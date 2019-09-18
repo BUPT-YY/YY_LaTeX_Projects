@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleese Assignment (For Students)
+% LaTeX Template
+% Version 2.0 (27/5/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{} % Course/class
+\newcommand{\assignmentTitle}{每日一题~~\today} % Assignment title or name
+\newcommand{\assignmentAuthorName}{YY} % Student name
+
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{} % Intructor name/time/description
+\newcommand{\assignmentDueDate}{} % Due date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+%\maketitle % Print the title page
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 1
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+\questiontext{任何集合$S$上都可以定义\myind{恒同映射}(identity): $\mathrm{id}_S:S\to S,s\mapsto s$.\\
+	若有两个映射$f:X\to Y$和$g:Y\to Z$, 则可以定义\myind{复合映射}(composition): \begin{equation*}g\circ f:X\to Z, x\mapsto g(f(x)).\end{equation*}
+	下面, 设$X$和$Y$是两个非空集合, $f:X\to Y$和$g:Y\to X$是两个映射. 如果$g\circ f = \mathrm{id}_X$, 则称$g$是$f$的一个\myind{左逆}; 如果$f\circ g = \mathrm{id}_Y$, 则称$g$为$f$的一个\myind{右逆}. \\如果$g$既是$f$的左逆又是$f$的右逆, 则称$g$为$f$的一个逆.\\证明:
+}
+
+\begin{subquestion}{$f$有左逆当且仅当$f$是单射;}
+	\answer{
+		\begin{proof}
+			设$f$有左逆$g$. 设$x_1,x_2\in X$, 且$x_1\neq x_2$, 只需证$f(x_1)\neq f(x_2)$.\\
+		用反证法. 假设$f(x_1) = f(x_2)$, 则 $x_1 = g(f(x_1)) = g(f(x_2)) = x_2$, 矛盾.\\
+		故$f(x_1)\neq f(x_2)$, 因此, $f$是单射.\\
+		另一方面, 设$f$是单射, 对于$y\in f(X)$, 定义$g(y)$为$y$在$f$下的原像; 对于$y\in Y\backslash f(X)$,定义$g(y)$为$X$中的任一元素, 则$g$是$f$的左逆.
+		\end{proof}
+	}
+	
+\end{subquestion}
+
+\begin{subquestion}{$f$有右逆当且仅当$f$是满射;} % Subquestion within question
+	\answer{
+		\begin{proof}
+			设$f$有右逆$g$.假若$f$不是满射,取$y\in Y\backslash f(X)$, 则$f(g(y))\neq y$,这与$f\circ g = \mathrm{id}_Y$矛盾.\\
+			另一方面, 设$f$是满射, 对于每一$y\in Y$,定义$g(y)$为$y$在$f$下的任一原像, 则$g$是$f$的右逆.			
+		\end{proof}
+	}
+\end{subquestion}
+
+\begin{subquestion}{$f$有左逆$g$,同时又有右逆$h$, 则$g=h$.} % Subquestion within question
+	\answer{
+		\begin{proof}
+			由条件知道:$g\circ f = \mathrm{id}_X, f\circ h = \mathrm{id}_Y$, 因此
+			\begin{equation*}
+				g = g\circ \mathrm{id}_Y = g\circ(f\circ h) = (g\circ f)\circ h = \mathrm{id}_X\circ h = h.
+			\end{equation*}
+		\end{proof}
+	}
+\end{subquestion}
+
+\end{question}
+%--------------------------------------------
+\newpage
+\begin{question}
+	\questiontext{
+		假设有两个映射$f:X\to Y$和$g:Y\to Z$, 证明:
+	}
+	\begin{subquestion}{若$g\circ f$是单射, 则$f$是单射;} % Subquestion within question
+		\answer{
+			\begin{proof}
+				用反证法.假设存在$x_1,x_2\in X$,且$x_1\neq x_2$使$f(x_1) = f(x_2)$,\\ 则$g(f(x_1)) = g(f(x_2))$,与$g\circ f$是单射矛盾.
+				
+				这说明$f$必是单射.	
+			\end{proof}
+		}
+	\end{subquestion}
+	\begin{subquestion}{若$g\circ f$是满射,则$g$是满射.} % Subquestion within question
+		\answer{
+			\begin{proof}
+				由于$g\circ f$是满射, 故$\forall z\in Z,\exists x\in X$, 使得$g(f(x)) = z$.
+				
+				因此,	$\forall z\in Z,\exists y=f(x)\in Y$, 使得$g(y) = z$.即$g$是满射.
+			\end{proof}
+		}
+	\end{subquestion}
+	
+\end{question}
+\end{document}

@@ -1,0 +1,90 @@
+
+\chapter{贝塞尔函数及其应用}
+
+\section{习题1-5}
+
+\begin{yyEx}
+	试用平面极坐标系把二维波动方程分离变量:
+	\begin{equation*}
+	u_{tt} - a^2(u_{xx}+u_{yy}) = 0,
+	\end{equation*}
+	即得到各相关单元函数所满足的常微分方程.
+\end{yyEx}
+
+\begin{yyEx}
+	写出$\mathrm{J}_0(x),\mathrm{J}_1(x),\mathrm{J}_2(x)$ ($n$为正整数)级数表达式的前$5$项.
+\end{yyEx}
+
+\begin{yyEx}
+	证明$\mathrm{J}_{2n-1}(0) = 0$, 其中$n = 1,2,3,\cdots.$
+\end{yyEx}
+
+\begin{yyEx}
+	证明$y = \mathrm{J}_n(\alpha x)$为方程$x^2y''+xy'+(\alpha^2x^2-n^2)y = 0$的解.
+\end{yyEx}
+
+\begin{yyEx}
+	试证$y = x^{1/2}\mathrm{J}_{3/2}(x)$是方程$x^2y''+(x^2-2)y = 0$的一个解.
+\end{yyEx}
+
+
+
+\section{习题6-10}
+
+\begin{yyEx}
+	试证$y = x\mathrm{J}_n(x)$是方程$x^2y''=xy'+(1+x^2-n^2)y = 0$的一个解.
+\end{yyEx}
+
+\begin{yyEx}
+	利用递推公式证明:\begin{equation*}
+	(1) \mathrm{J}_2(x) = \mathrm{J}_0''(x) -\frac{1}{x}\mathrm{J}_0'(x);~~(2)\mathrm{J}_3(x) +3 \mathrm{J}_0'(x) +4\mathrm{J}_0'''(x) = 0.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求解半径为$R$、固定边界的圆形薄膜的轴对称振动问题, 设$t = 0$时在膜上$\rho\leqslant\varepsilon$处有一冲量的垂直作用.
+\end{yyEx}
+
+\begin{yyEx}
+	半径为$b$的圆形薄膜, 边缘固定, 初始形状是旋转抛物面\begin{equation*}
+	u\big|_{t = 0} = (1-\rho^2/b^2)H,
+	\end{equation*}
+	初始速度分布为零. 求解膜的振动情况.
+\end{yyEx}
+
+\begin{yyEx}
+	一均匀无限长圆柱体, 体内无热源, 通过柱体表面沿法向的热量为常数$q$, 若柱体的初始温度也为常数$u_0$, 求任意时刻柱体的温度分布.
+\end{yyEx}
+
+\section{习题11-13}
+
+\begin{yyEx}
+	圆柱空腔内电磁振荡的定解问题为\begin{equation*}
+		\begin{dcases}
+			&\nabla^2u + \lambda u = 0,~~\sqrt{\lambda} = \frac{\omega}{c},\\
+			&u\big|_{\rho = a} = 0,\\
+			&\frac{\partial u}{\partial z}\bigg|_{z = 0} = \frac{\partial u}{\partial z}\bigg|_{z = l} = 0. 
+		\end{dcases}
+	\end{equation*}
+	试证电磁振荡的固有频率为\begin{equation*}
+		\omega_{mn} = c\sqrt{\lambda} = c\sqrt{\left( \frac{x_m^{(0)}}{a} \right)^2 + \left( \frac{n\pi}{l} \right)^2},~~n = 0,1,2,\cdots;m = 1,2,\cdots.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	半径为$R$、高为$H$的圆柱内无电荷, 柱体下底和柱面保持零电位, 上底电位为$f(\rho) = \rho^2$, 求柱体内各内点的电位分布. 定解问题为(取柱坐标)\begin{equation*}
+		\begin{dcases}
+			\nabla^2u = 0,&~\\
+			u\big|_{z = 0} = 0,&u\big|_{z = H} = \rho^2,\\
+			u\big|_{\rho = 0} \neq \infty,&u\big|_{\rho = R} = 0.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	圆柱体半径为$R$、 高为$H$, 上底保持温度$u_1$, 下底保持温度$u_2$, 侧面保持温度分布为
+	\begin{equation*}
+		f(z) = \frac{2u_1}{H}\left( z-\frac{H}{2} \right)z+\frac{2u_2}{H}\left( H-z \right),
+	\end{equation*}
+	求柱内各点的稳定温度分布.
+\end{yyEx}

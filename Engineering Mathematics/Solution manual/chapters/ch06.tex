@@ -1,0 +1,154 @@
+
+
+\chapter{分离变量法}
+
+\section{习题1-5}
+
+\begin{yyEx}
+	就下列初始条件及边界条件求解弦振动方程
+	\begin{equation*}
+		u(x,0) = 0,\frac{\partial u(x,0)}{\partial t} = x(l-x);~~u(0,t) = u(l,t) = 0.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	两端固定的弦长度为$l$, 用细棒敲击弦上$x = x_0$点, 即在$x = x_0$施加冲力, 设其冲量为$I$, 求解弦的振动, 即求解定解问题
+	\begin{equation*}
+		\begin{dcases}
+			u_{tt} - a^2u_{xx} = 0, &0\leqslant x\leqslant l,t>0,\\
+			u\big|_{x = 0} = u\big|_{x = l} = 0, &t>0,\\
+			u\big|_{t = 0} = 0,u_t\big|_{t = 0} = \frac{I}{\rho}\delta(x - x_0), &0\leqslant x\leqslant l.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	长为$l$的杆, 一端固定, 另一端因受力$F_0$而伸长, 求解杆在放手后的振动. 其定解问题为
+	\begin{equation*}
+	\begin{dcases}
+	u_{tt} - a^2u_{xx} = 0, &0\leqslant x\leqslant l,t>0,\\
+	u\big|_{x = 0} = 0,~~ u_x\big|_{x = 0} = 0, &t>0,\\
+	u(x,0) = \int_{0}^{x}\frac{\partial u}{\partial x}\mathrm{d}x = \int_{0}^{x}\frac{F_0}{YS}\mathrm{d}x = \frac{F_0x}{YS},~~u_t(x,0) = 0, &0\leqslant x\leqslant l.
+	\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	长为$x$的理想传输线远端开路, 先把传输线充电到电位差$v_0$, 然后把近端短路, 求线上的电压$V(x,t)$, 其定解问题为
+	\begin{equation*}
+	\begin{dcases}
+	V_{tt} - a^2V_{xx} = 0~~(a^2 = LC,0<x<l),&~\\
+	V(0,t) = 0,~~V_x(l,t) = -\left(R+L\frac{\partial}{\partial t}i_x \right)\bigg|_{x = l} = 0,&~\\
+	V(x,0) = v_0,~~V_t(x,0) = \frac{-1}{C}i_x\bigg|_{t = 0} = 0.
+	\end{dcases}
+	\end{equation*}
+	其中$i$表示电流强度, $i_x$表示电流强度对$x$的偏导数.
+\end{yyEx}
+
+\begin{yyEx}
+	设弦的两端固定于$x = 0$及$x = l$, 弦的初始位移如图6.5所示, 初速度为零, 有没有外力作用, 求弦作横向振动时的位移函数$u(x,t)$.
+\end{yyEx}
+
+\section{习题6-10}
+
+\begin{yyEx}
+	试求适合于下列初始条件及边界条件的一维热传导方程的解
+	\begin{equation*}
+		u\big\vert_{t = 0} = x(l-x),~~u\big\vert_{x = 0} = u\big\vert_{x = l} = 0.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求解一维热传导方程, 其初始条件及边界条件为
+	\begin{equation*}
+	u\big\vert_{t = 0} = x,~~u_x\big\vert_{x = 0} = 0,~~ u_x\big\vert_{x = l} = 0.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	在圆形区域内求解$\grad^2u = 0$, 使满足边界条件:
+	\begin{enumerate}
+		\item $u\big\vert_{\rho = a} = A\cos\varphi$;
+		\item $u\big\vert_{\rho = a} = A+B\sin\varphi$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	就下列初始条件和边界条件求解弦振动方程
+	\begin{equation*}
+		\begin{split}
+			&u\big\vert_{t = 0} = \begin{dcases}
+			x,&0<x\leqslant \frac{1}{2};\\
+			1-x,&\frac{1}{2}<x<1.
+			\end{dcases} \\
+			&\frac{\partial u}{\partial t}\bigg\vert_{t = 0} = x(x-1),~~u\big\vert_{x = 0} = u\big\vert_{x = l} = 0.
+		\end{split}		
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列定解问题
+	\begin{equation*}
+		\begin{dcases}
+			&\frac{\partial u}{\partial t} = a^2\frac{\partial ^2u}{\partial x^2} + A,\\
+			&u\big\vert_{x = 0} = u\big\vert_{x = l} = 0,\\
+			&u\big\vert_{t = 0} = 0.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\section{习题11-15}
+
+\begin{yyEx}
+	求满足下列定解条件的一维热传导方程$u_t = a^2u_{xx}~(0<x<l,t>0)$的解
+	\begin{equation*}
+		u\big\vert_{x = 0} = 10,~u\big\vert_{x = l} = 5,~u\big\vert_{t = 0} = kx, k\text{为常数}.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	试确定下列定解问题
+	\begin{equation*}
+	\begin{dcases}
+	&\frac{\partial u}{\partial t} = a^2\frac{\partial ^2u}{\partial x^2} + f(x),\\
+	&u\big\vert_{x = 0} = A,~~u\big\vert_{x = l} = B,\\
+	&u\big\vert_{t = 0} = g(x).
+	\end{dcases}
+	\end{equation*}
+	解的一般形式.
+\end{yyEx}
+
+\begin{yyEx}
+	在矩形区域$0\leqslant x\leqslant a, 0\leqslant y\leqslant b$ 内求拉普拉斯方程$(u_{xx}+u_{yy} = 0)$的解, 使其满足边界条件
+	\begin{equation*}
+		\begin{dcases}
+			u\big\vert_{x = 0} = 0, &u\big\vert_{x = a} = Ay,\\
+			\frac{\partial u}{\partial y}\bigg\vert_{y = 0} = 0, &\frac{\partial u}{\partial y}\bigg\vert_{y = b} = 0.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求解薄膜的恒定表面浓度扩散问题. 薄膜厚度为$l$, 杂质从两面进入薄膜, 由于薄膜周围气体含有充分的杂质, 薄膜表面上的杂志浓度得以保持为恒定的$N_0$, 其定解问题为
+	\begin{equation*}
+		\begin{dcases}
+			&u_t-a^2u_{xx} = 0,\\
+			&u(0,t) = u(l,t) = N_0,\\
+			&u(x,0) = 0,
+		\end{dcases}
+	\end{equation*}
+	求解$u$.
+\end{yyEx}
+
+\begin{yyEx}
+	求半带型区域$(0\leqslant x\leqslant a,y\geqslant 0)$内的静电势, 已知边界$x = 0$和$y = 0$上的电势都是零, 而边界$x = a$上的电势为$u_0$(常数).
+\end{yyEx}
+
+\section{习题16}
+
+\begin{yyEx}
+	在扇形区域内求解下列定解问题
+	\begin{equation*}
+		\grad^2i = 0;~~u\big|_{\varphi = 0} = u\big|_{\varphi = \alpha} = 0;~~u\big|_{\rho = R} = f(\varphi).
+	\end{equation*}
+\end{yyEx}

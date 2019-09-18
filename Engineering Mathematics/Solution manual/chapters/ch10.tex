@@ -1,0 +1,149 @@
+\chapter{行波法与积分变换法}
+
+\section{习题1-5}
+
+\begin{yyEx}
+	确定下列初值问题的解:
+	\begin{enumerate}
+		\item $u_{tt}-a^2u_{xx} = 0, u(x,0) = 0, u_t(x,0) = 1$;
+		\item $u_{tt}-a^2u_{xx} = 0, u(x,0) = \sin x, u_t(x,0) = x^2$;
+		\item $u_{tt}-a^2u_{xx} = 0, u(x,0) = x^3, u_t(x,0) = x$;
+		\item $u_{tt}-a^2u_{xx} = 0, u(x,0) =\cos x, u_t(x,0) = e^{-1}$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求解无界弦的自由振动, 设初始位移为$\varphi(x)$, 初始速度为$-a\varphi'(x)$
+\end{yyEx}
+
+\begin{yyEx}
+	求方程$\begin{lgathered}
+		\frac{\partial^2 u}{\partial x\partial y} = x^2y
+	\end{lgathered}$ 满足边界条件$u|_{y = 0} = x^2, u|_{x = 1} = \cos y$的解.
+\end{yyEx}
+
+\begin{yyEx}
+	证明定解问题
+	\begin{equation*}
+		\begin{split}
+			&u_{xx}+2\cos x\cdot u_{xy} - \sin^2x\cdot u_{yy} - \sin x\cdot u_y = 0,~~-\infty<x,y<\infty,\\
+			&u\big|_{y = \sin x} = \varphi(x),~~u_y\big|_{y = \sin x} = \psi(x)
+		\end{split}
+	\end{equation*}
+	的解为
+	\begin{equation*}
+		u(x,y) = \frac{\varphi(x-\sin x+y) + \varphi(x+\sin x-y)}{2} + \frac{1}{2}\int_{x+\sin x-y}^{x-\sin x+y}\psi(\xi)\mathrm{d}\xi.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	证明球面问题\begin{equation*}
+		\begin{dcases}
+			u_{tt} = a^2(u_{xx} + u_{yy} + u_{zz}), &-\infty<x,y,z<\infty,t>0,\\
+			u\big|_{t = 0} = \varphi(r), &r^2 = x^2+y^2+z^2,\\
+			u_t\big|_{t = 0} = \psi(r)&~
+		\end{dcases}
+	\end{equation*}
+	的解是
+	\begin{equation*}
+		u(r,t) = \frac{(r-at)\varphi(r-at)+(r+at)\varphi(r+at)}{2r}+\frac{1}{2ar}\int_{r-at}^{r+at}a\varphi(s)\mathrm{d}s.
+	\end{equation*}
+\end{yyEx}
+
+\section{习题6-10}
+
+\begin{yyEx}
+	利用泊松公式求解定解问题
+	\begin{equation*}
+		\begin{dcases}
+			u_{tt} = a^2(u_{xx} + u_{yy} + u_{zz}),&-\infty<x,y,z<+\infty,t>0,\\
+			u\big|_{t = 0} = 0, &-\infty<x,y,z<+\infty,\\
+			u_t\big|_{t = 0} = x^2+yz, &-\infty<x,y,z<+\infty.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	证明傅里叶变换的卷积定理\begin{equation*}
+		\mathcal{F}^{-1}[F_1(\omega)F_2(\omega)] = f_1(t)* f_2(t),
+	\end{equation*}
+	其中\begin{equation*}
+		\begin{split}
+			&f_1(t) = \mathcal{F}^{-1}[F_1(\omega)],~~f_2(t) = \mathcal{F}^{-1}[F_2(\omega)],\\
+			&f_1(t)*f_2(t) = \int_{-\infty}^{\infty}f_1(\xi)f_2(t-\xi)\mathrm{d}\xi.
+		\end{split}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	证明\begin{equation*}
+		\mathcal{F}^{-1}\left[ e^{-a^2\omega^2 t} \right] = \frac{1}{2a\sqrt{\pi t}} e^{-\frac{x^2}{4a^2t}}.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求上半平面内静电场的电位, 即求解定解问题
+	\begin{equation*}
+		\begin{dcases}
+			\nabla^2u = 0,&y>0,\\
+			u\big|_{y = 0} = f(x),&~\\
+			\lim\limits_{x^2+y^2\to\infty}u = 0.&~
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	用积分变换法解定解问题
+	\begin{equation*}
+		\begin{dcases}
+			\frac{\partial^2 u}{\partial t^2} = \frac{\partial^2 u}{\partial x^2}, &-\infty<x<\infty,t>0,\\
+			u\big|_{t = 0} = \varphi(x),&~\\
+			\frac{\partial u}{\partial x}\bigg|_{x = 0} = \psi(x).&~
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\section{习题11-14}
+
+\begin{yyEx}
+	用积分变换法求解问题
+	\begin{equation*}
+	\begin{dcases}
+	\frac{\partial^2 u}{\partial x\partial y} = 1, &x>0,y>0,\\
+	u\big|_{x = 0} = y+1,&u\big|_{y = 0} = 1.
+	\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	用积分变换法解定解问题
+	\begin{equation*}
+	\begin{dcases}
+	\frac{\partial u}{\partial t} = a^2\frac{\partial^2 u}{\partial x^2}, &0<x<l,t>0,\\
+	u\big|_{t = 0} = u_0,&\frac{\partial u}{\partial x}\bigg|_{x = 0} = 0,\\
+	u\big|_{x = 1} = u_1.&~
+	\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求解一维无限长杆上的热传导问题
+	\begin{equation*}
+	\begin{dcases}
+	u_t = a^2u_{xx}, &0<x<\infty,t>0,\\
+	u(0,t) = u_0,~~\lim\limits_{x\to\infty}u(x,t) = 0,&t \geqslant 0,\\
+	u(x,0) = 0,&0\leqslant x<\infty,t>0.\\
+	\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	求解杆的纵振动问题
+	\begin{equation*}
+	\begin{dcases}
+	u_t = a^2u_{xx}, &0<x<l,t>0,\\
+	u(0,t) = 0,Eu_x(l,t) = A\sin \omega t,&t > 0,\\
+	u(x,0) = 0,u_t(x,0) = 0&0\leqslant x<l.\\
+	\end{dcases}
+	\end{equation*}
+\end{yyEx}

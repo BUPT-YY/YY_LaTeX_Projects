@@ -1,0 +1,374 @@
+
+\chapter{留数及其应用}
+
+\section{内容提要}
+	在前面一章中, 我们主要是利用Laurent级数讨论了有孤立奇点的函数在孤立奇点的邻域上的性质. 本章中, 我们将利用积分表示来研究这些函数. 核心的问题是怎样将Cauchy定理和Cauchy公式推广到这些有孤立奇点的函数上, 并且得到一些结论. 本章中引入了留数这个复分析中的基本概念, 并且它有许多的应用. 应用留数定理可以将沿闭曲线的积分化为计算在孤立奇点处的留数, 还可以计算一些定积分和广义积分. 最后, 还可以推出辐角原理和Rouché定理.
+
+	(1)\myind{留数定义}~~设$f(z)$在$U_0(z_0,R)$内解析, 即$z_0$是$f(z)$的一个孤立奇点, 那么$f(z)$在$z_0$处的留数定义成
+	\begin{equation*}
+		\mathrm{Res}(f,z_0) = \frac{1}{2\pi\mathrm{i}}\oint_{\abs{z-z_0}=\rho}f(z)\mathrm{d}z,
+	\end{equation*}
+	其中$0<\rho<R$.
+	
+	当$\infty$为$f(z)$的孤立奇点, 即存在$R>0$, 使得$f(z)$在$\mathrm{C}\backslash \overline{U(0,R)}$上解析, 则$f(z)$在$\infty$处的留数定义成\begin{equation*}
+		\mathrm{Res}(f,\infty) = -\frac{1}{2\pi\mathrm{i}}\oint_{\abs{z}=\rho}f(z)\mathrm{d}z,
+	\end{equation*}
+	其中$R<\rho<+\infty$.
+
+	从留数的定义知, 当有限复数$z_0$为$f(z)$的孤立奇点时, $f(z)$在$z_0$处的留数即为$f(z)$在$z_0$附近的Laurent展式中$\begin{lgathered}
+		\frac{1}{z-z_0}
+	\end{lgathered}$的系数$c_{-1}$. 而当$z_0 = \infty$时, 设$f(z)$在$z = \infty$处的Laurent展式为$\begin{lgathered}
+		f(z) = \sum_{n = -\infty}^{\infty}c_nz^n
+	\end{lgathered}$, 则\begin{equation*}
+		\mathrm{Res}(f,\infty) = -c_{-1}.
+	\end{equation*}
+	
+	(2)\myind{留数的计算}\\	
+	\myind{规则I}~当$z_0\neq\infty$为$f(z)$的$m(m\geqslant 1)$阶极点时, $f(z)$在$z_0$处的留数可以由下式计算得到
+	\begin{equation*}
+		\mathrm{Res}(f,z_0) = \frac{1}{(m-1)!}\lim\limits_{z\to z_0}\frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}}\left[ (z-z_0)^mf(z) \right].
+	\end{equation*}
+	\myind{规则II}~特例是$m = 1$的情况, 也就是$z = z_0$为$f(z)$的一阶极点的时候, 上式化为
+	\begin{equation*}
+		\mathrm{Res}(f,z_0) = \lim\limits_{z\to z_0} (z-z_0)f(z).
+	\end{equation*}
+	\myind{规则III}~当$z_0\neq\infty$为$f(z)$的$m$阶极点时, 在$z_0$的邻域内, 我们有\begin{equation*}
+		f(z) = \dfrac{1}{(z-z_0)^m}g(z),
+	\end{equation*}
+	其中$g(z)$在$z_0$解析. 此时,
+	\begin{equation*}
+		\mathrm{Res}(f,z_0) = \frac{1}{(m-1)!}g^{(m-1)}(z_0).
+	\end{equation*}
+	\myind{规则IV}~若$z_0$为$\begin{lgathered}
+		f(z) = \frac{P(z)}{Q(z)}
+	\end{lgathered}$的一阶极点, 那么\begin{equation*}
+		\mathrm{Res}\left[ \frac{P(z)}{Q(z)},z_0 \right] = \frac{P(z_0)}{Q'(z_0)}.
+	\end{equation*}
+	\myind{规则V}~\begin{equation*}
+		\mathrm{Res}(f,\infty) = -\mathrm{Res}\left[ f\left(\frac{1}{z}\right)\cdot\frac{1}{z^2},0 \right].
+	\end{equation*}
+	
+	(3)\myind{本章中的主要定理}
+	\begin{theorem}[留数定理]
+		设$\Omega$是扩充复平面$\overline{\mathbb{C}}$中以有限条逐段光滑曲线为边界的区域, $\infty\notin\partial\Omega$, $z_1,\cdots,z_n$($z_j$可以为$\infty$)位于$\Omega$的内部, $f(z)$在$\Omega$内除去$z_1,\cdots,z_n$外解析, 在$\overline{\Omega}$上除去$z_1,\cdots,z_n$外连续, 则
+		\begin{equation*}
+			\int_{\partial\Omega}f(z)\mathrm{d}z = 2\pi\mathrm{i}\sum_{k=1}^n\mathrm{Res}(f,z_k).
+		\end{equation*}
+	\end{theorem}
+	
+	留数定理有以下的特例: 取$\Omega = \overline{\mathbb{C}}$, 其边界是空集,此时有以下的形式
+	\begin{theorem}[留数定理的特例]
+		设$f(z)$在$\mathbb{C}$内除去去$z_1,\cdots,z_n$外是解析的, 则有\begin{equation*}
+			\sum_{k=1}^n\mathrm{Res}(f,z_k) + \mathrm{Res}(f,\infty) = 0. 
+		\end{equation*}
+	\end{theorem}
+	
+	\begin{theorem}[辐角原理]
+		设$f(z)$在区域$D$内亚纯, $\Gamma$是$D$内一条可求长的简单闭曲线, 其内部$\Omega\subset D$, 再设$f(z)$在$\Gamma$上无零点和极点, 则\begin{equation*}
+			\frac{1}{2\pi\mathrm{i}}\int_{\Gamma}\frac{f'(z)}{f(z)}\mathrm{d}z = N-P,
+		\end{equation*}
+		其中$N$和$P$分别是$f(z)$在$\Gamma$内部的零点和极点的个数(记重数).
+	\end{theorem}
+	
+	\begin{theorem}[Rouché定理]
+		设$\Gamma$是可求长的Jordan曲线, 且其内部属于$D$, 再设$f(z)$和$g(z)$在$D$内解析, 在$\Gamma$上满足
+		\begin{equation*}
+			\abs{f(z)-g(z)}<\abs{f(z)},
+		\end{equation*}
+		则$f(z)$和$g(z)$在$\Gamma$内的零点个数(按重数计)相同.
+	\end{theorem}
+	
+	\begin{theorem}[分歧覆盖定理]
+		设$f(z)$在区域$D$内解析, $z_0\in D$. 记$w_0 = f(z_0)$. 设$z_0$是$f(z)-w_0$的$m$阶零点, 则存在$\rho>0$和$\delta>0$, 使得对于任意$w\in U(w_0,\rho)$, $f(z)-w$在圆盘$U(z_0,\delta)$内有且恰有$m$各不同的零点.
+	\end{theorem}
+
+	\begin{theorem}[辐角原理的推广]
+		设$\Omega$是$\overline{C}$中以有限条逐段光滑曲线为边界的区域, $\infty\notin\partial\Omega$, $f(z)$是$\overline{\Omega}$的邻域上的亚纯函数, 且$f(z)$在$\partial\Omega$上无零点和极点. 再设$f(z)$在$\Omega$内的零点为$z_1,\cdots,z_n$, 并设$z_j$是$f(z)$的$\alpha_j$阶的零点($j = 1,\cdots,n$); $w_1,\cdots,w_k$是$f(z)$在$\Omega$内的极点, 并设$w_j$是$f(z)$的$\beta_j$阶极点($j=1,\cdots,k$). 则对任意$\overline{\Omega}$的邻域上解析的函数$g(z)$, 有
+		\begin{equation*}
+			\frac{1}{2\pi\mathrm{i}}\int_{\partial\Omega}g(z)\frac{f'(z)}{f(z)}\mathrm{d}z = \sum_{j=1}^{n}\alpha_jg(z_j) -\sum_{j= 1}^{k} \beta_jg(w_j).
+		\end{equation*}
+	\end{theorem}
+
+练习: 用Rouché定理证明代数基本定理.
+
+代数基本定理有许多证明, 较早给出代数基本定理证明的是d'Alembert和Gauss, 后者一生中给出了四个证明. 我们这里给出的证明十分干净利落, 当然是因为用了在19世纪由Cauchy, Riemann和Weierstrass建立起来的复分析这个十分强大的数学武器.
+\section{习题1-5}
+
+\begin{yyEx}
+	\begin{enumerate}
+		\item 设$\begin{lgathered}
+			f(z) = \sum_{n = 0}^{+\infty}a_nz^n
+		\end{lgathered}$在$\abs{z}<R$内解析, $k$为正整数, 那么$\begin{lgathered}
+		\mathrm{Res}\left[ \frac{f(z)}{z^k},0 \right] = (\quad\quad)
+		\end{lgathered}$
+		\item 设$a$为解析函数$f(z)$的$m$级零点, 那么$\begin{lgathered}
+			\mathrm{Res}\left[ \frac{f'(z)}{f(z)},a \right] = (\quad\quad)
+		\end{lgathered}$
+		\item 下列函数中, $\mathrm{Res}[f(z),0] = 0$的是$(\quad\quad)$.\\
+			(A) $\begin{lgathered}
+				f(z) = \frac{\mathrm{e}^z-1}{z^2}
+			\end{lgathered}$~~~~~~~~~(B) $\begin{lgathered}
+				f(z) = \frac{\sin z}{z}-\frac{1}{z}
+			\end{lgathered}$\\(C) $\begin{lgathered}
+				f(z) = \frac{\sin z+\cos z}{z}
+			\end{lgathered}$~~(D) $\begin{lgathered}
+				f(z) = \frac{1}{\mathrm{e}^z-1}-\frac{1}{z}.
+			\end{lgathered}$
+		\item 下列命题中, 正确的是$(\quad\quad)$.\\
+			(A) 设$f(z) = (z-z_0)^{-n}\varphi(z)$, $\varphi(z)$在$z_0$点解析, $m$为自然数, 则$z_0$为$f(z)$的$m$级极点.\\
+			(B) 如果无穷远点$\infty$是函数$f(z)$的可去奇点, 那么$\mathrm{Res}[f(z),\infty] = 0$.\\
+			(C) 如果$z = 0$为偶函数$f(z)$的一个孤立奇点, 那么$\mathrm{Res}[f(z),0] = 0$.\\
+			(D) 若$\begin{lgathered}
+				\oint_Cf(z)\mathrm{d}z = 0
+			\end{lgathered}$, 则$f(z)$在$C$内无奇点.
+		\item $\begin{lgathered}
+		\mathrm{Res}[z^3\cos\frac{2\mathrm{i}}{z},\infty] = (\quad\quad).
+		\end{lgathered}$
+		\item $\begin{lgathered}
+			\mathrm{Res}[z^2\mathrm{e}^{\frac{1}{z-\mathrm{i}}},\mathrm{i}] = (\quad\quad).
+		\end{lgathered}$
+		\item 下列命题中, 不正确的是$(\quad\quad)$.\\
+			(A) 若$z_0(\neq\infty)$是$f(z)$的可去奇点或解析点, 则$\mathrm{Res}[f(z),z_0] = 0$.\\
+			(B) 若$P(z)$与$Q(z)$在$z_0$解析, $z_0$为$Q(z)$的一级零点, 则
+				\begin{equation*}
+					\mathrm{Res}\left[ \frac{P(z)}{Q(z)},z_0 \right] = \frac{P(z_0)}{Q'(z_0)}.
+				\end{equation*}
+			(C)若$z_0$为$f(z)$的$m$级极点, $n\geqslant m$为自然数, 则
+				\begin{equation*}
+					\mathrm{Res}[f(z),z_0] = \frac{1}{n!}\lim\limits_{z\to z_0}\frac{\mathrm{d}^n}{\mathrm{d}z^n}[(z-z_0)^{n+1}f(z)].
+				\end{equation*}
+			(D) 如果无穷远点$\infty$为$f(z)$的一级极点, 则$z = 0$为$f(1/z)$的一级极点, 并且\begin{equation*}
+				\mathrm{Res}[f(z),\infty] = \lim\limits_{z\to 0}zf\left(\frac{1}{z}\right).
+			\end{equation*}
+		\item 设$n>1$为正整数, 则$\begin{lgathered}
+			\oint_{\abs{z} = 2} \frac{1}{z^n-1}\mathrm{d}z = (\quad\quad).
+		\end{lgathered}$
+		\item 积分$\begin{lgathered}
+		\oint_{\abs{z} = 3/2} \frac{z^9}{z^{10}-1}\mathrm{d}z = (\quad\quad).
+		\end{lgathered}$
+		\item 积分$\begin{lgathered}
+		\oint_{\abs{z} = 1} z^2\sin\frac{1}{z}\mathrm{d}z = (\quad\quad).
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	填空题
+	\begin{enumerate}
+		\item $f(z) = e^{1/z}$在本性奇点$z = 0$处的留数$\mathrm{Res}f(z) = \underline{\quad\quad}$. $\begin{lgathered}
+			f(z) = \frac{\mathrm{e}^{\mathrm{i}z}}{1+z^2}
+		\end{lgathered}$, 则$\mathrm{Res}(f,i) = \underline{\quad\quad}.$
+		\item $\begin{lgathered}
+			I = \oint_{\abs{z} = 2}\frac{\mathrm{e}^z}{z^2-1}\mathrm{d}z = \underline{\quad\quad}
+		\end{lgathered}$, $\begin{lgathered}
+		I = \int_{\abs{z} = 1}\frac{\cos z}{z^3}\mathrm{d}z = \underline{\quad\quad}
+		\end{lgathered}$
+		\item $\begin{lgathered}
+			I = \int_{0}^{2\pi}\frac{\mathrm{d}\theta}{1+a\cos\theta}, \abs{a}<1
+		\end{lgathered}$, 则$I = \underline{\quad\quad}$. $\begin{lgathered}
+		I = \int_{0}^{+\infty}\frac{\cos x}{x^2+b^2}\mathrm{d}x
+		\end{lgathered}$, 则$I = \underline{\quad\quad}$.
+		\item 设函数$\begin{lgathered}
+			f(z) = \exp\left\{ z^2 + \frac{1}{z^2} \right\}, 
+		\end{lgathered}$则$\mathrm{Res}[f(z),0] = \underline{\quad\quad}.$
+		\item 设$z = a$为函数$f(z)$的$m$级极点, 那么$\begin{lgathered}
+			\mathrm{Res}\left[ \frac{f'(z)}{f(z)},a \right]= \underline{\quad\quad}.
+		\end{lgathered}$
+		\item 设$\begin{lgathered}
+			f(z) = \frac{2z}{1+z^2}
+		\end{lgathered}$, 则$\mathrm{Res}[f(z),\infty] = \underline{\quad\quad}.$
+		\item 设$\begin{lgathered}
+			f(z) = \frac{1-\cos z}{z^5}
+		\end{lgathered}$, 则$\mathrm{Res}[f(z),0] = \underline{\quad\quad}.$
+		\item 积分$\begin{lgathered}
+			\oint_{\abs{z} = 1} z^3\mathrm{e}^{1/z}\mathrm{d}z = \underline{\quad\quad}.
+		\end{lgathered}$
+		\item 积分$\begin{lgathered}
+		\oint_{\abs{z} = 1} \frac{1}{\sin z}\mathrm{d}z = \underline{\quad\quad}.
+		\end{lgathered}$
+		\item 积分$\begin{lgathered}
+		\int_{-\infty}^{+\infty} \frac{x\mathrm{e}^{ix}}{1+x^2}\mathrm{d}x = \underline{\quad\quad}.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列各函数$f(z)$在有限奇点处的留数:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\frac{z+1}{z^2-2z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{1-\mathrm{e}^{2z}}{z^4};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{1+z^4}{(z^2+1)^3};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{z}{\cos z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\cos\frac{1}{1-z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		z^2\sin\frac{1}{z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{1}{z\sin z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{\sinh z}{\cosh z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{z\mathrm{e}^z}{(z-a)^3};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{z-\sin z}{z^6}.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	计算下列各积分(利用留数; 圆周均取正向):
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\oint_{\abs{z} = 3/2} \frac{\sin z}{z} \mathrm{d}z;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_{\abs{z} = 2}\frac{\mathrm{e}^{2z}}{(z-1)^2}  \mathrm{d}z;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_{\abs{z} = 2}  \frac{z}{z^4-1}\mathrm{d}z;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_{\abs{z} = 2}  \frac{1}{(z+\mathrm{i})^{10}(z-1)(z-3)}\mathrm{d}z;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_{\abs{z} = 1/4}  \frac{z\sin z}{(\mathrm{e}^z-1-z)^2}\mathrm{d}z;
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列函数在无穷远点的留数值:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\frac{\mathrm{e}^z}{z^2-1};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{1}{z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{\cos z}{z};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{z^{15}}{(z^2+1)^2(z^4+2)^3};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		(z^2+1)\mathrm{e}^z;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\exp\left(-\frac{1}{z^2}\right).
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\section{习题6-10}
+
+\begin{yyEx}
+	计算下列各积分, $C$为正向圆周:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\oint_C \frac{5z^{27}}{(z^2-1)^4(z^4+2)^5}\mathrm{d}z,C:\abs{z} = 4;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_C \frac{z^3}{z+1}\mathrm{e}^{\frac{1}{z}} \mathrm{d}z,C:\abs{z} = 2;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_C \frac{\mathrm{e}^z}{z^2-1}\mathrm{d}z,C:\abs{z} = 2;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\oint_C \frac{\mathrm{d}z}{\varepsilon z^2+2z+\varepsilon},C:\abs{z} = 1,0<\varepsilon<1.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	计算下列积分:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+		\int_{0}^{2\pi}\frac{1}{5+3\sin\theta}\mathrm{d}\theta;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{-\infty}^{+\infty}\frac{1}{(1+x^2)^2}\mathrm{d}x;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{-\infty}^{+\infty}\frac{x\sin x}{(1+x^2)}\mathrm{d}x;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{0}^{\pi/2}\frac{\mathrm{d}\theta}{1+\cos^2\theta};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{0}^{2\pi}\frac{\mathrm{d}\theta}{a+b\cos\theta}(a^2>b^2);
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{-\infty}^{+\infty}\frac{\mathrm{d}x}{x^2+2x+2};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{0}^{+\infty}\frac{\cos x}{(x^2+4)(x^2+1)}\mathrm{d}x;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{-\infty}^{+\infty}\frac{\cos(2x)}{x^2+1}\mathrm{d}x.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	利用留数计算下列积分:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\int_{0}^{\pi}\frac{\mathrm{d}\theta}{a^2+\sin^2\theta}(a>0);
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{-\infty}^{+\infty}\frac{x^2-x+2}{x^4+10x^2+9}\mathrm{d}x;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{0}^{+\infty}\frac{x\sin x\cos 2x}{x^2+1}\mathrm{d}x;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\int_{-\infty}^{+\infty}\frac{\cos(x-1)}{x^2+1}\mathrm{d}x.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列条件下$f(z)/g(z)$在奇点$z_0$处的留数:
+	\begin{enumerate}
+		\item $f(z)$在$z_0$的邻域$G_1$内解析, 且$f(z_0)\neq 0$, 而$z_0$是$g(z)$的二级零点;
+		\item $z_0$是$f(z)$的一级零点,是$g(z)$的三级零点.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	试用各种不同的方法计算$\begin{lgathered}
+		\mathrm{Res}\left[ \frac{5z-2}{z(z-1)},1 \right].
+	\end{lgathered}$
+\end{yyEx}
+
+\section{习题11}
+
+\begin{yyEx}
+	证明下列各题:
+	\begin{enumerate}
+		\item 设$a$为$f(z)$的孤立奇点, 试证: 若$f(z)$是奇函数, 则$\mathrm{Res}[f(z),a] = \mathrm{Res}[f(z), -a]$; 若$f(z)$是偶函数, 则$\mathrm{Res}[f(z),a] = -\mathrm{Res}[f(z), -a]$.
+		\item 设$f(z)$以$a$为简单极点, 且在$a$处的留数为$A$, 证明
+		
+		$\begin{lgathered}
+			\lim\limits_{z\to a}\frac{\abs{f'(z)}}{1+\abs{f(z)}^2} = \frac{1}{\abs{A}}.
+		\end{lgathered}$
+		\item 若函数$\varPhi(z)$在$\abs{z}\leqslant 1$上解析, 当$z$为实数时, $\varPhi(z)$取实数而且$\varPhi(0) = 0$, $f(x,y)$表示$\varPhi(x+\mathrm{i}y)$的虚部, 试证明
+		\begin{equation*}
+			\int_{0}^{2\pi}\frac{t\sin\theta}{1-2t\cos\theta+t^2}f(\cos\theta,\sin\theta)\mathrm{d}\theta = \pi\varPhi(t)~(-1<t<1).
+		\end{equation*}
+	\end{enumerate}
+\end{yyEx}

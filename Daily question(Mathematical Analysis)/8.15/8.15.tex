@@ -1,0 +1,375 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleese Assignment (For Students)
+% LaTeX Template
+% Version 2.0 (27/5/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+
+\usepackage{amsmath,amssymb,amsfonts,bm,amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{tensor}
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage[most]{tcolorbox} % Required for boxes that split across pages
+
+\usepackage{booktabs} % Required for better horizontal rules in tables
+
+\usepackage{listings} % Required for insertion of code
+
+\usepackage{etoolbox} % Required for if statements
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions and margins
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	top=3cm, % Top margin
+	bottom=3cm, % Bottom margin
+	left=2.5cm, % Left margin
+	right=2.5cm, % Right margin
+	headheight=14pt, % Header height
+	footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
+	headsep=1.2cm, % Space from the top margin to the baseline of the header
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage[sfdefault,light]{roboto} % Use the Roboto font
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Required for customising headers and footers
+
+\pagestyle{fancy} % Enable custom headers and footers
+
+\lhead{\small\assignmentClass\ifdef{\assignmentClassInstructor}{\assignmentClassInstructor}{}\ \assignmentTitle} % Left header; output the instructor in brackets if one was set
+\chead{} % Centre header
+\rhead{\small\ifdef{\assignmentAuthorName}{\assignmentAuthorName}{\ifdef{\assignmentDueDate}{\assignmentDueDate}{}}} % Right header; output the author name if one was set, otherwise the due date if that was set
+
+\lfoot{} % Left footer
+\cfoot{\small Page\ \thepage\ } % Centre footer
+\rfoot{} % Right footer
+
+\renewcommand\headrulewidth{0.5pt} % Thickness of the header rule
+\newcommand{\myind}[1]{{\upshape\color{blue} #1 }\index{#1}}
+%----------------------------------------------------------------------------------------
+%	MODIFY SECTION STYLES
+%----------------------------------------------------------------------------------------
+
+\usepackage{titlesec} % Required for modifying sections
+
+%------------------------------------------------
+% Section
+
+\titleformat
+{\section} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\Large\bfseries} % Format of the whole section
+{\assignmentQuestionName~\thesection} % Format of the section label
+{6pt} % Space between the title and label
+{} % Code before the label
+
+\titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
+
+%------------------------------------------------
+% Subsection
+
+\titleformat
+{\subsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\itshape} % Format of the whole section
+{(\alph{subsection})} % Format of the section label
+{4pt} % Space between the title and label
+{} % Code before the label
+
+\titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
+
+\renewcommand\thesubsection{(\alph{subsection})}
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM QUESTION COMMANDS/ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+
+% Environment to be used for each question in the assignment
+\newenvironment{question}{
+	\vspace{0.5\baselineskip} % Whitespace before the question
+	\section{} % Blank section title (e.g. just Question 2)
+	\lfoot{\small\itshape\assignmentQuestionName~\thesection~continued on next page\ldots} % Set the left footer to state the question continues on the next page, this is reset to nothing if it doesn't (below)
+}{
+	\lfoot{} % Reset the left footer to nothing if the current question does not continue on the next page
+}
+
+%------------------------------------------------
+
+% Environment for subquestions, takes 1 argument - the name of the section
+\newenvironment{subquestion}[1]{
+	\subsection{#1}
+}{
+}
+
+%------------------------------------------------
+
+% Command to print a question sentence
+\newcommand{\questiontext}[1]{
+	\textbf{#1}
+	\vspace{0.5\baselineskip} % Whitespace afterwards
+}
+
+%------------------------------------------------
+
+% Command to print a box that breaks across pages with the question answer
+\newcommand{\answer}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		#1
+	\end{tcolorbox}
+}
+
+%------------------------------------------------
+
+% Command to print a box that breaks across pages with the space for a student to answer
+\newcommand{\answerbox}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		\vphantom{L}\vspace{\numexpr #1-1\relax\baselineskip} % \vphantom{L} to provide a typesetting strut with a height for the line, \numexpr to subtract user input by 1 to make it 0-based as this command is
+	\end{tcolorbox}
+}
+
+%------------------------------------------------
+
+% Command to print an assignment section title to split an assignment into major parts
+\newcommand{\assignmentSection}[1]{
+	{
+		\centering % Centre the section title
+		\vspace{2\baselineskip} % Whitespace before the entire section title
+		
+		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
+		
+		\vspace{0.75\baselineskip} % Whitespace before the section title
+		{\LARGE \MakeUppercase{#1}} % Section title, forced to be uppercase
+		
+		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
+		
+		\vspace{\baselineskip} % Whitespace after the entire section title
+	}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\author{\textbf{\assignmentAuthorName}} % Set the default title page author field
+\date{} % Don't use the default title page date field
+
+\title{
+	\thispagestyle{empty} % Suppress headers and footers
+	\vspace{0.2\textheight} % Whitespace before the title
+	\textbf{\assignmentClass:\ \assignmentTitle}\\[-4pt]
+	\ifdef{\assignmentDueDate}{{\small Due\ on\ \assignmentDueDate}\\}{} % If a due date is supplied, output it
+	\ifdef{\assignmentClassInstructor}{{\large \textit{\assignmentClassInstructor}}}{} % If an instructor is supplied, output it
+	\vspace{0.32\textheight} % Whitespace before the author name
+}
+
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{} % Course/class
+\newcommand{\assignmentTitle}{每日一题~~\today} % Assignment title or name
+\newcommand{\assignmentAuthorName}{YY} % Student name
+
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{} % Intructor name/time/description
+\newcommand{\assignmentDueDate}{} % Due date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+%\maketitle % Print the title page
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 1
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+\questiontext{
+	证明:$\mathbb{R}^2$中至少有一个圆周不含有理数点.
+}
+	\answer{
+		\begin{proof}
+			对于$r>0$, 记$S_r = \{ (x,y)\in\mathbb{R}^2|\sqrt{x^2+y^2}=r \}$.\\
+			用反证法. 若$\forall r>0, S_r\cap (\mathbb{Q}\times\mathbb{Q})\neq \emptyset$,则说明$\mathbb{Q}\times\mathbb{Q}$不可列. 这与$\mathbb{Q}\times\mathbb{Q}$是可列集矛盾.
+		\end{proof}
+	}
+\end{question}
+
+\begin{question}
+	\questiontext{试作一个从开圆盘$D^\circ = \{(x,y)|x^2+y^1<1 \}$到闭圆盘$D = \{(x,y)|x^2+y^2\leqslant 1 \}$的双射.
+	}
+
+	\answer{
+		{\kaishu{解}}.~ 作一列圆周:
+		\begin{equation*}
+			A_n = \left\{ (x,y)|x^2+y^2 = \frac{1}{n} \right\}
+		\end{equation*}
+		容易想到从$A_n$到$A_{n-1}$有个一一对应:
+		\begin{equation*}
+			g: A_n\to A_{n-1}, (x,y)\mapsto \left( \sqrt\frac{n}{n-1}x,\sqrt\frac{n}{n-1}y \right)
+		\end{equation*}
+		注意到\begin{equation*}
+			D^\circ \backslash \left( \bigcup_{n=2}^{+\infty}A_n  \right) = D \backslash \left( \bigcup_{n=1}^{+\infty}A_n  \right),
+		\end{equation*}
+		由此可作出$D^\circ$到$D$的双射如下:
+		\begin{equation*}
+			f:D^\circ\to D, (x,y)\mapsto\left\{
+			\begin{aligned}
+			&(x,y), ~\text{若}(x,y)\in D^\circ \backslash \left( \bigcup_{n=2}^{+\infty}A_n  \right);\\
+			&\left( \sqrt\frac{n}{n-1}x,\sqrt\frac{n}{n-1}y \right), ~\text{若}(x,y)\in A_n,n\geqslant 2.
+			\end{aligned}
+			\right.
+		\end{equation*}
+	}
+\end{question}
+
+\newpage
+
+\begin{question}
+	
+	\questiontext{
+		对点集$A$, 若点$x$的每个邻域都含有$A\backslash\{x\}$中的点,则称$x$为$A$的\myind{聚点}(limit point/cluster point/point of accumulation). $A$的全体聚点构成的集合$A'$称作$A$的\myind{导集}(derived set). $\overline{A} = A\cup A'$称为$A$的\myind{闭包}. 换言之, $x\in \overline{A}$当且仅当$x$的每个邻域都含有$A$中的点.\\
+		设$X,Y$是非空集合. 如果映射$f:X\to Y$满足: 任取$f(x_0)$的邻域$V$,都有$f^{-1}(V)$是$x_0$的邻域, 则称$f$在$x_0$处\myind{连续}(continuous). 在定义域上处处连续的映射称为\myind{连续映射}(continuous map).\\
+		证明$f:X\to Y$连续与下列命题等价:
+	}
+	
+	\begin{subquestion}{$Y$中的任意开集的原像都是$X$中的开集; }
+		\answer{
+			\begin{proof}
+				条件(a)的必要性(即$f$连续蕴含开集的原像开): 任取$Y$中的开集$V$,则$\forall x\in f^{-1}(V)$, 因为$V$是$f(x)$的邻域, 所以$f^{-1}(V)$是$x$的邻域. 由$x$的任意性可知$f^{-1}(V)$是开集.
+				
+				条件(b)的充分性(即开集的原像开蕴含$f$连续): 任取$x\in X$及$f(x)$的邻域$V$, 则存在开集$U$使得$f(x)]in U\subseteq V$. 由于$f^{-1}(U)$也是开集, 而$x\in f^{-1}(U)\subseteq f^{-1}(V)$, 故$f^{-1}(V)$是$x$的邻域, 这说明$f$在$x$处连续.
+			\end{proof}
+		}
+	\end{subquestion}
+	
+	\begin{subquestion}{$Y$中的任意闭集的原像都是$X$中的闭集; }
+		\answer{
+			\begin{proof}
+				必须且只需证明(a)$\Leftrightarrow$(b).
+				
+				注意到$f^{-1}(U)^c = f^{-1}(U^c)$.于是$f^{-1}(U)$是闭集当且仅当$f^{-1}(U^c)$是开集. 如果$f$满足条件(a), 则任取闭集$U$, 由$U^c$开知道$f^{-1}(U^c)$开, 从而$f^{-1}(U)$闭. 这说明(a)蕴含(b). 同理,(b)蕴含(a).
+			\end{proof}
+		}
+	\end{subquestion}
+	
+	\begin{subquestion}{$\forall F\subseteq Y$, 都有$\overline{f^{-1}(F)}\subseteq f^{-1}(\overline{F})$; }
+		\answer{
+			\begin{proof}
+				先证(b)$\Rightarrow$(c):$\forall F\subseteq Y$,
+				根据$F\subseteq \overline{F}$, 得到$f^{-1}(F) \subseteq f^{-1}(\overline{F})$, 
+				
+				因此,$\overline{f^{-1}(F)} \subseteq \overline{f^{-1}(\overline{F})}$.
+				
+				由于闭集的原像闭, 所以$f^{-1}(\overline{F})$是闭集, 因此$f^{-1}(\overline{F}) = \overline{f^{-1}(\overline{F})}$,所以
+				$\overline{f^{-1}(F)}\subseteq f^{-1}(\overline{F})$
+				
+				再证明(c)$\Rightarrow$(b):取任意闭集$F\subseteq Y$,则$F = \overline{F}$, $\overline{f^{-1}(F)}\subseteq f^{-1}(\overline{F}) = f^{-1}(F)$.
+				
+				这说明$f^{-1}(F)$是闭集, 即闭集的原像闭.
+			\end{proof}
+		}
+	\end{subquestion}
+	
+	\begin{subquestion}{$\forall E\subseteq X, f(\overline{E})\subseteq\overline{f(E)}$;}
+		\answer{
+			\begin{proof}
+				先证(c)$\Rightarrow$(d):
+				
+				对于任意的$E\subseteq X$, 注意到$E\subseteq f^{-1}(f(E))$, 故有$\overline{E}\subseteq \overline{f^{-1}(f(E))}$.
+				
+				由于$f(E)\subseteq Y$,所以由(c)得到$\overline{f^{-1}(f(E))}\subseteq f^{-1}(\overline{f(E)})$.
+				
+				因此,$\overline{E}\subseteq f^{-1}(\overline{f(E)})$, 这与$f(\overline{E})\subseteq\overline{f(E)}$等价.
+				
+				再证明(d)$\Rightarrow$(c):$\forall F\subseteq Y$, 注意到$f(f^{-1}(F))\subseteq F$, 因此$\overline{f(f^{-1}(F))}\subseteq \overline{F}$, 故有
+				\begin{equation*}
+					f^{-1}(\overline{F}) \supseteq f^{-1}(\overline{f(f^{-1}(F))})\stackrel{\text{条件}(d)}{\supseteq} f^{-1}(f(\overline{f^{-1}(F)})) \supseteq \overline{f^{-1}(F)}
+				\end{equation*}
+				
+				
+			\end{proof}
+		}
+		
+	\end{subquestion}
+	
+	
+	
+\end{question}
+
+\begin{question}
+	\begin{subquestion}{(微积分中的$\varepsilon-\delta$~language)若$f$是$\mathbb{R}^n$上的实值函数,说明:$f$在$x_0$处连续的条件为何定义为: 任取$\varepsilon>0$, 存在$\delta>0$,使得$|x-x_0|<\delta$蕴含$|f(x)-f(x_0)|<\varepsilon$.\\
+			Remark: 微积分中定义的$x_0$的$\delta$\myind{邻域}(neighborhood)为$B_\delta(x_0) = \{ x|\abs{x-x_0}<\delta \}.$	
+		} % Subquestion within question
+		\answer{
+			{\kaishu{说明}}.
+			只需注意到$\varepsilon-\delta$~语言可以重新叙述如下:
+			
+			$\forall \varepsilon>0,\exists \delta>0$,使得$x\in B_\delta(x_0)$蕴含$f(x)\in B_\varepsilon(f(x_0))$.\\
+			即$\forall \varepsilon>0,\exists \delta>0, B_\delta(x_0)\subseteq f^{-1}(B_\varepsilon(f(x_0)))$.
+			
+			即$f(x_0)$的任何$\varepsilon$邻域的原像一定包含$x_0$的某个$\delta$邻域.
+		}
+	\end{subquestion}
+	
+	\begin{subquestion}{若$f$是$\mathbb{R}^n$上的实值函数,证明: $f$在$\mathbb{R}^n$上连续~当且仅当~$\forall \lambda\in\mathbb{R}$,集合$\{x|f(x)<\lambda\}$与$\{x|f(x)>\lambda\}$均为开集.} % Subquestion within question
+		\answer{
+			\begin{proof}
+				必要性:
+				设$f$在$\mathbb{R}^n$上连续.任给$\lambda\in\mathbb{R}$,对于$x\in\mathbb{R}^n, f(x)<\lambda$. 由连续性, 存在$\varepsilon>0$,使得当$y\in B_\varepsilon(x)$, 有$f(y)<\lambda$. 故$\{x|f(x)<\lambda\}$的每一点均为内点, 从而它是开集. 同理,$\{x|f(x)>\lambda\}$也是开集.
+				
+				充分性:
+				设$\forall \lambda\in\mathbb{R}$,$\{x|f(x)<\lambda\}$和$\{x|f(x)>\lambda\}$是开集. 任取$a\in\mathbb{R}^n$, 往证$f(x)$在$a$处连续. 令$f(a) = \beta$. $\forall \varepsilon>0$, 因为$\{x|f(x)<\beta+\varepsilon\}$和$\{x|f(x)>\beta-\varepsilon\}$是开集,故它们的交$\{x|f(x)<\beta+\varepsilon\}\cap\{x|f(x)>\beta-\varepsilon\} = G$也是开集. 因此,对于$a\in G$, 存在$\delta>0$,使$B_\delta(a)\subset G$. 这说明 当$y\in B_\delta(a)$时,$\beta-\varepsilon<f(y)<\beta+\varepsilon$,即$f$在$a$处连续. 即证.
+			\end{proof}
+		}
+	\end{subquestion}
+\end{question}
+%--------------------------------------------
+\end{document}

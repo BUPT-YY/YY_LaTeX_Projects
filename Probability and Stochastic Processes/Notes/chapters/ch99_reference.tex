@@ -1,0 +1,52 @@
+%===== 参考文献
+\newcommand{\auth}[1]{\rm #1}
+\newcommand{\refart}[1]{#1}
+\newcommand{\refbook}[1]{\emph{#1}}
+\newcommand{\journal}[1]{\emph{#1}}
+%
+\newcommand{\authc}[1]{{\song #1}}  % 中文
+\newcommand{\refartc}[1]{{\kai #1}}
+\newcommand{\refbookc}[1]{{\kai #1}}
+\newcommand{\journalc}[1]{{\song #1}}
+
+
+\phantomsection
+\renewcommand{\leftmark}{参考文献}
+\addcontentsline{toc}{chapter}{参考文献}
+\begin{thebibliography}{999}
+
+\linespread{1.0}\selectfont
+
+\bibitem{Aas71}
+\auth{J. O. Aasen},
+\refart{On the reduction of a symmetric matrix to tridiagonal form},
+\journal{BIT}, 11 (1971), 233--242.
+
+\bibitem{AGL98}
+\auth{C. Ashcraft, R.G. Grimes and J.G. Lewis},
+\refart{Accurate symmetric indefinite linear equation solvers},
+\journal{SIAM Journal on Matrix Analysis and Applications}, 20 (1998), 513--561.
+
+\bibitem{AMV15}
+\auth{J. L. Aurentz, T. Mach, R. Vandebril and D. S. Watkins},
+\refart{Fast and backward stable computation of roots of polynomials},
+\journal{SIAM Journal on Matrix Analysis and Applications}, 36 (2015), 942--973.
+
+
+\bibitem{BJD03}
+\auth{北京大学数学系},
+\refbook{高等代数} (第三版),
+高等教育出版社, 2003.
+
+\bibitem{Che12}
+\auth{陈志明},
+\refartc{科学计算：科技创新的第三种方法},
+中国科学院院刊, 27 (2012), 161--166.
+
+\bibitem{Dai01}
+\auth{戴华},
+\refbook{矩阵论},
+科学出版社, 2001.
+
+
+\end{thebibliography}

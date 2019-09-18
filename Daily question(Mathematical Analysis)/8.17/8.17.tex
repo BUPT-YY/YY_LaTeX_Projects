@@ -1,0 +1,285 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+
+\usepackage{amsmath,amssymb,amsfonts,bm,amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{tensor}
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage[most]{tcolorbox} % Required for boxes that split across pages
+
+\usepackage{booktabs} % Required for better horizontal rules in tables
+
+\usepackage{listings} % Required for insertion of code
+
+\usepackage{etoolbox} % Required for if statements
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions and margins
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	top=3cm, % Top margin
+	bottom=3cm, % Bottom margin
+	left=2.5cm, % Left margin
+	right=2.5cm, % Right margin
+	headheight=14pt, % Header height
+	footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
+	headsep=1.2cm, % Space from the top margin to the baseline of the header
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage[sfdefault,light]{roboto} % Use the Roboto font
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Required for customising headers and footers
+
+\pagestyle{fancy} % Enable custom headers and footers
+
+\lhead{\small\assignmentClass\ifdef{\assignmentClassInstructor}{\assignmentClassInstructor}{}\ \assignmentTitle} % Left header; output the instructor in brackets if one was set
+\chead{} % Centre header
+\rhead{\small\ifdef{\assignmentAuthorName}{\assignmentAuthorName}{\ifdef{\assignmentDueDate}{\assignmentDueDate}{}}} % Right header; output the author name if one was set, otherwise the due date if that was set
+
+\lfoot{} % Left footer
+\cfoot{\small Page\ \thepage\ } % Centre footer
+\rfoot{} % Right footer
+
+\renewcommand\headrulewidth{0.5pt} % Thickness of the header rule
+\newcommand{\myind}[1]{{\upshape\color{blue} #1 }\index{#1}}
+%----------------------------------------------------------------------------------------
+%	MODIFY SECTION STYLES
+%----------------------------------------------------------------------------------------
+
+\usepackage{titlesec} % Required for modifying sections
+
+%------------------------------------------------
+% Section
+
+\titleformat
+{\section} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\Large\bfseries} % Format of the whole section
+{\assignmentQuestionName~\thesection} % Format of the section label
+{6pt} % Space between the title and label
+{} % Code before the label
+
+\titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
+
+%------------------------------------------------
+% Subsection
+
+\titleformat
+{\subsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\itshape} % Format of the whole section
+{(\alph{subsection})} % Format of the section label
+{4pt} % Space between the title and label
+{} % Code before the label
+
+\titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
+
+\renewcommand\thesubsection{(\alph{subsection})}
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM QUESTION COMMANDS/ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+
+% Environment to be used for each question in the assignment
+\newenvironment{question}{
+	\vspace{0.5\baselineskip} % Whitespace before the question
+	\section{} % Blank section title (e.g. just Question 2)
+	\lfoot{\small\itshape\assignmentQuestionName~\thesection~continued on next page\ldots} % Set the left footer to state the question continues on the next page, this is reset to nothing if it doesn't (below)
+}{
+	\lfoot{} % Reset the left footer to nothing if the current question does not continue on the next page
+}
+
+%------------------------------------------------
+
+% Environment for subquestions, takes 1 argument - the name of the section
+\newenvironment{subquestion}[1]{
+	\subsection{#1}
+}{
+}
+
+%------------------------------------------------
+
+% Command to print a question sentence
+\newcommand{\questiontext}[1]{
+	\textbf{#1}
+	\vspace{0.5\baselineskip} % Whitespace afterwards
+}
+
+%------------------------------------------------
+
+% Command to print a box that breaks across pages with the question answer
+\newcommand{\answer}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		#1
+	\end{tcolorbox}
+}
+
+%------------------------------------------------
+
+% Command to print a box that breaks across pages with the space for a student to answer
+\newcommand{\answerbox}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		\vphantom{L}\vspace{\numexpr #1-1\relax\baselineskip} % \vphantom{L} to provide a typesetting strut with a height for the line, \numexpr to subtract user input by 1 to make it 0-based as this command is
+	\end{tcolorbox}
+}
+
+%------------------------------------------------
+
+% Command to print an assignment section title to split an assignment into major parts
+\newcommand{\assignmentSection}[1]{
+	{
+		\centering % Centre the section title
+		\vspace{2\baselineskip} % Whitespace before the entire section title
+		
+		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
+		
+		\vspace{0.75\baselineskip} % Whitespace before the section title
+		{\LARGE \MakeUppercase{#1}} % Section title, forced to be uppercase
+		
+		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
+		
+		\vspace{\baselineskip} % Whitespace after the entire section title
+	}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\author{\textbf{\assignmentAuthorName}} % Set the default title page author field
+\date{} % Don't use the default title page date field
+
+\title{
+	\thispagestyle{empty} % Suppress headers and footers
+	\vspace{0.2\textheight} % Whitespace before the title
+	\textbf{\assignmentClass:\ \assignmentTitle}\\[-4pt]
+	\ifdef{\assignmentDueDate}{{\small Due\ on\ \assignmentDueDate}\\}{} % If a due date is supplied, output it
+	\ifdef{\assignmentClassInstructor}{{\large \textit{\assignmentClassInstructor}}}{} % If an instructor is supplied, output it
+	\vspace{0.32\textheight} % Whitespace before the author name
+}
+
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{} % Course/class
+\newcommand{\assignmentTitle}{每日一题~~\today} % Assignment title or name
+\newcommand{\assignmentAuthorName}{YY} % Student name
+
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{} % Intructor name/time/description
+\newcommand{\assignmentDueDate}{} % Due date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{question}
+
+\questiontext{
+	在Zermelo-Fraenkel集合论体系下叙述什么是 自然数集$\mathbb{N}$、整数环$\mathbb{Z}$、有理数域$\mathbb{Q}$和实数域$\mathbb{R}$.
+}
+
+\end{question}
+
+以下是关于ZF集合论的简介:
+
+最常用的集合论公理系统是ZF及其保守扩张GB(这里Z,F,G,B分别是其发明人Zermelo, Fraenkel, Gödel 以及 Bernays 名字的第一个字母)
+\\ \hspace*{\fill} \\%空行
+\myind{ZF}是\myind{Zermelo-Fraenkel集合论}(Zermelo-Fraenkel set theory)的简称，包括九条公理，每条公理是一个逻辑命题.注意ZF系统的所有命题中提到的对象都可以是集合，包括其中提到集合的元素时，这些元素课都可以是集合.仔细观察以下不难发现，这些公理中“某某集合存在”表达的其实都是“某某方式构造是对象算是集合”的意思.
+\\ \hspace*{\fill} \\%空行
+\myind{外延公理}(axiom of extensionality) 如果$x\in X$当且仅当$x\in Y$，则$X=Y$，即集合由其元素完全决定
+\\ \hspace*{\fill} \\%空行
+\myind{无序对公理}(axiom of pairing)$\forall x,y$，存在集合$\{x,y\}$（无序对）,使得$z\in \{x,y\}$当且仅当$z=x$或$z=y$.
+
+Note:这里允许$x=y$，此时$\{x,y\}=\{x\}$.能区分$x,y$地位的有序对则定义为集合
+\begin{equation}
+(x,y) = \{\{x\},\{x,y\}\}.
+\end{equation}
+\myind{并集公理}(axiom of union)$\forall \mathcal{A}$,存在集合$\cup\mathcal{A}$,使得$x\in\cup\mathcal{A}$当且仅当存在$A\in\mathcal{A}$满足$x\in A$.
+
+结合无序对公理和并集公理可以归纳定义无序多元组如下:
+\begin{equation}
+\{x_1,\cdots,x_{n+1} \} = \{x_1,\cdots,x_{n} \} \cup \{x_{n+1}\}.
+\end{equation}
+
+\myind{幂集公理}(axiom of power set)$\forall X$,存在集合$2^{X}$(幂集),使得$A\in 2^{X}$当且仅当 $A\subset X$.这里$A\subset X$是逻辑命题
+\begin{equation}
+\forall x\in A\Rightarrow x\in X
+\end{equation}
+(即$A$是$X$的子集)的简写.
+\\ \hspace*{\fill} \\%空行
+\myind{分离公理}(axiom schema of separation或axiom schema of specification) 任取集合$X$以及关于$x$的命题$P(x)$,存在集合$A$使得$x\in A$当且仅当$x\in X$并且$P(x)$成立.集合$A$通常记为$\{x\in X|P(x)\}$.
+
+结合分离公理和并集公理,就可以把交集定义为
+\begin{equation}
+\cap \mathcal{A} = \{x\in\cup\mathcal{A}|\forall A\in\mathcal{A},x\in A \}.
+\end{equation}
+
+注意到当$x\in X,y\in Y$时,前面定义的有序对$(x,y)$其实是一个由$X\cup Y$的子集构成的集合,这样的集合是$2^{X\cup Y}$的子集,也就是$2^{(2^{X\cup Y})}$的元素,因此利用分离公理,可以把直积(direct product)定义为
+\begin{equation}
+X\times Y = \{ z\in 2^{(2^{X\cup Y})}| \exists x\in X,y\in Y,\text{使得}z=(x,y) \}.
+\end{equation}
+直积也称作笛卡儿积(Cartesian product),其中英文Cartesian其实是将Descartes(笛卡儿)的名字形容词化之后的结果.
+
+每个从$X$射到$Y$的映射$f:X\rightarrow Y$可以用它在$X\times Y$中的函数图像来刻画,因此也不需要添加新的公理,就可以把从$X$打到$Y$的映射定义为集合
+\begin{equation}
+Y^X = \{f\in 2^{X\times Y} | \forall x\in X,\text{存在唯一}\ y\in Y\ \text{使得}(x,y)\in f \}
+\end{equation}
+的元素.并且此时如果$(x,y)\in f$,则把$y$记为$f(x)$.
+
+\myind{空集公理}(axiom of empty set) 存在集合$\emptyset$(空集),使得$\forall x,x\notin \emptyset$.
+
+由外延公理可以知道空集是唯一的.你也许会认为空集公理是多余的,因为有了分离公理可以随便取个集合,再取一个该集合中元素永远不满足的性质,然后就可以构造出空集来了,比如说$\emptyset=\{x\in A|x\notin A\}$.很多的书籍上也确实是这么写的,但是这实际上依赖于另外的一条其它公理中没有提到的假设:在这个世界上确实至少存在着那么一个集合$A$.缺少这个假设,形式逻辑的推理过程就没有了起点.当然,也有群体认为下面的一条公理"无穷公理"本身就包含了一定存在一个空集的意思.
+
+
+\myind{无穷公理}(axiom of infinity) 存在一个集合$\omega$(含有无穷多个元素的集合),使得$\emptyset\in\omega$,并且$x\in\omega$蕴含$x\cup\{x\}\in\omega$.
+
+在集合论中,每个自然数$n$被归纳地定义成一个恰好有$n$个元素的特殊集合:
+\begin{equation}
+0=\emptyset,1=\{0\},\cdots,n+1=\{0,\cdots,n\} = n\cup\{n\}.
+\end{equation}	
+
+比较一下这个定义和上述无穷公理不难看出,自然数集$\mathbb{N}$就是满足无穷公理的最小集合.
+
+\myind{替换公理}(axiom schema of replacement) 任取集合$X$以及关于$x,y$的逻辑命题$R(x,y)$, 如果$R$满足$\forall x\in X$, 存在唯一$y$使得该命题成立,则存在集合$Y$,使得$y\in Y$当且仅当存在一个$x\in X$使得$R(x,y)$成立.
+\\ \hspace*{\fill} \\%空行
+如果我们把$R(x,y)$理解成一个映射$f:x\mapsto y$,那么替换公理构造的$Y$其实就是$X$的象集$f(X)$.
+\\ \hspace*{\fill} \\%空行
+\myind{正则公理}(axiom of regularity)任取非空集合$X$,其中元素关于$\in$关系存在一个极小元素,即存在$x\in X$,使得$\forall y\in X,y\notin x$.
+\\ \hspace*{\fill} \\%空行
+注意:极小元素的选取并不一定唯一,也不一定是最小元素.
+
+ZF是集合论的公理化体系中最简单可靠的一个.当然,简单可靠的代价就是应用上的局限性.选择公理是一个饱受争议的公理,数学家们一方面对于是否应该允许“同时”进行无穷多项的构造提出了强烈的质疑,另一方面又利用它证明了很多虚无缥缈、无法构造的东西存在.有许多数学中的著名论断都需要在ZF之外再添加这条选择公理才能推推导出来.比如线性代数中任意线性空间中基的存在性,或者抽象代数中任意环的极大理想的存在性,或者实变函数(测度论)中不可测集的存在性,或者泛函分析中的Hahn-Banach定理,它们的证明过程中都直接或者间接地用到了选择公理,或者用到了在ZF中与选择公理等价的良序定理或Zorn引理.
+\\ \hspace*{\fill} \\%空行
+\myind{选择公理}(axiom of choice)任取一个由两两不相交的集合构成的集合族$\mathcal{A}$,存在一个集合$C$,它与$\mathcal{A}$的每个元素(元素是集合)都恰好交于一点.
+\\ \hspace*{\fill} \\%空行
+选择公理的一个简单推论是:任取一个集合族$\mathcal{A}$(不一定两两不交),存在一个映射$f:\mathcal{A}\mapsto\cup\mathcal{A}$,使得$\forall A\in\mathcal{A},f(A)\in A$.换言之,允许同时在集合族$\mathcal{A}$的每个元素(集合)里选择一个元素.
+
+%--------------------------------------------
+\end{document}

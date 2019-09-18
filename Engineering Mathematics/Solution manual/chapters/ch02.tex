@@ -1,0 +1,398 @@
+
+\chapter{复变函数的幂级数}
+
+\section{习题1-5}
+
+\begin{yyEx}
+	选择题
+	\begin{enumerate}
+		\item 设$\begin{lgathered}
+			a_n = \frac{(-1)^n + n\mathrm{i}}{n+4}(n = 1,2,\cdots)
+		\end{lgathered}$,则$\begin{lgathered}
+			\lim\limits_{n\to+\infty}a_n(\quad\quad).
+		\end{lgathered}$\\
+		(A) 等于$0$~~ (B)等于$1$~~ (C)等于$\mathrm{i}$~~ (D)不存在	
+		\item 下列级数中, 条件收敛的级数为$(\quad\quad)$.\\
+		(A) $\begin{lgathered}
+		\sum_{n=1}^{+\infty}\left( \frac{1+3\mathrm{i}}{2} \right)^n
+		\end{lgathered}$~~(B)$\begin{lgathered}
+		\sum_{n=1}^{+\infty} \frac{(3+4\mathrm{i})^n}{n!}
+		\end{lgathered}$~~(C)$\begin{lgathered}
+		\sum_{n=1}^{+\infty} \frac{\mathrm{i}^n}{n}
+		\end{lgathered}$~~(D)$\begin{lgathered}
+		\sum_{n=1}^{+\infty} \frac{(-1)^n+\mathrm{i}}{\sqrt{n+1}}
+		\end{lgathered}$		
+		\item 下列级数中, 绝对收敛的级数为$(\quad\quad)$.\\
+		(A) $\begin{lgathered}
+		\sum_{n=1}^{+\infty}\frac{1}{n}\left( 1+\frac{\mathrm{i}}{n} \right)
+		\end{lgathered}$~~(B)$\begin{lgathered}
+		\sum_{n=1}^{+\infty} \left[ \frac{(-1)^n}{n} + \frac{\mathrm{i}}{2^n} \right]
+		\end{lgathered}$~~(C)$\begin{lgathered}
+		\sum_{n=2}^{+\infty} \frac{\mathrm{i}^n}{\ln n}
+		\end{lgathered}$~~(D)$\begin{lgathered}
+		\sum_{n=1}^{+\infty} \frac{(-1)^n\mathrm{i}^n}{2^n}
+		\end{lgathered}$		
+		\item 若幂级数$\begin{lgathered}
+			\sum_{n=0}^{+\infty}c_nz^n
+		\end{lgathered}$在$z = 1+2\mathrm{i}$处收敛, 那么该级数在$z = 2$处的收敛性为$(\quad\quad)$.\\		
+		(A)~绝对收敛~~(B)~条件收敛~~(C)~发散~~(D)~不能确定		
+		\item 设幂级数$\begin{lgathered}
+		\sum_{n=0}^{+\infty}c_nz^n,\sum_{n=0}^{+\infty}nc_nz^{n-1}
+		\end{lgathered}$和$\begin{lgathered}
+		\sum_{n=0}^{+\infty}\frac{c_n}{n+1}z^{n+1}
+		\end{lgathered}$ 的收敛半径分别为$R_1,R_2,R_3$, 则$R_1,R_2,R_3$之间的关系是$(\quad\quad)$.\\
+		(A)~$R_1<R_2<R_3$~~(B)~$R_1>R_2>R_3$~~(C)~$R_1=R_2<R_3$~~(D)~$R_1=R_2=R_3$
+		\item 设$0<\abs{q}<1$, 则幂级数$\begin{lgathered}
+		\sum_{n=0}^{+\infty}q^{n^2}z^n
+		\end{lgathered}$ 的收敛半径$R = (\quad\quad)$\\
+		(A)~$\abs{q}$~~(B)~$\frac{1}{\abs{q}}$~~(C)~$0$~~(D)~$+\infty$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列幂级数的收敛半径
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\sum_{k=0}^{+\infty}\frac{k!}{k^k}z^k
+		\end{lgathered}$;
+		\item $\begin{lgathered}
+		\sum_{k=1}^{+\infty}k^nz^k
+		\end{lgathered}$;
+		\item $\begin{lgathered}
+		\sum_{n=1}^{+\infty}\frac{\sin\frac{n\pi}{2}}{n}\left( \frac{z}{2} \right)^n
+		\end{lgathered}$;
+		\item $\begin{lgathered}
+		\sum_{n = 0}^{+\infty}(2\mathrm{i})^nz^{2n+1}
+		\end{lgathered}$;
+		\item $\begin{lgathered}
+		\sum_{n = 1}^{+\infty}\frac{(n!)^2}{n^n}z^n
+		\end{lgathered}$;
+		\item $\begin{lgathered}
+		\sum_{n = 0}^{+\infty}(1+\mathrm{i})^nz^{n}
+		\end{lgathered}$;
+		\item 设函数$\begin{lgathered}
+			\frac{e^z}{\cos z}
+		\end{lgathered}$的泰勒展开式为$\begin{lgathered}
+			\sum_{n=0}^{+\infty}c_nz^n
+		\end{lgathered}$, 求幂级数$\begin{lgathered}
+			\sum_{n=0}^{+\infty}c_nz^n	
+		\end{lgathered}$的收敛半径$R$;
+		\item 设幂级数为$\begin{lgathered}
+		\sum_{n=0}^{+\infty}c_nz^n
+		\end{lgathered}$的收敛半径为$R$, 求幂级数为$\begin{lgathered}
+		\sum_{n=0}^{+\infty}(2^n-1)c_nz^n
+		\end{lgathered}$的收敛半径；
+		\item 已知级数$\begin{lgathered}
+			\sum_{k=0}^{+\infty}a_kz^k
+		\end{lgathered}$和$\begin{lgathered}
+		\sum_{k=0}^{+\infty}b_kz^k
+		\end{lgathered}$的收敛半径分别为$R_1$和$R_2$, 试确定下列级数的收敛半径\\
+			$\begin{lgathered}
+			\bullet\sum_{k=0}^{+\infty}a_k^nz^k
+			\end{lgathered}$~~~~
+			$\begin{lgathered}
+			\bullet\sum_{k=0}^{+\infty}\frac{1}{a_k}z^k
+			\end{lgathered}$~~~~
+			$\begin{lgathered}
+			\bullet\sum_{k=0}^{+\infty}a_kb_kz^k
+			\end{lgathered}$~~~~
+			$\begin{lgathered}
+			\bullet\sum_{k=0}^{+\infty}\frac{b_k}{a_k}z^k
+			\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列函数在指定点处的泰勒展开式.
+	\begin{enumerate}
+		\item $\arctan z$在$z = 0$处;
+		\item $f(z) = \cos^2z$在$z = 0$处;
+		\item $\begin{lgathered}
+			\frac{1}{z^2}
+		\end{lgathered}$在$z = -1$处;
+		\item $\sin z$在$z = \pi/2$处;
+		\item $\begin{lgathered}
+		\frac{\sin z}{1+z^2}
+		\end{lgathered}$在$\abs{z}<1$内点$z_0 = 0$处;
+		\item $\begin{lgathered}
+			\mathrm{e}^\frac{1}{1-z}
+		\end{lgathered}$在$\abs{z}<1$内点$z_0 = 0$处.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求级数$\begin{lgathered}
+		\sum_{k=0}^{+\infty}z^k,\sum_{k=1}^{+\infty}\frac{z^k}{k},\sum_{k=1}^{+\infty}\frac{z^k}{k^2}
+	\end{lgathered}$的收敛半径, 并讨论它们在收敛圆周上的收敛性.
+\end{yyEx}
+
+\begin{yyEx}
+	求下列函数在$z_0$处的泰勒展开式和收敛半径.
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\frac{z}{(z+1)(z+2)},z_0 = 2;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+			\frac{1}{4-3z},z_0 = 1+\mathrm{i}.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\section{习题6-10}
+
+\begin{yyEx}
+	求和函数.\begin{enumerate}
+		\item 求和函数$f(z) = 1+2z+3z^2+4z^3+\cdots,~\abs{z}<1$;
+		\item 求和函数$\begin{lgathered}
+			f(z) = \frac{1}{1\cdot 2}+\frac{z}{2\cdot 3}+\frac{z^2}{3\cdot 4}+\frac{z^3}{4\cdot 5}+\cdots,~\abs{z}<1
+		\end{lgathered}$;
+		\item 求幂级数$\begin{lgathered}
+			\sum_{n = 0}^{+\infty}\frac{(-1)^n}{n+1}z^{n+1}
+		\end{lgathered}$在$\abs{z}<1$内的和函数.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	若函数$\begin{lgathered}
+		\frac{1}{1-z-z^2}
+	\end{lgathered}$在$z = 0$处的泰勒展开式为$\begin{lgathered}
+		\sum_{n = 0}^{+\infty}a_nz^n
+	\end{lgathered}$, 则称$\{a_n\}$为斐波那契(Fibonacci)数列, 试确定$a_n$满足的递推关系式, 并明确给出$a_n$的表达式.
+\end{yyEx}
+
+\begin{yyEx}
+	求下列级数的洛朗级数.
+	\begin{enumerate}
+		\item 求函数$\begin{lgathered}
+			\frac{1}{z(z-\mathrm{i})}
+		\end{lgathered}$在$1<\abs{z-\mathrm{i}}<+\infty$内的洛朗展开式.
+		\item 求复变函数$\begin{lgathered}
+			\mathrm{e}^{\frac{1}{1-z}}
+		\end{lgathered}$在孤立奇点$z = 1$的去心邻域 $0<\abs{z-1}<+\infty$的洛朗展开式.
+		\item 求函数$\begin{lgathered}
+			\mathrm{e}^z+\mathrm{e}^{\frac{1}{z}}
+		\end{lgathered}$在$0<\abs{z}<+\infty$内的洛朗展开式.
+		\item 将函数$\begin{lgathered}
+		\frac{\ln (2-z)}{z(z-1)}
+		\end{lgathered}$在$1<\abs{z-\mathrm{i}}<+\infty$在$0<\abs{z-1}<1$内展开成洛朗级数.
+		\item 把下列各函数展开成$z$的幂级数, 并指出它们的收敛半径.\\
+		(a) $\begin{lgathered}
+			\mathrm{e}^{z^2}\sin z^2
+		\end{lgathered}$~~(b)$\begin{lgathered}
+		\mathrm{e}^{\frac{z}{z-1}}
+		\end{lgathered}$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	把下列各函数在指定的圆环域内展开成洛朗级数.
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\frac{1}{z(1-z)^2},0<\abs{z}<1,0<\abs{z-1}<1
+		\end{lgathered}$;
+		\item $\begin{lgathered}
+		\frac{z^2-2z+5}{(z-2)(z^2+1)},1<\abs{z}<2;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\sin z\cdot \sin\frac{1}{z},0<\abs{z}<+\infty;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{1}{z^2-3z+2},1<\abs{z}<2;
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\sin\frac{z}{z-1},\abs{z-1}>0.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求下列洛朗级数的收敛域.
+	\begin{enumerate}
+		\item 设函数$\cot z$在原点的去心邻域$0<\abs{z}<R$内的洛朗展开式$\begin{lgathered}
+			\sum_{n = -\infty}^{+\infty} c_nz^n
+		\end{lgathered}$, 求该洛朗级数的收敛域的外半径$R$.
+		\item 求级数$\begin{lgathered}
+			\frac{1}{z^2} + \frac{1}{z}+1+z+z^2+\cdots
+		\end{lgathered}$的收敛域.
+		\item 求双边幂级数$\begin{lgathered}
+			\sum_{n = 1}^{+\infty}(-1)^n\frac{1}{(z-2)^n}+\sum_{n = 1}^{+\infty}(-1)^n\left( 1-\frac{z}{2} \right)^n
+		\end{lgathered}$的收敛域.
+		\item 若$\begin{lgathered}
+			c_n = \begin{dcases}
+				3^n+(-1)^n,&n = 0,1,2,\cdots,\\
+				4^n,&n = -1,-2,\cdots,
+			\end{dcases}
+		\end{lgathered}$求双边幂级数$\begin{lgathered}
+			\sum_{n = -\infty}^{+\infty}c_nz^n
+		\end{lgathered}$的收敛域.
+	\end{enumerate}
+\end{yyEx}
+
+\section{习题11-15}
+
+\begin{yyEx}
+	判断幂级数$\begin{lgathered}
+		\sum_{n = 1}^{+\infty}\frac{\mathrm{i}^n}{n^{\alpha}}(\alpha>0)
+	\end{lgathered}$的收敛性与绝对收敛性.
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$在圆环域$H:R_1<\abs{z-z_0}<R_2$内的洛朗展开式为$\begin{lgathered}
+	\sum_{n = -\infty}^{+\infty}c_n(z-z_0)^n
+	\end{lgathered}$,$c$为$H$内绕$z_0$的任一条正向简单闭曲线, 求$\begin{lgathered}
+		\oint_c\frac{f(z)}{(z-z_0)^2}\mathrm{d}z = ?
+	\end{lgathered}$
+\end{yyEx}
+
+\begin{yyEx}
+	若函数$\begin{lgathered}
+		f(z) = \frac{1}{z(z+1)(z+4)}
+	\end{lgathered}$在原点处的极点的阶为$m$, 那么$m = ?$
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$在区域$D$内解析,$z_0$为$D$内的一点,$d$为$z_0$到$D$的边界上各点的最短距离, 那么当$\abs{z-z_0}<d$时, $\begin{lgathered}
+		f(z) = \sum_{n = 0}^{+\infty}c_n(z-z_0)^n
+	\end{lgathered}$成立, 求$c_n$.
+\end{yyEx}
+
+\begin{yyEx}
+	试证明:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\abs{\mathrm{e}^z-1}\leqslant \mathrm{e}^{\abs{z}}-1\leqslant \abs{z}\mathrm{e}^{\abs{z}}~(\abs{z}<+\infty);
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		(3-\mathrm{e})\abs{z}\leqslant \abs{\mathrm{e}^z-1}\leqslant (\mathrm{e}-1)\abs{z}~(\abs{z}<1).
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\section{习题16-20}
+
+\begin{yyEx}
+	设函数$f(z)$在圆域$\abs{z}<R$内解析, $\begin{lgathered}
+		S_n = \sum_{k=0}^n\frac{f^{(k)}(0)}{k!}z^k
+	\end{lgathered}$,试证:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			S_n(z) = \oint_{\abs{\xi} = r}f(\xi)\frac{\xi^{n+1}-z^{n+1}}{\xi-z}\frac{\mathrm{d}\xi}{\xi^{n+1}}~(\abs{z}<r<R);
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		f(z) - S_n(z) =\frac{z^{n+1}}{2\pi\mathrm{i}} \oint_{\abs{\xi} = r}\frac{f(\xi)}{\xi^{n+1}(\xi-z)}\mathrm{d}\xi~(\abs{z}<r<R).
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	设$\begin{lgathered}
+		f(z) = \sum_{n = 0}^{+\infty}a_nz^n~(\abs{z}<R_1),g(z) = \sum_{n = 0}^{+\infty}b_nz^n~(\abs{z}<R_2)
+	\end{lgathered}$, 则对任意的$r(0<r<R_1)$, 在$\abs{z}<rR_2$内有
+	\begin{equation*}
+		\sum_{n = 0}^{+\infty}a_nb_nz^n = \frac{1}{2\pi\mathrm{i}}\oint_{\abs{\xi} = r}f(\xi)g\left( \frac{z}{\xi} \right)\frac{\mathrm{d}\xi}{\xi}.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	设在$\abs{z}<R$内解析的函数$f(z)$有泰勒展开式\begin{equation*}
+		f(z) = a_0 + a_1z+a_2z^2+\cdots + a_nz^n + \cdots,
+	\end{equation*}
+	试证当$0\leqslant r<R$时,\begin{equation*}
+		\frac{1}{2\pi}\abs{f(r\mathrm{e}^{\mathrm{i}\theta})}^2\mathrm{d}\theta = \sum_{n = 0}^{+\infty}\abs{a_n}^2r^{2n}.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	试证在$0<\abs{z}<+\infty$内下列展开式成立:
+	\begin{equation*}
+		\mathrm{e}^{z+\frac{1}{z}} = c_0 + \sum_{n=1}^{+\infty}c_n\left( z^n + \frac{1}{z^n} \right),
+	\end{equation*}
+	其中$\begin{lgathered}
+		c_n = \frac{1}{\pi}\int_{0}^{\pi}\mathrm{e}^{2\cos\theta}\cos n\theta\mathrm{d}\theta~(n = 0,1,2,\cdots).
+	\end{lgathered}$
+\end{yyEx}
+
+\begin{yyEx}
+	试证级数$\begin{lgathered}
+		\sum_{k=1}^{+\infty}\frac{\sin k\abs{z}}{k(k+1)}
+	\end{lgathered}$在全复平面上一致收敛.
+\end{yyEx}
+
+\section{习题21-25}
+
+\begin{yyEx}
+	如果$C$为正向圆周$\abs{z} = 3$, 求积分$\begin{lgathered}
+		\int_Cf(z)\mathrm{d}z
+	\end{lgathered}$的值, 设$f(z)$为:
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\frac{z+2}{z(z+1)};
+		\end{lgathered}$
+		\item $\begin{lgathered}
+		\frac{z}{(z+1)(z+2)}.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	求出下列函数的奇点(包括无穷远点), 确定它们是哪一类的奇点(对于极点, 要指出它们的级).
+	\begin{enumerate}
+		\item $\begin{lgathered}
+			\frac{z^5}{(1-z)^2};
+		\end{lgathered}$
+		
+		\item $\begin{lgathered}
+		\frac{z^2+1}{\mathrm{e}^z};
+		\end{lgathered}$
+		
+		\item $\begin{lgathered}
+		\frac{\tan(z-1)}{z-1};
+		\end{lgathered}$
+		
+		\item $\begin{lgathered}
+		\frac{z^3+5}{z^4(z+1)};
+		\end{lgathered}$
+		
+		\item $\begin{lgathered}
+		z^4\mathrm{e}^{\frac{1}{z}}
+		\end{lgathered}$
+		
+		\item $\begin{lgathered}
+		\frac{\cos z}{z^2+1}+6z;
+		\end{lgathered}$
+		
+		\item $\begin{lgathered}
+		\frac{\sin(3z)}{z^2} - \frac{3}{z}.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	试求级数$\begin{lgathered}
+		\sum_{n=0}^{+\infty}z^{n^2}
+	\end{lgathered}$ 及其逐项求导级数、逐项求积级数的收敛半径, 讨论它们在$z = 1$和$z = i$时级数的收敛性.
+\end{yyEx}
+
+\begin{yyEx}
+	试证$\begin{lgathered}
+		\cosh(z+\frac{1}{z}) = c_0 + \sum_{k=1}^{+\infty}c_k(z^k+z^{-k})
+	\end{lgathered}$, \\其中$\begin{lgathered}
+		c_k = \frac{1}{2\pi}\int_{0}^{2\pi}\cos k\varphi\cosh(2\cos\varphi)\mathrm{d}\varphi.
+	\end{lgathered}$
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z),g(z)$分别以$z = b$为$m$级及$n$级极点, 试问$z = b$为$\begin{lgathered}
+		\frac{f}{g}
+	\end{lgathered}$
+	的怎样的点?
+\end{yyEx}
+
+\section{习题26}
+
+\begin{yyEx}
+	请指出下列级数在零点$z = 0$级.
+	\begin{equation*}
+		(1)~z^2(e^{z^2} - 1);~~(2)~6\sin z^3+z^3(z^6-6).
+	\end{equation*}
+\end{yyEx}

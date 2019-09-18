@@ -1,0 +1,339 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleese Assignment (For Students)
+% LaTeX Template
+% Version 2.0 (27/5/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+
+\usepackage{amsmath,amssymb,amsfonts,bm,amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{tensor}
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage[most]{tcolorbox} % Required for boxes that split across pages
+
+\usepackage{booktabs} % Required for better horizontal rules in tables
+
+\usepackage{listings} % Required for insertion of code
+
+\usepackage{etoolbox} % Required for if statements
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions and margins
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	top=3cm, % Top margin
+	bottom=3cm, % Bottom margin
+	left=2.5cm, % Left margin
+	right=2.5cm, % Right margin
+	headheight=14pt, % Header height
+	footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
+	headsep=1.2cm, % Space from the top margin to the baseline of the header
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage[sfdefault,light]{roboto} % Use the Roboto font
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Required for customising headers and footers
+
+\pagestyle{fancy} % Enable custom headers and footers
+
+\lhead{\small\assignmentClass\ifdef{\assignmentClassInstructor}{\assignmentClassInstructor}{}\ \assignmentTitle} % Left header; output the instructor in brackets if one was set
+\chead{} % Centre header
+\rhead{\small\ifdef{\assignmentAuthorName}{\assignmentAuthorName}{\ifdef{\assignmentDueDate}{\assignmentDueDate}{}}} % Right header; output the author name if one was set, otherwise the due date if that was set
+
+\lfoot{} % Left footer
+\cfoot{\small Page\ \thepage\ } % Centre footer
+\rfoot{} % Right footer
+
+\renewcommand\headrulewidth{0.5pt} % Thickness of the header rule
+\newcommand{\myind}[1]{{\upshape\color{blue} #1 }\index{#1}}
+%----------------------------------------------------------------------------------------
+%	MODIFY SECTION STYLES
+%----------------------------------------------------------------------------------------
+
+\usepackage{titlesec} % Required for modifying sections
+
+%------------------------------------------------
+% Section
+
+\titleformat
+{\section} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\Large\bfseries} % Format of the whole section
+{\assignmentQuestionName~\thesection} % Format of the section label
+{6pt} % Space between the title and label
+{} % Code before the label
+
+\titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
+
+%------------------------------------------------
+% Subsection
+
+\titleformat
+{\subsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\itshape} % Format of the whole section
+{(\alph{subsection})} % Format of the section label
+{4pt} % Space between the title and label
+{} % Code before the label
+
+\titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
+
+\renewcommand\thesubsection{(\alph{subsection})}
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM QUESTION COMMANDS/ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+
+% Environment to be used for each question in the assignment
+\newenvironment{question}{
+	\vspace{0.5\baselineskip} % Whitespace before the question
+	\section{} % Blank section title (e.g. just Question 2)
+	\lfoot{\small\itshape\assignmentQuestionName~\thesection~continued on next page\ldots} % Set the left footer to state the question continues on the next page, this is reset to nothing if it doesn't (below)
+}{
+	\lfoot{} % Reset the left footer to nothing if the current question does not continue on the next page
+}
+
+%------------------------------------------------
+
+% Environment for subquestions, takes 1 argument - the name of the section
+\newenvironment{subquestion}[1]{
+	\subsection{#1}
+}{
+}
+
+%------------------------------------------------
+
+% Command to print a question sentence
+\newcommand{\questiontext}[1]{
+	\textbf{#1}
+	\vspace{0.5\baselineskip} % Whitespace afterwards
+}
+
+%------------------------------------------------
+
+% Command to print a box that breaks across pages with the question answer
+\newcommand{\answer}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		#1
+	\end{tcolorbox}
+}
+
+%------------------------------------------------
+
+% Command to print a box that breaks across pages with the space for a student to answer
+\newcommand{\answerbox}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		\vphantom{L}\vspace{\numexpr #1-1\relax\baselineskip} % \vphantom{L} to provide a typesetting strut with a height for the line, \numexpr to subtract user input by 1 to make it 0-based as this command is
+	\end{tcolorbox}
+}
+
+%------------------------------------------------
+
+% Command to print an assignment section title to split an assignment into major parts
+\newcommand{\assignmentSection}[1]{
+	{
+		\centering % Centre the section title
+		\vspace{2\baselineskip} % Whitespace before the entire section title
+		
+		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
+		
+		\vspace{0.75\baselineskip} % Whitespace before the section title
+		{\LARGE \MakeUppercase{#1}} % Section title, forced to be uppercase
+		
+		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
+		
+		\vspace{\baselineskip} % Whitespace after the entire section title
+	}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\author{\textbf{\assignmentAuthorName}} % Set the default title page author field
+\date{} % Don't use the default title page date field
+
+\title{
+	\thispagestyle{empty} % Suppress headers and footers
+	\vspace{0.2\textheight} % Whitespace before the title
+	\textbf{\assignmentClass:\ \assignmentTitle}\\[-4pt]
+	\ifdef{\assignmentDueDate}{{\small Due\ on\ \assignmentDueDate}\\}{} % If a due date is supplied, output it
+	\ifdef{\assignmentClassInstructor}{{\large \textit{\assignmentClassInstructor}}}{} % If an instructor is supplied, output it
+	\vspace{0.32\textheight} % Whitespace before the author name
+}
+
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{} % Course/class
+\newcommand{\assignmentTitle}{每日一题~~\today} % Assignment title or name
+\newcommand{\assignmentAuthorName}{YY} % Student name
+
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{} % Intructor name/time/description
+\newcommand{\assignmentDueDate}{} % Due date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+%\maketitle % Print the title page
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 1
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+\questiontext{
+	设$D = \{ (x,y)|x^2+y^2\leqslant 1 \}$是单位闭圆盘.
+	\begin{equation*}
+		F: D\to D
+	\end{equation*}
+	是一个连续映射,证明: 一定存在点$p\in D$, 使得$F(p) = p$.
+}
+
+\answer{
+	\begin{proof}
+		我们将证明分别以下几步.
+		
+		首先假设$F$是二阶连续可微的映射. 如果$F$没有不动点, 则对于任意的$p\in D, F(p)\neq p$.这时, 由$F(p)$到$p$的连接射线必与$D$的边界$\partial D$交于一点$q:=G(p)$. 利用这一点我们得到一个映射\begin{equation}
+			G:D\to \partial D: p\mapsto G(p).
+		\end{equation}
+		由定义,将$G$限制在边界$\partial D$后, $G:\partial D\to \partial D$是恒同映射. 我们希望证明这样的映射是不存在的.
+		
+		首先, 连接$F(p)$与$p$的射线可以表示为:\begin{equation}
+			q = F(p) + t(p-F(p)), t\geqslant 0.
+		\end{equation}
+		这时, 对应于$G(p)$的$t$满足$t\geqslant 1$. 因而由$(G(p),G(p)) = 1$解得:
+		\begin{equation}
+			t = \frac{-(F(p),p-F(p))+\sqrt{(p,p-F(p))^2 - \norm{p-F(p)}^2(\norm{F(p)}^2-1)}}{\norm{p-F(p)}^2},
+		\end{equation}
+		因此,\begin{equation}
+			\begin{split}
+				G(p) &= p + \frac{-(F(p),p-F(p))+\sqrt{(p,p-F(p))^2 - \norm{p-F(p)}^2(\norm{F(p)}^2-1)}}{\norm{p-F(p)}^2} \\
+				&\times (F(p)-p).
+			\end{split}
+			\end{equation}
+		由于$F(p)-p$在$D$上处处不为$0$, 所以$p\mapsto G(p)$也是$D$上二次连续可微的映射. 我们将其表示为:
+		\begin{equation}
+			G:(x,y)\mapsto (g_1(x,y),g_2(x,y)).
+		\end{equation}
+		利用将$G$限制在边界$\partial D$后, $G:\partial D\to \partial D$是恒同映射, 我们得到:
+		\begin{equation}
+			\oint_{\partial D}g_1(x,y)\mathrm{d}g_2(x,y) = \oint_{\partial D}x\mathrm{d}y = \int_{0}^{2\pi}\cos^2(\theta)\mathrm{d}\theta = \pi.
+		\end{equation}
+		而另一方面,利用Green公式,我们得到:
+		\begin{equation}
+			\begin{split}
+				&\oint_{\partial D}g_1(x,y)\mathrm{d}g_2(x,y) \\
+				&= \oint_{\partial D}\left[ g_1(x,y)\frac{\partial g_2(x,y)}{\partial x}\mathrm{d}x + \frac{\partial g_2(x,y)}{\partial y}\mathrm{d}y  \right] \\
+				&=\iint_{D} \left[ \frac{\partial g_1(x,y)}{\partial x} \frac{\partial g_2(x,y)}{\partial y} - \frac{\partial g_1(x,y)}{\partial y}\frac{\partial g_2(x,y)}{\partial x} \right]\mathrm{d}x\mathrm{d}y.
+			\end{split}
+		\end{equation}
+		但由于$g_1^2(x,y)+g_2^2(x,y)  \equiv 1$,微分得到:
+		\begin{equation}
+			g_1(x,y)\frac{\partial g_1(x,y)}{\partial x} + g_2(x,y)\frac{\partial g_1(x,y)}{\partial x} = 0;
+		\end{equation}
+		\begin{equation}
+		g_1(x,y)\frac{\partial g_1(x,y)}{\partial y} + g_2(x,y)\frac{\partial g_1(x,y)}{\partial y} = 0.
+		\end{equation}
+		将其看作线性方程组,则$(g_1(x,y),g_2(x,y))$是其一个非零解, 所以必须方程组的系数行列式为$0$, 即
+		\begin{equation}
+			\frac{\partial g_1(x,y)}{\partial x} \frac{\partial g_2(x,y)}{\partial y} - \frac{\partial g_1(x,y)}{\partial y}\frac{\partial g_2(x,y)}{\partial x} \equiv 0.
+		\end{equation}
+		因而, \begin{equation}
+		\begin{split}
+		&\oint_{\partial D}g_1(x,y)\mathrm{d}g_2(x,y) \\
+		&=\iint_{D} \left[ \frac{\partial g_1(x,y)}{\partial x} \frac{\partial g_2(x,y)}{\partial y} - \frac{\partial g_1(x,y)}{\partial y}\frac{\partial g_2(x,y)}{\partial x} \right]\mathrm{d}x\mathrm{d}y = 0.
+		\end{split}
+		\end{equation}
+		这与\begin{equation}
+		\oint_{\partial D}g_1(x,y)\mathrm{d}g_2(x,y) = \pi.
+		\end{equation}
+		矛盾. 所以没有不动点的二次连续可微的映射$F:D\to D$是不存在的.
+		
+		下面, 我们希望利用Weierstrass逼近定理进一步证明没有不动点的连续映射$F:D\to D$也是不存在的.
+		
+		假设这样的$F$是存在的,我们将$F$表示为\begin{equation}
+			F:(x,y)\mapsto (f_1(x,y),f_2(x,y)),
+		\end{equation}
+		其中$f_1(x,y),f_2(x,y)$都是$D$上的连续函数.利用映射\begin{equation}
+			(x,y)\mapsto \left\{
+			\begin{aligned}
+			(x,y) &,~\text{如果} x^2+y^2\leqslant 1;\\
+			\frac{(x,y)}{\sqrt{x^2+y^2}}  &,~\text{如果} x^2+y^2>1.
+			\end{aligned}
+			\right.
+		\end{equation}
+		我们就得到一个$\mathbb{R}^2\to D$的一个连续映射,其限制在$D$上后是恒同映射. 将$F$复合这一个映射, 则可将$F$看作$\mathbb{R}^2\to D$的连续映射.特别地,我们可将$f_1(x,y),f_2(x,y)$分别看作$A = [-1,1]\times [-1,1]$上的连续函数. 因而可以用多项式在$A = [-1,1]\times [-1,1]$上一致地逼近$f_1(x,y),f_2(x,y)$. 这样的逼近在$D$上也是一致的.
+		
+		由假设$F$没有不动点, 而$D$是一个紧集. 因而存在$\varepsilon>0$, 使得对于任意的$p\in D$,恒有$\norm{F(p)-p}>\varepsilon$. 由于我们可以用多项式在$D$上一致逼近$f_1(x,y),f_2(x,y)$, 因而可用以多项式为分量的映射$H(p)$逼近映射$F$,使得在$D$上,\begin{equation}
+			\norm{H(p)-F(p)}\leqslant \frac{\varepsilon}{4}.
+		\end{equation}
+		这时, $\norm{H(p)}<1+\frac{\varepsilon}{4}$. 如果令\begin{equation}
+			T(p) = \frac{4}{4+\varepsilon}H(p),
+		\end{equation}
+		则$T(p)$是从$D$射到自身的一个二次连续可微的映射,对于任意的$p\in D$,由于
+		\begin{equation}
+			\begin{split}
+				&\norm{T(p)-F(p)}\leqslant \norm{T(p)-H(p)} +\norm{H(p)-F(p)} \\
+				&\leqslant \norm{H(p)}\left| 1-\frac{4}{4+\varepsilon} \right| + \frac{\varepsilon}{2} \leqslant \frac{4+\varepsilon}{4}\left| 1-\frac{4}{4+\varepsilon} \right| + \frac{\varepsilon}{2}\leqslant \frac{3\varepsilon}{4},
+			\end{split}
+		\end{equation}
+		我们得到\begin{equation}
+			\norm{T(p)-p}\geqslant \norm{F(p)-p} - \norm{T(p)-F(p)}>\varepsilon -\frac{3\varepsilon}{4}>0.
+		\end{equation}
+		因此$T(p)$在$D$中没有不动点. 这与上面我们得到的$D$到自身的二次连续可微的映射一定有不动点矛盾.
+	\end{proof}
+}
+
+\end{question}
+%--------------------------------------------
+\end{document}

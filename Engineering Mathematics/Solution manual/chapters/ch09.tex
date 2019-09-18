@@ -1,0 +1,227 @@
+
+
+\chapter{勒让德多项式及其应用}
+
+\section{习题1-5}
+
+\begin{yyEx}
+	氢原子定态问题的量子力学薛定谔方程是\begin{equation*}
+		-\frac{8h^2}{8\pi^2\mu}\nabla^2u-\frac{Ze^2}{r}u = Eu,
+	\end{equation*}
+	其中$h,\mu,Z,e,E$都是常数, 试在球坐标系下把这个方程分离变量, 即得到相应各单变量函数满足的常微分方程.
+\end{yyEx}
+
+\begin{yyEx}
+	证明:(1) $\begin{lgathered}
+			x^2 = \frac{2}{3}\mathrm{P}_2(x) + \frac{1}{3}\mathrm{P}_0(x);
+		\end{lgathered}$~~~(2)
+		$\begin{lgathered}
+			x^3 = \frac{2}{5}\mathrm{P}_3(x) + \frac{3}{5}\mathrm{P}_1(x).
+		\end{lgathered}$
+\end{yyEx}
+
+\begin{yyEx}
+	求证$\begin{lgathered}
+		\int_{-1}^{1}(1-x^2)[\mathrm{P}_n'(x)]^2\mathrm{d}x = \frac{2n(n+1)}{2n+1}.
+	\end{lgathered}$
+\end{yyEx}
+
+\begin{yyProof}
+	利用递推关系\begin{equation*}
+		\begin{split}
+			&(1-x^2)\mathrm{P}_n'(x) = n[\mathrm{P}_{n-1}(x)-x\mathrm{P}_n(x)]; \\
+			&\mathrm{P}_n'(x) = x\mathrm{P}_{n-1}'(x)+n\mathrm{P}_{n-1}(x),
+		\end{split}
+	\end{equation*}
+	可将积分化简为\begin{equation*}
+		\begin{split}
+		I &\triangleq \int_{-1}^{1}(1-x^2)[\mathrm{P}_n'(x)]^2\mathrm{d}x\\
+		 &= \int_{-1}^{1}n[\mathrm{P}_{n-1}(x)-x\mathrm{P}_n(x)]\mathrm{P}_n'(x)\mathrm{d}x\\
+		&= \int_{-1}^{1}n\mathrm{P}_{n-1}(x)[x\mathrm{P}_{n-1}'(x)+n\mathrm{P}_{n-1}(x)]-nx\mathrm{P}_n(x)\mathrm{P}_n'(x)\mathrm{d}x.
+		\end{split}
+	\end{equation*}
+	利用分部积分, 不难计算出\begin{equation*}
+		\begin{split}
+			J_l&\triangleq \int_{-1}^{1}x\mathrm{P}_l(x)\mathrm{P}_l'(x)\mathrm{d}x\\
+			 &= \int_{x = -1}^{1}\frac{x}{2}\mathrm{d}[\mathrm{P}_l(x)]^2 \\
+			&= 0 - \frac{1}{2}\int_{-1}^1 [\mathrm{P}_l(x)]^2\mathrm{d}x = -\frac{1}{2n+1}.
+		\end{split}
+	\end{equation*}
+	由此计算出最终结果
+	\begin{equation*}
+	\begin{split}
+	I &= \int_{-1}^{1}n\mathrm{P}_{n-1}(x)[x\mathrm{P}_{n-1}'(x)+n\mathrm{P}_{n-1}(x)]-nx\mathrm{P}_n(x)\mathrm{P}_n'(x)\mathrm{d}x \\
+	&= nJ_{n-1}-nJ_n +n^2\int_{-1}^1[\mathrm{P}_{n-1}(x)]^2\mathrm{d}x \\
+	&= \frac{-n}{2n-1}+\frac{n}{2n+1}+\frac{2n^2}{2n-1} \\
+	&= \frac{2n(n+1)}{2n+1}.
+	\end{split}
+	\end{equation*}
+\end{yyProof}
+
+\begin{yyEx}
+	证明$\begin{lgathered}
+		\mathrm{P}_l(-x) = (-1)^l\mathrm{P}_l(x).
+	\end{lgathered}$
+\end{yyEx}
+
+\begin{yyProof}
+	在以下的Legendre多项式的表达式中
+	\begin{equation*}\boxed{
+		\mathrm{P}_l(x) = \sum_{r = 0}^{\lfloor l/2\rfloor}(-1)^r\frac{(2l-2r)!}{2^lr!(l-r)!(l-2r)!}x^{l-2r}}
+	\end{equation*}
+	当$l$是奇数时, $\mathrm{P}_l(x)$由$x$的奇数次幂的线性组合构成, 它是奇函数; 当$l$是偶数时, $\mathrm{P}_l(x)$由$x$的偶数次幂的线性组合构成, 则它是偶函数.
+	
+	因此,不难看出\begin{equation*}
+		\mathrm{P}_l(-x) = (-1)^l\mathrm{P}_l(x).
+	\end{equation*}
+\end{yyProof}
+
+\begin{yySolution2}
+	见习题9.7的解答过程.
+\end{yySolution2}
+
+\begin{yyEx}
+	已知$\begin{lgathered}
+		\mathrm{P}_0(x) = 1,\mathrm{P}_1(x) = x,\mathrm{P}_2(x) = \frac{1}{2}(3x^2-1)
+	\end{lgathered}$,用递推公式求$\mathrm{P}_3(x),\mathrm{P}_4(x)$.
+\end{yyEx}
+
+\section{习题6-10}
+
+\begin{yyEx}
+	在$(-1,1)$上, 将下列函数按勒让德多项式展开为广义傅里叶级数.
+	\begin{equation*}
+		f(x) = \begin{dcases}
+			x,&0<x<1,\\
+			0,&-1<x<0.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yySolution}
+	设$f(x) = \sum_{l = 0}^{+\infty}c_l\mathrm{P}_l(x)$, 则
+	\begin{equation*}
+		c_l = \frac{2l+1}{2}\int_{0}^{1}x\mathrm{P}_l(x)\mathrm{d}x = \frac{2l+1}{2}\int_{0}^{1}\mathrm{P}_1(x)\mathrm{P}_l(x)\mathrm{d}x.
+	\end{equation*}
+	心中回忆书中公式(9.43),便可计算得到:
+	\begin{equation*}
+		c_l = \begin{dcases}
+			\frac{3}{2}\int_{0}^{1}x^2\mathrm{d}x = \frac{1}{2}, &l = 1,\\
+			\frac{2l+1}{2}\frac{-\mathrm{P}_l(0)}{l(l+1)-2},&l\neq 1.
+		\end{dcases}
+	\end{equation*}
+	从书中公式(9.20)可以轻松看出\begin{equation*}
+		\mathrm{P}_{2n}(0) = (-1)^n\frac{(2n)!}{2^{2n}(n!)^2},~~\mathrm{P}_{2n+1}(0) = 0, n\in\mathbb{N}.
+	\end{equation*}
+	由此得到最后的结果\begin{equation*}
+		\begin{split}
+			f(x) &= \frac{1}{2}\mathrm{P}_1(x) + \sum_{n = 0}^{+\infty}\frac{4n+1}{2}\frac{-(-1)^n\frac{(2n)!}{2^{2n}(n!)^2}}{2n(2n+1)-2}\mathrm{P}_{2n}(x) \\
+			&= \frac{1}{2}\mathrm{P}_1(x)+\sum_{n = 0}^{+\infty}\frac{(-1)^{n+1}(4n+1)(2n)!}{2^{2n+2}(2n-1)(n+1)(n!)^2}\mathrm{P}_{2n}(x).
+		\end{split}
+	\end{equation*}
+\end{yySolution}
+
+\begin{yySolution2}
+	利用\begin{equation*}
+		\boxed{f(x) = \max\{x,0\} = \frac{\abs{x}+x}{2} = \frac{\abs{x}}{2} + \frac{\mathrm{P}_1(x)}{2}}
+	\end{equation*}
+	和书中P267例1(2)的结论
+	\begin{equation*}
+		\boxed{
+			\abs{x} = \frac{1}{2}\mathrm{P}_0(x) + \sum_{n = 1}^{+\infty}\frac{(-1)^{n+1}(4n+1)(2n-2)!}{2^{2n}(n+1)!(n-1)!}\mathrm{P}_{2n}(x)
+		}
+	\end{equation*}
+	直接得到结论:
+	\begin{equation*}
+		f(x) = \frac{1}{4}\mathrm{P}_0(x)+\frac{1}{2}\mathrm{P}_1(x) +\frac{1}{2}\sum_{n = 1}^{+\infty}\frac{(-1)^{n+1}(4n+1)(2n-2)!}{2^{2n}(n+1)!(n-1)!}\mathrm{P}_{2n}(x).
+	\end{equation*}
+\end{yySolution2}
+
+\begin{yyEx}
+	利用勒让德多项式的生成函数(母函数)证明:\begin{equation*}
+		\mathrm{P}_n(-1) = (-1)^n,~~\mathrm{P}_{2n-1}(0) = 0,~~\mathrm{P}_{2n}(0) = \frac{(-1)^n(2n)!}{2^{2n}(n!)^2}.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyProof}
+	根据Legendre多项式的\myind{生成函数}:
+	\begin{equation*}
+		\boxed{
+			\frac{1}{\sqrt{1-2xt+t^2}} = \sum_{l = 0}^{+\infty}\mathrm{P}_l(x)t^l,~~\abs{t}<\abs{x\pm \sqrt{x^2-1}}.
+		}
+	\end{equation*}
+	令$x = -1$, 就得到
+	\begin{equation*}
+		\frac{1}{\sqrt{1+2t+t^2}} = \frac{1}{1+t} = \sum_{n=0}^{+\infty}(-1)^nt^n = \sum_{n = 0}^{+\infty}\mathrm{P}_n(-1)t^n
+	\end{equation*}
+	这说明$\mathrm{P}_n(-1) = (-1)^n$.
+	
+	再根据,
+	\begin{equation*}
+		\frac{1}{\sqrt{1-2xt+t^2}} = \frac{1}{\sqrt{1-2(-x)(-t)+(-t)^2}}
+	\end{equation*}
+	即\begin{equation*}
+		\sum_{l = 0}^{+\infty}\mathrm{P}_l(x)t^l = \sum_{l = 0}^{+\infty}\mathrm{P}_l(-x)(-t)^l
+	\end{equation*}
+	这说明了Legendre多项式的奇偶性, 即$\mathrm{P}_l(-x) = (-1)^l\mathrm{P}_l(x)$.
+	
+	这蕴含结论$\mathrm{P}_{2n-1}(0) = 0$.
+	
+	再代入$x = 0$, 有\begin{equation*}
+		\frac{1}{\sqrt{1+t^2}} = \sum_{l = 0}^{+\infty}\mathrm{P}_l(0)t^l,
+	\end{equation*}
+	两端对$t$微商, 得\begin{equation*}
+		-\frac{t}{1+t^2}\frac{1}{\sqrt{1+t^2}}\sum_{l = 1}^{+\infty}l\mathrm{P}_l(0)t^{l-1}.
+	\end{equation*}
+	结合以上两式, 我们有
+	\begin{equation*}
+		-t\sum_{l = 1}^{+\infty}l\mathrm{P}_l(0)t^{l-1} = (1+t^2)\sum_{l = 0}^{+\infty}\mathrm{P}_l(0)t^l.
+	\end{equation*}
+	比较两端各项系数, 并稍加整理得:
+	\begin{equation*}
+		\mathrm{P}_{l+1}(0) = -\frac{l}{l+1}\mathrm{P}_{l-1}(0).
+	\end{equation*}
+	再利用条件$\mathrm{P}_0(0) = 1$(此条件可在生成多项式中令$t = 0$立得), 可计算出\begin{equation*}
+		\begin{split}
+			\mathrm{P}_{2n}(0) &= (-1)^n\frac{(2n-1)(2n-3)\cdots 1}{(2n)(2n-2)\cdots 2}\\
+			&= (-1)^n\frac{(2n)!}{[(2n)(2n-2)\cdots 2]^2} \\
+			&=\frac{(-1)^n(2n)!}{2^{2n}(n!)^2}.
+		\end{split}
+	\end{equation*}
+\end{yyProof}
+
+\begin{yyEx}
+	在半径为$1$的球内求解拉普拉斯方程$\nabla^2u = 0$, 使$u|_{r = 1} = 3\cos 2\theta+1$.
+\end{yyEx}
+
+\begin{yyEx}
+	在半径为$1$的球内求解拉普拉斯方程$\nabla^2u = 0$, 已知在球面上
+	\begin{equation*}
+		u\big|_{r = 1} = \begin{dcases}
+			A,&0\leqslant \theta\leqslant \alpha,\\
+			0,&\alpha<\theta\leqslant\pi.
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	在半径为$1$的球外求解拉普拉斯方程$\nabla^2u = 0$, 使$u|_{r = 1} = \cos\theta$.
+\end{yyEx}
+
+\section{习题11-12}
+
+\begin{yyEx}
+	在半径为$a$的球外$(r>a)$求解:
+	\begin{equation*}
+		\begin{dcases}
+			&\nabla^2u = 0,\\
+			&u\big|_{r = a} = f(\theta,\phi).
+		\end{dcases}
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	(辐射速度势问题)设半径为$r_0$ 的球面径向速度分布为 \begin{equation*}
+		v = v_0\frac{1}{4}(3\cos 2\theta+1)\cos wt,
+	\end{equation*}这个球在空气中辐射出去的声场中的速度势满足三维波动方程: $v_{tt}-a^2\nabla^2v = 0$, 其中$a^2 = \frac{p_0r}{\rho_0}$, $p_0$是初始压强, $\rho_0$是初始密度, $r$是定压比热容的比值. 设$r_0\leqslant \lambda$(声波长), 求速度势$v$, 当$r$很大时 $v|_{r\to\infty}$的渐进表达式是什么?
+\end{yyEx}

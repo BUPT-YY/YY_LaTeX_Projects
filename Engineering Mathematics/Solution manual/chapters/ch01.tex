@@ -1,0 +1,1398 @@
+\setcounter{chapter}{0}
+\chapter{复变函数及其导数与积分}
+	工程数学的第一部分是复变函数, 在这一个部分有两个地方值得注意. 
+	
+	(1)要强调复变量$z$和$\overline{z}$的作用, 利用它来实现实变量$x$和$y$与复变量之间对于各种关系和公式的互换. 希望同学们能掌握怎样将实分析的问题用复变量表示; 怎样将复分析中的各种漂亮定理运用到其他方面.
+	
+	(2)在学习中应当突出级数和积分这两种表示方法. 可以说,由Weierstrass提出的\myind{幂级数方法}和由Cauchy提出的\myind{积分表示方法}是解析函数的两个主要研究方法, 这两种方法交替地出现成为了复变函数部分的主线. 同学们应当尽早了解和熟悉它们. 大家要学会尽可能将复分析中涉及的各个定理用这两种方法或其推论给出. 例如, 开映射定理可以作为幂级数的局部性质的推论; 单值性定理则可从幂级数的收敛圆的性质导出.
+	
+	顾名思义,"复分析"是研究以复数为变量的函数. 在这一章中, 我们要先温习中学中所学过的复数的各种表示及代数运算, 讨论复平面的拓扑; 然后将平面$\mathbb{R}^2$上的极限理论推广到复平面, 将实函数关于变量$x$和$y$的可导性和求导关系用复变量来表示; 之后, 讨论一下扩充复平面. 前面这一小部分仅仅讨论复函数对实变量$x$和$y$的可导性与微分, 这些内容仅仅是微积分的简单推广, 利用微积分的工具即可解决. 在复变函数的理论中, 我们主要要讨论的是关于复变量$z$可导的复函数. 即极限$\begin{lgathered} \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0} \end{lgathered}$存在的函数————解析函数. 引入解析函数的概念后, 要讨论一些它的基本性质, 介绍一些初等解析函数. 这一章的最后, 要定义复函数的曲线积分, 并介绍重要的Cauchy公式. Cauchy公式是1825年左右Cauchy在研究流体力学时发现的. 他将$\mathbb{C}$中区域$\Omega$上的解析函数表示为沿$\Omega$的边界$\partial\Omega$上的含参变量积分, 为解析函数的研究提供了一个非常有力的工具. 解析函数的许多性质可以由Cauchy公式得到. 这一小部分是本章最后要介绍的内容.
+\section{复数域}
+	在中学数学中我们已经学过复数的表示和代数运算, 本节我们将从复数的定义开始, 介绍一些复数的基本性质.
+    \begin{definition}
+        一复数是个有序的实数对(简称序对)$(a,b)$. "有序的"的意思是, 如果$a\neq b$,那么$(a,b)$和$(b,a)$就认为是不同的.
+    \end{definition}
+	设$x=(a,b),y=(c,d)$是两个复数. 当且仅当$a=c$且$b=d$时, 我们写成$x=y$.(注意, 这个定义并不多余). 我们定义复数的加法与乘法:
+	\begin{align}
+	    x+y&\triangleq (a+c,b+d),\\
+	  xy&\triangleq (ac-bd,ad+bc).  
+	\end{align}
+	二次方程$x^2+1=0$在实数中无解, 在此, 我们可以为它形式地引入虚根$\mathrm{i} = (0,1)$, $\mathrm{i}$满足$\mathrm{i}^2 = -1$. 由此, 我们可以将复数表示成较惯用的记号$(a,b) = a+b\mathrm{i}$.
+	
+	\begin{theorem}[Cauchy准则/复数域完备性定理]
+		复数列$\{z_n \}$在$\mathbb{C}$中收敛的充分必要条件是$\{z_n\}$为一个Cauchy列, 即
+		\begin{equation*}
+			\forall\varepsilon>0,\exists N\in\mathbb{N} (n,m>N\Rightarrow \abs{z_n-z_m}<\varepsilon).
+		\end{equation*}
+	\end{theorem}
+	
+	\begin{theorem}[Euler 公式]
+		\begin{equation*}
+			\mathrm{e}^{\mathrm{i}z} = \cos z+\mathrm{i}\sin z.
+		\end{equation*}
+	\end{theorem}
+
+	\begin{definition}[复平面上拓扑的几个定义]
+		$z_0$的$\varepsilon$-圆盘邻域为\begin{equation*}
+			U(z_0,\varepsilon) = \{z\big| \abs{z-z_0}<\varepsilon \},
+		\end{equation*}
+		$z_0$的$\varepsilon$-空心圆盘邻域为\begin{equation*}
+			U_0(z_0,\varepsilon) = U(z_0,\varepsilon)\backslash \{z_0\}
+		\end{equation*}
+		$S\subset \mathbb{C}$称为开集,若\begin{equation*}
+			\forall z\in S,\exists\varepsilon>0 (D(z,\varepsilon)\subset S).
+		\end{equation*}
+		开集在$\mathbb{C}$中的余集称为闭集.
+		$\mathbb{C}$中任意不空的集合$F$的直径$\mathrm{diam}F$定义为\begin{equation*}
+			\mathrm{diam}F = \sup\{ \abs{z-w}\big| z,w\in F \}.
+		\end{equation*}
+	\end{definition}
+
+	\begin{theorem}[闭集套定理]
+		$\{F_n\}$是$\mathbb{C}$中单调非增的一列非空闭集, 并且$\mathrm{diam}F_n\to 0$, 则存在唯一的一个点$z_0\in\mathbb{C}$, 使得
+		\begin{equation*}
+			\{z_0\} = \bigcap_{n = 1}^{+\infty}F_n.
+		\end{equation*}
+	\end{theorem}
+
+	\begin{theorem}[开覆盖定理]
+		$\mathbb{C}$中任意有界闭集都是紧集, 换言之, 它的每个开覆盖都有有限子覆盖.
+	\end{theorem}
+	
+	\begin{theorem}[Bolzano-Weierstrass]
+		$\mathbb{C}$中任意有界序列必有收敛子列.
+	\end{theorem}
+
+\section{习题1-20}
+
+
+\begin{yyEx}
+	计算下列各题.
+	\begin{enumerate}
+		\item 设$z = \begin{lgathered}\frac{(1+\mathrm{i})(2-\mathrm{i})(3-\mathrm{i})}{(3+\mathrm{i})(2+\mathrm{i})}\end{lgathered}$, 求$\abs{z}$.
+		\item 当$z = \begin{lgathered}\frac{1+\mathrm{i}}{1-\mathrm{i}}\end{lgathered}$时, 求$z^{100}+z^{75}+z^{50}$的值.
+		\item 设$z = (2-3\mathrm{i})(-2+\mathrm{i})$, 求$\arg z$.
+		\item 求复数$\begin{lgathered}\frac{(\cos 5\theta + \mathrm{i}\sin 5\theta)^2}{(\cos 3\theta - \mathrm{i}\sin 3\theta)^2}\end{lgathered}$的指数表示式.
+		\item 求复数$\begin{lgathered}z = \tan\theta - \mathrm{i}~\left(\frac{\pi}{2}<\theta<\pi\right)\end{lgathered}$的三角表示式.
+		\item 设$f(z) = 1-\overline{z}$, $z_1 = 2+3\mathrm{i},z_2 = 5-\mathrm{i}$,求$\overline{f(z_1-z_2)}$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yySolution}
+	\begin{enumerate}
+		\item \begin{equation*}
+			\abs{z} = \abs{1+\mathrm{i}}\cdot\frac{\abs{2-\mathrm{i}}}{\abs{2+\mathrm{i}}}\cdot\frac{\abs{3-\mathrm{i}}}{\abs{3+\mathrm{i}}} = \abs{1+\mathrm{i}} = \sqrt{2}.
+		\end{equation*}
+		\item 可以计算得到$z =\begin{lgathered}\frac{1+\mathrm{i}}{1-\mathrm{i}} = \mathrm{i}\end{lgathered}$, 因此, $z^4 = 1$.
+		所以,\begin{equation*}
+			z^{100}+z^{75}+z^{50} = 1 +\mathrm{i}^3 +\mathrm{i}^2 = -\mathrm{i}.
+		\end{equation*}
+		\item $z = (2-3\mathrm{i})(-2+\mathrm{i}) = -1+8\mathrm{i}$位于复平面的第二象限.
+		
+		因此, 它的辐角主值是\begin{equation*}
+				\arg z = \pi - \arctan 8.
+		\end{equation*}
+		\item \begin{equation*}
+			\frac{(\cos 5\theta + \mathrm{i}\sin 5\theta)^2}{(\cos 3\theta - \mathrm{i}\sin 3\theta)^2} = \frac{(\mathrm{e}^{5\mathrm{i}})^2}{(\mathrm{e}^{-3\mathrm{i}})^2} = \mathrm{e}^{16\mathrm{i}}
+		\end{equation*}
+		\item \begin{equation*}
+			\begin{split}
+				z &= \tan\theta - \mathrm{i} = \frac{1}{\cos\theta}\left( \sin\theta - \mathrm{i}\cos\theta \right) \\
+				&= \sec\theta \left[\cos(\theta-\frac{\pi}{2})+\sin(\theta-\frac{\pi}{2})   \right]
+			\end{split}
+		\end{equation*}
+		\item 注意到$\overline{f(z)} = 1-z$, 因此,\begin{equation*}
+			\overline{f(z_1-z_2)} = 1-[(2+3\mathrm{i})-(5-\mathrm{i})] = 4-4\mathrm{i}.
+		\end{equation*}
+	\end{enumerate}
+\end{yySolution}
+
+
+\begin{yyEx}
+	证明下列各题.
+	\begin{enumerate}
+		\item 若$z$为非零复数, 证明$\abs{z^2 - \overline{z}^2} \leqslant 2z\overline{z}$.
+		\item 设$z = x+\mathrm{i}y$,试证$\begin{lgathered}\frac{\abs{x}+\abs{y}}{\sqrt{2}}\leqslant \abs{z} \leqslant \abs{x}+\abs{y}\end{lgathered}$.
+		\item 试证$\begin{lgathered}\frac{z_1}{z_2}\geqslant 0(z_2\neq 0)\end{lgathered}$的充要条件为$\abs{z_1+z_2} = \abs{z_1}+\abs{z_2}$.
+		\item 证明使得$z^2 = \abs{z}^2$成立的$z$一定是实数.
+		\item 设复数$z\neq \pm \mathrm{i}$, 试证$\begin{lgathered}\frac{z}{1+z^2}\end{lgathered}$是实数的充要条件为$\abs{z} = 1$或$\mathrm{Im}(z) = 0$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yySolution}
+		\begin{enumerate}
+			\item 根据三角不等式得到:
+			\begin{equation*}
+			\abs{z^2 - \overline{z}^2} \leqslant \abs{z^2} + \abs{\overline{z}^2} = z\overline{z} + z\overline{z} = 2z\overline{z}.
+			\end{equation*}
+			
+			\item 根据三角不等式得到:
+			\begin{equation*}
+			\abs{z} = \abs{x+\mathrm{i}y} \leqslant \abs{x} + \abs{\mathrm{i}y} = \abs{x} + \abs{y}.
+			\end{equation*}
+			另一方面, 根据Cauchy不等式,
+			\begin{equation*}
+			\abs{x}+\abs{y} = 1\cdot\abs{x}+1\cdot\abs{y}\leqslant \sqrt{(1^2+1^2)(x^2+y^2)} = \sqrt{2}\abs{z}.
+			\end{equation*}
+			
+			\item 注意到\begin{equation*}
+			\begin{split}
+			&\abs{z_1+z_2}^2 = \abs{z_1}^2 + 2\mathrm{Re}z_1\overline{z_2} + \abs{z_2}^2; \\
+			&(\abs{z_1}+\abs{z_2})^2 = \abs{z_1}^2 + 2\abs{z_1\overline{z_2}}+\abs{z_2}^2.
+			\end{split}
+			\end{equation*}
+			因此,$\abs{z_1+z_2} = \abs{z_1}+\abs{z_2}$当且仅当$\mathrm{Re}z_1\overline{z_2} = \abs{z_1\overline{z_2}}$, 即$\mathrm{Im}z_1\overline{z_2} = 0$.
+			
+			可以看到\begin{equation*}
+			\abs{z_1+z_2} = \abs{z_1}+\abs{z_2} \Leftrightarrow z_1\overline{z_2} = \abs{z_1\overline{z_2}}\geqslant 0 \Leftrightarrow \frac{z_1}{z_2}\geqslant 0
+			\end{equation*}
+			
+			\item 设$z^2 = \abs{z}^2$. 若$z = 0$, 则$z$是实数.
+			
+			若$z\neq 0$, 由于复数域是域, 所以它的乘法对于每个非零元都有唯一逆元. 因此,
+			\begin{equation*}
+			z = z^{-1}z^2 = z^{-1}\abs{z}^2 = z^{-1}z\overline{z} = \overline{z}.
+			\end{equation*}
+			这说明$\mathrm{Im}z = 0$,即$z$是实数.
+			
+			\item 引入$w = z/(1+z^2)$. 
+			则\begin{equation*}
+			w\text{是实数} \Leftrightarrow w = \overline{w} \Leftrightarrow \overline{z}(1+z^2) = z(1+\overline{z}^2)
+			\Leftrightarrow (z-\overline{z})(1-\abs{z}^2) = 0.
+			\end{equation*}
+		\end{enumerate}	
+\end{yySolution}
+
+
+\begin{yyEx}
+	设$x,y$是实数,$z_1 = x+\sqrt{11}+y\mathrm{i},~z_2 = x-\sqrt{11}+y\mathrm{i}$且有$\abs{z_1}+\abs{z_2} = 12$.问动点$(x,y)$的轨迹是什么曲线.
+\end{yyEx}
+
+\begin{yySolution}
+	设$\abs{z_1} = 6+t$, 则$\abs{z_2} = 6-t$. 这两式平方后作差得到:
+	\begin{equation*}
+		4x\sqrt{11} = 24t.
+	\end{equation*}
+	代回$\abs{z_1} = 6+t$, 再平方, 得到
+	\begin{equation*}
+		x^2 + 2x\sqrt{11} + 11 + y^2 = (6+\frac{\sqrt{11}}{6}x)^2.
+	\end{equation*}
+	整理, 得\begin{equation*}
+		\frac{x^2}{36}+\frac{y^2}{25} = 1.
+	\end{equation*}
+	这说明动点$(x,y)$的轨迹是一个焦点在$x$轴上的椭圆.
+\end{yySolution}
+
+\begin{yyEx}
+	设$z$为复数, 求方程$z + \abs{\overline{z}} = 2+\mathrm{i}$的解.
+\end{yyEx}
+
+\begin{yySolution}
+	根据题意, 于是有\begin{equation*}
+		z = 2-\abs{z} + \mathrm{i}.
+	\end{equation*}
+	两端取模后平方, 得到:
+	\begin{equation*}
+		\abs{z}^2 = (2-\abs{z})^2 + 1.
+	\end{equation*}
+	解得:$\abs{z} = 5/4$.
+	于是\begin{equation*}
+		z = \frac{3}{4} + \mathrm{i}.
+	\end{equation*}
+\end{yySolution}
+
+\begin{yyEx}
+	满足不等式$\abs{\frac{z-\mathrm{i}}{z+\mathrm{i}}}\leqslant 2$的所有点$z$构成的集合是有界区域还是无界区域?
+\end{yyEx}
+
+\begin{yySolution}
+	当$z\in \mathbb{R}$时, 我们有
+	\begin{equation*}
+		\abs{\frac{z-\mathrm{i}}{z+\mathrm{i}}} \equiv 1\leqslant 2.
+	\end{equation*}
+	由于$\mathbb{R}$在复平面上是无界的. 所以, 满足不等式$\abs{\frac{z-\mathrm{i}}{z+\mathrm{i}}}\leqslant 2$的所有点$z$构成的集合是一个无界区域.
+\end{yySolution}
+
+\begin{yyEx}
+	若复数$z$满足$z\overline{z} + (1-2\mathrm{i})z+(1+2\mathrm{i})\overline{z} + 3 = 0$,试求$\abs{z+2}$的取值范围.
+\end{yyEx}
+
+\begin{yySolution}
+	回忆圆方程的复数表示: 若$C\in\mathbb{R},B\in\mathbb{C},B\overline{B}-C>0$, 则方程
+	\begin{equation*}
+		z\overline{z} + B\overline{z} + \overline{B}z + C = 0
+	\end{equation*}
+	表示一个以$\begin{lgathered}
+		-B
+	\end{lgathered}$为圆心, $\begin{lgathered}
+		\sqrt{B\overline{B}-C}
+	\end{lgathered}$为半径的圆周.
+	
+	因此, 本题中的复数$z$位于一个以$-1-2\mathrm{i}$为圆心, 半径为$\sqrt{2}$的圆周上.
+	
+	可以看到点$z_0 = -2$到圆心的距离为$\sqrt{5}$, 因而, $\abs{z+2}$的取值范围为$[\sqrt{5}-\sqrt{2},\sqrt{5}+\sqrt{2}]$
+\end{yySolution}
+
+\begin{yyEx}
+	设$a\geqslant 0$, 在复数集$\mathbb{C}$中解方程$z^2 + 2\abs{z} = a$.
+\end{yyEx}
+
+\begin{yySolution}
+	
+\end{yySolution}
+
+\begin{yyEx}
+	方程$\abs{z+2-3\mathrm{i}} = \sqrt{2}$代表什么曲线.
+\end{yyEx}
+
+\begin{yySolution}
+	这方程在复平面上表示一个以$-2+3\mathrm{i}$为圆心, $\sqrt{2}$为半径的圆周.
+\end{yySolution}
+
+\begin{yyEx}
+	不等式$\abs{z-2}+\abs{z+2}<5$所表示的区域的边界是什么曲线?
+\end{yyEx}
+
+\begin{yySolution}
+	不难看出, $\abs{z-2}+\abs{z+2}<5$所表示的区域是一个开的椭圆盘. 显然, 它的边界是\begin{equation*}
+		\{z\big|~\abs{z-2}+\abs{z+2} = 5 \}
+	\end{equation*}
+	仿照习题1.3的步骤, 可化简得到:
+	\begin{equation*}
+		\left\{z = x+\mathrm{i}y \bigg| \frac{x^2}{25/4}+\frac{y^2}{9/4} =1 \right\}
+	\end{equation*}
+\end{yySolution}
+\medskip
+\begin{note}
+	上面这个解答中用到了一个"显然", 严格来说这是需要证明的. 证明如下:
+	引入$G = \{z\big|~\abs{z-2}+\abs{z+2} < 5 \},~F = \{z\big|~\abs{z-2}+\abs{z+2} \leqslant 5 \}$.
+	
+	任取$z_0\in G$, 存在$\varepsilon = [5-(\abs{z_0-2}+\abs{z_0+2})]/2$, 这时,$\forall z\in U(z_0,\varepsilon)$,有
+	\begin{equation*}
+		\begin{split}
+			\abs{z-2}+\abs{z+2} &= \abs{z-z_0+z_0-2}+\abs{z-z_0+z_0+2}\\
+			&\leqslant 2\abs{z-z_0} + \abs{z_0-2}+\abs{z_0+2} \\
+			&< 2\varepsilon + \abs{z_0-2}+\abs{z_0+2} = 5
+		\end{split}
+	\end{equation*}
+	即$\forall z_0\in G,\exists \varepsilon>0, U(z_0,\varepsilon)\subset G$.这说明$G$是开集.
+	
+	同理, 任取$z_0\in F^c$, 则存在$\varepsilon = [(\abs{z_0-2}+\abs{z_0+2})-5]/2$, 使得$\forall z_0\in U(z_0,\varepsilon)$,有\begin{equation*}
+		\begin{split}
+		\abs{z-2}+\abs{z+2} &= \abs{z-z_0+z_0-2}+\abs{z-z_0+z_0+2}\\
+		&\geqslant \abs{z_0-2}+\abs{z_0+2}-2\abs{z-z_0}\\
+		&>\abs{z_0-2}+\abs{z_0+2}-2\varepsilon = 5.
+		\end{split}
+	\end{equation*}
+	即$\forall z_0\in F^c,\exists \varepsilon>0, U(z_0,\varepsilon)\subset F^c$.这说明$F^c$是开集, 也就是$F$是闭集.
+	
+	由于$G$是开集,$F$是闭集, $G\subset F$, 所以$G^o = G$, $\overline{G} \subset F$.
+	
+	注意到集合$G$和$F$分别可以化简为
+	\begin{equation*}
+		\begin{split}
+			G = \left\{z = x+\mathrm{i}y \bigg| \frac{x^2}{25/4}+\frac{y^2}{9/4} <1 \right\};\\
+			F = \left\{z = x+\mathrm{i}y \bigg| \frac{x^2}{25/4}+\frac{y^2}{9/4}\leqslant 1 \right\}.
+		\end{split}
+	\end{equation*}
+	因而$\forall z\in F$, 令$\begin{lgathered}
+		z_k = (1-\frac{1}{k})z
+	\end{lgathered}$, 则$G\ni z_k\to z$.
+	这说明$F$中的每个点都是$G$的聚点, 也就是$F\subset \overline{G}$.
+	
+	因此, $F = \overline{G}$, $\partial G = \overline{G}\backslash G^o = F\backslash G$.
+	
+	即\begin{equation*}
+	\partial G = \left\{z = x+\mathrm{i}y \bigg| \frac{x^2}{25/4}+\frac{y^2}{9/4} =1 \right\}
+	\end{equation*}
+\end{note}
+
+\begin{yyEx}
+	求方程$\begin{lgathered}\abs{\frac{2z-1-i}{2-(1-i)z}} = 1\end{lgathered}$所表示曲线的直角坐标方程.
+\end{yyEx}
+
+\begin{yySolution}
+	回忆初等数学中的Appollonius定理:
+	当$z_1,z_2\in \mathbb{C},k>0$且$k\neq 1$时, 集合\begin{equation*}
+		\left\{ z\in\mathbb{C}\bigg| \abs{\frac{z-z_1}{z-z_2}}  = k \right\}
+	\end{equation*}
+	表示一个圆心在$(z_1-k^2z_2)/(1-k^2)$, 半径是$\abs{(z_1-z_2)k/(1-k^2)}$的圆周.
+	
+	因此, 该题目中的方程所表示的曲线是一个圆心在原点, 半径是$1$的圆周. 因此, 它的直角坐标方程是\begin{equation*}
+		x^2+y^2 = 1.
+	\end{equation*}
+\end{yySolution}
+
+\begin{yyEx}
+	方程$\abs{z+1-2\mathrm{i}} = \abs{z-2+\mathrm{i}}$所表示的曲线是连接点$\underline{\quad\quad}$和$\underline{\quad\quad}$的线段的垂直平分线.
+\end{yyEx}
+
+\begin{yySolution}
+	这方程表示\begin{equation*}
+		d(z,-1+2\mathrm{i}) = d(z,2-\mathrm{i})
+	\end{equation*}
+	即这方程是表示点$-1+2\mathrm{i}$和$2-\mathrm{i}$连线的垂直平分线.
+\end{yySolution}
+
+\begin{yyEx}
+	对于映射$\begin{lgathered}\omega = \frac{1}{2}\left( z+\frac{1}{z} \right)\end{lgathered}$, 求出圆周$\abs{z} = 4$的像.
+\end{yyEx}
+
+\begin{yySolution}
+	这正是熟知的Жуко́вский(儒可夫斯基)函数. 因此,本题中不妨引入$z = r\mathrm{e}^{i\theta}$, 其中$r = 4$,并设$w = u + \mathrm{i}v$,
+	则由\begin{equation*}
+		\frac{1}{2}\left( z+\frac{1}{z} \right) = \frac{1}{2}\left( r\mathrm{e}^{i\theta} + \frac{1}{r\mathrm{e}^{i\theta}} \right) = \frac{1}{2}\left[ r(\cos\theta+\mathrm{i}\sin\theta) + \frac{1}{r}(\cos\theta-\mathrm{i}\sin\theta)  \right]
+	\end{equation*}
+	得到:
+	\begin{equation*}
+		\begin{dcases}
+			&u = \frac{1}{2}\left( r+\frac{1}{r} \right)\cos\theta, \\
+			&v = \frac{1}{2}\left( r-\frac{1}{r} \right)\sin\theta.
+		\end{dcases}
+	\end{equation*}
+	这正是椭圆的参数方程表示.
+	
+	代入$r=4$化为椭圆的标准方程得到:
+	\begin{equation*}
+		\frac{u^2}{(17/8)^2}+\frac{v^2}{(15/8)^2} = 1.
+	\end{equation*}
+\end{yySolution}
+
+\begin{yyEx}
+	证明$\begin{lgathered}\lim\limits_{z\to z_0}\frac{\mathrm{Im}(z)-\mathrm{Im}(z_0)}{z-z_0}\end{lgathered}$不存在.
+\end{yyEx}
+
+\begin{yySolution}
+	让$z-z_0$沿$y=0$趋于零, 我们有
+	\begin{equation*}
+		\lim\limits_{z\to z_0}\frac{\mathrm{Im}(z)-\mathrm{Im}(z_0)}{z-z_0} = \lim\limits_{x\to 0} \frac{0}{x} = 0.
+	\end{equation*}
+	让$z-z_0$沿$x=0$趋于零, 则
+	\begin{equation*}
+		\lim\limits_{z\to z_0}\frac{\mathrm{Im}(z)-\mathrm{Im}(z_0)}{z-z_0} = \lim\limits_{y\to 0} \frac{y}{\mathrm{i}y} = -\mathrm{i}.
+	\end{equation*}
+	二者不等, 说明此极限不存在.
+\end{yySolution}
+
+\begin{yyEx}
+	求$\lim\limits_{z\to 1+\mathrm{i}}\left( 1+z^2+z^4 \right)$.
+\end{yyEx}
+
+\begin{yySolution}
+    因为此函数连续, 所以我们有
+    \begin{equation*}
+        \lim\limits_{z\to 1+\mathrm{i}}\left( 1+z^2+z^4 \right) = 1+(1+\mathrm{i})^2+(1+\mathrm{i})^4 = -3+2\mathrm{i}.
+    \end{equation*}
+\end{yySolution}
+
+\begin{yyEx}
+	证明函数$f(z) = u(x,y) + iv(x,y)$在点$z_0 = x_0 + iy_0$处连续的充要条件是$u(x,y)$和$v(x,y)$在$(x_0,y_0)$处连续.
+\end{yyEx}
+
+\begin{yySolution}
+	只需证明以下的引理.
+	\begin{lemma}
+		设$f(z)$是定义在集合$S$上的函数,$z_0$是这集合的极限点,\\ 则$\lim\limits_{z\to z_0}f(z) = A$的充分必要条件是
+		\begin{equation*}
+			\lim\limits_{z\to z_0}\mathrm{Re}f(z) = \mathrm{Re}A,~~\lim\limits_{z\to z_0}\mathrm{Im}f(z) = \mathrm{Im}A.
+		\end{equation*}
+	\end{lemma}
+	\begin{proof}
+		根据复数的模的定义, 不难得到以下不等式
+		\begin{equation*}
+			\begin{split}
+				\max\{ &\abs{\mathrm{Re}f(z)-\mathrm{Re}A},\abs{\mathrm{Im}f(z)-\mathrm{Im}A} \}\leqslant \abs{f(z)-A}\\
+				&\leqslant \abs{\mathrm{Re}f(z)-\mathrm{Re}A}+\abs{\mathrm{Im}f(z)-\mathrm{Im}A}
+			\end{split}
+		\end{equation*}
+		因此, 若$\lim\limits_{z\to z_0}f(z) = A$, 则
+		\begin{equation*}
+			\forall\varepsilon>0,\exists\delta>0, \bigg(
+			z\in U_0(z_0,\delta)\cap S\Rightarrow f(z)\in U(A,\varepsilon)
+			\bigg).
+		\end{equation*}
+		而上面的不等式说明
+		\begin{equation*}
+			f(z)\in U(A,\varepsilon) \Rightarrow \mathrm{Re}f(z)\in U(\mathrm{Re}A,\varepsilon) ~\hat{~}~ \mathrm{Im}f(z)\in U(\mathrm{Im}A,\varepsilon)
+		\end{equation*}
+		这说明\begin{equation*}
+		\lim\limits_{z\to z_0}\mathrm{Re}f(z) = \mathrm{Re}A,~~\lim\limits_{z\to z_0}\mathrm{Im}f(z) = \mathrm{Im}A.
+		\end{equation*}
+		反过来, 若上面两式成立, 则
+		\begin{equation*}
+		\forall\varepsilon>0,\exists\delta>0, \bigg(
+		z\in U_0(z_0,\delta)\cap S\Rightarrow \mathrm{Re}f(z)\in U(\mathrm{Re}A,\varepsilon/2)~\hat{~}~\mathrm{Im}f(z)\in U(\mathrm{Im}A,\varepsilon/2)
+		\bigg).
+		\end{equation*}
+		根据上面的不等式可推出
+		\begin{equation*}
+		\forall\varepsilon>0,\exists\delta>0, \bigg(
+		z\in U_0(z_0,\delta)\cap S\Rightarrow f(z)\in U(A,\varepsilon)
+		\bigg).
+		\end{equation*}
+	\end{proof}
+\end{yySolution}
+
+\begin{yyEx}
+	设$z = x+iy$, 试讨论下列函数的连续性.
+	\begin{enumerate}
+		\item $
+		\begin{lgathered}
+		f(z) = \begin{dcases}
+		\frac{2xy}{x^2+y^2}, &z\neq 0;\\
+		0,&z=0.
+		\end{dcases}
+		\end{lgathered}
+		$
+		
+		\item $\begin{lgathered}
+		f(z) = \begin{dcases}
+		\frac{x^3y}{x^2+y^2}, &z\neq 0;\\
+		0,&z=0.
+		\end{dcases}
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$是定义在集合$S$上的函数, $z_0$是$S$的极限点.
+	
+	若$\lim\limits_{z\to z_0}f(z) = A\neq 0$, 则存在$\delta>0$,使得当$0<\abs{z-z_0}<\delta$时有$\abs{f(z)}>\frac{1}{2}\abs{A}$.
+\end{yyEx}
+
+\begin{yyProof}
+	根据$\lim\limits_{z\to z_0}f(z) = A\neq 0$, 知道
+	\begin{equation*}
+	\forall\varepsilon>0,\exists\delta>0, \bigg(
+	z\in U_0(z_0,\delta)\cap S\Rightarrow f(z)\in U(A,\varepsilon)
+	\bigg).
+	\end{equation*}
+		
+	现在, 取定$\varepsilon = \abs{A}/2$,存在对应的$\delta>0$,使得当$0<\abs{z-z_0}<\delta$时有$f(z)\in U(A,\varepsilon)$.
+	
+	这时根据三角不等式, 有\begin{equation*}
+		\abs{f(z)} = \abs{A+f(z)-A} \geqslant \abs{A} - \abs{f(z)-A} > \abs{A} - \varepsilon = \frac{1}{2}\abs{A}.
+	\end{equation*}
+	
+\end{yyProof}
+
+\begin{yyEx}
+	求下列函数的导数.
+	\begin{enumerate}
+		\item 求函数$f(z) = z^2\mathrm{Im}(z)$在$z=0$处的导数.
+		\item 设$f(z) = x^2 + iy^2$, 求$f'(1+i)$.
+		\item 设$f(z) = x^3+y^3+ix^2y^2$, 求$\begin{lgathered}f'\left( -\frac{3}{2}+\frac{3}{2}i \right)\end{lgathered}$.
+		\item 设$w^3-2zw+e^z = 0$, 求$\begin{lgathered}\frac{\mathrm{d}w}{\mathrm{d}z},\frac{\mathrm{d}^2w}{\mathrm{d}z^2}\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	试证下列函数在$z$平面上解析, 并分别求出其导数.
+	\begin{enumerate}
+		\item $f(z) = \cos x\cosh y - \mathrm{i}\sin x\sinh y$;
+		\item $f(z) = e^x(x\cos y-y\sin y) + \mathrm{i}e^x(y\cos y+ x\sin y)$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yySolution}
+    容易知道这两个函数的实部和虚部都是一阶连续可微的, 因而要证明它们解析必须且只需证明它们都满足Cauchy-Riemann方程.
+        \begin{enumerate}
+            \item \begin{equation*}
+                \begin{split}
+                    \frac{\partial u}{\partial x} &= -\sin x\cosh y;~~\frac{\partial u}{\partial y} = \cos x\sinh y;\\
+                    \frac{\partial v}{\partial x} &= -\cos x\sinh y;\frac{\partial v}{\partial y} = -\sin x\cosh y.
+                \end{split}
+                \end{equation*}
+                因此, 它满足C-R条件.
+                \begin{equation*}
+                    f'(z) = \frac{\partial u}{\partial x}+\mathrm{i}\frac{\partial v}{\partial x} = -\sin x\cosh y -\mathrm{i}\cos x\sinh y.
+                \end{equation*}
+                \item 化简这个函数:
+                \begin{equation*}
+                    \begin{split}
+                        f(z) &= \mathrm{e}^x(x+\mathrm{i}y)(\cos y+\mathrm{i}\sin y)\\
+                        &=z\mathrm{e}^z.
+                    \end{split}
+                \end{equation*}
+            注意到它独立于$\overline{z}$, 所以它满足C-R条件.
+            直接求导, 得到\begin{equation*}
+                f'(z) = (z+1)\mathrm{e}^z.
+            \end{equation*}
+        \end{enumerate}
+    
+\end{yySolution}
+
+\begin{yyEx}
+	若函数$f(z) = x^2+2xy-y^2 + i(y^2 + axy -x^2)$在复平面内处处解析, 那么实常数$a$的值是多少?
+\end{yyEx}
+
+\begin{yySolution}
+    替换\begin{equation*}
+        x = \frac{z + \overline{z}}{2},~~y = \frac{z-\overline{z}}{2\mathrm{i}}.
+    \end{equation*}
+    得到\begin{equation*}
+        f(z) = \frac{1}{4} \left((a+2-4\mathrm{i}) z^2+(2-a) \overline{z}^2\right).
+    \end{equation*}
+    由于$f(z)$解析, 所以它与$\overline{z}$独立, 因此, $a = 2$.
+\end{yySolution}
+
+\section{习题21-40}
+
+\begin{yyEx}
+	如果$f'(z)$在单位圆$\abs{z}<1$内处处为零, 且$f(0) = -1$, 那么在$\abs{z}<1$内, $f(z)\equiv$?
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(0) = 1,~f'(0) = 1+i$, 求$\begin{lgathered}\lim\limits_{z\to 0}\frac{f(z) - 1}{z}\end{lgathered}$.
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z) = u + iv$在区域$D$内是解析的, 且$u+v$是实常数, 证明$f(z)$在$D$内是常数.
+\end{yyEx}
+
+\begin{yyProof}
+    由于$u+v$是实常数, 所以\begin{equation*}
+        \frac{\partial u}{\partial x} + \frac{\partial v}{\partial x} = \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y} = 0.
+    \end{equation*}
+    根据Cauchy-Riemann条件, 知道这等价于\begin{equation*}
+        \begin{dcases}
+            &\frac{\partial u}{\partial x} - \frac{\partial u}{\partial y} = 0;\\
+            &\frac{\partial u}{\partial y} + \frac{\partial u}{\partial x} = 0.
+        \end{dcases}
+    \end{equation*}
+    上面可看作一个关于$\begin{lgathered}\frac{\partial u}{\partial x},\frac{\partial u}{\partial y}\end{lgathered}$的齐次线性方程组, 由于系数矩阵满秩, 所以没有非零解.
+    因此得到\begin{equation*}
+        f'(z) = \frac{\partial u}{\partial x} - \mathrm{i}\frac{\partial u}{\partial y} = 0.
+    \end{equation*}
+    因此,$f(z)$是常数.
+\end{yyProof}
+
+\begin{yyEx}
+	写出导函数$f'(z) = \frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x}$在区域$D$内解析的充要条件.
+\end{yyEx}
+
+\begin{yySolution}
+    $u,v$在区域$D$内可微并满足Cauchy-Riemann条件.
+\end{yySolution}
+
+\begin{yyEx}
+	若解析函数$f(z) = u+iv$的实部$u = x^2 - y^2$, 求$f(z)$.
+\end{yyEx}
+
+\begin{yySolution}
+    根据$u = x^2 - y^2$得到\begin{equation*}
+        \frac{\partial u}{\partial x} = 2x,~~\frac{\partial u}{\partial y} = -2y
+    \end{equation*}
+    这说明\begin{equation*}
+        \mathrm{d}v = \frac{\partial u}{\partial x}\mathrm{d}y - \frac{\partial u}{\partial y}\mathrm{d}x = 2x\mathrm{d}y +2y\mathrm{d}x.
+    \end{equation*}
+    解得\begin{equation*}
+        v = 2xy + C.
+    \end{equation*}
+    因此, $f(z) = (x^2-y^2)+\mathrm{i}(2xy+C)$.
+\end{yySolution}
+
+\begin{yyEx}
+	已知$u-v = x^2 - y^2$, 试确定解析函数$f(z) = u + iv$.
+\end{yyEx}
+
+\begin{yySolution}
+    对$u-v = x^2 - y^2$两边分别对$x$和$y$求偏导得到
+    \begin{equation*}
+        \begin{dcases}
+            &\frac{\partial u}{\partial x}-\frac{\partial v}{\partial x} = 2x, \\
+            &\frac{\partial u}{\partial y}-\frac{\partial v}{\partial y} = -2y.
+        \end{dcases}
+    \end{equation*}
+    根据Cauchy-Riemann方程, 可化为\begin{equation*}
+        \begin{dcases}
+            &\frac{\partial u}{\partial x}+\frac{\partial u}{\partial y} = 2x, \\
+            &\frac{\partial u}{\partial y}-\frac{\partial u}{\partial x} = -2y.
+        \end{dcases}
+    \end{equation*}
+    解得\begin{equation*}
+        \frac{\partial u}{\partial x} = x+y,~~\frac{\partial u}{\partial y} = x-y.
+    \end{equation*}
+    这说明\begin{equation*}
+        f'(z) = \frac{\partial u}{\partial x}-\mathrm{i}\frac{\partial u}{\partial y} = (x+y)-\mathrm{i}(x-y) = (1-\mathrm{i})z.
+    \end{equation*}
+    求积分得到\begin{equation*}
+        f(z) = \frac{1-\mathrm{i}}{2}z^2 + C.
+    \end{equation*}
+    注意到当$z = 0$时, $u-v = 0$, 由此得到$C = 0$.
+    因此, $f(z) = \frac{1-\mathrm{i}}{2}z^2$.
+\end{yySolution}
+
+
+\begin{yyEx}
+	解方程$\sin z + \mathrm{i}\cos z = 4i$.
+\end{yyEx}
+
+\begin{yySolution}
+	原方程等价于\begin{equation*}
+		 4 = \cos z -\mathrm{i}\sin z = \exp(-\mathrm{i}z).
+	\end{equation*}
+	即\begin{equation*}
+		-\mathrm{i}z = \ln 4 + 2k\pi\mathrm{i}, k\in\mathbb{Z}.
+	\end{equation*}
+	由此解得\begin{equation*}
+		z = 2n\pi - \mathrm{i}\ln 4,n\in\mathbb{Z}.
+	\end{equation*}
+\end{yySolution}
+
+\begin{yyEx}
+	设$f(z) = \frac{1}{5}z^5 - (1+\mathrm{i})z$, 求$f'(z) = 0$的所有根.
+\end{yyEx}
+
+\begin{yySolution}
+	根据\begin{equation*}
+		f'(z) = z^4 - (1+\mathrm{i}) = 0
+	\end{equation*}
+	得到\begin{equation*}
+		z = \sqrt[8]{2} \exp(\frac{\pi}{16}+\frac{k\pi}{2}),~k = 0,1,2,3.
+	\end{equation*}
+\end{yySolution}
+
+\begin{yyEx}
+	设$f(z) = u(x,y)+ iv(x,y)$为$z = x+iy$的解析函数, 若记
+	\begin{equation*}
+		w(z,\overline{z}) = u\left( \frac{z+\overline{z}}{2},\frac{z-\overline{z}}{2i} \right) + iv\left( \frac{z+\overline{z}}{2},\frac{z-\overline{z}}{2i} \right),
+	\end{equation*}
+	证明:$\frac{\partial w}{\partial \overline{z}} = 0$.
+\end{yyEx}
+
+\begin{yyProof}
+	根据$z,\overline{z}$与$x,y$的关系, 我们有\begin{equation*}
+		\frac{\partial}{\partial z} = \frac{1}{2}\left(\frac{\partial}{\partial x}-\mathrm{i}\frac{\partial}{\partial y}  \right),\frac{\partial}{\partial \overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x}+\mathrm{i}\frac{\partial}{\partial y}  \right)
+	\end{equation*}
+	因此,\begin{equation*}
+		\begin{split}
+			\frac{\partial w}{\partial \overline{z}} &= \frac{1}{2}\left(\frac{\partial}{\partial x}+\mathrm{i}\frac{\partial}{\partial y}  \right)(u+\mathrm{i}v) \\
+			&= \frac{1}{2}\left(\frac{\partial u}{\partial x} - \frac{\partial v}{\partial y}\right) + \frac{\mathrm{i}}{2}\left(\frac{\partial u}{\partial y} + \frac{\partial v}{\partial x}\right).
+		\end{split}
+	\end{equation*}
+	得$\frac{\partial w}{\partial \overline{z}} = 0$等价于\begin{equation*}
+		\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y},~~\frac{\partial u}{\partial y} = - \frac{\partial v}{\partial x}
+	\end{equation*}
+	即$u, v$满足Cauchy-Riemann方程, 证毕.
+\end{yyProof}
+
+\begin{yyEx}
+	设$
+	\begin{lgathered}
+	f(z) = \begin{dcases}
+	\frac{xy^2(x+iy)}{x^2+y^4}, &z\neq 0,\\
+	0,&z=0,
+	\end{dcases}
+	\end{lgathered}
+	$试证$f(z)$在原点满足柯西-黎曼方程, 但却不可导.
+\end{yyEx}
+
+\begin{yyEx}
+	计算下列积分.
+	\begin{enumerate}
+		\item 设$c$为沿原点$z = 0$到点$z = 1+i$的直线段, 计算$\begin{lgathered}\int_c2\overline{z}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为正向圆周$\abs{z-4} = 1$,计算$\begin{lgathered}\int_c \frac{z^2-3z+2}{(z-4)^2}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为从原点沿$y^2 = x$至$i+i$的弧段, 求积分$\begin{lgathered}\int_c(x+iy^2)\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为不经过点$1$与$-1$的正向简单闭曲线, 计算$\begin{lgathered}\oint_c\frac{z}{(z-1)(z+1)^2}\mathrm{d}z\end{lgathered}$.
+		\item 设$c_1:\abs{z} = 1$为负向, $c_2:\abs{z} = 3$为正向, 计算$\begin{lgathered}\oint_{c=c_1+c_2}\frac{\sin z}{z^2}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为正向圆周$\abs{z} = 2$, 计算$\begin{lgathered}\oint_c\frac{\cos z}{(1-z)^2}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为正向圆周$\abs{z} = \frac{1}{2}$, 计算$\begin{lgathered}\oint_c\frac{z^3\cos \frac{1}{z-2}}{(1-z)^2}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为从$0$到$1+\frac{\pi}{2}i$的直线段, 计算积分$\begin{lgathered}\int_cze^z\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为正向圆周$x^2+y^2-2x = 0$, 计算$\begin{lgathered}\oint_c\frac{\sin(\frac{\pi}{4}z)}{z^2-1}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为正向圆周$\abs{z-i} = 1$, 计算$\begin{lgathered}\oint_c\frac{z\cos z}{z^2-1}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为正向圆周$\abs{z} = 3$, 计算$\begin{lgathered}\oint_c\frac{z+\overline{z}}{\abs{z}}\mathrm{d}z\end{lgathered}$.
+		\item 设$c$为负向圆周$\abs{z} = 4$, 计算$\begin{lgathered}\oint_c\frac{e^z}{(z-\pi i)^5}\mathrm{d}z\end{lgathered}$.
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	设$\begin{lgathered}f(z) = \oint_{\abs{\xi} = 4}\frac{e^\xi}{\xi - z}\mathrm{d}\xi\end{lgathered}$,其中$\abs{z}\neq 4$, 求$f'(\pi i)$.
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$在单连通区域$B$内处处解析且不为零, $c$为$B$内任何一条简单闭曲线, 求积分$\begin{lgathered}\oint_c\frac{f''(z)+2f'(z)+f(z)}{f(z)}\mathrm{d}z\end{lgathered}$.
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$在区域$D$内解析, $c$为$D$内任何一条正向简单闭曲线, 它的内部含于$D$. 如果$f(z)$在$c$上的值为$2$, 那么对$c$内任一点$z_0$, $f(z_0)$的值是什么?
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z) = \oint_{\abs{\xi} = 2}\frac{\sin(\frac{\pi}{2}\xi)}{\xi-z}\mathrm{d}\xi$, 其中$\abs{z} \neq 2$, 求$f'(3)$.
+\end{yyEx}
+
+\begin{yyEx}
+	若函数$u(x,y) = x^3+axy^2$为某一解析函数的虚部, 则常数$a$的值是多少?
+\end{yyEx}
+
+\begin{yyEx}
+	计算下列积分:
+	\begin{enumerate}
+		\item $
+		\begin{lgathered}
+			\oint_{\abs{z} = R}\frac{6z}{(z^2-1)(z+2)}\mathrm{d}z,\text{其中}R>0,R\neq 1\text{且}R\neq 2;
+		\end{lgathered}
+		$
+		\item $\begin{lgathered}
+			\oint_{\abs{z} = 2}\frac{\mathrm{d}z}{z^4+2z^2+2}.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$在单连通区域$B$内解析,且满足$\abs{1-f(z)}<1~(z\in B)$. 试证:
+	\begin{enumerate}
+		\item 在$B$内处处有$f(z)\neq 0$;
+		\item 对于$B$内任意一条闭曲线$c$, 都有$\begin{lgathered}
+		\oint_{c}\frac{f''(z)}{f(z)}\mathrm{d}z = 0.
+		\end{lgathered}$
+	\end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z)$在圆域$\abs{z-a}<R$内解析,若$\begin{lgathered}
+	\max_{\abs{z-a} = r}\abs{f(z)} = M(r)~(0<r<R),
+	\end{lgathered}$
+	证明\begin{equation*}
+		\abs{f^{(n)}(a)}\leqslant \frac{n!M(r)}{r^n}~~(n = 1,2,\cdots).
+	\end{equation*}
+\end{yyEx}
+
+\begin{proof}
+	由Cauchy公式得到:\begin{equation*}
+		f^{(n)}(a) = \frac{n!}{2\pi i}\int_{\abs{z-a} = r}\frac{f(w)}{(w-a)^{n+1}}\mathrm{d}w,
+	\end{equation*}
+	利用绝对值不等式得
+	\begin{equation*}
+		\begin{split}
+				\abs{f^{(n)}(a)} &\leqslant \frac{n!}{2\pi}\int_{\abs{z-a} = r}\abs{\frac{f(w)}{(w-a)^{n+1}}}\abs{\mathrm{d}w}\\
+				&\leqslant \frac{n!M(r)}{2\pi r^{n+1}}\int_{\abs{z-a} = r}\mathrm{d}s = \frac{n!M(r)}{r^n}.
+		\end{split}
+	\end{equation*}
+\end{proof}
+
+\begin{yyEx}
+	求积分$\begin{lgathered}
+	\oint_{\abs{z} = 1}\frac{\mathrm{e}^z}{z}\mathrm{d}z,
+	\end{lgathered}$从而证明$\begin{lgathered}
+	\int_{0}^\pi  \mathrm{e}^{\cos\theta}\cos(\sin\theta)\mathrm{d}\theta = \pi.
+	\end{lgathered}$
+\end{yyEx}
+
+\begin{yySolution}
+	利用Cauchy公式, 得到
+	\begin{equation*}
+		\oint_{\abs{z} = 1}\frac{\mathrm{e}^z}{z}\mathrm{d}z = 2\pi\mathrm{i}\mathrm{e}^0 = 2\pi\mathrm{i}.
+	\end{equation*}
+	在此积分中, 替换$z = \exp(\mathrm{i}\theta)$, 得到
+	\begin{equation*}
+		2\pi\mathrm{i} = \int_{-\pi}^{\pi}\mathrm{e}^{\mathrm{e}^{\mathrm{i}\theta}}\mathrm{e}^{-\mathrm{i}\theta} \mathrm{i}\mathrm{e}^{\mathrm{i}\theta}\mathrm{d}\theta
+	\end{equation*}
+	利用Euler公式, 化简得到:\begin{equation*}
+		2\pi = \int_{-\pi}^{\pi} \mathrm{e}^{\cos\theta}\left[ \cos(\sin\theta) + \mathrm{i}\sin(\sin\theta) \right] \mathrm{d}\theta.
+	\end{equation*}
+	根据三角函数的奇偶性, 得到最终的结果\begin{equation*}
+		\int_{0}^\pi  \mathrm{e}^{\cos\theta}\cos(\sin\theta)\mathrm{d}\theta = \pi.
+	\end{equation*}
+\end{yySolution}
+
+\section{习题41-44}
+
+\begin{yyEx}
+	设$f(z)$在复平面上处处解析且有界, 对于任意给定的两个复数$a,b$, 试求极限\\ $\begin{lgathered}
+	\lim\limits_{R\to +\infty}\oint_{\abs{z} = R}\frac{f(z)}{(z-a)(z-b)}\mathrm{d}z
+	\end{lgathered}$并由此推证$f(a) = f(b)$(刘维尔(Liouville)定理).
+\end{yyEx}
+
+
+
+\begin{yyEx}
+	设$f(z)$在$\abs{z}<R~ (R>1)$内解析,且$f(0) = 1,f'(0) = 2$, 试计算积分\begin{equation*}
+		\oint_{\abs{z} = 1}(z+1)^2\frac{f(z)}{z^2}\mathrm{d}z,
+	\end{equation*}
+	并由此得出$\begin{lgathered}
+	\int_{0}^{2\pi} \cos^2\frac{\theta}{2}f(e^{i\theta})  \mathrm{d}\theta
+	\end{lgathered}$之值.
+\end{yyEx}
+
+\begin{yyEx}
+	设$f(z) = u+iv$是$z$的解析函数, 证明\begin{equation*}
+		\frac{\partial^2\ln(1+\abs{f(z)}^2)}{\partial x^2} + \frac{\partial^2\ln(1+\abs{f(z)}^2)}{\partial y^2} = \frac{4\abs{f'(z)}^2}{\left(1+ \abs{f(z)}^2\right)^2}.
+	\end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+	若$u = u(x^2+y^2)$, 试求解析函数$f(z) = u+iv$.
+\end{yyEx}
+
+\section{补充习题}
+
+\begin{yyEx}
+    将下面的复数表示为$a+\mathrm{i}b$的形式:\begin{equation*}
+        \mathrm{i}^n,~(1+\mathrm{i}\sqrt{3})^n,~(1+\mathrm{i})^n+(1-\mathrm{i})^n.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    解方程$z^5 = 1-\mathrm{i}$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$r>0$为实数, $z=x+\mathrm{i}y$为复数, 将复数$r^z$表示为$a+\mathrm{i}b$的形式.
+\end{yyEx}
+
+\begin{yyEx}
+    证明:
+    \begin{equation*}
+        \abs{z_1+z_2}^2+\abs{z_1-z_2}^2 = 2(\abs{z_1}^2+\abs{z_2}^2),
+    \end{equation*}
+    并说明其几何意义.
+\end{yyEx}
+
+\begin{yyEx}
+    设$z_1,z_2,z_3$都是单位复向量, 证明:$z_1,z_2,z_3$为一正三角形顶点的充分必要条件是$z_1+z_2+z_3 = 0$.
+\end{yyEx}
+
+\begin{yyEx}
+    证明:
+    \begin{enumerate}
+        \item  $\abs{1-\overline{z_1}z_2}^2-\abs{z_1-z_2}^2 = (1-\abs{z_1}^2)(1-\abs{z_1}^2)$;
+        \item 当$\abs{z_1},\abs{z_2}<1$时, 
+        $\begin{lgathered}\left|\frac{z_1-z_2}{1-\overline{z_1}z_2}\right|<1\end{lgathered}$;
+        \item 当$\abs{z_1} = 1$或$\abs{z_2} = 1$ 且$z_1\neq z_2$时, $\begin{lgathered}\left|\frac{z_1-z_2}{1-\overline{z_1}z_2}\right|=1\end{lgathered}$.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    用复变量表示过点$(1,3),(-1,4)$的直线的方程.
+\end{yyEx}
+
+\begin{yyEx}
+    \begin{enumerate}
+        \item 设$A,C\in\mathbb{R},B\in\mathbb{C}$, 问方程$Az\overline{z}+B\overline{z}+\overline{B}z+C = 0$在什么条件是圆方程, 求其圆心和半径;
+        \item 在上面方程中令$A\to 0$, 求半径和圆心的极限, 并说明其几何意义.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    证明$B\overline{z}+\overline{B}z+C= 0$是点$z_1,z_2$连线的垂直平分线的充要条件是$B\overline{z_1}+\overline{B}z_2+C = 0$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$S\subset \mathbb{C}$为任意集合. 令$S'$为$S$的所有极限点构成的集合, $S'$称为$S$的\myind{导集}. 证明:$S'$是闭集;$\overline{S} = S\cup S'$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$F\subset\mathbb{C}$为紧集, 证明$F$是有界闭集.
+\end{yyEx}
+
+\begin{yyEx}
+    对于任意集合$S\subset\mathbb{C}$, 证明$\mathrm{diam}S = \mathrm{diam}\overline{S}$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$z_0\notin \mathbb{R}$,$\begin{lgathered}\lim\limits_{n\to +\infty} z_n = z_0\end{lgathered}$, 证明: 若适当选取辐角主值, 则下两式成立:
+    \begin{equation*}
+        \lim\limits_{n\to+\infty}\abs{z_n} = \abs{z_0},~~\lim\limits_{n\to+\infty}\mathrm{arg}z_n = \mathrm{arg}z_0.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    设$G\subset\mathbb{C}$中为任意开集, 证明: $G$可分解为至多可列个互不相交且连通的开集的并.
+\end{yyEx}
+
+\begin{yyEx}
+    设$S$是给定的集合. 集合$T\subset S$称为$S$的\myind{相对闭集}, 如果$T$在$S$中的极限都在$T$内;集合$T\subset S$称为$S$的\myind{相对开集}, 如果$S\backslash T$是$S$的相对闭集. 证明:$S$连通的充分必要条件是$S$不能分解为两个非空且不交的相对开集(闭集)的并.
+\end{yyEx}
+
+\begin{yyEx}
+    设$S$是连通集合, $f(z)$是$S$上的函数. 如果$\forall z_0\in S, \exists r>0$, 使得$f(z)$在$S\cap D(z_0,r)$上为常数, 证明:$f(z)$在$S$上为常数.
+\end{yyEx}
+
+\begin{yyEx}
+    设$U,V$是$\mathbb{C}$中区域, 映射$f:U\to V$称为\myind{开映射}, 如果$f$将$U$中开集映为$V$中开集; $f$称为\myind{逆紧}的, 如果对$V$中任意紧集$K\subset V$, $f^{-1}(K)$是$U$中的紧集. 证明: 如果$f$是开且逆紧的映射, 则$f(U) = V$.
+\end{yyEx}
+
+\begin{yyEx}
+    求\begin{equation*}
+        (1+\cos\theta+\cos 2\theta+\cdots+\cos n\theta) + \mathrm{i}  (1+\sin\theta+\sin 2\theta+\cdots+\sin n\theta).  
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    设$K$是$\mathbb{C}$中的紧集, $F$为$\mathbb{C}$中的闭集. 定义:
+    \begin{equation*}
+        \mathrm{dist}(K,F) = \mathrm{inf}\{ \abs{z-w}:z\in K,w\in F \}.
+    \end{equation*}
+    证明:\begin{enumerate}
+        \item 如果$K\cap F=\varnothing$, 则$\mathrm{dist}(K,F)>0$;
+        \item 设$D$是开集, $S\subset D$是有界闭集, 则$\mathrm{dist}(S,\partial D)>0$.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(x,y) = x^3+3xy+y$, 求$\begin{lgathered}
+    \frac{\partial f}{\partial z},\frac{\partial f}{\partial \overline{z}}
+    \end{lgathered}$
+\end{yyEx}
+
+\begin{yyEx}
+    设$z_0$是集合$S$的极限点, 给出并证明$z\in S,~z\to z_0$时,$f(z)$收敛的Cauchy准则.
+\end{yyEx}
+
+\begin{yyEx}
+    将映射$(x,y)\mapsto (u(x,y),v(x,y))$表示为复函数$w = u+\mathrm{i}v = f(z) = f(x+\mathrm{i}y)$. 如果$f(x+\mathrm{i}y)$连续可导, 证明: 映射的Jacobi行列式满足
+    \begin{equation*}
+        \left|\begin{array}{cc} 
+            \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\
+            \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}
+        \end{array}\right| = \left|\begin{array}{cc} 
+            \frac{\partial f}{\partial z} & \frac{\partial \overline{f}}{\partial z} \\
+            \frac{\partial f}{\partial \overline{z}} & \frac{\partial \overline{f}}{\partial \overline{z}}
+        \end{array}\right|.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    试用$\begin{lgathered}\frac{\partial}{\partial z},\frac{\partial}{\partial \overline{z}}\end{lgathered}$表示$\begin{lgathered}\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial x\partial y }\end{lgathered}$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$\mathbb{C}_1,\mathbb{C}_2$分别是扩充复平面$S$的两个坐标平面, $\overline{B}z+B\overline{z}+C = 0$是平面$\mathbb{C}_1$中的直线,问其在平面$\mathbb{C}_2$上是什么样的曲线.
+\end{yyEx}
+
+\begin{yyEx}
+    假设条件如上题所示, 设$Az\overline{z}+\overline{B}z+B\overline{z}+C = 0$是平面$\mathbb{C}_1$中的圆, 问在平面$\mathbb{C}_2$上其是什么曲线.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f$是$\overline{\mathbb{C}}$上$C^{\infty}$的函数.
+    对坐标变换$z=1/w$, 证明\begin{equation*}
+        \mathrm{d}f = \frac{\partial f}{\partial z}\mathrm{d}z + \frac{\partial f}{\partial \overline{z}}\mathrm{d}\overline{z} = \frac{\partial f}{\partial w}\mathrm{d}w + \frac{\partial f}{\partial \overline{w}}\mathrm{d}\overline{w},
+    \end{equation*}
+    即: 微分$\mathrm{d}f$与坐标无关.
+\end{yyEx}
+
+\begin{yyEx}
+    将$f=z\overline{z}$定义到$\overline{\mathbb{C}}$上, 问$f$在$z=\infty$处是否可导?
+\end{yyEx}
+
+\begin{yyEx}
+    在$\overline{\mathbb{C}}$上定义:
+    \begin{equation*}
+        \mathrm{d}s^2 = \frac{4\abs{\mathrm{d}z}^2}{(1+\abs{z}^2)^2}.
+    \end{equation*}
+    称$\mathrm{d}s^2$为\myind{球度量}. 证明:对坐标变换$z = 1/w$, 有
+    \begin{equation*}
+        \frac{4\abs{\mathrm{d}z}^2}{(1+\abs{z}^2)^2} = \frac{4\abs{\mathrm{d}w}^2}{(1+\abs{w}^2)^2}.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    如果$f(z)$是$\mathbb{C}$上的解析函数, 证明$\overline{f(\overline{z})}$也在$\mathbb{C}$上解析.
+\end{yyEx}
+
+\begin{yyEx}
+    如果$f(z)$和$g(z)$都是$\mathbb{C}$上的解析函数, 证明$f[g(z)]$解析.
+\end{yyEx}
+
+\begin{yyEx}
+    证明:\begin{enumerate}
+        \item  如果$f(z),\overline{f(z)}$都解析, 则$f(z)$为常数;
+        \item 如果$f(z)$解析, 且$\abs{f(z)}$为常数, 则$f(z)$为常数.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z) = u+\mathrm{i}v$解析, 且$u =\sin v$, 证明$f(z)$为常数.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z) = u(x,y) + \mathrm{i}v(x,y)$解析, 且$f'(z)\neq 0$, 证明: 曲线$u(x,y) = c_1$与$v(x,y) = c_2$正交, 其中$c_1,c_2$为常数.
+\end{yyEx}
+
+\begin{yyEx}
+    \begin{enumerate}
+        \item  设$u(x,y) = ax^2+2bxy+cy^2$, 问$u(x,y)$在什么条件下是一解析函数的实部? 如果是, 求$v(x,y)$使$f(z) = u(x,y) +\mathrm{i}v(x,y)$解析.
+        \item 问向量函数$F:(x,y)\mapsto (x^2+y^2,xy)$是不是解析映射? 如果不是, 找一个映射$G:(x,y)\mapsto (u(x,y),v(x,y))$, 使得$F+G$是解析映射.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$是$C^{\infty}$的函数, 证明: 如果$f(z)$解析, 则对于任意$k\in\mathbb{N},f^{(k)}(z)$也解析.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$解析并有连续导函数, 且$f'(z_0)\neq 0$, 证明: 存在$z_0$的邻域$U$和$f(z_0)$的邻域$V$, 使得$f:U\to V$是一一映射. 用$C-R$方程证明$f^{-1}:V\to U$也解析.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f:(x,y)\mapsto (u(x,y),v(x,y))$是区域$\Omega_1$到$\Omega_2$的$C^{\infty}$同胚. 称$f$是\myind{保面积}的, 如果对$\Omega_1$内的任意以光滑曲线为边界的有界开集$O$,$O$的面积与$f(O)$的面积都相等. 证明: 如果$f$是保面积的, 且函数$f(z) = u(x,y)+\mathrm{i}v(x,y)$解析, 则$f(z) = \mathrm{e}^{\mathrm{i}\theta}z+c$, 其中$\theta$为常数.
+\end{yyEx}
+
+\begin{yyEx}
+    设$z = x+\mathrm{i}y$, 直接定义$\mathrm{e}^z = \mathrm{e}^x(\cos y+\mathrm{i}\sin y)$, 证明:
+    \begin{enumerate}
+        \item $\mathrm{e}^z$在$\mathbb{C}$上解析, 且$(\mathrm{e}^z)' = \mathrm{e}^z$.
+        \item $\mathrm{e}^{z_1+z_2} = \mathrm{e}^{z_1}\cdot\mathrm{e}^{z_2}$.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    定义\begin{equation*}
+        \cos z = \frac{\mathrm{e}^{\mathrm{i}z}+\mathrm{e}^{-\mathrm{i}z}}{2},~~\sin z = \frac{\mathrm{e}^{\mathrm{i}z}-\mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}}.
+    \end{equation*}
+    证明$\sin z$和$\cos z$的和角公式.
+\end{yyEx}
+
+\begin{yyEx}
+    设\begin{equation*}
+        f(z) = \sum_{n = 0}^{+\infty}a_n(z-z_0)^n
+    \end{equation*}是$z_0$的邻域上的幂级数, $f(z)$不为常数.
+    \begin{enumerate}
+        \item 证明: 存在正整数$m$, 使得在$z_0$的一个邻域上$f(z)$可表示为
+        \begin{equation*}
+            f(z) = f(z_0) +(z-z_0)^mg(z)
+        \end{equation*}
+        其中$g(z)$解析, 且处处不为零;
+        \item 证明: 存在$z_0$的邻域, 使得$f(z)$在此邻域上可表示为\begin{equation*}
+            f(z) = f(z_0) + [(z-z_0)h(z)]^m,
+        \end{equation*}
+        其中$h(z)$解析且处处不为零;
+        \item 设$\Omega$为区域, $f(z)$在$\Omega$上解析, 并且$\forall z_0\in\Omega$, 存在$z_0$的邻域, 使得$f(z)$可展开为$(z-z_0)$的幂级数, 证明: 如果$f(z)$不是常数, 则$f(z)$将$\Omega$中开集映为开集.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z) = \sum_{n=0}^{+\infty}a_nz^n$是收敛半径为$R$的幂级数. 设\begin{equation*}
+        \left\{ g_m(z) = \sum_{n=0}^{+\infty}b_{mn}z^n \right\}
+    \end{equation*}
+    是一列幂级数, 满足$\forall m,\abs{b_{mn}}\leqslant \abs{a_n}$, 并且对于任意$n$, $\lim\limits_{m\to+\infty}b_{mn} = b_n$存在. 证明幂级数
+    $g_m(z) = \sum_{n=0}^{+\infty}b_{mn}z^n$和$g(z) = \sum_{n=0}^{+\infty}b_nz^n$的收敛半径都大于等于$R$, 且对任意$0<r<R$, $g_m(z)$在$U(0,r)$上一致收敛于$g(z)$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z) = \sum_{n = 0}^{+\infty}n^2z^n$,$g(z) = \sum_{n=1}^{+\infty}(n^2+1)z^n$.
+    \begin{enumerate}
+        \item 如果$g/f = a_0+a_1z+a_2z^2+\cdots$, 求$a_0,a_1,a_2$;
+        \item 如果$f[g(z)] = a_0+a_1z+a_2z^2+\cdots$,求$a_0,a_1,a_2$.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    如果级数$\sum_{n=0}^{+\infty}\abs{a_n}$收敛, 证明$\sum_{n=0}^{+\infty}a_n$收敛, 且其和与求和顺序无关.
+\end{yyEx}
+
+\begin{yyEx}
+    设级数$\sum_{n=0}^{+\infty}\abs{a_n}$和$\sum_{n=0}^{+\infty}\abs{b_n}$都收敛.
+    \begin{enumerate}
+        \item 证明级数\begin{equation*}
+            \sum_{n = 0}^{+\infty}\left(\sum_{k = 0}^n a_{n-k}b_k \right)
+        \end{equation*}收敛, 且其和等于
+        \begin{equation*}
+            \left(\sum_{n = 0}^{+\infty}a_n\right)\cdot \left(\sum_{n = 0}^{+\infty}b_n\right);
+        \end{equation*}
+        \item 利用(1)证明如果幂级数$\sum_{n=0}^{+\infty}a_n$和$\sum_{n=0}^{+\infty}b_n$的收敛半径分别为$r_1,r_2$, 则其乘积的收敛半径大于等于$\min\{r_1,r_2\}$.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    试构造$\sqrt[n]{z}$的Riemann曲面.
+\end{yyEx}
+
+\begin{yyEx}
+    设$\Omega$是单位圆盘$U(0,1)$在映射$w = \mathrm{e}^z$下的像, 证明$\Omega$的面积为
+    \begin{equation*}
+        m(\Omega) = \mathrm{\pi}\sum_{n = 0}^{+\infty}\frac{1}{(n+1)!n!}.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    试将$(1+\mathrm{i})^{1+\mathrm{i}}$表示为$a+\mathrm{i}b$的形式, 并求其主值.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$\mathbb{C}$上解析, 并将上半平面映到上半平面, 将实轴映为实轴, 证明在实轴上$f'(z)\geqslant 0$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$D$是单连通区域, $z_0\notin D$, $f_1(z),f_2(z)$是$\sqrt{z-z_0}$在$D$上的两个不同的解析分支, 证明$f_1(D)\cap f_2(D)=\varnothing$.
+\end{yyEx}
+
+\begin{yyEx}
+    \begin{enumerate}
+        \item 设$z_1,z_2$是单位圆中任意两个互不相等的点, 证明: 存在单位圆到自身的分式线性变换$L(z)$, 使得$L(z_1) = 0$, $L(z_2)>0$. 并问: 这样的分式线性变换是否唯一?
+        \item 设$L(z)$为(1)中给定的分式线性变换, 证明:$L^{-1}(z)$将实轴变为过$z_1,z_2$且与单位圆周垂直的圆.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    证明: 将实轴(包含$\infty$)变为实轴(包含$\infty$)的分式线性变换可表示为$\begin{lgathered}w = \frac{az+b}{cz+d}\end{lgathered}$的形式, 其中$a,b,c,d$都是实数, 且当$ad-bc>0$时, 其将上半平面变为上半平面;当$ad-bc<0$时, 其将下半平面变为下半平面.
+\end{yyEx}
+
+\begin{yyEx}
+    设$\begin{lgathered}w = \frac{z-a}{1-\overline{a}z}\end{lgathered}$($\abs{a}<1$), 证明:
+    \begin{equation*}
+        \frac{\abs{\mathrm{d}w}}{1-\abs{w}^2} = \frac{\abs{\mathrm{d}z}}{1-\abs{z}^2}.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    在中学中所学过的解析几何中, 我们知道\myind{交比}的概念:
+    \begin{equation*}
+        L(z) = (z,z_2,z_3,z_4) =  \frac{z-z_3}{z-z_4}:\frac{z_2-z_3}{z_2-z_4}
+    \end{equation*}
+    可以看到, 它是将$z_3$变为$0$, $z_2$变为$1$, $z_4$变为$\infty$的分式线性变换. 证明: 其将由$z_2,z_3,z_4$决定的圆变为实轴. 并问在什么条件下, 其将圆内部映为上半平面, 圆外部变为下半平面.
+\end{yyEx}
+
+\begin{yyEx}
+    证明$(w,w_1,w_2,w_3) = (z,z_1,z_2,z_3)$是将$z_j$变为$w_j$($j=1,2,3$)的分式线性变换.
+\end{yyEx}
+
+\begin{yyEx}
+    给定四个点$z_1,z_2,z_3,Z_4$按顺序位于圆周$K$上, 证明其交比$(z_1,z_2,z_3,z_4)>0$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z) = u(x,y)+\mathrm{i}v(x,y)$,$u(x,y)$和$v(x,y)$都在$z_0=x_0+\mathrm{i}y_0$处可微. 如果
+    \begin{equation*}
+        \lim_{z\to z_0}\abs{\frac{f(z)-f(z_0)}{z-z_0}}
+    \end{equation*}
+    存在, 证明$f(z)$或$\overline{f(z)}$在$z_0$处可导.
+\end{yyEx}
+
+\begin{yyEx}
+    设$a_1,a_2,a_3,a_4$两两不等, 求
+    \begin{equation*}
+        \sqrt{(z-a_1)(z-a_2)(z-a_3)(z-a_4)}
+    \end{equation*}
+    单值解析分支存在的最大区域.
+\end{yyEx}
+
+\begin{yyEx}
+    利用极坐标$z = r(\cos\theta+\mathrm{i}\sin\theta)$, 证明Cauchy-Riemann方程可表示为
+    \begin{equation*}
+        u_r = \frac{1}{r}v_\theta,~    v_r = -\frac{1}{r}u_\theta,
+    \end{equation*}
+    其中$f(z) = u(r,\theta)+\mathrm{i}v(r,\theta)$, 并在极坐标下试求$f'(z)$.
+\end{yyEx}
+
+\begin{yyEx}
+    如果$w =f(z)$是区域$\Omega$上的解析函数, $\gamma:t\mapsto z(t),t\in[0,b]$是$\Omega$中一光滑曲线, $f(z)$在$\gamma$上处处不为零. 令$\Gamma$是由$t\mapsto f[z(t)] =w,t\in[0,b]$定义的曲线, 证明:
+    \begin{equation*}
+        \int_{\gamma}\frac{f'(z)}{f(z)}\mathrm{d}z = \int_{\Gamma}\frac{\mathrm{d}w}{w}.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    设$\gamma$是一不过原点的闭曲线, 根据
+    \begin{equation*}
+        \int_{\gamma}\frac{\mathrm{d}w}{w} = \int_{\gamma}\mathrm{d}\mathrm{Ln}w = \int_{\gamma}\mathrm{d}\left(
+        \ln\abs{w}+\mathrm{i}\mathrm{Arg}w
+        \right),
+    \end{equation*}
+    试证明:
+    \begin{equation*}
+        \int_{\gamma}\frac{\mathrm{d}w}{w} = \mathrm{i}\int_{\gamma}\mathrm{d}\mathrm{Arg}w.
+    \end{equation*}
+    并问, 其在什么条件下为零?
+\end{yyEx}
+
+\begin{yyEx}
+    设$\gamma$是$\mathbb{C}$中一有界的光滑曲线, $\overline{\gamma} =  \gamma$, $\phi(z)$是$\gamma$上的连续函数, 利用导数定义证明\begin{equation*}
+        f(z) = \frac{1}{2\mathrm{\pi}\mathrm{i}}\int_{\gamma}\frac{\phi(w)}{w-z}\mathrm{d}w
+    \end{equation*}
+    在$\mathbb{C}\backslash\gamma$上解析.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$是$z_0$邻域上的函数, 且在$z_0$点连续, 证明
+    \begin{equation*}
+        \lim_{\varepsilon\to 0}\frac{1}{2\mathrm{\pi}\mathrm{i}}\int_{\abs{w-z_0} = \varepsilon}\frac{f(w)}{w-z_0}\mathrm{d}w = f(z_0).
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在区域$\Omega$上解析, $z_0\in\Omega$, 证明:
+    \begin{enumerate}
+        \item $f(z)$在$z_0$邻域上可展开为$(z-z_0)$的幂级数\begin{equation*}
+            f(z) = \sum_{n=0}^{+\infty}\frac{f^{(n)}(z_0)}{n!}(z-z_0)^n;
+        \end{equation*}
+        \item 此幂级数的收敛半径大于等于$\mathrm{dist}(z_0,\partial\Omega)$;
+        \item 如果$f(x)$为$(x_0-r,x_0+r)$上的实函数, 在$x_0$处展开的Taylor级数收敛于$f(x)$，且这一级数的收敛半径$R>r$, 证明对于任意$x'\in(x_0-r,x_0+r)$,$f(x)$在$x'$处展开的Taylor级数收敛于$f(x)$.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    计算:\begin{enumerate}
+        \item \begin{equation*}
+            \int_{\abs{z} = 2}\frac{\mathrm{d}z}{z^2+1};
+        \end{equation*}
+        \item \begin{equation*}
+            \int_{\abs{z+\mathrm{i}}=1}\frac{\mathrm{e}^z}{1+z^2}\mathrm{d}z;
+        \end{equation*}
+        \item \begin{equation*}
+            \int_{\abs{z}=2}\frac{\abs{\mathrm{d}z}}{z-1}
+        \end{equation*}
+        \item \begin{equation*}
+            \int_{\abs{z} = 1}\overline{z}\mathrm{d}z.
+        \end{equation*}
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    计算:\begin{enumerate}
+        \item \begin{equation*}
+            \int_{\abs{z} = 2}\frac{\mathrm{d}z}{z^3(z+3)^2};
+        \end{equation*}
+        \item \begin{equation*}
+            \int_{\abs{z}=R}\frac{\mathrm{d}z}{(z-a)^n(z-b)},
+        \end{equation*}
+        其中$a,b$不在圆周$\abs{z} = R$上.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$U_0(z_0,R) = \{z:0<\abs{z-z_0}<R \}$上解析, 证明存在常数$c$, 使\begin{equation*}
+        f(z)-\frac{c}{z-z_0}
+    \end{equation*}
+    在$U_0(z_0,R)$上有原函数.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$是区域$\Omega$上的连续函数. 如果$\gamma$是$\Omega$中的一段圆弧, $f(z)$在$\Omega\backslash\gamma$上解析, 证明$f(z)$在$\Omega$上解析.
+\end{yyEx}
+
+\begin{yyEx}
+    $\{f_n(z)\}$是区域$\Omega$上的解析函数列, 且在$\Omega$上内闭一致收敛于$f(z)$, 证明:
+    \begin{enumerate}
+        \item $f(z)$在$\Omega$上解析;
+        \item $\{f^{(k)}(z)\}$在$\Omega$上也内闭一致收敛于$f^{(k)}(z)$;
+        \item 设$\{f_n(x)\}$是$[-1,1]$上连续可导的函数列, $\{f_n(0)\}$收敛, 且$\{f^{(n)}(x)\}$在$[-1,1]$上一致收敛, 则$\{f_n(x)\}$在$[-1,1]$上一致收敛, 并且
+        \begin{equation*}
+            [\lim_{n\to\infty}f_n(x)]' = \lim_{n\to\infty}f_n'(x).
+        \end{equation*}
+        请比较(2)和(3)中证明的不同之处.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$\Omega$上解析, 证明: 不存在$z_0\in\Omega$, 使得对于任意$n\in\mathbb{N}$,\begin{equation*}
+        \abs{f^{(n)}(z_0)}\geqslant n!n^n.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    利用平均值定理证明最大模原理.
+\end{yyEx}
+
+\begin{yyEx}\begin{enumerate}
+    \item 
+    设$f(z),g(z)$都在$z_0$的邻域上解析, $g(z_0)\neq 0$, 讨论$f(z),g(z)$在$z_0$展开的幂级数相除后的收敛半径;
+    \item 设$f(z)$在$z_0$的邻域解析, $z = g(w)$在$w_0$的邻域上解析, $z_0 = g(w_0)$, 讨论$f(z)$在$z_0$展开的幂级数复合$g(w)$在$w_0$展开的幂级数后所得幂级数的收敛半径.
+\end{enumerate}\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$\Omega$上解析并且有无穷多个零点, $f(z)$不恒为零, 证明可将$f(z)$的零点排成一列$\{z_n\}$, 且$\{z_n\}$在$\Omega$内无聚点.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$\mathbb{C}$上解析, 且存在$n$, 使
+    \begin{equation*}
+        \lim_{z\to\infty}f(z)/z^n =M,
+    \end{equation*}
+    证明$f(z)$为阶数小于等于$n$的多项式.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在区域$\Omega$上解析且不为多项式, 证明: 存在$z_0\in\Omega$, 使得对于任意$n$, 恒有$f^{(n)}(z_0)\neq 0$.
+\end{yyEx}
+
+\begin{yyEx}
+    如果$u(x,y)$是$\mathbb{R}^2$上非负的调和函数, 证明$u(x,y)$为常数.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$\overline{U(0,1)}$的邻域上解析. 令$\gamma = f(\partial U(0,1))$, 证明:$\gamma$的弧长$L\geqslant 2\mathrm{\pi}\abs{f'(0)}$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$将$U(0,1)$单叶地映为$\Omega$, 证明:$\Omega$的面积$m(\Omega)\geqslant \mathrm{\pi}\abs{f'(0)}^2$.
+\end{yyEx}
+
+\begin{yyEx}
+    设非常数的函数$f(z)$在$1<\abs{z}<\infty$上解析, 且\begin{equation*}
+        \lim_{z\to\infty}f(z)    \xlongequal{\text{记为}}f(\infty)
+    \end{equation*}存在, 证明:
+    \begin{enumerate}
+        \item \begin{equation*}
+            f(\infty) = \frac{1}{2\mathrm{\pi}}\int_{\abs{z}=R}f(R\mathrm{e}^{\mathrm{i}\theta})\mathrm{d}\theta,R>1;
+        \end{equation*}
+        \item 在区域$\abs{z}>1$上最大模原理对$f(z)$成立.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在区域$\Omega$上解析, $z_0\in\Omega$, $f(z) = \sum_{n=0}^{+\infty}a_n(z-z_0)^n$是$f(z)$在$z_0$的幂级数展开, 证明:
+    \begin{enumerate}
+        \item 当$r>0$充分小时,\begin{equation*}
+            \frac{1}{2\mathrm{\pi}}\int_{0}^{2\mathrm{\pi}}\abs{f(z_0+r\mathrm{e}^{\mathrm{i}\theta})}\mathrm{d}\theta = \sum_{n = 0}^{+\infty}\abs{a_n}^2r^{2n}.
+        \end{equation*}
+        \item 利用(1)证明解析函数的最大模原理;
+        \item 设$f_1(z),f_2(z),\cdots,f_n(z)$都是区域$\Omega$上的解析函数. 定义$\Omega$上解析的向量函数$\bm{F}(z) = (f_1(z),\cdots,f_n(z))$, 并定义$\bm{F}(z)$在$z$的模为
+        \begin{equation*}
+            \norm{\bm{F}(z)} = \sqrt{\abs{f_1(z)}^2+\cdots+\abs{f_n(z)}^2}.
+        \end{equation*}
+        如果$\bm{F}(z)$不为常值, 则$\norm{\bm{F}(z)}$在$\Omega$内没有最大值.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$U(0,1)$上解析, 证明: 存在序列$\{z_n\}\subset U(0,1)$, 使得其同时满足:
+    \begin{enumerate}
+        \item $\lim\limits_{n\to\infty}\abs{z_n} = 1$;
+        \item $\lim\limits_{n\to\infty}f(z_n)$存在.
+    \end{enumerate}
+\end{yyEx}
+
+\begin{yyEx}
+    若$P(z)$为$n$次多项式, 且当$\abs{z}\leqslant 1$时, $\abs{P(z)}\leqslant M$, 证明:当$R>1, \abs{z}\leqslant R$时, $\abs{P(z)}\leqslant MR^n$. 
+\end{yyEx}
+
+\begin{yyEx}
+    设$D$是以有限条逐段光滑曲线为边界的有界区域, $\{ f_n(z)\}$是$D$上的解析函数列, 满足$\forall\varepsilon>0,\exists N\in\mathbb{N}$, 使得只要$n>N,m>N$就有\begin{equation*}
+        \iint_{D}\abs{f_n(z)-f_m(z)}\mathrm{d}x\mathrm{d}y<\varepsilon,
+    \end{equation*}
+    证明:$\{f_n(z)\}$在$D$上内闭一致收敛.
+\end{yyEx}
+
+\begin{yyEx}
+    证明: 如果$f(z)$在$\mathbb{C}$上解析, 且平方可积, 则$f(z)\equiv 0$.
+\end{yyEx}
+
+\begin{yyEx}
+    设$z_1\neq z_2$和$w_1\neq w_2$是上半平面任意给定的两组点, 问是否存在上半平面的解析自同胚$L$, 使得$L(z_1) = w_1,~L(z_2) = w_2$?
+\end{yyEx}
+
+\begin{yyEx}
+    设$f(z)$在$U(0,1)$内解析, $\mathrm{Re}f(z)\geqslant 0,f(0) = a>0$, 证明
+    \begin{equation*}
+        \abs{\frac{f(z)-a}{f(z)+a}}\leqslant \abs{z},~\abs{f'(0)}\leqslant 2a.
+    \end{equation*}
+    若$a = 1$, 则\begin{equation*}
+        \frac{1-\abs{z}}{1+\abs{z}}\leqslant \abs{f(z)} \leqslant \frac{1+\abs{z}}{1-\abs{z}}.
+    \end{equation*}
+\end{yyEx}
+
+\begin{yyEx}
+    如果$f(z)$是上半平面到自身的解析同胚, 证明
+    \begin{equation*}
+        f(z) = \frac{az+b}{cz+d},
+    \end{equation*}
+    其中$a,b,c,d\in\mathbb{R},ad-bc>0$.
+\end{yyEx}
+
+\begin{yyEx}
+    
+\end{yyEx}

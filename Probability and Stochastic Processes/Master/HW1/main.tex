@@ -1,0 +1,467 @@
+\documentclass[a4paper,AutoFakeBold,oneside,12pt]{article}
+
+%need xelatex
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+
+%%%%%%%% 这两个宏包冲突, 只可保留其中一个
+%\usepackage{amsfonts}
+\usepackage{mathrsfs}
+%%%%%%%%
+
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{calligra}
+\usepackage{csquotes}
+\usepackage{tensor}
+\usepackage[thicklines]{cancel}
+\usepackage{tcolorbox}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{enumerate}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ \hmwkClassInstructor\ \hmwkClassTime: \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+	\nobreak\extramarks{}{习题 \arabic{#1} 接下页\ldots}\nobreak{}
+	\nobreak\extramarks{习题 \arabic{#1} (continued)}{习题 \arabic{#1} 接下页\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+	\nobreak\extramarks{习题 \arabic{#1} (continued)}{习题 \arabic{#1} 接下页\ldots}\nobreak{}
+	\stepcounter{#1}
+	\nobreak\extramarks{习题 \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+	\section{习题 \arabic{homeworkProblemCounter}}
+	\setcounter{partCounter}{1}
+	\enterProblemHeader{homeworkProblemCounter}
+}{
+	\exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{作业\ \#1}
+\newcommand{\hmwkDueDate}{9月22日, 2019}
+\newcommand{\hmwkClass}{概率论与随机过程}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{}
+\newcommand{\hmwkAuthorName}{杨勇,2019110294}
+
+%
+% Title Page
+%
+
+\title{
+	\vspace{2in}
+	\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+	\normalsize\vspace{0.1in}\small{完成于 \hmwkDueDate}\\
+	\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+	\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large 解.}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+	
+	\maketitle
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\pagebreak
+	\begin{homeworkProblem}
+		设$A_1,A_2,\cdots$为任一集序列, 若令
+		\begin{equation}
+			A_1' = A_1,~A_n' = A_n\backslash \bigcup_{k=1}^{n-1}A_k,n=2,3,\cdot.
+		\end{equation}
+		试证:$A_1',\cdots,A_n',\cdots$两两互不相交, 且
+		\begin{equation}
+			\bigcup_{n=1}^{+\infty}A_n = \bigcup_{n=1}^{+\infty}A_n'.
+		\end{equation}
+		\begin{proof}
+			一方面,设$\omega\in \bigcup_{n=1}^{+\infty}A_n'$, 根据并运算的定义知道:$\exists n\in\mathbb{N}^*(\omega\in A_n').$
+			注意到$A_n'\subset A_n$, 所以$\omega\in A_n'\Rightarrow \omega\in A_n$.
+			因此,有$\exists n\in\mathbb{N}^*(\omega\in A_n).$
+			这说明\begin{equation}
+				\bigcup_{n=1}^{+\infty}A_n' \subset \bigcup_{n=1}^{+\infty}A_n.
+			\end{equation}
+			令一方面, 设$\omega\in \bigcup_{n=1}^{+\infty}A_n$, 根据并运算的定义知道:$\exists n\in\mathbb{N}^*(\omega\in A_n).$
+			
+			这里为了讨论方便, 引入$A_0 = \varnothing$.
+			
+			此时, 先看$\omega$是否属于$A_1$, 若$\omega\in A_1$, 则$\omega\in A_1'$; 若$\omega\notin A_1$, 则继续看$\omega$是否属于$A_2$. 若$\omega\in A_2$, 则$\omega\in A_2\backslash A_1 = A_2'$. 若$\omega\notin A_2$, 则继续看$\omega$是否属于$A_3$,
+			若$\omega\in A_3$, 则$\omega\in A_3\backslash(A_1\cup A_2) = A_3'$, 否则继续看$\omega$是否属于$A_4$,以此类推. 因此, 必有整数$k\in\{1,\cdots,n\}$使得$\omega\notin A_0,\cdots A_{k-1}$, 但$\omega\in A_k$.即$\omega\in A_k'$.
+			所以有$\omega\in \bigcup_{n=1}^{+\infty}A_n'$.
+			
+			这说明\begin{equation}
+				\bigcup_{n=1}^{+\infty}A_n \subset \bigcup_{n=1}^{+\infty}A_n'.
+			\end{equation}
+			结合(3)与(4)知道结论成立.
+		\end{proof}
+		
+	\end{homeworkProblem}
+	
+	\begin{homeworkProblem}
+		设$(\Omega,\mathscr{F})$为一可测空间, $A_n\in\mathscr{F},n=1,2,\cdots$, 试证:
+		\begin{align}
+			&\bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k = \{ \omega:\omega\text{属于无穷多个}A_n \},\nonumber\\
+			&\bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k = \{ \omega:\omega\text{只不属于有限多个}A_n \}.
+		\end{align}
+		\begin{proof}
+			(1)若$\omega\in\bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k$, 则根据交的定义知任给$n\in\mathbb{N}^*$, 有\begin{equation}
+				\omega\in\bigcup_{k=n}^{+\infty}A_k
+			\end{equation}
+			从而根据并的定义又知道:存在$k\geqslant n$, 使$\omega\in A_k$.
+			
+			即\begin{equation}
+				\forall n\in\mathbb{N}^*,\exists k\geqslant n~\left( \omega\in A_k \right).
+			\end{equation}
+			这说明$\omega\in\bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k$当且仅当$\omega$属于集合列$\{A_j\}$中的无穷多个集合.
+			
+			(2)若$\omega\in\bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k$, 则根据交与并的定义知道:
+			\begin{equation}
+				\exists j_0\in\mathbb{N}^*,\forall k\geqslant j_0~\left( x\in A_k \right).
+			\end{equation}
+			这说明$\omega\in\bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k$当且仅当$\omega$只不属于集合列$\{A_j\}$中的有限多个集合.
+		\end{proof}
+	
+		\textbf{Note}用概率论的语言, 可以把这个结论总结为:
+		\begin{enumerate}
+			\item 事件列$\{A_j\}$的上极限发生当且仅当$\{A_j\}$中有无穷个事件发生;
+			\item 事件列$\{A_j\}$的下极限发生当且仅当$\{A_j\}$中仅有有限个事件不发生.
+		\end{enumerate}
+		
+	\end{homeworkProblem}
+
+	\begin{homeworkProblem}
+		若记\begin{equation}
+			\bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k = A^{\star} = \limsup_{n\to\infty}A_n,
+		\end{equation}
+		称为集序列$\{A_n\}$的上限集. 若记
+		\begin{equation}
+		\bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k = A_{\star} = \liminf_{n\to\infty}A_n,
+		\end{equation}
+		称为集序列$\{A_n\}$的下限集. 试证:
+		\begin{enumerate}
+			\item $\liminf\limits_{n\to\infty}A_n\subset \limsup\limits_{n\to\infty}A_n$;
+			\item 若$A_n\uparrow$, 则$A^\star = A_\star = \cup_{n=1}^{+\infty}A_n$;
+			\item 若$A_n\downarrow$, 则$A^\star = A_\star = \cap_{n=1}^{+\infty}A_n$;
+			\item 若$A$为任一集合, 则$A\backslash A_\star = \limsup\limits_{n\to\infty}(A\backslash A_n),A\backslash A^\star = \liminf\limits_{n\to\infty}(A\backslash A_n)$
+		\end{enumerate}
+		\begin{proof}
+			\begin{enumerate}
+				\item 根据习题2知道: $\omega\in\bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k$当且仅当$\omega$只不属于集合列$\{A_j\}$中的有限多个集合. 这可以推出 $\omega$属于集合列$\{A_j\}$中的无穷多个集合, 即$\omega\in\bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k$. 这说明$\bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k\subset\bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k$.
+				\item 不难看出对一般的集合列$\{A_j\}$,总有下列的包含关系:
+				\begin{equation}
+					\bigcap_{n=1}^{+\infty}A_n\subset \liminf_{n\to\infty}A_n \subset \limsup_{n\to\infty}A_n\subset \bigcup_{n=1}^{+\infty}A_n
+				\end{equation}
+				再根据$\{A_n\}$单调非降, 得到$\bigcap_{k=n}^{+\infty}A_k = A_n$.
+				这说明$\liminf A_n = \cup_{n=1}^{+\infty}A_n$. 
+				
+				结合上面的包含关系知道结论成立.
+				\item 根据$\{A_n\}$单调非增, 得到$\bigcup_{k=n}^{+\infty}A_k = A_n$.
+				这说明$\limsup A_n = \cap_{n=1}^{+\infty}A_n$.
+				
+				结合包含关系(11)可知结论成立.
+				\item 回忆de Morgen法则:
+				\begin{align}
+					&A\backslash \bigcup_{\lambda\in\Lambda}B_{\lambda} = \bigcap_{\lambda\in\Lambda}(A\backslash B_{\lambda})\nonumber\\
+					&A\backslash \bigcap_{\lambda\in\Lambda}B_{\lambda} = \bigcup_{\lambda\in\Lambda}(A\backslash B_{\lambda}).
+				\end{align}
+				我们由此知道
+				\begin{align}
+					A\backslash \liminf_{n\to\infty}A_n &= A\backslash \bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}A_k\nonumber\\
+					&=\bigcap_{n=1}^{+\infty}\left( A\backslash \bigcap_{k=n}^{+\infty}A_k \right)\nonumber\\
+					&= \bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}\left( A\backslash A_k \right)\nonumber \\
+					&=\limsup_{n\to\infty}(A\backslash A_n),
+				\end{align}
+				和\begin{align}
+				A\backslash \limsup_{n\to\infty}A_n &= A\backslash \bigcap_{n=1}^{+\infty}\bigcup_{k=n}^{+\infty}A_k\nonumber\\
+				&=\bigcup_{n=1}^{+\infty}\left( A\backslash \bigcup_{k=n}^{+\infty}A_k \right)\nonumber\\
+				&= \bigcup_{n=1}^{+\infty}\bigcap_{k=n}^{+\infty}\left( A\backslash A_k \right)\nonumber \\
+				&=\liminf_{n\to\infty}(A\backslash A_n).
+				\end{align}
+			\end{enumerate}
+		\end{proof}
+	\end{homeworkProblem}
+	
+	
+	
+	\begin{homeworkProblem}
+		证明: 包含一切形如$(-\infty,x)$的区间的最小$\sigma$-代数是一维Borel域.
+		\begin{proof}
+			根据定义,一维Borel集合系$\mathscr{B}_\mathbb{R}$是由$\pi$-系$\mathscr{P}_\mathbb{R} = \{(-\infty,a]:a\in\mathbb{R}\}$生成的$\sigma$-代数:
+			\begin{equation}
+				\mathscr{B}_R = \sigma(\mathscr{P}_\mathbb{R}).
+			\end{equation}
+			对任意$a\in\mathbb{R}$,我们有
+			\begin{align}
+				&\bigcap_{n=1}^{+\infty}\left(-\infty,a+\frac{1}{n}\right) = (-\infty,a]\nonumber\\
+				&\bigcup_{n=1}^{+\infty}\left(-\infty,a-\frac{1}{n}\right] = (-\infty,a)
+			\end{align}
+			因此, 对任何$x\in\mathbb{R},(-\infty,x)\in\mathscr{B}_{\mathbb{R}}$.
+			所以$\sigma(\{ (-\infty,x):x\in\mathbb{R} \})\subset \mathscr{B}_{\mathbb{R}}$.
+			
+			另外, 对任何$x\in\mathbb{R},(-\infty,x]\in\sigma(\{ (-\infty,x):x\in\mathbb{R} \})$.
+			所以$\sigma(\{ (-\infty,x):x\in\mathbb{R} \})\supset \mathscr{B}_{\mathbb{R}}$.
+			
+			二者结合起来便说明$\sigma(\{ (-\infty,x):x\in\mathbb{R} \})= \mathscr{B}_{\mathbb{R}}$.
+		\end{proof}
+	\end{homeworkProblem}
+	
+	\begin{homeworkProblem}
+		求包含二集合$A,B$的最小$\sigma$-代数, 其中$A,B\neq\varnothing$且$\Omega,AB\neq\varnothing, A\cup B\neq\Omega$, 而且$A,B$互不包含.
+		
+		\solution
+		所求的集合系为:\begin{equation}
+		    \mathscr{A} = \{\varnothing,A,B,A\cup B,A\Delta B,A\backslash B, B\backslash A,\Omega,A^c,B^c,A^cB^c,AB^c,BA^c,(AB)^c,(A\Delta B)^c \}
+		\end{equation}
+	\end{homeworkProblem}
+	
+	
+	\begin{homeworkProblem}
+		若$\mathscr{G} = \{A_k:A_k\subset\Omega,k=1,2,\cdots,\text{两两不交}\}$, 试求$\sigma(\mathscr{G})$.
+		
+		\solution
+		引入\begin{equation}
+			A_0 = \Omega\backslash\bigcup_{k=1}^{+\infty}A_k.
+		\end{equation}
+		则所求为:
+		\begin{equation}
+			\sigma(\mathscr{G}) = \left\{ \bigcup_{k\in K}A_{k}:K\subset\mathbb{N} \right\}.
+		\end{equation}
+		\begin{proof}
+		    不妨记(19)式右端为$\mathscr{D}$. 由于$\sigma$代数是对于可列并的运算以及补的运算封闭的, 故$\sigma(\mathscr{G}) \supset \mathscr{D}$. 因此, 要完成这个定理的证明, 只需证$\sigma(\mathscr{G}) \subset \mathscr{D}$. 为此, 又只需证$\mathscr{D}$是一个$\sigma$-代数. 下面, 分别验证$\sigma$-代数的三个条件:
+		    \begin{enumerate}[1)]
+		        \item \begin{equation}
+		            \Omega = \bigcup_{k=0}^{+\infty}A_k \in \mathscr{D};
+		        \end{equation}
+		        \item \begin{equation}
+		            A = \bigcup_{k\in K}A_{k}\in \mathscr{D} \Rightarrow A^c = \bigcup_{k\in (\mathbb{N}\backslash K)}A_{k} \in\mathscr{D};
+		        \end{equation}
+		        \item 设$B_1,B_2,\cdots \in \mathscr{D}$, 则存在$K_1,K_2,\cdots \subset \mathbb{N}$, 使\begin{equation}
+		            B_n = \bigcup_{k\in K_n}A_{k}, n=1,2,\cdots.
+		        \end{equation}
+		        这时,\begin{equation}
+		            \bigcup_{n=1}^{+\infty}B_n = \bigcup_{n=1}^{+\infty}\bigcup_{k\in K_n}A_{k} = \bigcup_{k\in K}A_{k}\in\mathscr{D}.
+		        \end{equation}
+		        其中$K = \cup_{n=1}^{+\infty}K_n$.
+		    \end{enumerate}
+		    由此知道$\mathscr{D}$确是一个$\sigma$-代数.
+		\end{proof}
+	\end{homeworkProblem}
+	
+	\begin{homeworkProblem}
+		设$\Omega$是不可列集, $\mathscr{A}$是$\Omega$的一切有限子集、可列子集及以有限子集或可列子集为余集的子集所作成的集合类, 试证$\mathscr{A}$是一$\sigma$-代数.
+		\begin{proof}
+		    分别验证$\sigma$-代数的三个条件:
+		    \begin{enumerate}[1)]
+		        \item 由于$\varnothing$是$\Omega$的一个有限子集, 所以 $\Omega = \varnothing^{c} \in \mathscr{A}$;
+		        \item 设$A\in\mathscr{A}$, 则$A$是$\Omega$的至多可列子集或 以$\Omega$的至多可列子集为余集的子集.
+		        这两类情况下, $A^c$分别是$\Omega$的以至多可列子集为余集的子集 或 $\Omega$的至多可列子集, 因此, $A^c\in\mathscr{A}$;
+                                                                                     		        
+		        \item 设$A_1,A_2,\cdots \in \mathscr{A}$. 有下列两种情况:\\
+		        (1) 若诸$A_j$均是$\Omega$的至多可列子集, 则$\cup_j A_j$仍是$\Omega$的至多可列子集;\\
+		        (2) 若诸$A_j$中至少有一个是 以$\Omega$的至多可列子集为余集的子集, 则$\cup_j A_j$仍是以$\Omega$的至多可列子集为余集的子集.
+		        
+		        所以总有\begin{equation}
+		            \bigcup_{n=1}^{+\infty}A_n\in\mathscr{A}
+		        \end{equation}
+		    \end{enumerate}
+		    由此知道$\mathscr{A}$确是一个$\sigma$-代数.
+		\end{proof}
+	\end{homeworkProblem}
+
+	\begin{homeworkProblem}
+		设$\mathscr{G}$是由$\Omega$的子集组成的集合类, $A$是$\Omega$的一个非空子集, 令\begin{equation}
+			\mathscr{G}\cap A = \{ A':A'=B\cap A, B\in\mathscr{G} \},
+		\end{equation}
+		试证:$\sigma(\mathscr{G})\cap A$是以$A$为空间的包含集合类$\mathscr{G}\cap A$的最小$\sigma$-代数.
+		\begin{proof}
+		    先证明$\sigma(\mathscr{G})\cap A = \{BA: B\in \sigma(\mathscr{G})\}$是以$A$为空间的一个$\sigma$-代数. 
+		    为此, 我们分别对它验证$\sigma$-代数的三个条件.
+		    \begin{enumerate}[1)]
+		        \item 因$\Omega\in\sigma(\mathscr{G})$, 所以$A = \Omega\cap A\in \sigma(\mathscr{G})\cap A$;
+		        \item 设$E\in \sigma(\mathscr{G})\cap A$. 即$E = AB$, 其中$B\in\sigma(\mathscr{G})$.
+		        $E$相对$A$的补是$A\backslash E = A\backslash AB = AB^c$. 因为$B^c\in\sigma(\mathscr{G})$, 所以$A\backslash E\in \sigma(\mathscr{G})\cap A$;
+		        \item 设$E_1,E_2,\cdots \in \sigma(\mathscr{G})\cap A$. 即$E_j = AB_j$, 其中$B_j\in\sigma(\mathscr{G}),j = 1,2,\cdots$. 由于$\sigma(\mathscr{G})$是一个$\sigma$-代数, 所以$\cup_{j=1}^{+\infty}B_j\in\sigma(\mathscr{G})$. 这说明
+		        \begin{equation}
+		            \bigcup_{j = 1}^{+\infty}E_j = \bigcup_{j = 1}^{+\infty}AB_j  =A\left(\bigcup_{j = 1}^{+\infty}B_j \right)\in \sigma(\mathscr{G})\cap A.
+		        \end{equation}
+		    \end{enumerate}
+		    再设$\mathscr{E}$是以$A$为空间的包含集合类$\mathscr{G}\cap A$的任意一个$\sigma$-代数, 下面证明$ \left(\sigma(\mathscr{G})\cap A\right)\subset \mathscr{E}$.
+		    因为$\mathscr{E}$包含集合类$\mathscr{G}\cap A$, 所以$\forall B\in\mathscr{G}, AB\in\mathscr{E}$.
+		    令\begin{equation}
+		        \mathscr{H}_A = \{H:AH\in\mathscr{E}\}.
+		    \end{equation}
+		    则$\mathscr{G}\subset\mathscr{H}_A$. 继续证明$\mathscr{H}_A$是一个$\sigma$-代数.
+		    注意到$\mathscr{E}$是以$A$为空间的一个$\sigma$-代数, 所以有
+		    \begin{enumerate}[1)]
+		        \item $A\Omega =A\in\mathscr{E}$, 即$\Omega\in \mathscr{H}_A$;
+		        \item 设$H\in \mathscr{H}_A$, 则$AH\in\mathscr{E}$. 利用上面条件,有$AH^c = A\backslash AH\in\mathscr{E}$. 这说明$H^c\in \mathscr{H}_A$;
+		        \item 再设$H_1,H_2,\cdots\in \mathscr{H}_A$, 则$AH_j\in\mathscr{E},j=1,2,\cdots$. 再次利用$\mathscr{E}$是以$A$为空间的一个$\sigma$-代数, 得到\begin{equation}
+		            A\left(\bigcup_{j=1}^{+\infty}H_j\right) = \bigcup_{j=1}^{+\infty}AH_j\in \mathscr{E}.
+		        \end{equation}
+		        这说明$\bigcup_{j=1}^{+\infty}H_j\in \mathscr{H}_A$.
+		    \end{enumerate}
+		    因此, $\mathscr{H}_A$确是个$\sigma$-代数. 又因为$\mathscr{G}\subset\mathscr{H}_A$. 根据$\sigma$-代数的生成的定义, $\sigma(\mathscr{G})\subset \mathscr{H}_A$.
+		    
+		    即\begin{equation}
+		        \forall B\in \sigma(\mathscr{G}),\text{总有}BA\in\mathscr{E}.
+		    \end{equation}
+		    这正是$ \left(\sigma(\mathscr{G})\cap A\right)\subset \mathscr{E}$.
+		\end{proof}
+	\end{homeworkProblem}
+
+	\begin{homeworkProblem}
+		设$A$是$\Omega$的一个子集, $\mathscr{G}$是$\Omega$的包含$A$的一切子集所组成的集合类, 试问$\sigma(\mathscr{G})$是由哪些子集组成的?
+		
+		\solution
+		\begin{equation}
+		    \sigma(\mathscr{G}) = \mathscr{G}\cup\{ G\cup(\Omega\backslash A):G\in\mathscr{G} \}.
+		\end{equation}
+	\end{homeworkProblem}
+
+	\begin{homeworkProblem}
+		设$\xi(\omega)$是定义在$\Omega$上而值域为$\mathbb{R}^{(1)}$的单值实函数, $B\subset\mathbb{R}^{(1)}$, $\{\omega:\xi(\omega)\in B\}$表示使$\xi(\omega)$的值属于$B$的一切$\omega(\in\Omega)$的集合, 试证:\begin{enumerate}
+			\item $\overline{\{\omega:\xi(\omega)\in B  \}} = \{ \omega:\xi(\omega)\in\overline{B} \}$;
+			\item 若$B_k\subset\mathbb{R}^{(1)},k=1,2,\cdots$, 则有\begin{equation}
+				\bigcup_{k=1}^{+\infty}\{\omega:\xi(\omega)\in  B_k\} = \left\{ \omega:\xi(\omega)\in\bigcup_{k=1}^{+\infty}B_k \right\}.
+			\end{equation}
+		\end{enumerate}
+        \textbf{分析:}
+		    回忆数学分析中引入的"映射的逆像"(preimage/inverse image).
+		    
+		    设映射$\varphi:A\to B$, 集合$D\subset B$的原像定义为
+		    \begin{equation}
+		        \varphi^{-1}(D) \triangleq \{x\in A:\varphi(x)\in D\}.
+		    \end{equation}
+		    那时候, 曾经证明过这样两个关于映射与集合运算之间关系的公式.
+		    \begin{align}
+		        &\varphi^{-1}\left( \bigcup_{\lambda\in\Lambda}E_\lambda \right) = \bigcup_{\lambda\in\Lambda}\varphi^{-1}\left( E_\lambda \right); \\
+		        &\left(\varphi^{-1}(D)\right)^c = \varphi^{-1}(D^c).
+		    \end{align}
+            我们愿意在此重新温习一下它的证明.
+            \begin{proof}
+                \begin{align}
+                    x\in \varphi^{-1}\left( \bigcup_{\lambda\in\Lambda}E_\lambda \right) &\Longleftrightarrow \exists y\in \bigcup_{\lambda\in\Lambda}E_{\lambda}\left(y = \varphi(x)\right)\nonumber\\
+                    &\Longleftrightarrow \exists \lambda\in\Lambda\exists y\in E_{\lambda}\left(y = \varphi(x)\right)\nonumber\\
+                    &\Longleftrightarrow \exists \lambda\in\Lambda \left(x\in\varphi^{-1}(E_{\lambda})\right).
+                \end{align}
+                还需要讨论空集的情况.
+                \begin{align}
+                   ~~\varphi^{-1}\left( \bigcup_{\lambda\in\Lambda}E_\lambda \right) = \varnothing &\Longleftrightarrow \left(\bigcup_{\lambda\in\Lambda}E_\lambda\right)\bigcap \mathrm{Im}\varphi = \varnothing \nonumber\\
+                    &\Longleftrightarrow \forall\lambda\in\Lambda\left( E_{\lambda}\cap \mathrm{Im}\varphi  \right)= \varnothing\nonumber\\
+                    &\Longleftrightarrow \forall\lambda\in\Lambda\left( \varphi^{-1}(E_{\lambda}) = \varnothing \right)\nonumber\\
+                    &\Longleftrightarrow \bigcup_{\lambda\in\Lambda}\varphi^{-1}(E_{\lambda}) = \varnothing.
+                \end{align}
+                再考虑另一个公式.
+                \begin{align}
+                    x\in \left(\varphi^{-1}(D)\right)^c &\Longleftrightarrow x\notin \varphi^{-1}(D)\nonumber\\
+                    &\Longleftrightarrow \varphi(x)\notin D\nonumber\\
+                    &\Longleftrightarrow\varphi(x)\notin D^c\nonumber\\
+                    &\Longleftrightarrow x\in \varphi^{-1}(D^c)
+                \end{align}
+            \end{proof}
+            利用这两个公式, 就容易完成本题的证明.
+            \begin{proof}
+                \begin{enumerate}
+                    \item \begin{equation}
+                        \overline{\{\omega:\xi(\omega)\in B  \}} = \left(\xi^{-1}(B)\right)^c = \xi^{-1}(B^c) = \{ \omega:\xi(\omega)\in\overline{B} \};
+                    \end{equation}
+                    \item \begin{equation}
+                        \bigcup_{k=1}^{+\infty}\{\omega:\xi(\omega)\in  B_k\} 
+                        =\bigcup_{k=1}^{+\infty}\xi^{-1}(B_k) = \xi^{-1}\left(\bigcup_{k=1}^{+\infty}B_k\right)
+                        = \left\{ \omega:\xi(\omega)\in\bigcup_{k=1}^{+\infty}B_k \right\}.
+                    \end{equation}
+                \end{enumerate}
+            \end{proof}
+	\end{homeworkProblem}
+	
+\end{document}
