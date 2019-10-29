@@ -1,0 +1,58 @@
+\documentclass[UTF8,12pt]{ctexart}
+\usepackage[landscape]{geometry}
+\geometry{a3paper,centering,scale = 0.8}
+\usepackage{booktabs}
+
+\title{Scheduler}
+\author{杨勇}
+\date{January 2019}
+
+\begin{document}
+
+\maketitle
+
+\begin{table}[htbp]
+	\centering
+	\caption{文件结构}
+	\begin{tabular}{rllrr}
+		\toprule
+		文件夹 & 文件 & 概要 & 注释 & \\
+		\midrule
+		\multicolumn{1}{l}{ulsch\_manager\textbackslash{}} & mac\_pucch.h & 用于mac pucch配置 &       &  \\
+		& mac\_pusch.h & 用于mac pusch配置 &       &  \\
+		\midrule
+		\multicolumn{1}{l}{dlsch\_manager\textbackslash{}} & mac\_pdcch.h &       &       &  \\
+		& mac\_pdsch.h &       &       &  \\
+		& mac\_pdcch\_sa.h & PDCCH in SA mode &       &  \\
+		& mac\_pdsch\_processing\_time.h & mac pdsch processing time &       &  \\
+		& mac\_pdsch\_sa.h & PDCCH in SA mode &       &  \\
+		\midrule
+		\multicolumn{1}{l}{bwp\_manager\textbackslash{}} & mac\_bwp.h & function prototype for BWP Manager. & 
+		\multicolumn{1}{l}{BWP:Band Width part} & 
+		\multicolumn{1}{l}{部分带宽} \\
+		\midrule
+		\multicolumn{1}{l}{ccch\_manager\textbackslash{}} & mac\_ccch\_sa.h & CCCH in SA mode & 
+		\multicolumn{1}{l}{CCCH:Common Control Channel} & \multicolumn{1}{l}{公共控制信道} \\
+		\midrule
+		\multicolumn{1}{l}{rach\_manager\textbackslash{}} & mac\_prach.h & mac prach configuration & \multicolumn{1}{l}{PRACH:Physical Random-Access Channel} & \multicolumn{1}{l}{物理随机接入信道} \\
+		& mac\_random\_access.h & function prototypes  for MAC utilities &       &  \\
+		\midrule
+		\multicolumn{1}{l}{resource\_manager\textbackslash{}} & mac\_ul\_resource\_allocator.h & mac ul resource allocator &       & \multicolumn{1}{l}{资源分配} \\
+		& resource\_allocator.h & mac resource allocator &       &  \\
+		& TBS\_Table\_64QAM.h &       &       &  \\
+		\midrule
+		\multicolumn{1}{l}{ssb\_manager\textbackslash{}} & mac\_sib\_sa.h & BCCH Messges & \multicolumn{1}{l}{BCCH:Broadcast Control Channel} & \multicolumn{1}{l}{广播控制信道} \\
+		& mac\_ssb.h & function prototype for SSB Manager. & \multicolumn{1}{l}{SSB:Synchronization Signal Block} & \multicolumn{1}{l}{同步信号块} \\
+		\midrule
+		\multicolumn{1}{l}{strategy\textbackslash{}} & mac\_dl\_round\_robin\_scheduler.h & mac downlink round robin scheduler &       & \multicolumn{1}{l}{循环调度程序} \\
+		& mac\_dl\_scheduler\_strategy.h & mac downlink strategy &       & \multicolumn{1}{l}{下行策略} \\
+		& mac\_ul\_round\_robin\_scheduler.h & mac uplink round robin scheduler &       &  \\
+		& mac\_ul\_scheduler\_strategy.h  & mac uplink round robin scheduler &       &  \\
+		\bottomrule
+	\end{tabular}%
+	\label{tab:文件结构}%
+\end{table}%
+
+
+
+\end{document}

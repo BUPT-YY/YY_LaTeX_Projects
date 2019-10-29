@@ -1,0 +1,592 @@
+\documentclass[11pt,UTF8]{ctexbook}
+\usepackage{ctex}
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+
+%%%%%%%% 这两个宏包冲突, 只可保留其中一个
+%\usepackage{amsfonts}
+\usepackage{mathrsfs}
+%%%%%%%%
+
+%B5
+%\usepackage[papersize={185mm,230mm},body={155mm,190mm},left=15mm,top=10mm,includeheadfoot, head=15pt]{geometry}
+
+
+%A5
+%\usepackage[papersize={148mm,210mm},body={122.6mm,164.6mm},left=12.7mm,top=12.7mm,includeheadfoot, head=15pt]{geometry}
+
+%横向
+%\usepackage[landscape]{geometry}
+\usepackage{geometry}
+\geometry{b5paper,centering,scale = 0.8}
+
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{3pt plus1pt minus2pt}
+\ctexset{%
+	contentsname={目\ \ 次},
+	listfigurename={插\ 图\ 目\ 录},
+	listtablename={表\ 格\ 目\ 录},
+	bibname={参\ 考\ 文\ 献},
+	chapter={name={第,章},
+		number=\chinese{chapter},
+		format=\raggedright,
+		nameformat={\color{blue}\huge\heiti},
+		titleformat={\color{black}\huge\heiti},
+		beforeskip={0pt},
+		afterskip={25pt}
+	},
+	section={format=\raggedright,
+		nameformat={\large\bfseries},
+		titleformat={\large\bfseries}
+	},
+	subsection={format=\raggedright,
+		nameformat={\bfseries},
+		titleformat={\bfseries}
+	}
+}
+%%===== 中英文字体
+%\setmainfont{Adobe Garamond Pro} %{Minion Pro} % 衬线字体 roman \rmfamily
+%\setsansfont{Myriad Pro} % 无衬线字体 sans serif \sffamily
+%\setmonofont{Consolas}   % 等宽字体 typewriter \ttfamily
+%% 中文字体
+%\setCJKmainfont[BoldFont={方正小标宋_GBK},%FZHeiGB18030,FZSongHeiGB18030}, %
+%                ItalicFont={FZBeiWeiKaiShuS}]%FZKaiGB18030
+% {FZShuSongGB18030}%{FZBoYaSong,NSimSun,Adobe Song Std L}
+%\setCJKsansfont{FZHeiGB18030}
+%\setCJKmonofont{FZKaiGB18030}
+\newcommand{\song}{\songti}
+\newcommand{\hei}{\heiti}
+\newcommand{\kai}{\kaishu}
+%\setCJKfamilyfont{BWKai}{FZBeiWeiKaiShuS}\newcommand{\BWKai}{\CJKfamily{BWKai}}
+\newcommand{\BWKai}{\kai}
+
+\newcommand*\norm[1]{\|#1\|}
+\newcommand*\abs[1]{\lvert#1\rvert}
+%===== 常用宏包
+\usepackage{amsmath,amssymb,bm}
+\usepackage{esint}
+\usepackage{extarrows}
+\usepackage{fancyhdr}  % 页眉和页脚
+\usepackage{listings}  % 源代码
+\usepackage{makeidx}\makeindex   % 索引
+\usepackage{graphicx,xcolor}\graphicspath{{figures/}}
+\usepackage{subfigure} % 子插图
+%\usepackage{picins} % 图文混排, texlive 不支持
+%\piccaption{This is caption\label{aaa}}
+%\parpic[r]{\includegraphics[width=5cm]{aaa.jpg}}
+%\usepackage{picinpar}
+%\begin{figwindow}
+%\usepackage{epstopdf} % 处理 eps 图片
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,scopes,plotmarks}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{tensor}
+
+%===== 背景图片
+\usepackage{wallpaper}
+%\URCornerWallPaper{0.1}{ecnu03s.png} % 在右上角插入背景图片
+
+%%===== 每章生成小目录
+%\usepackage{minitoc}
+%\setcounter{minitocdepth}{2} % 显示到 subsection
+%%\nomtcrule  % 去掉 minitoc 的横线
+%\dominitoc[n] % 使 minitoc 起作用, n 表示不显示 contents 标题
+
+%===== 参考文献与链接
+% \usepackage{chapterbib} % 分章参考文献
+\usepackage[numbers,sort&compress,sectionbib]{natbib}
+\setlength{\bibsep}{0.5ex}
+%\usepackage[xetex,pagebackref]{hyperref}
+\usepackage[xetex,pagebackref]{hyperref}
+\hypersetup{CJKbookmarks=true,colorlinks=true,citecolor=blue,%
+	linkcolor=blue,urlcolor=blue,bookmarksnumbered=true,%
+	bookmarksopen=true,bookmarksopenlevel=1,breaklinks=true}
+%\renewcommand*{\backrefalt}[4]{%
+%    \ifcase #1 No citations.%
+%    \or Cited on page #2.%
+%    \else Cited on pages #2.%
+%    %\else #1 Cited on pages #2.%
+%    \fi
+%    }
+
+%===== 浮动图表的标题
+\usepackage[margin=2em,labelsep=period,skip=0.5em,font=normalfont]{caption}
+\DeclareCaptionFormat{mycaption}%
+{{\heiti\color{blue} #1}#2{\kaishu #3}}
+\captionsetup{format=mycaption,tablewithin=chapter,figurewithin=chapter}
+
+%===== 浮动对象距离设置
+\usepackage{float}
+\setlength{\floatsep}{10pt plus 3pt minus 2pt}
+% 出现在页面顶部或底部中的浮动对象之间的竖直距离
+\setlength{\textfloatsep}{10pt plus 3pt minus 2pt}
+% 出现在页面顶部或底部中的浮动对象与文本之间的竖直距离
+\setlength{\intextsep}{10pt plus 3pt minus 2pt}
+% 出现在页面中间的浮动对象上下文之间的竖直距离
+
+%===== 表格
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{multirow,bigdelim}  % 多行
+\usepackage{fancyvrb}
+\fvset{formatcom=\color{blue},frame=single,rulecolor=\color{red}}
+
+%===== 给文字加边框和背景色
+%\usepackage{framed}  % shaded 环境
+\definecolor{shadecolor}{gray}{0.9}
+\definecolor{notecolor}{gray}{0.95}
+\usepackage[framemethod=tikz]{mdframed}  % shaded 环境
+\newmdenv[linecolor=green,middlelinewidth=0.5pt,%
+roundcorner=3pt,backgroundcolor=yellow!5,%
+innertopmargin=0.5em,innerbottommargin=0.5em,%
+innerleftmargin=3pt,innerrightmargin=3pt,%
+skipbelow=0.5em,skipabove=1em,%
+splittopskip=\topskip]{Block}
+\newmdenv[linecolor=green,middlelinewidth=0pt,%
+outerlinewidth=0.5pt,
+roundcorner=3pt,backgroundcolor=shadecolor,%
+innerbottommargin=3pt,innerrightmargin=5pt,%
+innerleftmargin=5pt,%
+skipabove=0pt]{mathbox}
+\newmdenv[linecolor=blue!5!green,middlelinewidth=0.3pt,%
+roundcorner=3pt,backgroundcolor=red!2!white,%
+% frametitle={Hello},frametitlebackgroundcolor=green!50,%
+skipabove=5pt,skipbelow=2pt,%
+innerleftmargin=0pt]{notebox}
+\newmdenv[linewidth=0pt,roundcorner=10pt,backgroundcolor=gray!5,%
+innertopmargin=1em,innerbottommargin=1em,%
+innerleftmargin=2em,innerrightmargin=2em,%
+skipbelow=1em,skipabove=2em,%
+splittopskip=\topskip]{Quote}
+\newmdenv[linecolor=red,middlelinewidth=0.5pt,%
+roundcorner=3pt,backgroundcolor=white,%
+innertopmargin=0em,innerbottommargin=1em,%
+innerleftmargin=1ex,innerrightmargin=1ex,%
+skipbelow=0.5em,skipabove=0em,%
+splittopskip=\topskip]{AlgoBox}
+\newenvironment{note}%
+{\begin{notebox}%
+		\begin{list}{\textcolor{red}{$\dag$}}{%
+				\leftmargin1.8em\labelwidth1.0em\labelsep0.5em
+				\itemsep0pt\itemindent0pt\parsep0pt\topsep0pt}%
+			\item}
+		{\end{list}\end{notebox}}
+\newenvironment{think}%
+{\begin{notebox}%
+		\begin{list}{\raisebox{0ex}{\textcolor{red}{$\clubsuit$}}}{% \HandPencilLeft  \WhiteKnightOnWhite
+				\leftmargin1.8em\labelwidth1.0em\labelsep0.5em
+				\itemsep0pt\itemindent0pt\parsep0pt\topsep0pt}%
+			\item}
+		{\end{list}\end{notebox}}
+%\newenvironment{subtit}%
+%    {\begin{Block}\centering\large\hei}
+%    {\end{Block}}
+
+%===== 自定义列表
+\newcounter{muni}
+\newenvironment{nlist}%
+{\begin{list}{{\hfill\upshape (\arabic{muni})}}%
+		{\usecounter{muni}\leftmargin30pt\labelwidth24pt\labelsep.5em%
+			\itemsep2pt\parsep0pt\topsep0pt\itemindent0pt}}
+	{\end{list}}
+\newenvironment{blist}%
+{\begin{list}{{\hfill\raisebox{1.12pt}{$\bullet$}}}{%
+			\leftmargin2em\labelwidth1.5em\labelsep0.5em
+			\itemsep0pt\itemindent0pt\parsep0pt\topsep0pt}}
+	{\end{list}}
+\newcounter{exer}\numberwithin{exer}{chapter}
+\newcounter{exertmp}\setcounter{exertmp}{0}
+\newenvironment{exerlist}%
+{%\noindent{\color{red}\rule{\textwidth}{1pt}}\par
+	\begin{list}{{\hfill\color{blue}\upshape{\textit{练习}} \arabic{chapter}.\arabic{exer}}}%
+		{\usecounter{exer}\setcounter{exer}{\theexertmp}%
+			\leftmargin30pt\labelwidth24pt\labelsep.5em%
+			\itemsep0.5em\parsep0pt\topsep0pt\itemindent0pt}}
+	{\end{list}}
+%    {\setcounter{exertmp}{\value{exer}}\end{list}}
+
+%===== list
+\usepackage{enumitem}
+\setlist{itemsep=0.05\baselineskip,itemindent=0em,%
+	partopsep=0pt,parsep=0ex,topsep=0.1\baselineskip,%
+	labelwidth=1.0em,labelsep=0.5em,leftmargin=2.5em}
+\setlist[enumerate,1]{label=(\arabic*), ref=(\arabic*)}
+\setlist[enumerate,2]{label=\emph{\alph*}), ref=\theenumi.\emph{\alph*}}
+\setlist[enumerate,3]{label=\roman*), ref=\theenumii.\roman*}
+%%===== 定理环境
+\usepackage[amsmath,thref,thmmarks,hyperref]{ntheorem}
+\theorempreskipamount1.2em  % spacing before the environment
+\theorempostskipamount0em % spacing after the environment
+%\theorempostwork{\noindent}
+\theoremstyle{plain}
+\theoremheaderfont{\normalfont\rmfamily\bfseries\color{blue}}
+\theorembodyfont{\normalfont\rmfamily\BWKai\color{black}}
+\theoremindent0em
+\theoremseparator{\hspace{0.2em}}
+\theoremnumbering{arabic}
+%\newtheorem{theorem}{\color{blue}定理}[chapter]
+%\newtheorem{definition}{\color{blue}定义}[chapter]
+%\newtheorem{property}[theorem]{\color{blue}性质}
+%\newtheorem{lemma}{\color{blue}引理}[chapter]
+%\newtheorem{corollary}{\color{blue}推论}[chapter]
+%\newtheorem{remark}{\color{blue}注记}[chapter]
+\colorlet{thmcolor}{green}
+
+
+%\RequirePackage[most]{tcolorbox}
+\definecolor{tssteelblue}{RGB}{70,130,180}
+\definecolor{tsorange}{RGB}{255,138,88}
+\definecolor{tsblue}{RGB}{23,74,117}
+\definecolor{tsforestgreen}{RGB}{21,122,81}
+\definecolor{tsyellow}{RGB}{255,185,88}
+\definecolor{tsgrey}{RGB}{200,200,200}
+\newenvironment{boxdefinition}
+{\begin{tcolorbox}
+		[enhanced jigsaw,breakable,pad at break*=1mm,
+		colback=yellow!10!white,boxrule=0pt,frame hidden,
+		borderline west={1.5mm}{-2mm}{tsforestgreen}]}
+	{\end{tcolorbox}}
+
+\newtheorem{envdefinition}{习题}[chapter]
+
+\newenvironment{yyEx}
+{\begin{boxdefinition}\begin{envdefinition}}
+		{\end{envdefinition}\end{boxdefinition}}
+
+\newtheorem*{yySolution}{\color{blue}解:}
+\newtheorem*{yySolution2}{\color{blue}另解:}
+%\newtheorem*{yyProof}{\color{blue}证明:}
+\newenvironment{yyProof}[1][证明]%
+{\par\vspace{-0.2ex}\noindent\normalfont{\hei\color{blue} #1.} \upshape}
+{\mbox{}\hfill\scalebox{1.2}{\ensuremath{\Box}}\medskip}
+
+\newenvironment{boxtheorem}
+{\begin{tcolorbox}
+		[enhanced jigsaw,breakable,pad at break*=1mm,
+		colback=black!5,colframe=tsorange]}
+	{\end{tcolorbox}}
+\newtheorem{envtheorem}{定理}
+\newenvironment{theorem}
+{\begin{boxtheorem}\begin{envtheorem}}
+		{\end{envtheorem}\end{boxtheorem}}
+
+\newtheorem{envdef}{定义}
+\newenvironment{definition}
+{\begin{boxtheorem}\begin{envdef}}
+		{\end{envdef}\end{boxtheorem}}
+
+\newtheorem{envlemma}{引理}
+\newenvironment{boxlemma}
+{\begin{tcolorbox}
+		[enhanced jigsaw,breakable,pad at break*=1mm,
+		colback=tsyellow!20,boxrule=0pt,frame hidden]}
+	{\end{tcolorbox}}
+\newenvironment{lemma}
+{\begin{boxlemma}\begin{envlemma}}
+		{\end{envlemma}\end{boxlemma}}
+
+
+%%
+%%\theoremheaderfont{\normalfont\itshape\color{blue}}
+%\theorembodyfont{\normalfont\rmfamily\color{black}}
+%\newtheorem{example}{\color{blue}例}[chapter]
+
+\newenvironment{proof}[1][证明]%
+{\par\vspace{-2ex}\noindent\normalfont{\hei\color{blue} #1.} \upshape}
+{\mbox{}\hfill\scalebox{1.2}{\ensuremath{\Box}}\medskip}
+\newcommand{\mysolve}{{\upshape\hei\color{blue} 解}}
+
+%===== 数学公式
+% \setlength{\abovedisplayskip}{4pt plus1pt minus1pt}     %公式前的距离
+% \setlength{\belowdisplayskip}{4pt plus1pt minus1pt}     %公式后面的距离
+% \setlength{\arraycolsep}{2pt}   %在一个array中列之间的空白长度
+\numberwithin{equation}{chapter}
+\allowdisplaybreaks[4]
+\usepackage{array}
+%\usepackage{yhmath}
+%\usepackage{esint} % 积分符号
+%\usepackage{bbding}
+%\usepackage{skak}
+
+\usepackage[ntheorem]{empheq} % 数学公式加框和背景色
+\usepackage[many]{tcolorbox}
+\tcbset{highlight math %
+	style={enhanced, colframe=blue!40,colback=yellow!20,arc=4pt,boxrule=1pt}}
+%% Examples: equation
+%\begin{equation}
+%\tcbhighmath{E = mc^2}
+%\end{equation}
+%
+%% Example: align
+%\begin{empheq}[box=\tcbhighmath]{align}
+%a&=b\\
+%E&=mc^2 + \int_a^a x\, dx
+%\end{empheq}
+\newtcbox{\inlinebox}[1][]{%
+	nobeforeafter, notitle, box align=center,
+	fontupper=\color{blue}\bfseries, leftright skip=0.5ex,
+	left=0.5mm,right=0.5mm,top=0mm,bottom=0mm,boxrule=0.8pt,
+	colframe=red!80!white,colback=yellow!20!white,#1}
+\newcommand{\mybox}[1]{%
+	\raisebox{0.7ex}[0pt][0pt]{\inlinebox{#1}}}
+
+%===== 算法
+\usepackage{algorithm}  %\usepackage{algorithm,algorithmic}
+%\usepackage[compatible]{algpseudocode}
+\usepackage{algpseudocode} % algorithmicx
+% algorithmicx是algorithmic的改进版，由几个子包组成，
+% 包括 algpseudocode.sty, algcompatible.sty 等
+\floatname{algorithm}{\color{blue} 算法}
+\algrenewcommand{\algorithmiccomment}[1]{\quad{\color{red}\%\ #1}}
+%\algsetup{linenosize=\small}
+\numberwithin{algorithm}{chapter}
+\renewcommand{\listalgorithmname}{算\ 法\ 目\ 录}
+\makeatletter
+\newenvironment{breakalgo}[2]{%
+	\captionsetup{margin=0pt,justification=RaggedRight,singlelinecheck=false}%
+	% \def\@fs@cfont{\bfseries}%
+	% \let\@fs@capt\relax%
+	\par\noindent%
+	\begin{AlgoBox}
+		\noindent\captionof{algorithm}{#1}\label{#2}%
+		\vspace{-0.7\baselineskip}%
+		\noindent\rule{\linewidth}{.4pt}\vspace{-0.3\baselineskip}%
+	}{\end{AlgoBox}}
+\newenvironment{breakalgon}{%
+	\captionsetup{margin=0pt,justification=RaggedRight,singlelinecheck=false}%
+	%\def\@fs@cfont{\bfseries}%
+	%\let\@fs@capt\relax%
+	\par\noindent%
+	\medskip%
+	\rule{\linewidth}{.8pt}%
+	\vspace{-0.5\baselineskip}%
+}{%
+	\vspace{-.75\baselineskip}%
+	\rule{\linewidth}{.4pt}%
+	\medskip%
+}
+\makeatother
+
+%===== 源代码格式
+\renewcommand{\lstlistlistingname}{源代码目录}
+\renewcommand{\lstlistingname}{MATLAB 源代码}
+\lstset{language=Matlab}
+\lstset{escapechar=`}
+\lstset{basicstyle=\ttfamily\small,showstringspaces=false,tabsize=2}
+\lstset{flexiblecolumns=true}
+\lstset{xleftmargin=1ex,xrightmargin=1ex}
+\lstset{frame=tblr,frameround=tttt}  %单线, 圆角框
+%%\lstset{frame=TBLR}  %双线方框
+%\lstset{frame=shadowbox,rulesepcolor=\color{blue}}
+\lstset{commentstyle=\color{red},keywordstyle=\color{blue},caption=\lstname,%
+	breaklines=true,backgroundcolor=\color{lightgray!20}}
+%\lstset{framexleftmargin=3em,framexrightmargin=1em,framextopmargin=0.3em,framexbottommargin=0.3em}
+%\lstdefinestyle{numbers}{numbers=left,stepnumber=1,numberstyle=\small,numbersep=1em}
+\lstset{numbers=left, numberstyle=\small, stepnumber=1, numbersep=1em}
+
+%\makeatletter
+%\lstnewenvironment{mcode}[1][]
+%  {\lstset{language=Matlab,basicstyle=\small\ttfamily,
+%    numbers=none,nolol,title=\textcolor{blue}{\textsf{MATLAB}},frameround=tttt,
+%    backgroundcolor=\color{lightgray!20},rulecolor=\color{blue!5!green},%
+%    xleftmargin=0.5em,xrightmargin=0.5em,#1}%
+%    \csname\@lst @SetFirstNumber\endcsname}
+%    {\csname\@lst @SaveFirstNumber\endcsname}
+%\makeatother
+%\newcommand{\emcode}{\addtocounter{lstlisting}{-1}}
+
+%===== 页眉和页脚
+\pagestyle{fancy}
+\fancyhf{}  %清除以前对页眉页脚的设置
+% 定义页眉与正文间双隔线
+%\newcommand{\makeheadrule}{%
+%    \makebox[0pt][l]{\rule[.7\baselineskip]{\headwidth}{0.5pt}}%
+%    \rule[0.85\baselineskip]{\headwidth}{0.8pt}\vskip-.8\baselineskip
+%    }
+%\makeatletter
+%\renewcommand{\headrule}{%
+%    {\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+%     \makeheadrule}}
+%\makeatother
+% 画单隔线
+%\renewcommand{\headrulewidth}{0.5pt} % 页眉下面的分隔线
+%\renewcommand{\footrulewidth}{0pt}   % 页脚上面的分隔线
+\renewcommand{\chaptermark}[1]{\markboth{\CTEXthechapter\ \ #1}{}} % 章标题
+\fancyhead[RE]{\leftmark}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ \ #1}{}} % 节标题
+\fancyhead[LO]{\rightmark}
+\fancyhead[RO,LE]{$\cdot$\ \thepage\ $\cdot$}
+
+%===== 习题解答
+\usepackage{answers}
+\Newassociation{sol}{Solution}{ans}
+\newenvironment{nproof}[1][证明]% 习题解答专用
+{\par\noindent\normalfont{\hei\color{blue} #1.} \color{blue}\kaishu\upshape}
+{\mbox{}\hfill\scalebox{1.2}{\ensuremath{\Box}}\medskip}
+
+%===== 自定义命令
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Cm}{\mathbb{C}^{m\times m}}
+\newcommand{\Cn}{\mathbb{C}^{n\times n}}
+\newcommand{\Cnm}{\mathbb{C}^{n\times m}}
+\newcommand{\Cmn}{\mathbb{C}^{m\times n}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rm}{\mathbb{R}^{m\times m}}
+\newcommand{\Rn}{\mathbb{R}^{n\times n}}
+\newcommand{\Rmn}{\mathbb{R}^{m\times n}}
+\newcommand{\Xbb}{\mathbb{X}}
+\newcommand{\Pbb}{\mathbb{P}}
+\newcommand{\Zbb}{\mathbb{Z}}
+\newcommand{\Vbb}{{\mathbb{V}}}
+\newcommand{\Wbb}{{\mathbb{W}}}
+\newcommand{\Lbb}{{\mathbb{L}}}
+%
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\O}{\mathcal{O}}
+%\newcommand{\DD}{\mathcal{D}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\PP}{\mathcal{P}} % 集合
+\newcommand{\QQ}{\mathcal{Q}} % 集合
+\renewcommand{\SS}{\mathcal{S}} % 集合, 子空间
+\newcommand{\WW}{\mathcal{W}} % 集合, 子空间
+\newcommand{\TT}{\mathcal{T}} % 集合
+\newcommand{\ZZ}{\mathcal{Z}} % 集合
+\newcommand{\ZZn}{\mathcal{Z}^{n\times n}} % Z-矩阵集合
+
+\newcommand{\II}{\mathrm{\bf I}} % 不变算子
+\newcommand{\EE}{\mathrm{\bf E}} % 位移算子
+%
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
+\newcommand{\ii}{\bm{\mathrm{i}\,}}
+\newcommand{\Ran}{\mathrm{Ran}}
+\newcommand{\Ker}{\mathrm{Ker}}
+\newcommand{\ddiv}{\mathrm{div}}
+\newcommand{\gap}{\mathrm{gap}}
+\newcommand{\vvec}{\mathrm{vec}}
+%\newcommand{\myvec}[1]{\mathrm{\textbf{#1}}}
+\newcommand{\rr}{\bm{\mathrm{r}}}  % Numerical Radius
+\newcommand{\Co}{\mathrm{Co}}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\Toep}{\bm{\textsf{T}}}
+\newcommand{\Hankel}{\bm{\textsf{H}}}
+\newcommand{\Circ}{\bm{\textsf{C}}}
+\newcommand{\LDLT}{\ensuremath{\mathrm{LDL}^\T}}
+\newcommand\opt{{\rm opt}}
+%
+\newcommand{\lam}{\lambda}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\xt}{{x_*}}
+\newcommand{\yt}{{y_*}}
+%\newcommand{\T}{\intercal}
+%\newcommand{\T}{{\raisebox{1pt}[0pt]{\scriptsize$\intercal$}}}
+\renewcommand{\d}{\mspace{4mu}\mathrm{d}}
+\newcommand{\p}{\partial}
+\newcommand{\grad}{\nabla}
+\newcommand{\adots}{\reflectbox{$\ddots$}}
+\newcommand{\ie}{\emph{i.e.}}
+%
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bbm}{\begin{bmatrix}}
+	\newcommand{\ebm}{\end{bmatrix}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\Cond}{\kappa}
+%
+\newcommand{\dis}{\displaystyle}
+\newcommand{\code}[1]{\textcolor{blue}{\ttfamily #1}}
+\newcommand{\function}[1]{\textcolor{blue}{\bfseries #1}}
+\newcommand{\ip}[1]{\ensuremath{( #1 )}}
+\newcommand{\mycite}[1]{{\upshape\cite{#1}}}
+\newcommand{\myind}[1]{{\hei\upshape\color{blue} #1 }\index{#1}}
+\newcommand{\myindd}[2]{{\hei\upshape\color{blue} #1}\index{#2}}
+\newcommand{\mydef}{\triangleq}
+\newcommand{\mycolon}{\!:\!}
+\newcommand{\mymid}{\,:\,}
+\newcommand{\myss}{\scriptstyle}
+\newcommand{\ssrm}[1]{{\scriptscriptstyle\mathrm{#1}}}
+\newcommand{\myem}[1]{{\hei\upshape\textcolor{blue}{#1}}}
+\newcommand{\myif}[2]{\textbf{if} #1 \textbf{then} #2}
+\newcommand{\rA}{r_{\scriptscriptstyle\! A}}
+\newcommand{\lev}{\textit{lev}}
+\newcommand{\bslx}{\hfill{\upshape\color{blue}(留作练习)}}
+%
+\DeclareMathOperator{\sspan}{span}
+\DeclareMathOperator{\ddim}{dim}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tridiag}{tridiag}
+\DeclareMathOperator{\mvec}{vec}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\fl}{fl}
+\DeclareMathOperator{\der}{D} % 导数算子
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\MATLAB}{MATLAB}
+%
+\DeclareMathAlphabet{\mathsfsl}{OT1}{cmss}{m}{n}
+\SetMathAlphabet{\mathsfsl}{bold}{OT1}{cmss}{bx}{n}
+\newcommand{\DD}{\mathsfsl{D}}
+%
+\newcommand{\tbc}{\textcolor{blue}{\it To be continued ... }\bigskip}
+%
+\renewcommand{\baselinestretch}{1.3}
+
+
+
+\begin{document}
+	
+	\frontmatter
+	\begin{titlepage}\Large
+		\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+		\pdfbookmark[0]{封面}{Cover}
+		\begin{center}
+			\vspace*{3cm}
+			{\hei\Huge 概率论与随机过程作业} \bigskip
+			
+			{\hei\LARGE 杨~~勇~~2019110294\footnote{{\large \url{Yang945841548@bupt.edu.cn}}}} \medskip
+			
+			\today
+			
+		\end{center}
+	\end{titlepage}
+	
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	\pdfbookmark[1]{目次}{Contents}
+	\tableofcontents
+	%\faketableofcontents  % for minitoc
+	%\clearpage{\pagestyle{empty}\cleardoublepage}
+	%\listoffigures
+	%\clearpage{\pagestyle{empty}\cleardoublepage}
+	%\listoftables
+	%\clearpage{\pagestyle{empty}\cleardoublepage}
+	%\listofalgorithms
+	%\clearpage{\pagestyle{empty}\cleardoublepage}
+	%\lstlistoflistings %显示所有源代码目录
+	
+	
+	\mainmatter
+	
+	\input{chapters/ch1.tex}
+	\input{chapters/ch2.tex}
+	\input{chapters/ch3.tex}
+	\input{chapters/ch4.tex}
+	\input{chapters/ch5.tex}
+	
+	
+	
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+	\backmatter
+	\phantomsection
+	
+	
+\end{document}

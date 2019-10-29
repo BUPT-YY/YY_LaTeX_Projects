@@ -1,0 +1,57 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[english]{babel}
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath, amsthm,bm}
+\usepackage{mathtools}
+\input{chapters/preamble}
+\title{Solution} %->->->->-> Check hyperref title <-<-<-<-<-
+\author[Yong YANG]{Yong YANG, 2019110294}
+\institute[BUPT]{
+	Beijing University of Posts and Telecommunications%
+} %You can change the Institution if you are from somewhere else
+\date{\today}
+%\logo{\includegraphics[width= 0.2\textwidth]{images/a-logo.png}}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+   \section{}
+\begin{frame}
+	设$A = \begin{bmatrix}
+		a & 1-a\\
+		b & 1-b
+	\end{bmatrix}$($0<a,b<1$), 求$\lim\limits_{n\to\infty}A^n$.
+	\begin{block}{解.}
+		容易计算出:
+		\begin{equation*}
+			A^n = \begin{bmatrix}
+				\frac{b-(a-1) (a-b)^n}{-a+b+1} & -\frac{(a-1) \left((a-b)^n-1\right)}{a-b-1} \\
+				\frac{b \left((a-b)^n-1\right)}{a-b-1} & \frac{b (a-b)^n-a+1}{-a+b+1} \\
+			\end{bmatrix}.
+		\end{equation*}
+		取极限, 得到:
+		\begin{equation*}
+			\lim\limits_{n\to\infty}A^n = \begin{bmatrix}
+			\frac{b}{-a+b+1} & \frac{a-1}{a-b-1} \\
+			-\frac{b}{a-b-1} & \frac{-a+1}{-a+b+1} \\
+			\end{bmatrix}.
+		\end{equation*}
+	\end{block}
+	
+	
+\end{frame}
+
+
+\section{}
+\begin{frame}{}
+\centering
+\Huge\bfseries
+\textcolor{orange}{谢~~谢}
+\end{frame}
+\end{document}

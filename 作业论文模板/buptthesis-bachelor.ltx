@@ -1,0 +1,216 @@
+%%
+%% This is file `buptthesis-bachelor.ltx',
+%% generated with the docstrip utility.
+%% The original source files were:
+%% buptthesis.dtx  (with options: `bachelor')
+%% This file has the LPPL maintenance status "maintained".
+\ProvidesFile{buptthesis-bachelor.ltx}
+  [2019/10/08 1.0.0rc Beijing University of Posts and Telecommunications Thesis Template]
+\ifbupt@degree@course
+  \bupt@def@label{degreetypeChi}{}
+  \bupt@def@label{degreetypeEng}{}
+\else
+  \bupt@def@label{degreetypeChi}{学士}
+  \bupt@def@label{degreetypeEng}{Bachelor}
+\fi
+\bupt@def@label{authorChi}{学生姓名}
+\bupt@def@label{studentidChi}{学生学号}
+\bupt@def@label{supervisorChi}{指导教师}
+\bupt@def@label{coursenameChi}{课程名称}
+\bupt@def@label{majorChi}{专业}
+\bupt@def@label{departmentChi}{学院(系)}
+\ifbupt@degree@course
+  \bupt@def@label{thesiscat}{课程论文}
+  \def\bupt@label@thesistype{\bupt@label@thesiscat}
+  \bupt@def@label{subjectChi}{\bupt@label@thesiscat}
+  \bupt@def@label{subjectEng}{Course Paper}
+\else
+  \bupt@def@label{thesiscat}{学位论文}
+  \def\bupt@label@thesistype{毕业设计（论文）}
+  \bupt@def@label{subjectChi}{\bupt@label@degreetypeChi\bupt@label@thesiscat}
+  \bupt@def@label{subjectEng}{Thesis of \bupt@label@degreetypeEng}
+\fi
+\bupt@def@label{bigabstract}{英文大摘要}
+\geometry{%
+  paper      = a4paper,
+  vmargin    = {84bp, 72bp},
+  hmargin    = 90bp,
+  headheight = 60bp,
+  headsep    = 12bp,
+}
+\ifbupt@language@english
+  \def\bupt@titlemark{\bupt@value@entitle}
+  \newcommand{\bupt@fancyhead}{%
+    \parbox[b]{0.75\textwidth}{%
+      \raggedleft\nouppercase{\footnotesize\heiti\bupt@titlemark}}}
+  \newcommand{\bupt@fancyfoot}[2]{%
+    \small --~~Page~~{\bfseries{#1}}~~of~~{\bfseries{#2}}~~--}
+\else
+  \def\bupt@titlemark{\bupt@value@title}
+  \newcommand{\bupt@fancyhead}{%
+    \parbox[b]{0.75\textwidth}{%
+      \raggedleft\nouppercase{\small\heiti\bupt@titlemark}}}
+  \newcommand{\bupt@fancyfoot}[2]{%
+    \small 第~{\bfseries{#1}}~页\,共~{\bfseries{#2}}~页}
+\fi
+\fancypagestyle{bupt@front}{%
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics{figure/bupt_logo.pdf}}
+  \fancyhead[R]{\bupt@fancyhead}
+  \fancyfoot[C]{\bupt@fancyfoot{\thepage}{\lastpageref{pagesLTS.Roman}}}
+}
+\fancypagestyle{bupt@plain}{%
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics{figure/bupt_logo.pdf}}
+  \fancyhead[R]{\bupt@fancyhead}
+  \fancyfoot[C]{\bupt@fancyfoot{\thepage}{\lastpageref{pagesLTS.arabic}}}
+}
+\fancypagestyle{bupt@biglast}{%
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics{figure/bupt_logo.pdf}}
+  \fancyhead[R]{\bupt@fancyhead}
+  \fancyfoot[C]{\bupt@fancyfoot{\theCurrentPageLocal}%
+                               {\lastpageref{pagesLTS.roman.local}}}
+}
+\renewcommand{\frontmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagenumbering{Roman}
+  \pagestyle{bupt@front}
+}
+\renewcommand{\mainmatter}{%
+  \cleardoublepage
+  \@mainmattertrue
+  \bupt@setfloatfonttrue
+  \pagenumbering{arabic}
+  \pagestyle{bupt@plain}
+}
+\renewcommand{\backmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+}
+\ctexset{%
+  subsection/format = \zihao{-4}\normalfont,
+}
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappagefont}{\normalfont}
+\NewDocumentEnvironment{abstract}{}{%
+  \cleardoublepage
+  \pdfbookmark[0]{\bupt@label@abstract}{abstract}
+  \chapter*{%
+    \bupt@value@title \vskip 2ex
+    \begingroup
+      \zihao{4}
+      \bupt@label@abstractChi
+    \endgroup
+  }
+  \@mkboth{\bupt@label@abstractChi}%
+          {\bupt@label@abstractChi}%
+}{%
+  \vskip 3ex \noindent
+  \begingroup
+    \zihao{-4}
+    \heiti\bupt@label@keywordsChi
+  \endgroup
+  \begingroup
+    \zihao{5}
+    \bupt@value@keywords
+  \endgroup
+}
+\NewDocumentEnvironment{enabstract}{}{%
+  \cleardoublepage
+  \chapter*{%
+    \MakeUppercase\bupt@value@entitle \vskip 2ex
+    \begingroup
+      \zihao{4}
+      \MakeUppercase\bupt@label@abstractEng
+    \endgroup
+  }
+  \@mkboth{\bupt@label@abstractEng}%
+          {\bupt@label@abstractEng}%
+}{%
+  \vskip 3ex \noindent
+  \begingroup
+    \zihao{-4}\bfseries
+    \bupt@label@keywordsEng
+  \endgroup
+  \begingroup
+    \zihao{5}
+    \bupt@value@enkeywords
+  \endgroup
+}
+\newcommand{\bupt@bigabstract}[1]{\long\gdef\bupt@bigabstract@body{#1}}
+\NewDocumentEnvironment{bigabstract}{}{%
+  \Collect@Body\bupt@bigabstract
+}{%
+  \ifbupt@degree@course\relax\else
+    \ifbupt@language@english\relax\else
+      \AtEndDocument{%
+        \cleardoublepage
+        \pagenumbering{roman}
+        \pagestyle{bupt@biglast}
+        \pdfbookmark[0]{\bupt@label@bigabstract}{bigabstract}%
+        \chapter*{\MakeUppercase\bupt@value@entitle}
+        \@mkboth{\bupt@label@bigabstract}%
+                {\bupt@label@bigabstract}%
+        \bupt@bigabstract@body
+      }
+    \fi
+  \fi
+}
+\RenewDocumentCommand\maketitle{}{%
+  \pdfbookmark[0]{\bupt@label@titlepage}{titlepage}
+  \bupt@makechinesetitle%
+}
+\newcommand{\bupt@makechinesetitle}{%
+  \cleardoublepage
+  \thispagestyle{empty}
+  \begin{center}
+    \kaishu
+    \vspace*{48bp}
+    \includegraphics{bupt_name.pdf}
+    \vskip 28bp
+    {\fontsize{32}{32}\bupt@label@subjectChi}
+    \vskip 16bp
+    {\zihao{-2}\MakeUppercase\bupt@label@subjectEng}
+    \vskip 16bp
+    \includegraphics{bupt_badge.pdf}
+    \vskip \stretch{2}
+    \begingroup
+      \zihao{2}
+      \begin{tabular}{r@{：}l}
+        论文题目 &
+        \begin{minipage}[t]{280pt}
+          \zihao{-2}
+          \begin{center}
+            \bupt@uline\bupt@value@title
+          \end{center}
+        \end{minipage}
+      \end{tabular}
+    \endgroup
+    \vskip \stretch{1}
+    \begingroup
+      \zihao{3}
+      \def\arraystretch{1.1}
+      \begin{tabular}
+        {>{\begin{CJKfilltwosides}{4\ccwd}}r<{\end{CJKfilltwosides}}@{：}c}
+        \bupt@label@authorChi        & \bupt@value@author      \\ \cline{2-2}
+        \bupt@label@studentidChi     & \makebox[180pt]{\bupt@value@studentid} \\
+          \cline{2-2}
+		\ifbupt@degree@course
+          \bupt@label@coursenameChi  & \bupt@value@coursename  \\ \cline{2-2}
+        \else
+          \bupt@label@majorChi       & \bupt@value@major       \\ \cline{2-2}
+        \fi
+        联系方式    & \url{Yang945841548@bupt.edu.cn}  \\ \cline{2-2}
+        \bupt@label@departmentChi    & \bupt@value@department  \\ \cline{2-2}
+      \end{tabular}
+    \endgroup
+    \vskip 40bp
+  \end{center}
+  \cleardoublepage
+}
+\endinput
+%%
+%% End of file `buptthesis-bachelor.ltx'.

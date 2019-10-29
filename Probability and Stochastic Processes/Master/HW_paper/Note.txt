@@ -1,0 +1,5 @@
+%%%%%%%% 这两个宏包冲突, 只可保留其中一个
+%\usepackage{amsfonts}
+\usepackage{mathrsfs}
+
+%希望的字体应该是下面的这个

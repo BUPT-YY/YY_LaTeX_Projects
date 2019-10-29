@@ -1,0 +1,1178 @@
+\part{测度论}
+
+
+\chapter{测度空间与概率空间}
+简言之, 测度论可以理解为在抽象空间上建立类似于实变函数中测度、积分和导数那样的分析系统. 建立近代测度与积分理论的途径大致有两条. 一条是从简单图形的测度(如矩体的体积)出发, 逐步把测度的定义域扩张称包含所有"可测集"的一个集合类. 然后在测度理论的基础上建立积分的理论. 这是Lebesgue和Carathéodory等人的方法. 另一条是把把积分看成一类常见函数构成的线性空间上的具有某种性质的"线性泛函", 然后逐步把线性泛函的定义域扩张成包含所有"可积函数"组成的线性空间. 这是F.Riesz, Daniell 和Kakutani等人的方法. 
+
+概率论的传统是使用第一条途径, 因为先引进概率后引进期望在直观上较易接受. 但是, 值得强调的是, 第二条途径其实更加简便, 并且对泛函分析的学习更方便一些. 对这有兴趣可以去读严加安先生的《测度论讲义》.
+
+
+\section{可测空间}
+\subsection{集合及其运算}
+集合是数学中最原始的概念.若要给它下定义,不得不引入新的概念来说明它.若要给这些新的概念下定义,又不得不引入另外的新的概念.这样就会导致无休止的讨论.因此,在直观的朴素集合论(naive set theory)中,集合被看成是无需下定义的基本概念.为了方便,我们愿意给集合概念一个直观的描述,但这不是给它下定义. 使用朴素集合论有时会导致悖论, 因而后来有了以ZF(Zermelo-Fraenkel set theory)为代表的公理化集合论. 如果对集合论有兴趣, 请见本书附录. 在此,应当相信我们所提到的构造集合的方法都不会导致悖论.集合论中涉及数学基础的那些深层问题,也不会自己跳出来颠覆人们所发展的概率论方法. 
+
+考虑一个任意非空集合$\Omega$, 称之为\myind{样本空间}. $\Omega$的子集以大写英文字母$A,B,C,\cdots$等记之, 称之为这个样本空间的\myind{集合}. 元素$x$属于(belong to)集合$A$, 记作$x\in A$; 反之, $x$不属于集合$A$, 则用记号$x\notin A$来表示. $\Omega$上定义的实函数
+\begin{equation}
+\bm{1}_{A}(x) = \begin{dcases}
+1, &x\in A,\\
+0, &x\notin A
+\end{dcases}
+\end{equation}
+称为$A$的\myind{示性函数}(indicator function). 集合\begin{equation}
+A^c \triangleq \{ x:x\notin A \}
+\end{equation}
+称为$A$的\myind{余}. 如果
+\begin{equation}
+x\in A\Rightarrow x\in B
+\end{equation}
+则说集合$A$\myind{包含于}(be included in)$B$, 或集合$B$\myind{包含}(include)集合$A$, 记为$A\subset B$或$B\subset A$. 如果$A\subset B$且$B\subset A$, 则称集合$A$等于集合$B$, 记为$A = B$.
+
+给定集合$A$和$B$, 集合
+\begin{align}
+A\cup B &\triangleq \{ x: x\in A\text{或} x\in B\},&AB &\triangleq \{ x: x\in A\text{且} x\in B\},\nonumber\\
+A\backslash B &\triangleq \{ x:x\in A\text{且}x\notin B \},&A\triangle B &\triangleq (A\backslash B)\cup(B\backslash A)
+\end{align}
+分别称为集合$A$与$B$的\myind{并、交、差、对称差}. 如果$B\subset A$, 则还说$A\backslash B$为$A$与$B$的\myind{真差}.
+
+集合的并与交的运算满足\myind{交换律}和\myind{结合律}, 还满足下面两个分配律\begin{align}
+(A\cup B)\cap C &= (A\cap C)\cup (B\cap C);~~(A\cap B)\cup C = (A\cup C)\cap (B\cup C).
+\end{align}
+如果两个集合$A$与$B$满足$AB = \varnothing$, 则称它们为\myind{不交的}.
+
+并和交的概念可以推广到任意多个集合的情形. 对一族集合$\{A_t,t\in T\}$ ($T$表示一个集合, 它的元素用$t$表示. $\{A_t,t\in T\}$意味着每一个$T$中的元素$t$, 都对应着$\Omega$中的一个集合$A_t$), 集合
+\begin{equation}
+\bigcup_{t\in T}A_t \triangleq \{ x:\exists t\in T,\text{使得} x\in A_t \}
+\end{equation}
+称为它们的\myind{并};集合
+\begin{equation}
+\bigcap_{t\in T}A_t \triangleq \{ x:\forall t\in T, x\in A_t \}
+\end{equation}
+称为它们的\myind{交}. 
+\begin{note}
+	注意: 当指标集$T = \varnothing$时, \begin{equation}
+		\bigcup_{t\in T}A_t = \varnothing,~~\bigcap_{t\in T}A_t = \Omega.
+	\end{equation}
+\end{note}
+
+如果对任何$s,t\in T$, 均有$A_sA_t = \varnothing$, 那么称这族集合$\{A_t,t\in T\}$是\myind{两两不交的}. 注意, 反映并和交运算之间关系的有下列的De-Morgan法则:
+\begin{equation}
+\left(\bigcup_{t\in T}A_t\right)^c = \bigcap_{t\in T}A_t^c;~~\left(\bigcap_{t\in T}A_t\right)^c = \bigcup_{t\in T}A_t^c.\label{eq:De-Morgan}
+\end{equation}
+设$\{A_n,n=1,2,\cdots\}$是一个集合序列. 如果对每个$n = 1,2,\cdots$, 有\begin{equation}
+A_n\subset A_{n+1},
+\end{equation}
+则称$\{A_n\}$是\myind{非降}的, 记为$A_n\uparrow$, 并把集合$\lim\limits_{n\to\infty}A_n\triangleq \bigcup\limits_{n = 1}^{\infty}A_n$叫做它的\myind{极限}; 如果对每个$n = 1,2,\cdots$, 有
+\begin{equation}
+A_n\supset A_{n+1},
+\end{equation}
+则称$\{A_n\}$是\myind{非增}的, 记为$A_n\downarrow$, 并称$\lim\limits_{n\to\infty}A_n\triangleq \bigcap\limits_{n = 1}^{\infty}A_n$为它的\myind{极限}. 非降或非增的集合序列统称为\myind{单调序列}. 因此, \myind{单调序列总有极限}. 对于任意给定的一个集合序列$\{A_n,n=1,2,\cdots\}$, 集合序列
+\begin{equation}
+\left\{ \bigcap_{k=n}^\infty A_k,n=1,2,\cdots\right\}\text{和}\left\{ \bigcup_{k=n}^\infty A_k,n=1,2,\cdots\right\}
+\end{equation}
+分别是非降的和非增的, 因而分别有极限
+\begin{equation}
+\liminf_{n\to\infty}A_n\triangleq \bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_k ~\text{和}~\limsup_{n\to\infty}A_n\triangleq \bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_k 
+\end{equation}
+我们把$\liminf\limits_{n\to\infty}A_n$和$\limsup\limits_{n\to\infty}A_n$分别叫做$\{A_n,n=1,2,\cdots\}$的\myind{下极限}和\myind{上极限}. 显然, 记号$\omega\in\limsup\limits_{n\to\infty}A_n$ 意味着元素$\omega$属于序列$\{A_n,n=1,2,\cdots\}$的无穷多个集合, 而记号$\omega\in\liminf\limits_{n\to\infty}A_n$ 则表明除去$\{A_n,n=1,2,\cdots\}$ 中的有限个集合外, 元素$\omega$属于该序列的其余集合. 于是我们有
+\begin{equation}
+\liminf_{n\to\infty}A_n\subset\limsup_{n\to\infty}A_n.
+\end{equation}
+如果$\liminf\limits_{n\to\infty}A_n = \limsup\limits_{n\to\infty}A_n$, 我们将认为$\{A_n,n=1,2,\cdots\}$的\myind{极限存在}, 并把
+\begin{equation}
+\lim_{n\to\infty}A_n \triangleq \liminf_{n\to\infty}A_n = \limsup_{n\to\infty}A_n
+\end{equation}
+称为它的\myind{极限}.
+
+\subsection{集类}
+以空间$\Omega$中的一些集合为元素组成的集合称为$\Omega$上的\myind{集合类}. 换句话说,集合类就是由集合组成的集合. 集合类一般用花体字母$\mathscr{A},\mathscr{B},\mathscr{C},\mathscr{D},\mathscr{E},\mathscr{F},\mathscr{G},\mathscr{H},\cdots$来表示. 为什么不仅要讨论集合, 还要讨论集合类呢? 道理和实分析中的情形一样: 为了研究一般集合的测度理论, 也就是为了建立测度, 需要先明确研究对象和研究范围. 即必须确定出一些\myind{可测集}, 而这些可测集的全体就组成了一个集合类. 
+在抽象空间中确定可测集时可能用到的集合类有$\pi$类、半环、半代数、环、代数、$\sigma$环、$\sigma$代数、单调类、$\lambda$类等.这些集合类中最重要的是$\sigma$代数,下面一一介绍这些集合类.
+
+\begin{definition}[$\pi$类]
+	如果$\Omega$上的非空集合类$\mathscr{P}$对交运算封闭,即\begin{equation}
+	A,B\in\mathscr{P} \implies AB\in\mathscr{P}.
+	\end{equation} 
+	则称$\mathscr{P}$为一个$\pi$类.
+\end{definition}
+\begin{example}
+	$\mathscr{P}_\mathbb{R} = \{(-\infty,a]:a\in\mathbb{R}  \}$对有限交的运算封闭,因而组成实数空间$\mathbb{R}$上的$\pi$类.	
+\end{example}
+\begin{definition}[半环]
+	满足下列条件的$\pi$ 类 $\mathscr{Q}$称为半环: 对任意的$A,B\in\mathscr{Q}$ 且$A\supset B$, 存在有限个两两不交的$\{C_k\in\mathscr{Q},k=1,\cdots,n\}$, 使得
+	\begin{equation}
+	A\backslash B = \bigcup_{k=1}^nC_k.
+	\end{equation}
+\end{definition}
+\begin{example}
+	容易看出, 由实数轴$\mathbb{R}$上的开区间全体组成的集合类、左开右闭区间全体组成的集合类、左闭右开区间全体组成的集合类和闭区间全体组成的集合类都是$\pi$类. 记由全体左开右闭区间全体组成的集合为\begin{equation}
+	\mathscr{Q}_{\mathbb{R}} \triangleq \{ (a,b]:a,b\in\mathbb{R} \},
+	\end{equation}
+	则对任何$(a,b],(c,d]\in\mathscr{Q}_{\mathbb{R}}$, 容易验证$(a,b]\backslash(c,d]$可表成$\mathscr{Q}_{\mathbb{R}}$中至多两个不交集合之并. 因此, 它是$\mathbb{R}$上的半环.
+\end{example}
+\begin{example}
+	如果$\Omega = \{ \omega_1,\omega_2,\cdots,\omega_n \}$是由有限个元素组成的集合, 则有$\Omega$上的所有单点集组成的集合类$\mathscr{P} = \{\varnothing,\{\omega_1\},\{\omega_2\},\cdots,\{\omega_n\}\}$是一个$\pi$类, 也是一个半环.
+\end{example}
+
+\begin{definition}[半(集)代数]
+	设$\Omega$是给定的一个非空集合, 它的一些子集组成的集类$\mathscr{S}$称为$\Omega$的一个半代数, 如果它满足
+	\begin{blist}
+		\item[(i)] $\Omega\in\mathscr{S}$;
+		\item[(ii)] (是$\pi$类) 若$A,B\in\mathscr{S}$, 则$AB\in\mathscr{S}$;
+		\item[(iii)] (真差可分割) 若$A,A_1\in\mathscr{S}$, 并且$A_1\subset A$, 则存在$A_j\in\mathscr{S}$, 使得$A_1,\cdots,A_n\in\mathscr{S}$互不相交, 且$A = \bigcup_{j=1}^nA_j$.
+	\end{blist}
+\end{definition}
+半集代数有较好的集合运算结构, 它构成了测度理论的基本研究对象和研究范围, 这个结构保证了交运算封闭性, 以及可分割性: 大的研究对象可以分割成小的研究对象之并. 由下面的引理可以得到半集代数的一个等价定义.
+
+\begin{lemma}
+	$\Omega$的集类$\mathscr{S}$为半集代数的充分必要条件是满足:
+	\begin{blist}
+		\item[(i)] $\Omega\in\mathscr{S}$;
+		\item[(ii)] (是$\pi$类) 若$A,B\in\mathscr{S}$, 则$AB\in\mathscr{S}$;
+		\item[(iii)'] 若$A\in\mathscr{S}$,  则存在$A_j\in\mathscr{S}$, 使得$A_1,\cdots,A_n\in\mathscr{S}$互不相交, 且$A^c = \bigcup_{j=1}^nA_j$.
+	\end{blist}
+\end{lemma}
+\begin{proof}
+	只需要在(i)和(ii)成立的前提下证明(iii)和(iii)'等价.
+	
+	假设(iii)成立, 往证(iii)'成立. 事实上, 当$A\in\mathscr{S}$, 注意到$A\subset\Omega\in\mathscr{S}$, 由(iii)知存在$A_j\in\mathscr{S}$, 使得
+	\begin{equation}
+	A = A_0,A_1,\cdots,A_n\in\mathscr{S}
+	\end{equation}
+	互不相交, 且$\Omega = \cup_{j=0}^nA_j$, 即$A^c=\cup_{j=1}^nA_j$.
+	
+	假设(iii)'成立, 往证(iii)成立. 若$\mathscr{S}$中集$A$和$A_1$满足条件$A_1\subset A$, 则由(iii)' 知存在$B_j\in\mathscr{S}$, 使得$B_2,B_3,\cdots,B_n$互不相交, 且$A_1^c = \cup_{j=2}^nB_j$, 因此
+	\begin{align}
+	A&= A\Omega = A(A_1\cup A_1^c)\nonumber\\
+	&= (AA_1)\cup\left( \bigcup_{j=2}^n(AB_j) \right) = \bigcup_{j=1}^nA_j,
+	\end{align}
+	其中$A_j = AB_j,~2\leqslant j\leqslant n$. 显然$A_1,A_2,\cdots,A_n\in\mathscr{S}$互不相交, 因此(iii)成立.
+\end{proof}
+
+\begin{example}
+	$\Omega = \mathbb{Z}_+ = \{0,1,2\cdots\}$, 试证明
+	\begin{equation}
+	\mathscr{S} = \{\mathbb{Z}_+\cap [a,b):a\in\mathbb{R}^{1},a\leqslant b\in\mathbb{R}^{1}\cup\{+\infty\}\}
+	\end{equation}
+	为半集代数.
+	\begin{proof}
+		显然, $\Omega,\varnothing\in\mathscr{S}$, 并且$\mathscr{S}$对于交运算封闭. 若
+		\begin{equation}
+		A_1 = \mathbb{Z}_+\cap [a_1,b_1) \subset A = \mathbb{Z}_+\cap [a,b)
+		\end{equation}
+		取\begin{equation}
+		A_1 = \mathbb{Z}_+\cap [a,a_1),~~ 
+		A_3 = \mathbb{Z}_+\cap [b_1,b)
+		\end{equation}
+		则$A_1,A_2,A_3$互不相交, 且$A = A_1\cup A_2\cup A_3$, 即$\mathscr{S}$为半集代数.
+	\end{proof}
+\end{example}
+
+\begin{example}
+	$\Omega = \mathbb{R}^{1}$, 试证明
+	\begin{equation}
+	\mathscr{S} = \left\{ (a,b]:a\in\mathbb{R}, a\leqslant b\in\mathbb{R}^{1}\cup \{+\infty\}  \right\}
+	\end{equation}
+	为半集代数.
+	\begin{proof}
+		Omitted.
+	\end{proof}
+\end{example}
+
+\begin{definition}[环]
+	非空集合类$\mathscr{R}$称为一个\myind{环},如果它对并和差的运算是\myind{封闭的},即\\
+	若$A,B\in\mathscr{R}$, 则$A\cup B,A\backslash B\in\mathscr{R}$,
+\end{definition}
+\begin{example}
+	不难验证\begin{equation}
+	\mathscr{R}_\mathbb{R} = \left\{ \bigcup_{k=1}^n(a_k,b_k]:a_k,b_k\in\mathbb{R},n\in\mathbb{N}^*  \right\}
+	\end{equation}
+	是$\mathbb{R}$上的环.
+\end{example}
+\begin{example}
+	由有限个元素组成的集合$\Omega$的一切子集组成的集合类$\mathscr{T}$形成一个环.
+\end{example}
+\begin{lemma}
+	非空集合类$\mathscr{R}$是一个环的充分必要条件是:
+	若$A,B\in\mathscr{R}$, 则$AB,A\triangle B\in\mathscr{R}$.
+\end{lemma}
+\begin{proof}
+	设$\mathscr{R}$是一个环, 则\begin{align}
+	A\triangle B &= (A\backslash B)\cup (B\backslash A)\in\mathscr{R},\nonumber\\
+	AB &= (A\cup B)\backslash(A\triangle B)\in\mathscr{R}.
+	\end{align}
+	另一方面, 设$\mathscr{R}$满足引理中的条件, 则\begin{align}
+	A\backslash B &= A(A\triangle B)\in\mathscr{R},\nonumber\\
+	A\cup B &= (AB)\triangle(A\triangle B)\in\mathscr{R}.
+	\end{align}
+	因此, $\mathscr{R}$是一个环当且仅当 $A,B\in\mathscr{R}\Rightarrow AB,A\triangle B\in\mathscr{R}$.
+\end{proof}
+
+\begin{theorem}
+	设$\mathscr{R}$是一个环, 并定义加法$A+B\triangleq A\triangle B$和乘法$A\cdot B \triangleq AB$,
+	则$(\mathscr{R},+,\cdot)$构成一个抽象代数学中的“环”.
+\end{theorem}
+\begin{proof}
+	须证:$(\mathscr{R},+)$构成一个Abel群, $\mathscr{R}$对乘法满足结合律, 对加法和乘法满足分配律.
+	
+	容易按照集合的运算规律逐一验证:
+	\begin{blist}
+		\item $(\mathscr{R},+)$满足结合律: $(A\triangle B)\triangle C = A\triangle (B\triangle C)$;
+		\item 存在幺元$\varnothing$,使$\forall A\in\mathscr{R}, A\triangle\varnothing = \varnothing\triangle A = A$;
+		\item 对每个$A\in\mathscr{R}$, 存在加法的逆元$B = A$, 使$A\triangle B = B\triangle A = \varnothing$;
+		\item $\mathscr{R}$对加法有交换律$A\triangle B = B\triangle A$;
+		\item $\mathscr{R}$对乘法满足结合律: $AB = BA$;
+		\item $\mathscr{R}$中的加法对乘法有分配律:\begin{equation}
+		A(B\triangle C) = (AB)\triangle (AC);~~(B\triangle C)A = (BA)\triangle (CA).
+		\end{equation}
+	\end{blist}
+\end{proof}
+
+我们需要更好的集合运算结构, 需要一个对于集合的交、并、差和补这些运算封闭的一个结构, 所以引入下面的集代数.
+
+\begin{definition}[(集)代数]\label{集代数}
+	 $\Omega$的非空子集类$\mathscr{A}$称为$\Omega$的一个集代数, 如果它满足
+	\begin{blist}
+		\item[(i)] $\Omega\in\mathscr{A}$;
+		\item[(ii)] (是$\pi$类) 若$A,B\in\mathscr{A}$, 则$AB\in\mathscr{A}$;
+		\item[(iii)] (对补运算封闭)若$A\in\mathscr{A}$, 则$A^c\in\mathscr{A}$.
+	\end{blist}
+\end{definition}
+
+下面给出几个集代数的等价定义
+\begin{lemma}
+	对于$\Omega$上的集类$\mathscr{A}$, 下列条件都是$\mathscr{A}$为集代数的充分必要条件:
+	\begin{blist}
+		\item[(\RNum{1})] 定义\ref{集代数}中的(i)和(iii)成立, 并且满足
+		(ii)' (对并运算封闭) 若$A,B\in\mathscr{A}$, 则$A\cup B\in\mathscr{A}$;
+		\item[(\RNum{2})] 定义\ref{集代数}中的(i)成立, 并且满足
+		(iv) (对差运算封闭)若$A,B\in\mathscr{A}$, 则$A\backslash B\in\mathscr{A}$.
+	\end{blist}
+\end{lemma}
+\begin{proof}
+	在定义\ref{集代数}中的(i)和(iii)成立的情况下, 由集合运算的对偶公式\begin{equation}
+	(AB)^c = A^c\cup B^c,~~(A\cup B)^c = A^c\cap B^c
+	\end{equation}
+	知定义\ref{集代数}中的(ii)与(ii)'等价. 因此(I)是集类$\mathscr{A}$为代数的充分必要条件.
+	
+	当定义\ref{集代数}中的(i)成立, 并且满足(iv)时, 有
+	\begin{align}
+	A^c &= \Omega\backslash A\in\mathscr{A},\forall A\in\mathscr{A},\nonumber\\
+	AB &= A\backslash B^c \in\mathscr{A},\forall A,B\in\mathscr{A}.
+	\end{align}
+	即$\mathscr{A}$为集代数; 反之, 当$\mathscr{A}$为集代数时, 定义\ref{集代数}中的(i)、(ii)和(iii)成立. 由(ii)和(iii)知
+	\begin{align}
+	A\backslash B = AB^c\in\mathscr{A},\forall A,B\in\mathscr{A}.
+	\end{align}
+	综上所述, (\RNum{1})和(\RNum{2})都是集类$\mathscr{A}$为集代数的充分必要条件.
+\end{proof}
+\begin{note}
+	有的文献中, 也把代数叫做\myind{域}.	
+\end{note}
+\begin{lemma}
+	半环必是$\pi$类, 半代数必是半环, 环必是半环, 代数必是环. 
+\end{lemma}
+\begin{proof}
+	根据定义, 半环必然满足$\pi$类的条件; 半代数也满足半环的条件.
+	
+	若$\mathscr{R}$是一个环, 则\begin{align}
+	A,B\in\mathscr{R}&\Rightarrow A\cup B,A\backslash B, B\backslash A\in\mathbb{R}\nonumber\\
+	&\Rightarrow A\triangle B = \left[ (A\backslash B)\cup (B\backslash A) \right]\in\mathbb{R}\nonumber\\
+	&\Rightarrow AB = (A\cup B)\backslash (A\triangle B)\in\mathscr{R},
+	\end{align}
+	由此可见, 环必是半环.
+	
+	又设$\mathscr{A}$是一个代数, 则\begin{align}
+	A,B\in\mathscr{R}&\Rightarrow  A\cup B = (A^c\cap B^c)^c\in\mathscr{A}\nonumber\\
+	A,B\in\mathscr{R}&\Rightarrow A\backslash B = AB^c\in\mathscr{A}
+	\end{align}
+	因而代数必是环.
+\end{proof}
+
+可以看到, 前面的几个集合运算结构都只是对于集合的有限次运算封闭, 但是不能保证它对于可数次集合运算封闭. 对于建立测度来说, 只有有限运算是不够的. 因此, 还必须引进一些在可列运算下的集合类.
+\begin{definition}[单调类]
+	集合类$\mathscr{M}$称为一个\myind{单调类}, 如果对$\mathscr{M}$中的任何单调序列$\{A_n,n=1,2,\cdots \}$, 均有$\lim\limits_{n\to\infty}A_n\in\mathscr{M}$.
+\end{definition}
+
+\begin{definition}[$\lambda$类]\label{lambda类}
+	集合类$\mathscr{L}$称为一个\myind{$\lambda$类}, 如果它满足下列条件:
+	\begin{blist}
+		\item[(i)] $\Omega\in\mathscr{L}$;
+		\item[(ii)](对真差封闭)当$A,B\in\mathscr{L}$且$A\subset B$时有$B\backslash A\in\mathscr{L}$;
+		\item[(iii)](对非降列极限封闭) 对于$\mathscr{L}$中的非降序列$\{A_n,n=1,2,\cdots\}$, 有$\bigcup\limits_{n=1}^{\infty}A_n\in\mathscr{L}$.
+	\end{blist}
+\end{definition}
+
+
+\begin{example}
+	对于$\Omega$上的集类$\mathscr{L}$, 以下条件是$\mathscr{L}$为$\lambda$类的充分必要条件:
+	定义\ref{lambda类}中的$(iii)$成立, 并且满足:
+	\begin{blist}
+		\item[(i)']若$A\in\mathscr{L}$, 则$A^c\in\mathscr{L}$;
+		\item[(ii)']若$A,B\in\mathscr{L}$, 且$AB = \varnothing$, 则$A\cup B\in\mathscr{L}$.
+	\end{blist}
+\end{example}
+
+\begin{definition}[$\sigma$环]
+	称非空集合类$\mathscr{R}$是一个$\sigma$环, 如果
+	\begin{align}
+	&A,B\in\mathscr{R}\Rightarrow A\backslash B\in\mathscr{R};\nonumber\\
+	&A_n\in\mathscr{R},n\in\mathbb{N}^*\Rightarrow \bigcup_{n=1}^{\infty}A_n\in\mathscr{R}.
+	\end{align}
+\end{definition}
+易见:\myind{一个对可列并运算封闭的环是$\sigma$环}.
+
+\begin{definition}[$\sigma$代数]
+	满足下列三个条件的集合类$\mathscr{F}$称为\myind{$\sigma$代数}：
+	\begin{blist}
+		\item[(i)] $\Omega\in\mathscr{F}$;
+		\item[(ii)](对补运算封闭) 若$A\in\mathscr{F}$, 则$A^c\in\mathscr{F}$;
+		\item[(iii)](对可列并运算封闭) 若$A_m\in\mathscr{F},n\in\mathscr{N}^*$, 则$\bigcup\limits_{n=1}^{\infty}A_n\in\mathscr{F}$.
+	\end{blist}
+\end{definition}
+易见:\myind{一个包括$\Omega$的$\sigma$环是$\sigma$代数}.
+
+有的文献中, 也把$\sigma$代数称作\myind{$\sigma$域}. 有两个很特殊的$\sigma$代数, 它们分别是$\Omega$上含集合最少的$\sigma$代数$\{\varnothing,\Omega \}$和$\Omega$上含集合最多的$\sigma$代数$\mathscr{T}\triangleq \{A:A\subset\Omega\}$. 因此, 例1.7中的环也是$\sigma$代数. 但是, 沿例1.1,例1.2,例1.6的那条线出来的$\sigma$代数会比较复杂, 要在下一节才能说清楚.
+
+\begin{lemma}
+	$\mathscr{F}$是一个$\sigma$代数的充分必要条件是它满足定义中的(i)、(ii)和如下条件(iii)'若$A_n\in\mathscr{F},n\in\mathbb{N}^*$,则 $ \bigcap\limits_{n=1}^{\infty}A_n\in\mathscr{F}.$
+\end{lemma}
+\begin{proof}
+	可由集合运算的De-Morgan法则(公式\ref{eq:De-Morgan})得到.
+\end{proof}
+
+这一事实又可进一步推出$A,B\in\mathscr{F}\Rightarrow AB = A\cap B\cap B\cap\cdots\in\mathscr{F}.$
+因此, \myind{$\sigma$代数}是\myind{代数}.
+
+$\sigma$代数的集合运算结构合理, 对于集合的可列次运算封闭, 能够满足具有可列可加性的测度的建立. 下面, 我们来讨论单调类、$\lambda$类和$\sigma$代数三者之间的关系.
+
+\begin{lemma}
+	$\lambda$类是单调类; $\sigma$代数是$\lambda$类.
+\end{lemma}
+\begin{proof}
+	设$\mathscr{L}$是$\lambda$类, 如果对每个$n\in\mathbb{N}^*$, 有$A_n\in\mathscr{L}$ 而且 $A_n\downarrow$, 则由$\lambda$类的定义知
+	\begin{equation}
+	\bigcap_{n=1}^{\infty}A_n = \left( \bigcup_{n=1}^{\infty}A_n^c \right)^c\in\mathscr{L}.	
+	\end{equation}
+	这一事实加上$\lambda$类定义的第三条便说明了$\lambda$类是单调类.
+	
+	设$\mathscr{F}$是一个$\sigma$代数, 则$\mathscr{F}$显然满足$\lambda$类定义的第一条和第三条. 由于$\sigma$代数是代数, 所以它也就满足$\lambda$类定义的第二条, 因此, $\sigma$代数是$\lambda$类.
+\end{proof}
+
+至于什么时候其它的集合类能够称为$\sigma$代数, 有如下两个定理.
+\begin{theorem}[(集合形式的)单调类定理]
+	一个既是单调类又是代数的集合类必是$\sigma$代数.
+\end{theorem}
+\begin{proof}
+	把这个集合类记为$\mathscr{F}$. 由于$\mathscr{F}$是集代数, 故它对有限并是封闭的. 由因为$\mathscr{F}$是单调类, 所以它对非降序列的极限也是封闭的. 因此, \begin{align}
+	&A_n\in\mathscr{F},n\in\mathbb{N}^*\Rightarrow  \bigcup_{k=1}^nA_k\in\mathscr{F},n\in\mathbb{N}^*\nonumber\\
+	\Rightarrow &\bigcup_{n=1}^{\infty}A_n = \bigcup_{n=1}^{\infty}\bigcup_{k=1}^nA_k = \lim_{n\to\infty}\bigcup_{k=1}^nA_k\in\mathscr{F},
+	\end{align}
+	可见, $\mathscr{F}$确是$\sigma$代数.
+\end{proof}
+
+\begin{theorem}[Dynkin's $\pi-\lambda$定理]
+	一个既是$\lambda$类又是$\pi$类的集合类必是$\sigma$代数.
+\end{theorem}
+\begin{proof}
+	记此集合类为$\mathscr{F}$. 由于$\mathscr{F}$是$\lambda$类, 从$\lambda$类定义的前两条得到
+	\begin{align}
+	&\Omega\in\mathscr{F};\nonumber\\
+	&A\in\mathscr{F}\Rightarrow A^c = \Omega\backslash A\in\mathscr{F}.
+	\end{align}
+	此结论加上$\mathscr{F}$由是$\pi$类, 便知$\mathscr{F}$是集代数. 又由于$\mathscr{F}$是$\lambda$类, 所以$\mathscr{F}$还是个单调类. 所以$\mathscr{F}$既是集代数又是单调类, 所以$\mathscr{F}$确是$\sigma$代数.
+\end{proof}\\
+\textbf{小结}:以上讨论得到的结论可以总结成这几个集合类之间从严紧到宽松的顺序:
+
+\begin{center}
+	\begin{tabular}{ccccc}
+		$\sigma$代数 & $\Longleftrightarrow$ & $\pi$类 & $+$ & $\lambda$类 \\
+		~  & $\Longleftrightarrow$ & 代数 & $+$ & 单调类
+	\end{tabular};
+	\\ \hspace*{\fill} \\%空行
+	\begin{tabular}{ccccccc}
+		$\sigma$代数 & $\Longrightarrow$ & 代数 & $\Longrightarrow$ & 半代数 & ~ & ~ \\
+		$\Downarrow$ & ~ & $\Downarrow$ & ~ & $\Downarrow$ & ~ & ~ \\
+		$\sigma$环 & $\Longrightarrow$ & 环 & $\Longrightarrow$ & 半环 & $\Longrightarrow$ & $\pi$类
+	\end{tabular};
+	\begin{tabular}{ccccc}
+		$\sigma$代数 & $\Rightarrow$ & $\lambda$类 & $\Rightarrow$ & 单调类.
+	\end{tabular}
+\end{center}
+
+这些集合类的核心是$\sigma$代数, 它的成员即将成为我们常说的可测集. 换句话说, 我们最终是要在$\sigma$代数上建立测度. 今后, 非空集合$\Omega$和它上面的一个$\sigma$代数$\mathscr{F}$放在一切写成的$(\Omega,\mathscr{F})$将称为\myind{可测空间}.
+
+\subsection{集类的生成}
+考虑更深入的问题: 如何由简单的集合类生产更复杂的集合类? 首先, 要明确一下生产这个概念.
+\begin{definition}[集类的生成]
+	称$\mathscr{S}$为由集合类$\mathscr{E}$\myind{生成}的环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数), 如果下列条件被满足:
+	\begin{blist}
+		\item[(i)] $\mathscr{S}\supset \mathscr{E}$;
+		\item[(ii)] 对任意一个环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数)$\mathscr{S}'$均有: 若$\mathscr{S}'\supset \mathscr{E}$, 则$\mathscr{S}'\supset \mathscr{S}$.
+	\end{blist}
+\end{definition}
+
+换言之, 由集合类$\mathscr{E}$\myind{生成}的环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数), 也就是\myind{包含}$\mathscr{E}$\myind{的最小的}环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数). 下列命题是展开这个讨论的理论依据.
+\begin{lemma}
+	由任意集合类$\mathscr{E}$生产的环、集代数、单调类、$\lambda$类和$\sigma$代数均存在.
+\end{lemma}
+\begin{proof}
+	以$\mathscr{T}$记由$\Omega$的所有子集合所组成的集合类. 前已说明, $\mathscr{T}$为一个$\sigma$代数. 因此, $\mathscr{T}$是一个环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数). 把包含集合类$\mathscr{E}$的环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数)的全体记为$\bm{A}$, 则$\mathscr{T}\in\bm{A}$. 因而$\bm{A}$非空.
+	
+	不难验证:$\mathscr{S}\triangleq \bigcap\limits_{\mathscr{A}\in\bm{A}}\mathscr{A}$还是一个环(或集代数, 或单调类, 或$\lambda$类, 或$\sigma$代数), 并且满足定义1.10中的条件.
+\end{proof}
+
+把由集合类$\mathscr{E}$生成的环、集代数、单调类、$\lambda$类和$\sigma$代数分别记作$r(\mathscr{E})$,$a(\mathscr{E})$, $m(\mathscr{E})$, $\lambda(\mathscr{E})$和$\sigma(\mathscr{E})$.
+\begin{note}
+	有的文献中, 也把这些符号记成作$\mathscr{R}(\mathscr{E})$,$\mathscr{A}(\mathscr{E})$, $\mathscr{M}(\mathscr{E})$, $\mathscr{L}(\mathscr{E})~\text{or} ~\Lambda(\mathscr{E})~\text{or} ~l(\mathscr{E})$和$\sigma(\mathscr{E})$. 
+	这些都只是记号,各种形式都有人用,无特殊意义. 阅读时, 应从上下文通晓其意.
+\end{note}
+
+\begin{theorem}\label{thm:半代数生成代数}
+	设$\mathscr{S}$是一个半环, 则
+	\begin{equation}\label{eq:半环生成环}
+	r(\mathscr{S}) = \left\{ \bigcup_{j=1}^nA_j: A_1,A_2,\cdots,A_n\text{为}\mathscr{S}\text{互不相交集合}, n\in\mathbb{N}^*  \right\}.
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	记式\ref{eq:半环生成环}右端的集合类为$\mathscr{R}$. 由于环对于有限并的运算是封闭的, 故$r(\mathscr{S})\supset \mathscr{R}$. 因此, 要完成定理的证明, 必须且只需证 $r(\mathscr{S})\subset \mathscr{R}$. 为此, 又只需证明$\mathscr{R}$为一个环. 若$A,B\in\mathscr{R}$, 则存在互不相交的$\{A_i\in\mathscr{S},i=1,\cdots,n  \}$和互不相交的$\{B_j\in\mathscr{S},j=1,\cdots,m \}$使得
+	\begin{equation}
+		A = \bigcup_{i=1}^{n}A_i~~\text{和}\bigcup_{j=1}^{m}B_j.
+	\end{equation}
+	注意到对每对$(i,j)$, 存在$k_{i,j}$个互不相交的集合$\{C_l^{i,j}\in\mathscr{S},l=1,\cdots,k_{i,j}\}$, 使得
+	\begin{equation}
+		A_i\backslash B_j = A_i\backslash(A_iB_j) = \bigcup_{l=1}^{k_{i,j}}C_l^{i,j},
+	\end{equation}
+	由此, 可把$A\backslash B$表示成$\mathscr{S}$中有限个互不相交的集合的并:
+	\begin{align}
+		A\backslash B &= \bigcup_{i=1}^n\bigcap_{j=1}^m [A_i\backslash B_j]\nonumber\\
+		&= \bigcup_{i=1}^n\bigcap_{j=1}^m \bigcup_{l=1}^{k_{i,j}}C_l^{i,j}\nonumber\\
+		&= \bigcup_{i=1}^n\bigcup_{
+			\begin{subarray}{c}
+			l_1 = 1,\cdots,k_{i,1}\\
+			\cdots\\
+			l_m = 1,\cdots,k_{i,m}
+			\end{subarray}
+		}(C_{l_1}^{i,1}\cap\cdots\cap C_{l_m}^{i,m})
+	\end{align}
+	这表明$\mathscr{R}$对于差运是封闭的. 在此基础上, 又可以把$A\cup B$按下列方式表示成$\mathscr{S}$中有限个互不相交的集合的并:
+	\begin{align}
+		A\cup B &= B\cup (A\backslash B)\nonumber\\
+		&= \left(\bigcup_{j=1}^m B_j\right)\cup (A\backslash B)\nonumber\\
+		&=\left(\bigcup_{j=1}^m B_j\right)\cup\left[ \bigcup_{i=1}^n\bigcup_{
+			\begin{subarray}{c}
+			l_1 = 1,\cdots,k_{i,1}\\
+			\cdots\\
+			l_m = 1,\cdots,k_{i,m}
+			\end{subarray}
+		}(C_{l_1}^{i,1}\cap\cdots\cap C_{l_m}^{i,m}) \right]
+	\end{align}
+	可见, $\mathscr{R}$对有限并也是封闭的. 这个亚子, 我们就证明了$\mathscr{R}$确实是一个环.
+\end{proof}
+
+\begin{theorem}\label{thm:半代数生成代数1}
+	设$\mathscr{S}$是一个半集代数, 则\begin{equation}\label{eq:半代数生成代数1}
+	a(\mathscr{S}) = \left\{ \bigcup_{j=1}^nA_j: A_1,A_2,\cdots,A_n\text{为}\mathscr{S}\text{上的互不相交集合}, n\in\mathbb{N}^*  \right\}.
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	记式\ref{eq:半代数生成代数1}右端为$\mathscr{A}$. 
+	由于代数对于有限并的运算是封闭的, 故$a(\mathscr{S})\supset \mathscr{A}$. 因此, 要完成定理的证明, 必须且只需证 $a(\mathscr{S})\subset \mathscr{A}$. 为此, 又只需证明$\mathscr{A}$为集代数. 显然,$\Omega\in\mathscr{S}\subset\mathscr{A}$. 若$A,B\in\mathscr{R}$, 则存在互不相交的$\{A_i\in\mathscr{S},i=1,\cdots,n  \}$和互不相交的$\{B_j\in\mathscr{S},j=1,\cdots,m \}$使得
+	\begin{equation}
+	A = \bigcup_{i=1}^{n}A_i~~\text{和}\bigcup_{j=1}^{m}B_j.
+	\end{equation}
+	从而, \begin{equation}
+		AB = \bigcup_{i=1}^n\bigcup_{j=1}^m[A_iB_j]
+	\end{equation}
+	注意到互不相交集构成的集类
+	\begin{equation}
+		\{A_iB_j:1\leqslant i\leqslant n,1\leqslant j\leqslant m\}\subset \mathscr{S}
+	\end{equation}
+	可得$AB\in\mathscr{A}$. 进一步, 由De-Morgan律(式\ref{eq:De-Morgan})得
+	\begin{equation}
+		A^c = \bigcap_{i=1}^nA_i^c
+	\end{equation}
+	而由$\mathscr{S}$为半代数知道$A_i^c\in\mathscr{S}$. 因此, $A^c\in\mathscr{S}\subset\mathscr{A}$. 综上所述, $\mathscr{A}$为集代数.
+\end{proof}
+
+\begin{theorem}
+	设$\mathscr{S}$是一个半集代数, 则\begin{equation}
+	a(\mathscr{S}) = \left\{ \bigcup_{j=1}^nA_j: A_1,A_2,\cdots,A_n\in\mathscr{S}, n\in\mathbb{N}^*  \right\}.
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	根据定理\ref{thm:半代数生成代数1}知道
+	\begin{equation}
+		a(\mathscr{S}) \subset \left\{ \bigcup_{j=1}^nA_j: A_1,A_2,\cdots,A_n\in\mathscr{S},
+		n\in\mathbb{N}^*  \right\}.
+	\end{equation}
+	另一方面, 对于任何\begin{equation}
+		A\in\left\{ \bigcup_{j=1}^nA_j: A_1,A_2,\cdots,A_n\in\mathscr{S},
+		n\in\mathbb{N}^*  \right\},
+	\end{equation}
+	存在$A_1,\cdots,A_n\in\mathscr{S}$, 使得$A = \cup_{i=1}^nA_i$. 注意到$\mathscr{S}\subset a(\mathscr{S})$, 且$a(\mathscr{S})$为代数, 可得
+	$A\in a(\mathscr{S})$, 即
+	\begin{equation}
+		\left\{ \bigcup_{j=1}^nA_j: A_1,A_2,\cdots,A_n\in\mathscr{S},
+		n\in\mathbb{N}^*  \right\} \subset a(\mathscr{S}),
+	\end{equation}
+	所以命题中的等式成立.
+\end{proof}
+
+
+\begin{theorem}
+	如果$\mathscr{A}$是一个集代数, 则$\sigma(\mathscr{A})=m(\mathscr{A})$.
+\end{theorem}
+\begin{proof}
+	由于$\sigma(\mathscr{A})$是一个$\sigma$代数,
+	从而也就是一个单调类. 由于$m(\mathscr{A})$是包含$\mathscr{A}$的最小单调类. 所以有
+	\begin{equation}
+	\sigma(\mathscr{A})\supset m(\mathscr{A}).
+	\end{equation}
+	往证$\sigma(\mathscr{A})\subset m(\mathscr{A})$. 则必须且只需证明$m(\mathscr{A})$为一个$\sigma$代数. 注意到$m(\mathscr{A})$是一个单调系, 所以又只需证明$m(\mathscr{A})$是一个集代数.
+	
+	\begin{blist}
+		\item[(i)] 由于$\mathscr{A}$是集代数, 所以$\Omega\in\mathscr{A}\subset m(\mathscr{A})$;
+		\item[(ii)] 对任意$A\in\mathscr{A}$, 令$\mathscr{G}_{A} = \{ B\in m(\mathscr{A}): A\backslash B\in m(\mathscr{A}) \}$. 则$\mathscr{A}\subset \mathscr{G}_{A}$.
+		
+		下证$\mathscr{G}_{A}$是个单调类. 设单调列$\{B_n,n\in\mathbb{N}^*\}\subset \mathscr{G}_A$. 则$B_n,A\backslash B_n\in m(\mathscr{A})$.
+		
+		由于$B_n$单调, 所以$A\backslash B_n$也单调. 由于$m(\mathscr{A})$是单调类, 所以
+		\begin{equation}
+		\lim_{n\to\infty}B_n,A\backslash\left(\lim_{n\to\infty}B_n\right) = \lim_{n\to\infty}(A\backslash B_n) \in m(\mathscr{A}).
+		\end{equation}
+		这说明$\lim\limits_{n\to\infty}B_n\in\mathscr{G}_A$. 因此,$\mathscr{G}_{A}$是个单调类. 这进一步说明了$m(\mathscr{A})\subset \mathscr{G}_A$.\\
+		即: 若$A\in\mathscr{A},B\in m(\mathscr{A})$, 则$A\backslash B\in m(\mathscr{A})$.
+		
+		再对任意$B\in m(\mathscr{A})$, 令$\mathscr{H}_{B} = \{ A\in m(\mathscr{A}):A\backslash B\in m(\mathscr{A}) \}$.
+		
+		由前面的讨论知道$\mathscr{A}\subset \mathscr{H}_B$. 下面继续证明$\mathscr{H}_B$也是一个单调类.
+		
+		任选单调列$\{A_n,n\in\mathbb{N}^*\}\subset \mathscr{H}_B$. 则$A_n,A_n\backslash B\in m(\mathscr{A})$. 从而根据$m(\mathscr{A})$为单调类知道
+		\begin{equation}
+		\lim_{n\to\infty}A_n,\left(\lim_{n\to\infty}A_n\right)\backslash B = \lim_{n\to\infty}(A_n\backslash B)\in m(\mathscr{A}).
+		\end{equation}
+		这说明$\lim\limits_{n\to\infty}A_n\in \mathscr{H}_B$. 即$\mathscr{H}_B$也是单调类.
+		
+		所以有, $m(\mathscr{A})\subset \mathscr{H}_B$. 
+		\begin{equation}
+		\forall A,B\in m(\mathscr{A}), \text{总有}~A\backslash B\in m(\mathscr{A}).
+		\end{equation}
+	\end{blist}
+	根据(i)和(ii)说明, $m(\mathscr{A})$也是一个集代数. 证毕.
+\end{proof}
+
+\begin{corollary}
+	如果$\mathscr{A}$是集代数, $\mathscr{M}$是单调类, 则\begin{equation}
+	\mathscr{A}\subset \mathscr{M}\Rightarrow \sigma(\mathscr{A})\subset\mathscr{M}.
+	\end{equation}
+\end{corollary}
+
+\begin{theorem}
+	如果$\mathscr{P}$是一个$\pi$类, 则$\sigma(\mathscr{P}) = \lambda(\mathscr{P})$.
+\end{theorem}
+\begin{proof}
+	由于$\sigma$代数是$\lambda$类. 所以总有$\sigma(\mathscr{P})\supset\lambda(\mathscr{P})$.
+	
+	往证$\sigma(\mathscr{P})\subset\lambda(\mathscr{P})$, 则只需证$\lambda(\mathscr{P})$是一个$\sigma$代数. 由于它本身是一个$\lambda$类, 所以又只需证明它是一个$\pi$类.
+	
+	对任意$A\in\mathscr{P}$, 令$\mathscr{G}_A = \{B\in\lambda(\mathscr{P}):AB\in\lambda(\mathscr{P})\}$. 不难验证:$\mathscr{P}\subset\mathscr{G}_A $并且 $\mathscr{G}_A$是一个$\lambda$类.
+	因此, $\lambda(\mathscr{P})\subset \mathscr{G}_A$. 这说明$\forall A\in\mathscr{P},B\in\lambda(\mathscr{P})$, 有$AB\in\lambda(\mathscr{P})$.
+	
+	对任意$B\in\lambda(\mathscr{P})$, 令$\mathscr{H}_B = \{A\in\lambda(\mathscr{P}), AB\in\lambda(\mathscr{P})\}$. 根据前面的论证知道$\mathscr{P}\subset \mathscr{H}_B$. 又不难验证$\mathscr{H}_B$是一个$\lambda$类, 所以有$\lambda(\mathscr{P})\subset\mathscr{H}_B$.
+	
+	这说明$\forall A,B\in\lambda(\mathscr{P}), AB\in\lambda(\mathscr{P})$. 即$\lambda(\mathscr{P})$是一个$\pi$类. 证毕.
+\end{proof}
+
+\begin{corollary}
+	如果$\mathscr{P}$是$\pi$类, $\mathscr{L}$是$\lambda$类, 则\begin{equation}
+	\mathscr{P}\subset \mathscr{L}\Rightarrow \sigma(\mathscr{P})\subset\mathscr{L}.
+	\end{equation}
+\end{corollary}
+
+\begin{example}
+	对例1.4中的$\mathscr{S}$, $\sigma(\mathscr{S})$是$\mathbb{Z}_{+}$的所有子集全体. 对于例子1.1中的$\mathscr{P}_{\mathbb{R}}$, 称$\sigma(\mathscr{P}_{\mathbb{R}})$是一维Borel $\sigma$代数 记$\mathscr{O}_{\mathbb{R}}$是由$\mathbb{R}$中的开集组成的集合类, 则容易证明$\mathscr{B}_{\mathbb{R}} = \sigma(\mathscr{O}_\mathbb{R})$. 由此出发, 可将Borel $\sigma$代数的概念一般化: 对于拓扑空间(topological space)$(X,\tau)$. 其中$\tau$是其所有开集构成的集合类. 我们将把\begin{equation}
+	\mathscr{B} \triangleq \sigma(\tau)
+	\end{equation}
+	称为拓扑空间$X$上的Borel $\sigma$代数, 其中的集合称为$X$中的Borel集, 而$(X,\mathscr{B})$就是所谓的拓扑可测空间.
+\end{example}
+
+在测度论中, 为了讨论可测函数. 一般还会引入\myind{广义实数集}$\overline{\mathbb{R}}\triangleq \mathbb{R}\cup\{+\infty,-\infty\}$. 今后,$\overline{\mathbb{R}}$中的元素将称为\myind{广义实数}. 关于$\overline{\mathbb{R}}$中元素的顺序, 除了实数按原有顺序外, 还规定
+\begin{equation}
+	-\infty<a<+\infty,~~\forall a\in\mathbb{R}.
+\end{equation}
+根据这种顺序, 又可定出$\overline{\mathbb{R}}$中的区间: 对任何$a,b\in\overline{\mathbb{R}}$, 令
+\begin{align}
+	(a,b) &= \{x\in\overline{\mathbb{R}}:a<x<b\};\nonumber\\
+	[a,b) &= \{x\in\overline{\mathbb{R}}:a\leqslant x<b\};\nonumber\\
+	(a,b] &= \{x\in\overline{\mathbb{R}}:a<x\leqslant b\};\nonumber\\
+	[a,b] &= \{x\in\overline{\mathbb{R}}:a\leqslant x\leqslant b\};
+\end{align}
+关于$\overline{\mathbb{R}}$中的运算, 规定
+\begin{align}
+	(\pm\infty)+a &= a+(\pm\infty) = a-(\mp\infty)\nonumber\\
+	&= \pm\infty,~~\forall a\in\mathbb{R};
+\end{align}
+\begin{equation}
+	(\pm\infty) + (\pm\infty) = (\pm\infty) - (\mp\infty) = \pm\infty;
+\end{equation}
+\begin{align}
+(\pm\infty)\cdot a &= a\cdot(\pm\infty) \nonumber\\
+&= \begin{dcases}
+	\pm\infty,&0<a\leqslant +\infty,\\
+	0,&a=0,\\
+	\mp\infty,&-\infty\leqslant a<0.
+\end{dcases}
+\end{align}
+注意: 诸如$(\pm\infty)-(\pm\infty)$, $(\pm\infty)/(\pm\infty)$, $\cdots$等是没有定义的. 对$a\in\overline{\mathbb{R}}$,记
+\begin{equation}
+	a^+ = \max(a,0)~~\text{和}~~a^- = \max(-a,0),
+\end{equation}
+分别把它们叫做$a$的\myind{正部}和\myind{负部}. 易见, $a = a^+ - a^-$. 另外, 还记
+\begin{equation}
+	\mathscr{B}_{\overline{\mathbb{R}}} = \sigma(\mathscr{B}_{\mathbb{R}},\{-\infty,+\infty\}).
+\end{equation}
+
+\begin{theorem}
+	下列等式成立:
+	\begin{align}
+		\mathscr{B}_{\overline{\mathbb{R}}} &= \sigma(\{ [-\infty,a]:a\in\mathbb{R} \})\nonumber\\
+		&= \sigma(\{ [-\infty,a):a\in\mathbb{R} \})\nonumber\\
+		&= \sigma(\{ [a,\infty]:a\in\mathbb{R} \})\nonumber\\
+		&= \sigma(\{ (a,\infty]:a\in\mathbb{R} \})
+	\end{align}
+\end{theorem}
+\begin{proof}
+	对任何$a\in\mathbb{R}$, 我们有\begin{equation}
+		[-\infty,a) = \{-\infty\}\cup (-\infty,a)\in\mathscr{B}_{\overline{\mathbb{R}}}
+	\end{equation}
+	故$\sigma(\{ [-\infty,a):a\in\mathbb{R} \})\subset\mathscr{B}_{\overline{\mathbb{R}}}$; 又由\begin{align}
+		\{-\infty\} &= \bigcap_{n=1}^{\infty}[-\infty,-n) \in\sigma(\{ [-\infty,a):a\in\mathbb{R} \}),\nonumber\\
+		\{\infty\} &= \bigcap_{n=1}^{\infty}[n,\infty]= \bigcap_{n=1}^{\infty}[-\infty,n)^c \in\sigma(\{ [-\infty,a):a\in\mathbb{R} \}),\nonumber\\
+		(-\infty,a)&=[-\infty,a)\backslash \{-\infty\} \in\sigma(\{ [-\infty,a):a\in\mathbb{R} \}),\nonumber
+	\end{align}
+	和\begin{equation}
+		\mathscr{B}_{\mathbb{R}} = \sigma(\{ (-\infty,a):a\in\mathbb{R} \}) \subset \sigma(\{ [-\infty,a):a\in\mathbb{R} \})
+	\end{equation}
+	推知$\sigma(\{ [-\infty,a):a\in\mathbb{R} \})\supset \mathscr{B}_{\overline{\mathbb{R}}}$. 于是命题的第一个等式成立. 容易看出, 对任$a\in\mathbb{R}$,单点集$\{a\}$属于后四个集类中的任一个. 因此, 命题的后三个等式也成立.
+\end{proof}
+
+
+
+\section{测度与测度的构造}
+测度, 作为实际测量的结果, 对我们来说并不陌生. 像线段的长度、平面上某些曲线围成的面积和容器的容积等都是测度. 随着科学技术的发展, 人们越来越意识到, 仅仅讨论这些直接建立的测度是远远不够的. 例如, 概率从抽象角度看是对形形色色的事件发生的可能性进行测量. 因而只有在抽象空间上建立了测度, 才有可能真正解决概率论的问题. 在抽象空间建立测度没有什么直接经验可循, 只能采用公理化的方法. 当然, 归根结底, 公理化方法中的那些公理也是从实际中提炼出来的.
+\subsection{测度、可测空间与测度空间}
+ 本节给出测度的基本定义与简单性质.
+
+ 对于$\Omega$的子集类$\mathscr{C}$, 进考虑满足如下条件的映射\begin{equation}
+	\mu:\mathscr{C}\to\overline{\mathbb{R}}_{+}\triangleq[0,+\infty]
+ \end{equation}
+ 且存在$A\in\mathscr{C}$, 使得$\mu(A)<+\infty$\footnote{如果任何集合的测度值都为$+\infty$, 就没有意义了.}.
+
+ 如果映射$\mu$满足可加性, 即对于$\mathscr{C}$中互不相交集合$A$和$B$, 在$A\cup B\in\mathscr{C}$的情况下, 有
+ \begin{equation}
+	\mu(A\cup B) = \mu(A) + \mu(B)
+ \end{equation}
+ 就称$\mu$为$\mathscr{C}$上的\myind{可加测度}.
+
+ 如果映射$\mu$满足有限可加性, 即对于$\mathscr{C}$中互不相交集合$A_1, A_2,\cdots, A_n$, 在$\bigcup_{k=1}^nA_k\in\mathscr{C}$的情况下, 有
+ \begin{equation}
+	\mu\left( \bigcup_{k=1}^n A_k \right) = \sum_{k=1}^n\mu(A_k)
+ \end{equation}
+
+ 就称$\mu$为$\mathscr{C}$上的\myind{有限可加测度}.
+
+ 如果映射$\mu$满足可列可加性, 即对于$\mathscr{C}$中互不相交集合列$\{A_n:n\in\mathbb{N}^* \}$, 在$\bigcup_{k=1}^{+\infty}\in\mathscr{C}$的情况下, 有
+ \begin{equation}
+	\mu\left( \bigcup_{k=1}^{+\infty} A_k \right) = \sum_{k=1}^{+\infty}\mu(A_k)
+ \end{equation}
+ 就称$\mu$为$\mathscr{C}$上的\myind{可列可加测度}, 简称为{\myind{测度}}\footnote{当$\varnothing\in\mathscr{C}$时, 测度也是有限可加测度}.
+
+ \sout{将可加、有限可加和可列可加测度统称为测度.}
+
+对于$\mathscr{C}$上的测度$\mu$, 如果\begin{equation}
+	\mu(A)<+\infty, \forall A\in\mathscr{C}
+\end{equation}
+就称$\mu$为$\mathscr{C}$上的\myind{有限测度}; 如果对于任何$A\in\mathscr{C}$, 存在互不相交集类$\{A_n:n\in\mathbb{N}^* \}$, 使得$A = \bigcup_{n=1}^{+\infty}A_n$, 且
+\begin{equation}
+	\mu(A_n)<\infty, \forall n\in\mathbb{N}^*
+\end{equation}
+就称$\mu$为$\mathscr{C}$上的\myind{$\sigma$有限测度}.
+
+对于$\Omega$上的$\sigma$代数$\mathscr{F}$, 称$(\Omega,\mathscr{F})$为可测空间; 称$\mathscr{F}$中的集合为$\Omega$中关于$\mathscr{F}$的\myind{可测集}.
+
+若$\mu$为$\sigma$代数$\mathscr{F}$上的测度, 称$(\Omega,\mathscr{F},\mu)$为\myind{测度空间}. 特别当$\mu(\Omega) = 1$时称$(\Omega,\mathscr{F},\mu)$为概率空间, 此时称$\mu$为概率测度.
+
+\subsection{测度在集代数上的扩张}
+本小节讨论如何将半代数$\mathscr{S}$上的$\sigma$有限测度扩张到$\sigma(\mathscr{S})$上的$\sigma$有限测度, 并将证明这种扩张是唯一的.
+\begin{definition}
+	设$\Omega$上的子集类$\mathscr{C}_1\subset\mathscr{C}_2$, $\mu_j$是$\mathscr{C}_j$上的测度(可加测度), 如果对于任意$A\in\mathscr{C}_1$, 有
+	\begin{equation}
+		\mu_1(A) = \mu_2(A)
+	\end{equation}
+	就称$\mu_2$是$\mu_1$在$\mathscr{C}_2$上的\myind{扩张}, 称$\mu_1$是$\mu_2$\myind{在$\mathscr{C}_1$上的限制}, 记为$\mu_1 = \mu_2\bigg\vert_{\mathscr{C}_1}$.
+\end{definition}
+
+\begin{theorem}
+	\label{thm:121}设$\mu$为$\Omega$上的半代数$\mathscr{S}$上的有限可加测度, 则$\mu$在$a(\mathscr{S})$上存在唯一的扩张.
+\end{theorem}
+\begin{proof}
+	对于任意$A\in a(\mathscr{S})$, 由定理\ref{thm:半代数生成代数1}知$\mathscr{S}$中存在互不相交集$A_1, A_2, \cdots, A_n$, 使得$A = \bigcup_{k=1}^nA_k$, 记
+	\begin{equation}
+		\tilde{\mu}(A)\triangleq \sum_{k=1}^n\mu(A_k)\label{eq:1.12}
+	\end{equation}
+	往证这样定义的$\tilde{\mu}$是合理的, 即若$A$还能表示成$\mathscr{S}$中的互不相交集$B_1,B_2,\cdots,B_m$之并, 就有
+	\begin{equation}
+		\sum_{k=1}^n\mu(A_k) = \sum_{u=1}^m\mu(B_u).\label{eq:1.13}
+	\end{equation}
+	事实上, $A_k = A_k\bigcap\left( \bigcup_{u=1}^mB_u \right) = \bigcup_{u=1}^m(A_kB_u)$, 注意到$A_kB_u\in\mathscr{S}$, 再由$\mu$的有限可加性得
+	\begin{equation}
+		\sum_{k=1}^n\mu(A_k) = \sum_{k=1}^n\sum_{u=1}^m\mu(A_kB_u).
+	\end{equation}
+	类似地, 由$B_u = B_u\bigcap\left( \bigcup_{k=1}^nA_k \right) = \bigcup_{k=1}^n(A_kB_u)$得
+	\begin{equation}
+		\sum_{u=1}^m\mu(B_u) = \sum_{k=1}^n\sum_{u=1}^m\mu(A_kB_u).	
+	\end{equation}
+
+	下只需证明$\tilde{\mu}$是$a(\mathscr{S})$上的有限可加测度即可. 事实上, 对于$a(\mathscr{S})$中的互不相交集
+	\begin{equation}
+		A_1,A_2,\cdots,A_n
+	\end{equation}
+	由$a(\mathscr{S})$为代数知$\bigcup_{k=1}^nA_k\in a(\mathscr{S})$, 再由定理\ref{thm:半代数生成代数1}知:
+	对每一个$k$， 存在$\mathscr{S}$中的互不相交集$A_{k,1}, A_{k,2},\cdots, A_{k,m_k}$ 使得$A_k = \bigcup_{j=1}^{m_k}A_{k,j}$.
+	注意到\begin{equation}
+		\{A_{k,j}:1\leqslant j\leqslant m_k,1\leqslant k\leqslant n \}
+	\end{equation}
+	是$\mathscr{S}$中的互不相交集, 由$\tilde{\mu}$的定义得
+	\begin{align}
+		\tilde{\mu}\left( \bigcup_{k=1}^n A_k \right) &= \tilde{\mu}\left( \bigcup_{k=1}^n\left( \bigcup_{j=1}^{m_k}A_{k,j} \right) \right)\nonumber\\
+		&= \sum_{k=1}^n\sum_{j=1}^{m_k}\mu(A_{k,j}) = \sum_{k=1}^n\tilde{\mu}(A_k).
+	\end{align}
+	即$\mu$是$a(\mathscr{S})$上的有限可加测度.
+
+	综上所述, $\tilde{\mu}$是$\mu$在$a(\mathscr{S})$上的扩张, 并且由(\ref{eq:1.12})和(\ref{eq:1.13})知它还是唯一的扩张.
+\end{proof}
+
+\begin{theorem}
+	设$\mu$为$\Omega$上的半代数$\mathscr{S}$上的测度, 则$\mu$在$a(\mathscr{S})$上存在唯一的扩张.\footnote{这里的扩张要有可列可加性, 而定理\ref{thm:121}中仅要求扩张有有限可加性.}
+\end{theorem}
+
+\begin{proof}
+	由于$\varnothing\in\mathscr{S}$, 所以$\mu$为$\mathscr{S}$上的有限可加测度, 由定理\ref{thm:121}知$\mu$在$a(\mathscr{S})$上存在唯一的扩张$\tilde{\mu}$为有限可加测度. 下面只需证明
+	$\tilde{\mu}$具有可列可加性即可.
+
+	事实上, 对于互不相交集列$\{A_n:n\in\mathbb{N}^*\}\subset a(\mathscr{S})$, 若$A = \bigcup_{n=1}^{\infty}A_n\in a(\mathscr{S})$,
+	则存在$\mathscr{S}$中的互不相交集$B_1,B_2,\cdots,B_m$, 使得$A = \bigcup_{k=1}^m B_k$, 并且\begin{equation}
+		\label{eq:183}\tilde{\mu}(A) = \sum_{k=1}^m \mu(B_k)
+	\end{equation}
+	另一方面, 存在$\mathscr{S}$中的互不相交集$A_{n,1},A_{n,2},\cdots,A_{n,l_n}$, 使得$A_n = \bigcup_{j=1}^{l_n}A_{n,j}$. 因此,
+	\begin{align}
+		B_k &= B_k\cap \left( \bigcup_{n=1}^{+\infty}A_n \right) = \bigcup_{n=1}^{+\infty}(A_nB_k)\nonumber\\
+		&= \bigcup_{n=1}^{+\infty}\bigcup_{j=1}^{l_n}(A_{n,j}B_k).
+	\end{align}
+	注意到$\{ A_{n,j}B_k:n\in\mathbb{N}^*,1\leqslant j\leqslant l_n \}$为$\mathscr{S}$中互不相交集列, $A_nB_k\in a(\mathscr{S})$, 以及测度$\mu$和有限可加测度$\tilde{\mu}$的性质得
+	\begin{equation}
+		\mu(B_k) = \sum_{n=1}^{+\infty}\sum_{j=1}^{l_n}\mu(A_{n,j}B_k) = \sum_{n=1}^{+\infty}\tilde{\mu}(A_nB_k).
+	\end{equation}
+	带入到\ref{eq:183}可得\begin{equation}
+		\tilde{\mu}(A) = \sum_{k=1}^m\sum_{n=1}^{+\infty}\tilde{\mu}(A_nB_k) = \sum_{n=1}^{+\infty}\sum_{k=1}^m\tilde{\mu}(A_nB_k).
+	\end{equation}
+	再注意到$\bigcup_{k=1}^m(A_nB_k) = A_n$得$\tilde{\mu}$的可列可加性.
+\end{proof}
+
+\begin{theorem}[测度的单调性]
+	设$\mu$为$\Omega$上的半代数$\mathscr{S}$上的测度(或有限可加测度), 若$A_1,A_2,\cdots,A_n$为$\mathscr{S}$中互不相交集,
+	且$\bigcup_{k=1}^n A_k\subset A\in\mathscr{S}$, 则\label{thm:measurepropmonotone}
+	\begin{equation}
+		\sum_{k=1}^n\mu(A_k)\leqslant \mu(A).\label{eq:117}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	记$\tilde{\mu}$为$\mu$在$a(\mathscr{S})$上的扩张, 命\begin{equation}
+		A_{n+1} \triangleq A\backslash \left( \bigcup_{k=1}^n A_k \right),
+	\end{equation}
+	则$A_1,A_2,\cdots,A_{n+1}$为$a(\mathscr{S})$中的互不相交集. 注意到$A = \bigcup_{k=1}^{n+1}A_k$ 可得
+	\begin{equation}
+		\mu(A) = \tilde{\mu}(A) = \sum_{k=1}^{n+1}\tilde{\mu}(A_k)\geqslant \sum_{k=1}^n \tilde{\mu}(A_k) = \sum_{k=1}^n \mu(A_k)
+	\end{equation}
+	即(\ref{eq:117})成立.
+\end{proof}
+
+\begin{theorem}[测度的次可加性]
+	设$\mu$为$\Omega$上的半代数$\mathscr{S}$上的测度, $\{A_k:k\in\mathbb{N}^*\}$为$\mathscr{S}$中互不相交集列. 对$n\in\mathbb{N}^*\bigcup\{+\infty\}$,
+	若$\bigcup_{k=1}^n A_k\supset A\in\mathscr{S}$, 则有
+	\begin{equation}
+		\mu(A) \leqslant \sum_{k=1}^n\mu(A_k).\label{eq:118}
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	记$\tilde{\mu}$为$\mu$在$a(\mathscr{S})$上的扩张, 则有
+	\begin{equation}
+		A = A\bigcap\left( \bigcup_{k=1}^n A_k \right) = \bigcup_{k=1}^n(AA_k)
+	\end{equation}
+	且$AA_1,AA_2,\cdots,AA_n$为$\mathscr{S}$中互不相交集. 由定理\ref{thm:121}和测度的单调性(定理\ref{thm:measurepropmonotone})知道
+	\begin{align}
+		\mu(A)&=\tilde{\mu}(A)=\sum_{k=1}^n\tilde{\mu}(AA_k)\nonumber\\
+		&=\sum_{k=1}^n\mu(AA_k)\leqslant \sum_{k=1}^n\mu(AA_k).
+	\end{align}
+	即(\ref{eq:118})成立.
+\end{proof}
+
+\subsection{外测度}
+\begin{definition}[外测度]
+	用$\mathscr{D}$表示由$\Omega$的所有子集构成的集类, 称$\mu^*:\mathscr{D}\to\overline{\mathbb{R}}_+$为$\Omega$的一个外测度, 
+	如果它满足如下三个条件
+	\begin{blist}
+		\item[(i)] $\mu^*(\varnothing) = 0$;
+		\item[(ii)] 不降性: 对于任何$A\subset B\subset \Omega$, 都有$\mu^*(A)\leqslant\mu^*(B)$;
+		\item[(iii)] 次$\sigma$-可加性: 对于任何$A_n\subset\Omega, n\in\mathbb{N}^*$, 有
+		\begin{equation}\label{eq:externalmeasure_subsigmaaddi}
+			\mu^*\left( \bigcup_{n = 1}^{+\infty}A_n \right) \leqslant \sum_{n=1}^{+\infty}\mu^*(A_n).
+		\end{equation}
+	\end{blist}
+\end{definition}
+
+\begin{lemma}
+	外测度$\mu^*$具有次可加性.\label{lem:externalmeasure_subadditi}
+\end{lemma}
+\begin{proof}
+	对于任何$A_k\subset\Omega$, $1\leqslant k\leqslant n$, 记$A_{n+i} = \varnothing$, 则由外测度的定义知
+	\begin{align}
+		\mu^*\left( \bigcup_{k=1}^nA_k \right) &= \mu^*\left( \bigcup_{k=1}^{+\infty}A_k \right)\nonumber\\
+		&\leqslant \sum_{k=1}^{+\infty}\mu^*(A_k) = \sum_{k=1}^{n}\mu^*(A_k).
+	\end{align}
+	即$\mu^*$具有次可加性.
+\end{proof}
+
+\begin{definition}
+	设$\mu^*$是$\Omega$上的外测度, 称$\Omega$的子集$A$为$\mu^*$-可测集, 如果它满足
+	\begin{equation}\label{eq:1.20}
+		\mu^*(D) = \mu^*(AD) + \mu^*(A^cD),~~\forall D\subset \Omega.
+	\end{equation}
+	这个条件称为Carathéodory条件. 进一步, 称\begin{equation}
+		\mathscr{A}_{\mu^*} \triangleq \{ A\subset\Omega : A\text{为}\mu^*\text{-可测集} \}
+	\end{equation}
+	为$\mu^*$-可测集类.
+\end{definition}
+
+\begin{lemma}\label{lemma:1.2.2}
+	$\Omega$的子集$A$为$\mu^*$-可测集的充分必要条件是
+	\begin{equation}
+		\mu^*(D)\geqslant \mu^*(AD) + \mu^*(A^cD),~~\forall D\subset\Omega.
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	由引理\ref{lem:externalmeasure_subadditi}知结论成立.
+\end{proof}
+
+\begin{lemma}\label{lamma:1.23}
+	若$\mu^*$是$\Omega$上的外测度, 则对任何$\{A_n:n\in\mathbb{N}^* \}\subset\mathscr{A}_{\mu^*}$有
+	\begin{equation}
+		\mu^*(D)\geqslant \sum_{k=1}^{+\infty}\mu^*(B_kD)+\mu^*\left( 
+		\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+		\right)\label{eq:1.23}
+	\end{equation}
+	其中$B_1 = A_1$, $B_{n+1} = A_{n+1}\backslash \left( \bigcup_{k=1}^n A_k \right)$, $n\in\mathbb{N}^*$.
+\end{lemma}
+\begin{proof}
+	由$A_1\in\mathscr{A}_{\mu^*}$得到
+	\begin{align}
+		\mu^*(D) &= \mu^*(A_1D) + \mu^*(A_1^cD)\nonumber\\
+		&= \mu^*(B_1D) + \mu^*(A_1^cD)\label{eq:1.24}
+	\end{align}
+	由$A_{n+1}\in\mathscr{A}_{\mu^*}$得到
+	\begin{align}\label{eq:1.25}
+		\mu^*\left( \left( \bigcap_{k=1}^{n}A_k^c \right) D	\right)&= \mu^*\left(A_{n+1} \left( \bigcap_{k=1}^{n}A_k^c \right) D	\right)+\mu^*\left( A_{n+1}^c\left( \bigcap_{k=1}^{n}A_k^c \right) D	\right)\nonumber\\
+		&= \mu^*(B_{n+1}D) + \mu^*\left( \left( \bigcap_{k=1}^{n+1}A_k^c \right) D	\right)
+	\end{align}
+	利用(\ref{eq:1.24})和(\ref{eq:1.25})递推, 并注意到外测度的不降性得
+	\begin{align}
+		\mu^*(D) &\geqslant \sum_{k=1}^{n+1}\mu^*(B_kD) + \mu^*\left( \left( \bigcap_{k=1}^{n+1}A_k^c \right) D	\right)\nonumber\\
+		&\geqslant\sum_{k=1}^{n+1}\mu^*(B_kD) + \mu^*\left( \left( \bigcap_{k=1}^{+\infty}A_k^c \right) D	\right)
+	\end{align}
+	令$n\to\infty$, 得
+	\begin{equation}
+		\mu^*(D) \geqslant \sum_{k=1}^{+\infty}\mu^*(B_kD) + \mu^*\left( \left( \bigcap_{k=1}^{+\infty}A_k^c \right) D	\right)
+	\end{equation}
+	即(\ref{eq:1.23})成立.
+\end{proof}
+
+\begin{theorem}
+	设$\mu^*$为$\Omega$上的外测度, 则$\mathscr{A}_{\mu^*}$为一个$\sigma$代数.
+\end{theorem}
+\begin{proof}
+	显然$\Omega$满足Carathéodory条件(式\ref{eq:1.20}), 即$\Omega\in\mathscr{A}_{\mu^*}$.
+	
+	若$A\in\mathscr{A}_{\mu^*}$, 则Carathéodory条件(式\ref{eq:1.20})成立, 即$A^c$满足Carathéodory条件(式\ref{eq:1.20})，亦即$\mathscr{A}_{\mu^*}$对补运算封闭.
+
+	若$A_n\in\mathscr{A}_{\mu^*}$, $n\in\mathbb{N}^*$, 由引理\ref{lamma:1.23}知道:
+	\begin{equation}
+		\mu^*(D)\geqslant \sum_{k=1}^{+\infty}\mu^*(B_kD)+\mu^*\left( 
+		\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+		\right),~~\forall D\subset\Omega.
+	\end{equation}
+	其中$B_1 = A_1$, $B_{n+1} = A_{n+1}\backslash \left( \bigcup_{k=1}^n A_k \right)$, $n\in\mathbb{N}^*$.
+	利用外测度的次$\sigma$-可加性, 并注意到$\bigcup_{k=1}^{\infty}A_k =\bigcup_{k=1}^{\infty}B_k $, 可得
+	\begin{align}
+		\mu^*(D)&\geqslant \sum_{k=1}^{+\infty}\mu^*(B_kD)+\mu^*\left( 
+		\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+		\right)\nonumber\\
+		&\geqslant \mu^*\left(\left( \bigcup_{k=1}^{+\infty}B_k \right)D\right)+\mu^*\left( 
+			\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+			\right)\nonumber\\
+		&=\mu^*\left(\left( \bigcup_{k=1}^{+\infty}A_k \right)D\right)+\mu^*\left( 
+			\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+			\right),~~\forall D\subset\Omega.
+	\end{align}
+	由引理\ref{lemma:1.2.2}知$\bigcup_{k=1}^{\infty}A_k\in\mathscr{A}_{\mu^*}$, 即$\mathscr{A}_{\mu^*}$对可列并运算封闭.
+
+	综上所述, $\mathscr{A}_{\mu^*}$是$\sigma$代数.
+\end{proof}
+
+\begin{theorem}
+	$\Omega$上的外测度$\mu^*$在$\sigma$代数$\mathscr{A}_{\mu^*}$上的限制为测度.
+\end{theorem}
+
+\begin{proof}
+	显然$\mu^*$非负, 因此只需要证明在$\mathscr{A}_{\mu^*}$上$\mu^*$具有可列可加性. 
+	对于$\mathscr{A}_{\mu^*}$中互不相交集列$\{A_m:n\in\mathbb{N}^*\}$, 记
+	\begin{equation}
+		B_1 = A_1, B_{n+1} = A_{n+1}\cap\left( \bigcap_{k=1}^n A_k^c \right) = A_{n+1}, n\in\mathbb{N}^*.
+	\end{equation}
+	由引理\ref{lamma:1.23}, 注意到外测度的次$\sigma$-可加性得
+	\begin{align}
+		\mu^*(D)&\geqslant \sum_{k=1}^{+\infty}\mu^*(B_kD)+\mu^*\left( 
+		\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+		\right)\nonumber\\
+		&= \sum_{k=1}^{+\infty}\mu^*(A_kD)+\mu^*\left( 
+			\left( \bigcup_{k=1}^{+\infty}A_k \right)^c D	
+			\right),~~\forall D\subset\Omega.
+	\end{align}
+	特别取$D = \bigcup_{n=1}^{\infty}A_n$, 得到
+	\begin{equation}
+		\mu^*\left( \bigcup_{n=1}^{+\infty}A_n \right)\geqslant \sum_{n=1}^{+\infty}\mu^*(A_n).
+	\end{equation}
+	再结合外测度的次$\sigma$-可加性, 即得外测度$\mu^*$在$\sigma$代数$\mathscr{A}_{\mu^*}$上的限制为测度.
+\end{proof}
+
+\subsection{从半集代数到$\sigma$代数上的测度扩张}
+
+在集代数上的测度扩张过程中, (\ref{eq:1.12})起了至关重要的作用, 能否应用这种思想扩张到$\sigma$代数中呢?
+\begin{lemma}
+	若$\mu$是$\Omega$上的半集代数$\mathscr{S}$上的测度, 对于任何$A\subset\Omega$, 定义
+	\begin{equation}\label{eq:1.26}
+		\mu^*(A) \triangleq \inf\left\{ \sum_{n=1}^{\infty}\mu(A_n):A_n\in\mathscr{S},n\geqslant 1; A\subset \bigcup_{n=1}^{+\infty}A_n \right\}.
+	\end{equation}
+	则$\mu^*$为外测度, 称其为由\myind{$\mu$引出的外测度}.
+	并且在$\mathscr{S}$上这个外测度与$\mu$一致, 即\begin{equation}
+		\mu(A) = \mu^*(A),~~\forall A\in\mathscr{S}.\label{eq:1.27}
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	注意到$\varnothing\in\mathscr{S}$, 且$\mu(\varnothing) = 0$, 由(\ref{eq:1.26})得$\mu^*(\varnothing) = 0$, 即$\mu^*$在空集的值为$0$.
+
+	往证$\mu^*$有不降性. 对于任何$A\subset B\subset \Omega$, 注意到$B$的每个覆盖都是$A$的覆盖, 所以有
+	\begin{equation}
+		\left\{ \sum_{n=1}^{+\infty}\mu(A_n):A_n\in\mathscr{S},A\subset\bigcup_{n=1}^{+\infty}A_n  \right\}
+		\supset 	\left\{ \sum_{n=1}^{+\infty}\mu(B_n):B_n\in\mathscr{S},B\subset\bigcup_{n=1}^{+\infty}B_n  \right\}
+	\end{equation}
+	因此, \begin{align}
+		\mu^*(A) &= \inf\left\{ \sum_{n=1}^{+\infty}\mu(A_n):A_n\in\mathscr{S},A\subset\bigcup_{n=1}^{+\infty}A_n  \right\}\nonumber\\
+		&\leqslant 	\inf\left\{ \sum_{n=1}^{+\infty}\mu(B_n):B_n\in\mathscr{S},B\subset\bigcup_{n=1}^{+\infty}B_n  \right\} = \mu^*(B)	
+	\end{align}
+	即$\mu^*$具有不降性.
+
+	往证$\mu^*$具有次$\sigma$-可加性. 对于任何\begin{equation}
+		A_n\subset\Omega,n\in\mathbb{N}^*
+	\end{equation}
+	\begin{blist}
+		\item 若$\sum_{n=1}^{\infty}\mu^*(A_n) = \infty$, 自然有(\ref{eq:externalmeasure_subsigmaaddi})成立.
+		\item 如果$\sum_{n=1}^{\infty}\mu^*(A_n) < \infty$, 则对于任意$\varepsilon>0$, 由$\mu^*$的定义知:
+		\begin{equation}
+			\exists\{A_{n,k}:k\in\mathbb{N}^*\}\subset\mathscr{S},~\mathrm{s.t.}~A_n\subset\bigcup_{k=1}^{+\infty}A_{n,k},
+		\end{equation}
+		且\begin{equation}\label{eq:1.28}
+			\sum_{n=1}^{+\infty}\mu(A_{n,k})\leqslant \mu^*(A_n) + \frac{\varepsilon}{2^n},~~\forall n\in\mathbb{N}^*.
+		\end{equation}
+		因此, $\bigcup_{n=1}^{\infty}A_n\subset\bigcup_{n=1}^{\infty}\bigcup_{k=1}^{\infty}A_{n,k}$, 注意到$A_{n,k}\in\mathscr{S}$, 由(\ref{eq:1.26})和(\ref{eq:1.28})知
+		\begin{align}
+			\mu^*\left( \bigcup_{n=1}^{+\infty}A_n \right)&\leqslant \sum_{n=1}^{+\infty}\sum_{k=1}^{+\infty}\mu(A_{n,k})\nonumber\\
+			&\leqslant \sum_{n=1}^{+\infty}\left( \mu^*(A_n)+\frac{\varepsilon}{2^n} \right) = \sum_{n=1}^{+\infty}\mu^*(A_n)+\varepsilon.
+		\end{align}
+		由$\varepsilon$的任意性知(\ref{eq:externalmeasure_subsigmaaddi})成立.
+	\end{blist}
+	综上所述, $\mu^*$为$\Omega$上的外测度.
+
+	下面, 只需证明(\ref{eq:1.27})成立. 事实上, 当$A\in\mathscr{S}$时, 由测度的次可加性知道
+	\begin{equation}
+		\mu(A)\leqslant \sum_{n=1}^{+\infty}\mu(A_n),~\forall \{A_n:n\in\mathbb{N}^*\}\subset\mathscr{S},A\subset\bigcup_{n=1}^{+\infty}A_n
+	\end{equation}
+	所以\begin{align}
+		\mu(A) &\leqslant \inf\left\{ \sum_{n=1}^{+\infty}\mu(A_n):A_n:n\in\mathbb{N}^*; A\subset\bigcup_{n=1}^{+\infty}A_n \right\}\nonumber\\
+		&=\mu^*(A).
+	\end{align}
+	另一方面, 由\begin{equation}
+		\mu(A) \in \left\{ \sum_{n=1}^{+\infty}\mu(A_n):A_n:n\in\mathbb{N}^*; A\subset\bigcup_{n=1}^{+\infty}A_n \right\}\nonumber\\
+	\end{equation}
+	得到\begin{equation}
+		\mu(A) \geqslant \mu^*(A).
+	\end{equation}
+	因此, (\ref{eq:1.27})成立.
+\end{proof}
+
+\begin{lemma}
+	若$\mu$是$\Omega$上的半代数$\mathscr{S}$上的测度, $\mu^*$是$\mu$引出的外测度, 则$\mathscr{S}\subset \mathscr{A}_{\mu^*}$.
+\end{lemma}
+\begin{proof}
+	设$A\in\mathscr{S}$, 只需证明$A$是$\mu^*$-可测集. 由引理(\ref{lemma:1.2.2}), 又只需证明
+	\begin{equation}
+		\mu^*(D) \geqslant \mu^*(AD) + \mu^*(A^cD),~~\forall D\subset\Omega.
+	\end{equation}
+	为此, 必须且只需对$\mu^*(D)<+\infty$的$D\subset\Omega$证明该式即可.
+
+	事实上, 当$D\subset\Omega,\mu^*(D)<+\infty$时, 由外测度的定义知: 对于任意$\varepsilon>0$, 存在$\{ A_n:n\in\mathbb{N}^* \}\subset\mathscr{S}$, 使
+	\begin{equation}
+		\mu^*(D)\geqslant \sum_{n=1}^{+\infty}\mu(A_n)- \varepsilon.
+	\end{equation}
+	而由引理\ref{lemma:1.1.1}知道存在$\mathscr{S}$中互不相交集$B_1, B_2,\cdots, B_m$, 使得
+	\begin{align}
+		A^c &= \bigcup_{k=1}^m B_k\nonumber\\
+		A_n &= A_n\cap\left( A\cup A^c \right) = (AA_n)\cup \left( \bigcup_{k=1}^m (B_kA_n) \right).
+	\end{align}
+	由定理\ref{thm:1.2.3}和引理\ref{lemma:1.2.4}得
+	\begin{equation}
+		\mu(A_n)\geqslant \mu(AA_n)+\sum_{k=1}^m\mu(B_kA_n)
+	\end{equation}
+	带入到(\ref{eq:1.30})得到
+	\begin{equation}
+		\mu^*(D)\geqslant \sum_{n=1}^{+\infty}\left( \mu(AA_n)+\sum_{k=1}^m\mu(B_kA_n) \right)-\varepsilon
+	\end{equation}
+	令$\varepsilon\to 0$, 利用外测度的次$\sigma$-可加性和次可加性可得
+	\begin{align}
+		\mu^*(D)&\geqslant\sum_{n=1}^{+\infty}\left( \mu(AA_n)+\sum_{k=1}^m\mu(B_kA_n) \right)\nonumber\\
+		&\geqslant \sum_{n=1}^{+\infty}\left( \mu(AA_n)+\mu^*(A^cA_n) \right)\nonumber\\
+		&\geqslant \mu^*\left( A\left( \bigcup_{n=1}^{\infty}A_n \right) \right)+\mu^*\left( A^c\left( \bigcup_{n=1}^{\infty}A_n \right) \right)\nonumber\\
+		&\geqslant \mu^*(AD) + \mu^*(A^cD).
+	\end{align}
+	即引理结论成立.
+\end{proof}
+
+\begin{theorem}
+	若$\mu$为$\Omega$上半代数$\mathscr{S}$上的测度, 则$\mu$在$\sigma(\mathscr{S})$上存在扩张.
+\end{theorem}
+\begin{proof}
+	用$\mu^*$表示$\mu$引出的外测度, 由定理\ref{thm:1.2.6}知道$\mu^*$是$\mathscr{A}_{\mu^*}$上的测度, 由定理\ref{thm:1.2.5}
+	知道$\mathscr{A}_{\mu^*}$为$\sigma$代数, 引理\ref{lemma:1.2.5}知
+	$\mathscr{S}\subset\mathscr{A}_{\mu^*}$, 所以$\sigma(\mathscr{S})\subset\mathscr{A}_{\mu^*}$, 因此,
+	$\mu^*\bigg\vert_{\sigma(\mathscr{S})}$是$\mu$在$\sigma(\mathscr{S})$上的扩张.
+\end{proof}
+
+
+\begin{theorem}[测度扩张定理]
+	若$\mu$为$\Omega$上的$\sigma$有限测度, 则$\mu$在$\sigma(\mathscr{S})$上的扩张唯一. 即若$\mu_1$和$\mu_2$都是$\mu$在$\sigma(\mathscr{S})$上的扩张,
+	则对于任何$A\in\sigma(\mathscr{S})$, 都有$\mu_1(A) = \mu_2(A)$.
+\end{theorem}
+\begin{proof}
+	由定理
+\end{proof}
+
+
+\section{测度的性质}
+\subsection{测度的运算性质}
+\subsection{测度空间的完全化}
+\subsection{Lebesgue-Stieltjes测度}
+
+
+
+\chapter{可测函数与随机变量}
+\section{可测函数与分布}
+
+
+\begin{definition}
+	设$(\Omega,\mathscr{F})$为可测空间,$A\in\mathscr{F}$, 记\begin{equation}
+	A\cap \mathscr{F}\triangleq \{ AB:B\in\mathscr{F} \}
+	\end{equation}
+	如果函数$f:A\to\bar{\mathbb{R}}$满足条件\begin{equation}
+	f^{-1}(B) \triangleq \{\omega\in A:f(\omega)\in B\}\in A\cap\mathscr{F},~~\forall B\in\mathscr{B}_{\bar{\mathbb{R}}},
+	\end{equation}
+	其中$\mathscr{B}_{\bar{\mathbb{R}}} = \sigma\left(\left\{\mathscr{B}_{\mathbb{R}},\bar{\mathbb{R}}\right\}\right)$,则称$f$为定义在$A$上的$\mathscr{F}$\myind{可测函数}, 或者\myind{广义随机变量}, 简称为\myind{可测函数}; 如果$A$上的可测函数$f$满足条件$f(A)\subset \mathbb{R}$, 则称$f$为$A$上的\myind{有限实值随机变量};将$A$上的有限实值随机变量简称为\myind{随机变量},记为r.v.
+\end{definition}
+上述概念可以进一步推广到一般映射的情况.
+
+\begin{definition}
+	对于映射$f:\Omega\to E$, 称
+	\begin{equation}
+	f^{-1}(A)\triangleq \{f\in A\}\triangleq \{\omega\in\Omega:f(\omega)\in A\},~~\forall A\subset E
+	\end{equation}
+	为$A$对$f$的\myind{原像}, 简记为$\{f\in A\}$; 称
+	\begin{equation}
+	f^{-1}(\mathscr{E})\triangleq \{ f^{-1}(A):A\in\mathscr{E} \}
+	\end{equation}
+	为集类$\mathscr{E}$对$f$的原像, 其中$\mathscr{E}$是$E$的子集类; 如果$(\Omega,\mathscr{F})$和$(E,\mathscr{E})$为可测空间,$f$满足
+	\begin{equation}
+	f^{-1}(\mathscr{E})\subset \mathscr{F}
+	\end{equation}
+	则称$f$为$(\Omega,\mathscr{F})$到$(E,\mathscr{E})$的$\mathscr{F}$\myind{可测映射}, 简称为\myind{可测映射}; 而$\sigma(f)\triangleq f^{-1}(\mathscr{E})$叫做\myind{使映射$f$可测的最小$\sigma$代数}. 如果$(\Omega,\mathscr{F})$和$(E,\mathscr{E})$为可测空间, $\mathscr{F}$上有概率测度$\mathbf{P}$, 则称映射$f$为$(\Omega,\mathscr{F},\mathbf{P})$到$(E,\mathscr{E})$的\myind{随机元}. 如果$f$是概率空间$(\Omega,\mathscr{F},\mathbf{P})$到$(\mathbb{R}^n,\mathscr{B}^n)$的随机元, 则称$f$为\myind{$n$维随机变量}.
+\end{definition}
+
+\begin{theorem}\label{集合的原像}
+	集合的原像有以下性质: 设$f$是$\Omega$到$E$上的映射, 则有
+	\begin{align}
+	&f^{-1}(E) = \Omega,~~f^{-1}(\varnothing) = \varnothing\nonumber\\
+	&B_1\subset B_2\Rightarrow f^{-1}(B_1)\subset f^{-1}(B_2)\nonumber\\
+	&f^{-1}(B^c) = \left(f^{-1}(B)\right)^c, \forall B\subset E\nonumber\\
+	&f^{-1}(A\backslash B) = (f^{-1}A)\backslash (f^{-1}B), \forall A,B\subset E\nonumber\\
+	&f^{-1}\bigcup_{t\in T}A_t = \bigcup_{t\in T}f^{-1}A_t\nonumber\\
+	&f^{-1}\bigcap_{t\in T}A_t = \bigcap_{t\in T}f^{-1}A_t,
+	\end{align}
+	其中, $\{A_t:t\in T\}$为$Y$的子集类.
+\end{theorem}
+\begin{proof}
+	Omitted.
+\end{proof}
+
+\begin{lemma}\label{lemma141}
+	设$f$是$\Omega\to E$的映射, $\mathscr{E}$是$E$上的$\sigma$代数, 则$f^{-1}(\mathscr{E})$是$\Omega$的$\sigma$代数.	
+\end{lemma}
+\begin{proof}
+	可由定理\ref{集合的原像}得结论.
+\end{proof}
+
+\begin{theorem}
+	设$f$是$\Omega$到$E$上的映射,对$E$上的非空子集类$\mathscr{E}$, 有
+	\begin{equation}
+	\sigma(f^{-1}\mathscr{E}) = f^{-1}\sigma(\mathscr{E}).
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	由引理\ref{lemma141}易见$f^{-1}\sigma(\mathscr{E})$是一个$\sigma$代数. 因此$\sigma(f^{-1}\mathscr{E})\subset f^{-1}\sigma(\mathscr{E})$. 另一方面, 令
+	\begin{equation}
+	\mathscr{G} = \{ B\subset E:f^{-1}B\in\sigma(f^{-1}\mathscr{E})\}
+	\end{equation}
+	则$\mathscr{G}$是一个$\sigma$代数, 且$\mathscr{E}\subset\mathscr{G}$, 因此$\sigma(f^{-1}\mathscr{E})\supset f^{-1}\sigma(\mathscr{E})$, 即结论成立.
+\end{proof}
+
+
+
+\section{分布与分布函数}
+\subsection{可测函数的运算}
+
+
+{测度论中的典型方法}
+在测度论和概率论中,为了证明一个关于可测函数的命题,常常分解为如下几个比较容易的步骤进行：
+\begin{blist}
+	\item (1)证明该命题对最简单的函数——示性函数成立.
+	\item (2)证明该命题对非负简单函数——示性函数的线性组合成立.
+	\item (3)证明该命题对非负可测函数——非降的非负简单函数列的极限成立.
+	\item (4)证明该命题对一般的可测函数——两个非负可测函数,即它的正部和负部之差成立.
+\end{blist}
+按上述步骤证明命题的方法叫做测度论中的典型方法.典型方法符合人们的认识过程,是一种具有普遍意义、行之有效的方法,必须熟练掌握.
+
+\section{复合映射的可测性}
+\section{可测映射列极限的可测性}
+\section{可测函数的构造}
+\section{可测函数的收敛性}	
+

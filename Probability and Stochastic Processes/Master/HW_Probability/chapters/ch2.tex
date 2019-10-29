@@ -1,0 +1,289 @@
+\chapter{随机变量和可测函数~~随机变量的分布}
+
+\begin{yyEx}
+	设$F(x) = P(\xi<x)$, 试证:$F(x)$单调不减、左连续, 且$F(-\infty) = 0$, $F(+\infty) = 1$.
+	
+\end{yyEx}
+\begin{yyProof}
+	若$x_1<x_2$, 则$\{ \xi<x_2 \} = \{ \xi<x_1\}  \cup\{ x_1\leqslant\xi<x_2 \}$, 
+	注意到等式右边的两个集合不交, 故
+	\begin{equation}
+	F(x_2) = P(\xi<x_2) = P(\xi<x_1)+P( x_1\leqslant\xi<x_2) \geqslant P(\xi<x_1) = F(x_1).
+	\end{equation}
+	由于函数$F(x)$单调且有界, 所以它必存在单侧极限. 为了证明$F(x-0)=F(x)$, 必须且只需对某一列$\{x_n\}$, $x_1<x_2<\cdots,x_n\to x$, 有$\lim\limits_{n\to\infty}F(x_n) = F(x)$即可. 令
+	\begin{equation}
+	A_n = \left\{ x_n = x-\frac{1}{n}\leqslant \xi < x \right\},
+	\end{equation}
+	则$A_n\supset A_{n+1}$ 且$\bigcap\limits_{n=1}^{\infty}A_n = \varnothing$, 利用概率测度在$\varnothing$处上连续得到:
+	\begin{equation}
+	\lim_{n\to\infty}F(x_n) - F(x) = \lim_{n\to\infty}[F(x_n) - F(x)] = \lim_{n\to\infty}P(A_n) = P(\varnothing) = 0.
+	\end{equation}
+	令$B_n = \{ \xi<-n \}$, 则$B_n\downarrow \varnothing$; 类似地, 令$C_n = \{\xi<n\}$,则$C_n\uparrow\Omega$.
+	由$F$的单调性和概率测度$P$的连续性,
+	\begin{align}
+	F(+\infty) &= \lim_{n\to\infty}F(n) = \lim_{n\to\infty}P(C_n) = P(\Omega) = 1,\nonumber\\
+	F(-\infty) &= \lim_{n\to\infty}F(-n) = \lim_{n\to\infty}P(B_n) =  P(\varnothing) = 0.
+	\end{align}
+\end{yyProof}
+
+\begin{yyEx}
+	设随机变量$\xi$取值于$(0,1)$, 若对一切$0<x\leqslant y<1$，$P(x<\xi\leqslant y)$只与长度$y-x$有关, 试证:
+	$\xi$服从$(0,1)$上的均匀分布.
+\end{yyEx}
+
+\begin{yyProof}
+	设$\xi$的d.f.是$F(x)$.由于$\xi$取值于$(0,1)$, 所以当$x<0$时, $F(x) = 0$; 当$x\geqslant 1$时, $F(x) = 1$. 
+	当$0\leqslant x\leqslant1$时, $F(x) = P(0<\xi\leqslant x)$.
+	
+	若正数$x,y$满足$x+y<1$, 则\begin{equation}F(x+y) = P(0<\xi\leqslant x+y) = P(0<\xi\leqslant x) + P(x<\xi\leqslant x+y) = F(x)+F(y).\end{equation}
+	对正整数$n,m$, 有
+	\begin{equation}
+		1 = F(1) = F(1/m + 1/m + \cdots + 1/m) = mF(1/m).
+	\end{equation}
+	于是$F(1/m) = 1/m$, $F(n/m) = F(1/m + 1/m + \cdots + 1/m) = nF(1/m) = n/m$. \\对$0\leqslant x<1$, 存在有理数列$[0,1]\ni x_n\downarrow x$, 于是, $F(x) = \lim\limits_{n\to\infty}F(x_n) = \lim\limits_{n\to\infty}x_n = x$.
+	
+	由此,$\xi$的d.f.是\begin{equation}
+		F(x) = \begin{dcases}
+			0, &x<0,\\
+			x, &0\leqslant x<1,\\
+			1, &x\geqslant 1.
+		\end{dcases}
+	\end{equation}
+	所以$\xi\sim\mathcal{U}(0,1)$.
+\end{yyProof}
+
+\begin{yyEx}
+	试证:$f(x,y) = k\mathrm{e}^{-(ax^2+2bxy+cy^2)}$为分布密度的充要条件是$a>0$,$c>0$,$ac-b^2>0$,$k=\sqrt{ac-b^2}/\pi$.
+\end{yyEx}
+
+\begin{proof}
+	条件必要: 根据$f\geqslant 0$, 知$k>0$.
+	再根据\begin{equation}
+		1 = \iint_{\mathbb{R}^2}f(x,y)\mathrm{d}x\mathrm{d}y = k\iint_{\mathbb{R}^2}
+		\exp\left[ -a\left(x+\frac{b}{a}y\right)^2+\frac{ac-b^2}{a}y^2\right]\mathrm{d}x\mathrm{d}y\\
+		\end{equation}
+	知道:$a>0$, $ac-b^2>0$, $k = \dfrac{1}{\pi}\sqrt{ac-b^2}$.
+	
+	条件充分: 当$a>0$,$c>0$,$ac-b^2>0$,$k=\sqrt{ac-b^2}/\pi$时, 根据前面的计算显然有$f\geqslant 0$,$\iint f \mathrm{d}x\mathrm{d}y= 1$. 从而$f$是密度函数.
+\end{proof}
+
+\begin{yyEx}
+	若$(\xi,\eta)$的分布密度为\begin{equation}
+	f(x,y) = \begin{dcases}
+	A\mathrm{e}^{-(2x+y)},&x>0,y>0,\\
+	0,&\text{otherwise},
+	\end{dcases}
+	\end{equation}
+	试求:\begin{blist}
+		\item[(1)] 常数$A$;
+		\item[(2)] 关于$\xi$,$\eta$的边沿密度;
+		\item[(3)] $f_{\xi|\eta}(x|y)$;
+		\item[(4)] $P(\xi\leqslant x|\eta<1)$.
+	\end{blist}
+\end{yyEx}
+
+\begin{yySolution}
+	\begin{enumerate}
+	\item 根据$\iint f(x,y)\mathrm{d}x\mathrm{d}y = 1$得到$A = 2$.
+	\item 
+	根据$(\xi,\eta)$的联合密度形式知道: $\xi\sim \mathcal{E}(2)$, $\eta\sim \mathcal{E}(1)$, 
+	且$\xi$和$\eta$独立. 因此, $\xi$和$\eta$的边沿密度分别为
+	\begin{equation}
+		f_{\xi}(x) = 2\mathrm{e}^{-2x}\bm{1}_{(x>0)},f_{\eta}(x) = \mathrm{e}^{-y}\bm{1}_{(y>0)}.
+	\end{equation}
+	\item 由于$\xi$与$\eta$独立, 所以有: 当$y>0$时,
+	\begin{equation}
+		f_{\xi|\eta}(x|y) = f_{\xi}(x) = 2\mathrm{e}^{-2x}\bm{1}_{(x>0)}.
+		\end{equation}
+	\item 由于$\xi$与$\eta$独立, 所以\begin{equation}
+		P(\xi\leqslant x|\eta<1) = P(\xi\leqslant x) = \begin{dcases}
+			1-\mathrm{e}^{-2x},&x\geqslant 0,\\
+			0, &x<0.
+		\end{dcases}
+	\end{equation}
+	\end{enumerate}
+\end{yySolution}
+
+\begin{yyEx}
+	求证: 若$F(x)$为分布函数, 则对任意$h>0$, 函数
+	\begin{equation}
+	\varPhi(x) = \frac{1}{h}\int_{x}^{x+h}F(y)\mathrm{d}y,
+	\varPhi(x) = \frac{1}{2h}\int_{x-h}^{x+h}F(y)\mathrm{d}y
+	\end{equation}
+	都是分布函数.
+\end{yyEx}
+
+\begin{yySolution}
+	先证明两个函数都是单调非降的,设$a<b$, 根据$F$的单调性可知:
+	对第一个函数:\begin{align}
+		\varPhi(b) - \varPhi(a) &= \frac{1}{h}\int_{b}^{b+h}F(y)\mathrm{d}y - \frac{1}{h}\int_{a}^{a+h}F(y)\mathrm{d}y\nonumber\\
+		&=\frac{1}{h}\int_{0}^h \left[ F(b+u)-F(a+u) \right]\mathrm{d}u\nonumber\\
+		&\geqslant 0.
+	\end{align}
+	类似地, 对第二个函数:\begin{align}
+		\varPhi(b) - \varPhi(a) &= \frac{1}{h}\int_{b-h}^{b+h}F(y)\mathrm{d}y - \frac{1}{h}\int_{a-h}^{a+h}F(y)\mathrm{d}y\nonumber\\
+		&=\frac{1}{h}\int_{-h}^h \left[ F(b+u)-F(a+u) \right]\mathrm{d}u\nonumber\\
+		&\geqslant 0.
+	\end{align}
+	再证明两个函数都是右连续的, 根据$0\leqslant F(x)\leqslant 1$可知:
+	对第一个函数:\begin{align}
+		0&\leqslant \varPhi(a+\Delta x) - \varPhi(a)\nonumber\\
+		 &= \frac{1}{h}\int_{a+\Delta x}^{a+\Delta x+h}F(y)\mathrm{d}y - \frac{1}{h}\int_{a}^{a+h}F(y)\mathrm{d}y\nonumber\\
+		&=\frac{1}{h}\int_{a+h}^{a+\Delta x+h}F(y)\mathrm{d}y - \frac{1}{h}\int_{a}^{a+\Delta x}F(y)\mathrm{d}y\nonumber\\
+		&\geqslant \frac{2\Delta x}{h}\to 0,~\text{as}~\Delta x\to 0.
+	\end{align}
+	类似地, 对第二个函数:\begin{align}
+		0&\leqslant \varPhi(a+\Delta x) - \varPhi(a)\nonumber\\
+		 &= \frac{1}{2h}\int_{a+\Delta x-h}^{a+\Delta x+h}F(y)\mathrm{d}y - \frac{1}{2h}\int_{a-h}^{a+h}F(y)\mathrm{d}y\nonumber\\
+		&=\frac{1}{2h}\int_{a+h}^{a+\Delta x+h}F(y)\mathrm{d}y - \frac{1}{2h}\int_{a-h}^{a-h+\Delta x}F(y)\mathrm{d}y\nonumber\\
+		&\geqslant \frac{\Delta x}{h}\to 0,~\text{as}~\Delta x\to 0.
+	\end{align}
+	最后证明$\varPhi(+\infty) = 1$, $\varPhi(-\infty) = 0$. 根据$F$的单调性, 我们有:
+	对第一个函数:\begin{equation}
+		F(x)\leqslant \varPhi(x) = \frac{1}{h}\int_{x}^{x+h}F(y)\mathrm{d}y \leqslant F(x+h)
+	\end{equation}
+	对第二个函数:\begin{equation}
+		F(x-h)\leqslant \varPhi(x) = \frac{1}{2h}\int_{x-h}^{x+h}F(y)\mathrm{d}y \leqslant F(x+h)
+	\end{equation}
+	由极限的夹挤准则知结论成立.
+\end{yySolution}
+
+\begin{yyEx}
+	设$\xi,\eta$独立, 且都服从Poisson分布,\begin{align}
+	P(\xi = m) &= \frac{\lambda_1^m}{m!}\mathrm{e}^{-\lambda_1},~m=0,1,2,\cdots\nonumber\\
+	P(\eta = n) &= \frac{\lambda_2^n}{n!}\mathrm{e}^{-\lambda_2},~n=0,1,2,\cdots
+	\end{align}
+	求证:\begin{blist}
+		\item[(1)] $\xi+\eta$仍服从Poisson分布;
+		\item[(2)] \begin{equation}
+		P(\xi=k|\xi+\eta=N) = \binom{N}{k}\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{N-k},~k=0,1,\cdots,N.
+		\end{equation}
+	\end{blist}
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi,\eta$独立, 且分布密度分别为
+	\begin{equation}
+	f_{\xi}(x) = \begin{dcases}
+	\frac{1}{2}, &1<x<3,\\
+	0,&\text{otherwise},
+	\end{dcases}
+	\quad f_{\eta}(y) = \begin{dcases}
+	\mathrm{e}^{-(y-2)},&y>2,\\
+	0,&\text{otherwise},
+	\end{dcases}
+	\end{equation}
+	求证:\begin{equation}
+	f_{\xi/\eta}(x) = \begin{dcases}
+	\frac{1}{2x}\mathrm{e}^2\left[\mathrm{e}^{-1/x}(1+x)-\mathrm{e}^{-3/x}(x+3)\right], &0<x<\frac{1}{2},\\
+	\frac{3}{2}-\frac{\mathrm{e}^{2}}{2x}\mathrm{e}^{-3/x}(x+3),&\frac{1}{2}<x<\frac{3}{2},\\
+	0,&\text{otherwise}.
+	\end{dcases}
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	设$f_1(x),f_2(x),f_3(x)$对应的分布函数为$F_1(x),F_2(x),F_3(x)$, 证明: 对一切$\alpha$($-1<\alpha<1$), 下列函数是分布密度, 且有相应的边沿密度$f_1(x),f_2(x),f_3(x)$,
+	\begin{align}
+	&f_{\alpha}(x_1,x_2,x_3) \nonumber\\
+	=&f_1(x_1)f_2(x_2)f_3(x_3)\{ 1+\alpha[2F_1(x_1)-1][2F_2(x_2)-1][2F_3(x_3)-1] \}.
+	\end{align}
+\end{yyEx}
+
+\begin{yyEx}
+	设$(\xi,\eta,\zeta)$的分布密度为\begin{equation}
+	f(x,y,z) =\begin{dcases}
+	\frac{6}{(1+x+y+z)^4},&x>0,y>0,z>0,\\
+	0,&\text{otherwise},
+	\end{dcases}
+	\end{equation}
+	试求$U = \xi+\eta+\zeta$的分布密度.
+\end{yyEx}
+	\begin{yySolution}
+	我们愿意用一个初等的结论:
+	设$g(x)$可积, 并设$\Omega_a$是$\mathbb{R}^n$中的如下区域:
+	\begin{equation}
+	\Omega_a = \{(x_1,\cdots,x_n):0\leqslant \sum_{j=1}^nx_j\leqslant a,x_j\leqslant 0,j=1,\cdots,n\}.
+	\end{equation}
+	则,
+	\begin{equation}
+	\int_{\Omega_a} g(x_1+\cdots+x_n)\mathrm{d}x_1\cdots\mathrm{d}x_n
+	=\int_{0}^{a}\frac{x^{n-1}}{(n-1)!}g(x)\mathrm{d}x.
+	\end{equation}
+	由此, 可以第五节(一)中的方法求解本题:
+	\begin{equation}
+	F_U(u) = \iiint_{\{x+y+z\leqslant u\}}f(x,y,z)\mathrm{d}x\mathrm{d}y\mathrm{d}z = \int_{0}^{u}\frac{3x^2}{(1+x)^4}\mathrm{d}x,
+	\end{equation}
+	可见, $U$的概率密度函数为\begin{equation}
+	f_U(u) = \begin{dcases}
+	\frac{3u^2}{(1+u)^4}, &u>0,\\
+	0,&u\leqslant 0.
+	\end{dcases}
+	\end{equation}
+\end{yySolution} 
+
+\begin{yyEx}
+	设$\xi,\eta$独立且均服从$\mathcal{N}(0,1)$,证明$U = \xi^2+\eta^2$与$V=\dfrac{\xi}{\eta}$是独立的.
+\end{yyEx}
+
+\begin{yyProof}
+	设$D = \{(u,v):u>0,-\infty<v<\infty\}$, 则$P((U,V)\in D) = 1$.
+	对$(u,v)\in D$, 有
+	\begin{equation}
+		\{U = u,V = v\} = \{\xi = x,\eta = y\}\cup \{\xi = -x,\eta = -y\}
+	\end{equation}
+	其中\begin{equation}
+		x = v\sqrt{\frac{u}{1+v^2}},~~y = \sqrt{\frac{u}{1+v^2}}.
+	\end{equation}
+	\begin{align}
+		J &= \frac{\partial(x,y)}{\partial(u,v)} = \frac{\partial(u,v)}{\partial(x,y)}^{-1} = \det\begin{pmatrix}
+				2x & 2y \\ 1/y & -x/y^2
+			\end{pmatrix}^{-1}\nonumber\\
+		&=\frac{-1}{2(1+x^2/y^2)} = \frac{-1}{2(1+v^2)}.
+	\end{align}
+	由此, 可得$(U,V)$的联合密度
+	\begin{align}
+		g(u,v) &= f(x,y)\abs{J} + f(-x,-y)\abs{J}\nonumber\\
+		&= \frac{1}{2}\exp(-u/2)\frac{1}{\pi(1+v^2)}\bm{1}_{(u,v)\in D}.
+	\end{align}
+	由于联合密度$g(u,v)$可分离变量, 且定义域为矩形区域, 所以$U,V$独立.
+\end{yyProof}
+
+\begin{yyEx}
+	设$\xi,\eta$独立且它们的分布密度为\begin{equation}
+	f_{\xi}(x) = f_{\eta}(x) = \begin{dcases}
+	\mathrm{e}^{-x},&x>0,\\
+	0,&x\leqslant 0.
+	\end{dcases}
+	\end{equation}
+	试研究$\xi+\eta$与$\dfrac{\xi}{\xi+\eta}$是否独立.
+\end{yyEx}
+
+\begin{yySolution}
+	记$U = \xi+\eta$, $V = \dfrac{\xi}{\xi+\eta}$. 则
+	\begin{equation}
+		\{U = u,V = v\} = \{\xi = uv, \eta = u(1-v)\}.
+	\end{equation}
+	\begin{equation}
+		J = \det\begin{pmatrix}
+			v & u \\
+			1-v & -u
+		\end{pmatrix} = -u
+	\end{equation}
+	由此可得$(U,V)$的联合密度\begin{align}
+		g(u,v) &= f_\xi(uv)f_\eta(u(1-v))\abs{J}\nonumber\\
+		&= u\mathrm{e}^{-u}\bm{1}_{(uv>0,u(1-v)>0)}\nonumber\\
+		&= u\mathrm{e}^{-u}\bm{1}_{(u>0)}\bm{1}_{(0<v<1)}.
+	\end{align}
+	由于联合密度$g(u,v)$可分离变量, 且定义域为矩形区域, 所以$U,V$独立.
+\end{yySolution}
+
+\begin{yyEx}
+	证明: 任一广义分布函数最多有可列个不连续点.
+\end{yyEx}
+	\begin{yyProof}
+	设$F$是一个广义分布函数, 即$F$是一个$\mathbb{R}$上的非降右连续的实值函数. 若$x_0$是$F(x)$的不连续点, 则有
+	\begin{equation} F(x_0-0)<F(x_0+0).
+	\end{equation}
+	因此, $x_0$就对应着一个开区间$(F(x_0-0),F(x_0+0))$. 对于两个不同的不连续点$x_1$及$x_2$, 区间$(F(x_1-0),F(x_1+0))$与$(F(x_2-0),F(x_2+0))$不交. 因而, $F$的不连续点构成一个$\mathbb{R}$上的互不相交的开区间族, 所以它是至多可列集.(Remark: 设$\mathscr{G}$是$\mathbb{R}$中互不相交的开区间族,可从每个区间取一个有理数, 而有理数是可列集, 从而$\mathscr{G}$是至多可列集).
+\end{yyProof}

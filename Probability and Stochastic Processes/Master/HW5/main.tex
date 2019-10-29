@@ -1,9 +1,9 @@
-%!TEX program = xelatex
-\documentclass[a4paper,AutoFakeBold,oneside,10pt]{article}
+\documentclass[AutoFakeBold,oneside,12pt]{ctexart}
+\usepackage{geometry}
 
-%need xelatex
-\usepackage[fntef]{ctex} % invole CJKfntef
-\usepackage{ctex}
+\geometry{a4paper,scale=0.9}
+
+\newcommand{\myind}[1]{{\heiti\upshape\color{black} #1 }\index{#1}}
 
 %%%%%%%% 这两个宏包冲突, 只可保留其中一个
 %\usepackage{amsfonts}
@@ -99,7 +99,7 @@
 %   - Author
 %
 
-\newcommand{\hmwkTitle}{作业\ \#3}
+\newcommand{\hmwkTitle}{作业\ \#5}
 \newcommand{\hmwkDueDate}{9月22日, 2019}
 \newcommand{\hmwkClass}{概率论与随机过程}
 \newcommand{\hmwkClassTime}{}
@@ -147,7 +147,11 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Bias}{\mathrm{Bias}}
-
+\newenvironment{blist}%
+{\begin{list}{{\hfill\raisebox{1.12pt}{$\bullet$}}}{%
+			\leftmargin2em\labelwidth1.5em\labelsep0.5em
+			\itemsep0pt\itemindent0pt\parsep0pt\topsep0pt}}
+	{\end{list}}
 \begin{document}
 	
 	\maketitle
@@ -157,11 +161,26 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\pagebreak
 	\begin{homeworkProblem}
-
+	试证:
+	\begin{blist}
+		\item[(1)] 若$\xi_n\stackrel{p}{\rightarrow}\xi$, 则$\xi_n-\xi\stackrel{p}{\rightarrow}0$;
+		\item[(2)] 若$\xi_n\stackrel{p}{\rightarrow}\xi$, $\xi_n\stackrel{p}{\rightarrow}\eta$,则$P(\xi=\eta) = 1$;
+		\item[(3)] 若$\xi_n\stackrel{p}{\rightarrow}\xi$, 则$\xi_n-\xi_m\stackrel{p}{\rightarrow}0$($n,m\to\infty$);
+		\item[(4)]
+		若$\xi_n\stackrel{p}{\rightarrow}\xi$, 则对任意常数$C$, 有$C\xi_n\stackrel{p}{\rightarrow}C\xi$. 若$\eta$为随机变量, 有$\xi_n\eta\stackrel{p}{\rightarrow}\xi\eta$;
+		\item[(5)]
+		若$\xi_n\stackrel{p}{\rightarrow}\xi$,$\eta_n\stackrel{p}{\rightarrow}\eta$, 则$\xi_n\pm\eta_n\stackrel{p}{\rightarrow}\xi\pm\eta$, $\xi_n\eta_n\stackrel{p}{\rightarrow}\xi\eta$;
+		\item[(6)]
+		若$\xi_n\stackrel{p}{\rightarrow}\xi$,$\eta_n\stackrel{p}{\rightarrow}\eta$,且$g(x)$是$\mathbb{R}^{(1)}$上的连续函数, 则$g(\xi_n)\stackrel{p}{\rightarrow}g(\xi)$.
+	\end{blist}
 	\end{homeworkProblem}
 	
+	\begin{homeworkProblem}
+		设$\{\xi_n\}$是单调下降的正随机变量列, 且$\xi_n\stackrel{p}{\rightarrow}0$,试证$\xi_n\to 0,\mathrm{a.e.}$.
+	\end{homeworkProblem}
 
-    
-    
-    
+	\begin{homeworkProblem}
+		证明: 若存在常数$C>0$, 使$\abs{\xi_n}<C$, $\abs{\xi}<C$, 则$\xi_n\stackrel{p}{\rightarrow}\xi$的充要条件是$\xi_n$平均收敛于$\xi$.
+	\end{homeworkProblem}
+
 \end{document}

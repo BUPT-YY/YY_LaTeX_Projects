@@ -1,0 +1,10 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{引言}{2}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{若干准备知识}{8}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{一元高次代数方程的基础知识}{8}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{线性方程组}{8}{0}{4}

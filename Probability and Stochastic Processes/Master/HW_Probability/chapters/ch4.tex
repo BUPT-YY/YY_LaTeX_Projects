@@ -1,0 +1,131 @@
+\chapter{随机变量的特征函数}
+\begin{yyEx}
+		若随机变量$\xi$服从几何分布, 即
+		\begin{equation}
+			P(\xi = k) = pq^{k-1},~k=1,2,\cdots,
+		\end{equation}
+		其中$0<p<1$, $q = 1-p$, 试求$\xi$的特征函数$\varphi_\xi(t)$及$\mathrm{E}(\xi)$及$\mathrm{var}(\xi)$.
+\end{yyEx}
+
+\begin{yyEx}
+	试求$\Gamma$分布的特征函数, 并证明对具有相同参数$b$的$\Gamma$分布, 关于参数$p$具有可加性.
+\end{yyEx}
+
+\begin{yyEx}
+	求证: 函数
+	\begin{align}
+		\varphi_1(t) &= \sum_{k=0}^{\infty}a_k\cos kt,\nonumber\\
+		\varphi_2(t) &= \sum_{k=0}^{\infty}a_k\mathrm{e}^{\mathrm{i}kt}
+	\end{align}
+	是特征函数, 其中$a_k\geqslant 0,\sum\limits_{k=1}^{\infty}a_k = 1$, 并求出与$\varphi_1(t),\varphi_2(t)$所对应的分布函数.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\varphi_1(t) = \cos t$, $\varphi_2(t) = \cos^2 t$是特征函数, 求它们分别对应的分布函数
+\end{yyEx}
+
+\begin{yyEx}
+	设$F(x)$是随机变量$\xi$的分布函数, 且$F(x)$是严格单调的, 试求:
+	\begin{blist}
+		\item[(1)]$\eta = aF(\xi)+b$;
+		\item[(2)]$\eta = \ln F(\xi)$
+	\end{blist}
+的特征函数, 其中$a,b$是常数.
+\end{yyEx}
+
+\begin{yyEx}
+	设$F(x)$是随机变量$\xi$的分布函数, $\varphi(t)$是$\xi$的特征函数, 令\begin{equation}
+		G(x) = \frac{1}{2h}\int_{x-h}^{x+h}F(u)\mathrm{d}u,
+	\end{equation}
+	其中$h>0$, 则$G(x)$仍是一分布函数, 且与$G(x)$相对应的特征函数为$\dfrac{\sin ht}{ht}\varphi(t)$.
+\end{yyEx}
+
+\begin{yyEx}
+	证明: 特征函数是实值函数的充要条件是其相应的分布函数$F(x)$满足\begin{equation}
+		F(x) = 1 - F(- x - 0)~~(x>0).
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	求证: 对任何实的特征函数$\varphi(t)$, 均有
+	\begin{blist}
+		\item[(1)]$1-\varphi(2t)\leqslant 4\left[1-\varphi(t)\right]$;
+		\item[(2)]$1+\varphi(2t)\geqslant 2\left[\varphi(t)\right]^2$.
+	\end{blist}
+\end{yyEx}
+
+\begin{yyEx}
+	证明: 满足下列各等式的连续函数$\varphi(t)$是特征函数.
+	\begin{blist}
+	\item[(1)]$\varphi(t) = \varphi(-t)$;
+	\item[(2)]$\varphi(t+2a) = \varphi(t)$;
+	\item[(3)]$\varphi(t) = \dfrac{a-t}{a}$($0\leqslant t\leqslant a$),
+	\end{blist}
+	其中,$a$是正常数.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi_1,\cdots,\xi_n$独立且有相同的几何分布, 试求$\sum\limits_{j=1}^n\xi_j$的分布.
+\end{yyEx}
+
+\begin{yyEx}
+	若$f(t)$是特征函数, 则$\varphi(t) = \mathrm{e}^{f(t)-1}$也是特征函数.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\varphi(t)$是一随机变量的特征函数, 证明下列不等式成立.
+	\begin{blist}
+		\item[(1)]$\abs{\varphi(t+h) - \varphi(t)}\leqslant \sqrt{2\mathrm{Re}[1-\varphi(t)]}$; 
+		\item[(2)] $1-\mathrm{Re}[\varphi(2t)]\leqslant 4\left\{ 1 - \mathrm{Re}\left[\varphi(t)\right] \right\}$.
+	\end{blist}
+\end{yyEx}
+
+\begin{yyProof}
+	设$\varphi(t)$对应的d.f.是$F(x)$, 则
+	\begin{equation}
+		\mathrm{Re}(1-\varphi(t)) = \int_{-\infty}^{+\infty}(1-\cos tx)\mathrm{d}F(x).
+	\end{equation}
+	因为\begin{equation}
+		1-\cos tx = 2\sin^2\left(\frac{tx}{2}\right) \geqslant \frac{1}{4} (1-\cos 2tx),
+	\end{equation}
+	所以对每一$t$, \begin{equation}
+		1-\mathrm{Re}[\varphi(2t)]\leqslant 4\left\{ 1 - \mathrm{Re}\left[\varphi(t)\right] \right\}
+	\end{equation}
+\end{yyProof}
+
+\begin{yyEx}
+	设$\varphi(t)$是分布函数$F(x)$的特征函数, 试证明: 在$F(x)$的任意连续点$x$处有
+	\begin{equation}
+		F(x) = \lim_{x\to 0^+}\frac{1}{2\pi}\int_{-\infty}^{x}\int_{-\infty}^{\infty}\mathrm{e}^{-\frac{1}{2}\sigma^2t^2}\varphi(t)\mathrm{e}^{-\mathrm{i}tu}\mathrm{d}t\mathrm{d}u.
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	已知$\varphi(t) = \dfrac{1}{1+t^2}$是一特征函数, 试求与之相对应的分布密度函数.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi_1,\xi_2,\cdots$是独立同分布的随机变量列, $\mathrm{E}(\xi_1) = \mu > 0$, $\nu = \nu_p$服从参数为$p$的指数分布并且与$\xi_1,\xi_2,\cdots$独立, 令
+	\begin{equation}
+		\xi_p = \xi_1 + \cdots + \xi_{\lfloor \nu\rfloor},
+	\end{equation}
+	试证: 当$p\to 0$时, $p\xi_p$的极限分布是参数为$\dfrac{1}{\mu}$的指数分布.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi_1,\xi_2,\xi_3$独立, 都服从$\mathcal{N}(0,1)$分布, 试求$\eta_1 = \xi_1 + \xi_2$, $\eta_2 = \xi_1 + \xi_3$的联合特征函数.
+\end{yyEx}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

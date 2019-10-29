@@ -1,0 +1,67 @@
+\chapter{收敛定理}
+		\begin{yyEx}
+		试证:
+		\begin{blist}
+			\item[(1)] 若$\xi_n\stackrel{p}{\rightarrow}\xi$, 则$\xi_n-\xi\stackrel{p}{\rightarrow}0$;
+			\item[(2)] 若$\xi_n\stackrel{p}{\rightarrow}\xi$, $\xi_n\stackrel{p}{\rightarrow}\eta$,则$P(\xi=\eta) = 1$;
+			\item[(3)] 若$\xi_n\stackrel{p}{\rightarrow}\xi$, 则$\xi_n-\xi_m\stackrel{p}{\rightarrow}0$($n,m\to\infty$);
+			\item[(4)]
+			若$\xi_n\stackrel{p}{\rightarrow}\xi$, 则对任意常数$C$, 有$C\xi_n\stackrel{p}{\rightarrow}C\xi$. 若$\eta$为随机变量, 有$\xi_n\eta\stackrel{p}{\rightarrow}\xi\eta$;
+			\item[(5)]
+			若$\xi_n\stackrel{p}{\rightarrow}\xi$,$\eta_n\stackrel{p}{\rightarrow}\eta$, 则$\xi_n\pm\eta_n\stackrel{p}{\rightarrow}\xi\pm\eta$, $\xi_n\eta_n\stackrel{p}{\rightarrow}\xi\eta$;
+			\item[(6)]
+			若$\xi_n\stackrel{p}{\rightarrow}\xi$, 且$g(x)$是$\mathbb{R}^{(1)}$上的连续函数, 则$g(\xi_n)\stackrel{p}{\rightarrow}g(\xi)$.
+		\end{blist}
+	\end{yyEx}
+	
+	\begin{yyProof}
+		\begin{enumerate}
+			\item 根据定义, 这显然成立.
+			\item 注意$P(\xi\neq\eta)> 0$当且仅当存在$\varepsilon_0>0$ 使$P(\abs{\xi-\eta}\geqslant\varepsilon_0)>0$, 而
+			当$\xi_n\stackrel{p}{\rightarrow}\xi$和 $\xi_n\stackrel{p}{\rightarrow}\eta$时,
+			\begin{equation}
+				P(\abs{\xi-\eta}\geqslant\varepsilon_0)\leqslant P(\abs{\xi_n-\xi}\geqslant\varepsilon_0) + P(\abs{\xi_n-\eta}\geqslant\varepsilon_0)\to 0, \text{as}~n\to\infty.
+			\end{equation}
+			因此, 必须有$P(\xi=\eta) = 1$.
+			\item 对任意的$\varepsilon>0$, \begin{equation}
+			P(\abs{\xi_n-\xi_m}\geqslant\varepsilon)\leqslant P(\abs{\xi_n-\xi}\geqslant\varepsilon) + P(\abs{\xi_m-\xi}\geqslant\varepsilon)\to 0, \text{as}~n,m\to\infty.
+			\end{equation}
+			\item \begin{align}\label{eq:513}
+				P(\abs{\xi_n\eta-\xi\eta}\geqslant\varepsilon) &= P(\abs{\eta}\leqslant M, \abs{\xi_n\eta-\xi\eta}\geqslant\varepsilon) + P(\abs{\eta}> M, \abs{\xi_n\eta-\xi\eta}\geqslant\varepsilon)\nonumber\\
+				&\leqslant P(\abs{\xi_n-\xi}\geqslant \varepsilon/M) + P(\abs{\eta}>M).
+			\end{align}
+			根据分布函数的性质知道$P(\abs{\eta}>M)\to 0, \text{as}~M\to\infty$.
+			因此, 在式(\ref{eq:513})的右端先令$n\to\infty$, 再令$M\to\infty$, 便得到$\forall \varepsilon>0, P(\abs{\xi_n\eta-\xi\eta}\geqslant\varepsilon)\to 0, \text{as}~n\to\infty$. 即$\xi_n\eta\stackrel{p}{\rightarrow}\xi\eta$. 注意到任意的常数$C$也是个随机变量, 所以命题的前半部分自然成立.
+			\item 
+			\item 
+		\end{enumerate}
+	\end{yyProof}
+	
+	\begin{yyEx}
+		设$\{\xi_n\}$是单调下降的正随机变量列, 且$\xi_n\stackrel{p}{\rightarrow}0$,试证$\xi_n\to 0,\mathrm{a.e.}$.
+	\end{yyEx}
+	\begin{yyProof}
+		令$A_n = \{ \abs{\xi_n-0}\geqslant \varepsilon \},~n\in\mathbb{N}^*$. 根据$\{\xi_n\}$是单调下降的正r.v.序列, 知道$\{A_n\} \downarrow$. 注意到$\{\xi_n\}$依概率测度收敛到$0$, \begin{equation}
+			\lim_{n\to\infty}P\left\{ \bigcup_{m=n}^{+\infty}A_m \right\} = \lim_{n\to\infty}P\left\{ A_n \right\} = 0.
+		\end{equation}
+		这说明$\xi_n\to 0,\mathrm{a.s.}$.
+	\end{yyProof}
+	
+	\begin{yyEx}
+		证明: 若存在常数$C>0$, 使$\abs{\xi_n}<C$, $\abs{\xi}<C$, 则$\xi_n\stackrel{p}{\rightarrow}\xi$的充要条件是$\xi_n$平均收敛于$\xi$.
+	\end{yyEx}
+	
+	\begin{yyProof}
+		条件充分: 根据马尔可夫(Марков)不等式, 对任意$\varepsilon>0$\begin{equation}
+			0\leqslant P(\abs{\xi_n-\xi}\geqslant \varepsilon) \leqslant \frac{1}{\varepsilon}\mathrm{E}\abs{\xi_n - \xi} \to 0,~\text{as}~n\to\infty.
+		\end{equation}
+		条件必要: 对任意$\varepsilon>0$有 \begin{align}
+			0\leqslant \mathrm{E}\abs{\xi_n - \xi} &= \mathrm{E}\left[\abs{\xi_n - \xi}\bm{1}_{(\abs{\xi_n - \xi}<\varepsilon)}\right] + \mathrm{E}\left[\abs{\xi_n - \xi}\bm{1}_{(\abs{\xi_n - \xi}\geqslant\varepsilon)}\right]\nonumber\\
+			&\leqslant \mathrm{E}\left[\varepsilon\right] + \mathrm{E}\left[2C\bm{1}_{(\abs{\xi_n - \xi}\geqslant\varepsilon)}\right]\nonumber\\
+			&= \varepsilon + 2CP(\abs{\xi_n - \xi}\geqslant\varepsilon)
+		\end{align}
+		先令$n\to\infty$, 再令$\varepsilon\to 0$, 得到
+		\begin{equation}
+			\lim_{n\to\infty}\mathrm{E}\abs{\xi_n - \xi} = 0.
+		\end{equation}
+	\end{yyProof}

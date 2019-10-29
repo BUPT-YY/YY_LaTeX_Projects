@@ -1,0 +1,70 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[english]{babel}
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath, amsthm,bm}
+\usepackage{mathtools}
+\input{chapters/preamble}
+\title{Solution} %->->->->-> Check hyperref title <-<-<-<-<-
+\author[Yong YANG]{Yong YANG, 2019110294}
+\institute[BUPT]{
+	Beijing University of Posts and Telecommunications%
+} %You can change the Institution if you are from somewhere else
+\date{\today}
+%\logo{\includegraphics[width= 0.2\textwidth]{images/a-logo.png}}
+
+\usepackage{graphicx}
+\definecolor{hellmagenta}{rgb}{1,0.75,0.9}
+\definecolor{hellcyan}{rgb}{0.75,1,0.9}
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{1,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+\definecolor{darkyellow}{rgb}{1,0.9,0}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+   \section{}
+\begin{frame}
+	求$x\to 1^-$时, 与$\sum\limits_{n=0}^{+\infty}x^{n^2}$等价的无穷大量.
+\begin{block}{解:}
+	当$n\leqslant t<n+1$时,
+	\begin{equation*}
+		\mathrm{e}^{\textcolor{red}{n^2}\ln x}\geqslant \mathrm{e}^{\textcolor{red}{t^2}\ln x}>\mathrm{e}^{\textcolor{red}{(n+1)^2}\ln x},
+	\end{equation*}
+	积分得到\begin{equation*}
+		\mathrm{e}^{\textcolor{red}{n^2}\ln x}\geqslant \int_{n}^{n+1}\mathrm{e}^{\textcolor{red}{t^2}\ln x}\mathrm{d}t>\mathrm{e}^{\textcolor{red}{(n+1)^2}\ln x}.
+	\end{equation*}
+	求和, 得\begin{equation*}
+		\sum_{n=0}^{+\infty}\mathrm{e}^{\textcolor{red}{n^2}\ln x}\geqslant \int_{0}^{+\infty}\mathrm{e}^{\textcolor{red}{t^2}\ln x}\mathrm{d}t>\sum_{n=1}^{+\infty}\mathrm{e}^{\textcolor{red}{n^2}\ln x} = \sum_{n=0}^{+\infty}\mathrm{e}^{\textcolor{red}{n^2}\ln x} - 1.
+	\end{equation*}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\begin{block}{接上页...}
+		因此, 与其等价的无穷大量是\begin{equation*}
+			\begin{split}
+				\sum_{n=0}^{+\infty}\mathrm{e}^{\textcolor{red}{n^2}\ln x} &\sim \int_{0}^{+\infty}\mathrm{e}^{t^2\ln x}\mathrm{d}t \\
+				&= \frac{1}{\sqrt{-\ln x}}\frac{1}{2}\sqrt{\pi}\\
+				&\sim \frac{1}{2}\sqrt{\frac{\pi}{1-x}}.
+			\end{split}
+		\end{equation*}
+	\end{block}
+\end{frame}
+
+\section{}
+\begin{frame}{}
+\centering
+\Huge\bfseries
+\textcolor{orange}{谢~~谢}
+\end{frame}
+\end{document}

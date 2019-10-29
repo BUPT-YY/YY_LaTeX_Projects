@@ -1,0 +1,223 @@
+%%
+%% This is file `buptthesis-graduate.ltx',
+%% generated with the docstrip utility.
+%% buptthesis.dtx  (with options: `graduate')
+%%
+%% This file has the LPPL maintenance status "maintained".
+\ProvidesFile{buptthesis-graduate.ltx}
+  [2019/10/08 1.0.0rc Beijing University of Posts and Telecommunications Thesis Template]
+\ifbupt@degree@doctor
+  \bupt@def@label{degreetypeChi}{博士}
+  \bupt@def@label{degreetypeEng}{Doctor}
+\else
+  \bupt@def@label{degreetypeChi}{硕士}
+  \bupt@def@label{degreetypeEng}{Master}
+\fi
+\bupt@def@label{authorChi}{\bupt@label@degreetypeChi 研究生}
+\bupt@def@label{authorEng}{Candidate}
+\bupt@def@label{studentidChi}{学号}
+\bupt@def@label{studentidEng}{Student ID}
+\bupt@def@label{supervisorChi}{导师}
+\bupt@def@label{supervisorEng}{Supervisor}
+\bupt@def@label{assisupervisorChi}{副导师}
+\bupt@def@label{assisupervisorEng}{Assistant Supervisor}
+\bupt@def@label{degreeChi}{申请学位}
+\bupt@def@label{degreeEng}{Academic Degree Applied for}
+\bupt@def@label{majorChi}{学科}
+\bupt@def@label{majorEng}{Speciality}
+\bupt@def@label{departmentChi}{所在单位}
+\bupt@def@label{departmentEng}{Affiliation}
+\bupt@def@label{defenddateChi}{答辩日期}
+\bupt@def@label{defenddateEng}{Date of Defence}
+\bupt@def@label{conferringChi}{授予学位单位}
+\bupt@def@label{conferringEng}{Degree-Conferring-Institution}
+\bupt@def@label{fundChi}{资助基金}
+\bupt@def@label{fundEng}{Funded by}
+\bupt@def@label{thesiscat}{学位论文}
+\def\bupt@label@thesistype{\bupt@label@thesiscat}
+\bupt@def@label{subjectChi}{%
+  \bupt@label@schoolChi\bupt@label@degreetypeChi\bupt@label@thesiscat
+}
+\bupt@def@label{subjectEng}{%
+  Dissertation Submitted to \bupt@label@schoolEng \\%
+  for the Degree of \bupt@label@degreetypeEng
+}
+\geometry{%
+  paper      = a4paper,
+  top        = 3.5cm,
+  bottom     = 4.0cm,
+  left       = 3.3cm,
+  right      = 2.8cm,
+  headheight = 1.0cm,
+  headsep    = 0.5cm,
+}
+\newcommand{\bupt@fancyfoot}[2]{
+  \ifbupt@review\relax\else
+    \ifx#2\@empty\else
+      \zihao{-5}{\bfseries #1}\\{#2}
+    \fi
+  \fi
+}
+\fancypagestyle{bupt@title}{%
+  \fancyhf{}
+  \fancyfoot[C]{\bupt@fancyfoot{\bupt@label@fundChi}{\bupt@value@fund}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{bupt@entitle}{%
+  \fancyhf{}
+  \fancyfoot[C]{\bupt@fancyfoot{\bupt@label@fundEng}{\bupt@value@enfund}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{bupt@plain}{%
+  \fancyhf{}
+  \fancyhead[C]{\zihao{-5}\bupt@label@subjectChi}
+  \fancyfoot[C]{\small ---~{\bfseries\thepage}~---}
+  \renewcommand{\headrule}{%
+    \hrule\@height2.25\p@\@width\headwidth
+    \vskip 0.75\p@
+    \hrule\@height0.75\p@\@width\headwidth
+    \vskip -2.75\p@
+  }
+}
+\renewcommand{\frontmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagenumbering{Roman}
+  \pagestyle{bupt@plain}
+}
+\renewcommand{\mainmatter}{%
+  \cleardoublepage
+  \@mainmattertrue
+  \bupt@setfloatfonttrue
+  \pagenumbering{arabic}
+  \pagestyle{bupt@plain}
+}
+\renewcommand{\backmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+}
+\renewcommand{\cftchapfont}{\bfseries\heiti}
+\renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftdotsep}}
+\NewDocumentEnvironment{abstract}{}{%
+  \cleardoublepage
+  \pdfbookmark[0]{\bupt@label@abstract}{abstract}
+  \chapter*{%
+    \bupt@value@title \vskip 2ex
+    \begingroup
+      \bupt@label@abstractChi
+    \endgroup
+  }
+  \@mkboth{\bupt@label@abstractChi}%
+          {\bupt@label@abstractChi}%
+  \zihao{4}
+}{%
+  \vskip 3ex \noindent
+  \begingroup
+    \heiti\bupt@label@keywordsChi
+  \endgroup
+  \begingroup
+    \bupt@value@keywords
+  \endgroup
+}
+\NewDocumentEnvironment{enabstract}{}{%
+  \cleardoublepage
+  \chapter*{%
+    \MakeUppercase\bupt@value@entitle \vskip 2ex
+    \begingroup
+      \MakeUppercase\bupt@label@abstractEng
+    \endgroup
+  }
+  \@mkboth{\bupt@label@abstractEng}%
+          {\bupt@label@abstractEng}%
+  \zihao{4}
+}{%
+  \vskip 3ex \noindent
+  \begingroup
+    \bfseries\MakeUppercase
+    \bupt@label@keywordsEng
+  \endgroup
+  \begingroup
+    \bupt@value@enkeywords
+  \endgroup
+}
+\newcommand{\bupt@bigabstract}[1]{\long\gdef\bupt@bigabstract@body{#1}}
+\NewDocumentEnvironment{bigabstract}{}{%
+  \Collect@Body\bupt@bigabstract
+}{%
+  \relax
+}
+\RenewDocumentCommand\maketitle{}{%
+  \pdfbookmark[0]{\bupt@label@titlepage}{titlepage}
+  \bupt@makechinesetitle%
+  \bupt@makeenglishtitle%
+}
+\newcommand{\bupt@makechinesetitle}{%
+  \cleardoublepage
+  \thispagestyle{bupt@title}
+  \begin{center}
+    \vspace*{40bp}
+    {\zihao{-2}\bupt@label@subjectChi}
+    \vskip \stretch{4}
+    {\zihao{2}\heiti\bupt@value@title \vskip 1bp}
+    \vskip \stretch{5}
+    \begingroup
+      \zihao{4}
+      \def\tabcolsep{1bp}
+      \def\arraystretch{1.25}
+      \begin{tabular}
+        {>{\begin{CJKfilltwosides}[t]{6.5\ccwd}\heiti}r<{\end{CJKfilltwosides}}
+          @{：}l}
+        \bupt@label@authorChi           & \bupt@value@author         \\
+        \bupt@label@studentidChi        & \bupt@value@studentid      \\
+        \bupt@label@supervisorChi       & \bupt@value@supervisor     \\
+        \ifx\bupt@value@assisupervisor\@empty\else
+          \bupt@label@assisupervisorChi & \bupt@value@assisupervisor \\
+        \fi
+        \bupt@label@degreeChi           & \bupt@value@degree         \\
+        \bupt@label@majorChi            & \bupt@value@major          \\
+        \bupt@label@departmentChi       & \bupt@value@department     \\
+        \bupt@label@defenddateChi       & \bupt@value@date           \\
+        \bupt@label@conferringChi       & \bupt@label@schoolChi      \\
+      \end{tabular}
+    \endgroup
+    \vskip 26bp
+  \end{center}
+  \cleardoublepage
+}
+\newcommand{\bupt@makeenglishtitle}{%
+  \cleardoublepage
+  \thispagestyle{bupt@entitle}
+  \begin{center}
+    \vspace*{28bp}
+    {\zihao{-2}\bupt@label@subjectEng \vskip 1bp}
+    \vskip \stretch{4}
+    {\zihao{2}\bfseries\MakeUppercase\bupt@value@entitle \vskip 1bp}
+    \vskip \stretch{5}
+    \begingroup
+      \zihao{4}
+      \def\tabcolsep{1bp}
+      \def\arraystretch{1.3}
+      \begin{tabular}
+        {>{\bfseries}l<{:~}l}
+        \bupt@label@authorEng           & \bupt@value@enauthor         \\
+        \bupt@label@studentidEng        & \bupt@value@studentid        \\
+        \bupt@label@supervisorEng       & \bupt@value@ensupervisor     \\
+        \ifx\bupt@value@enassisupervisor\@empty\else
+          \bupt@label@assisupervisorEng & \bupt@value@enassisupervisor \\
+        \fi
+        \bupt@label@degreeEng           & \bupt@value@endegree         \\
+        \bupt@label@majorEng            & \bupt@value@enmajor          \\
+        \bupt@label@departmentEng       & \bupt@value@endepartment     \\
+        \bupt@label@defenddateEng       & \bupt@value@endate           \\
+        \bupt@label@conferringEng       & \bupt@label@schoolEng        \\
+      \end{tabular}
+    \endgroup
+    \vskip 26bp
+  \end{center}
+  \cleardoublepage
+}
+\endinput
+%%
+%% End of file `buptthesis-graduate.ltx'.

@@ -1,8 +1,9 @@
-\documentclass[a4paper,AutoFakeBold,oneside,10pt]{article}
+\documentclass[AutoFakeBold,oneside,12pt]{ctexart}
+\usepackage{geometry}
 
-%need xelatex
-\usepackage[fntef]{ctex} % invole CJKfntef
-\usepackage{ctex}
+\geometry{a4paper,scale=0.9}
+
+\newcommand{\myind}[1]{{\heiti\upshape\color{black} #1 }\index{#1}}
 
 %%%%%%%% 这两个宏包冲突, 只可保留其中一个
 %\usepackage{amsfonts}
@@ -99,7 +100,7 @@
 %
 
 \newcommand{\hmwkTitle}{作业\ \#2}
-\newcommand{\hmwkDueDate}{9月22日, 2019}
+\newcommand{\hmwkDueDate}{10月2日, 2019}
 \newcommand{\hmwkClass}{概率论与随机过程}
 \newcommand{\hmwkClassTime}{}
 \newcommand{\hmwkClassInstructor}{}
@@ -157,8 +158,29 @@
 	\pagebreak
 	\begin{homeworkProblem}
 		设$F(x) = P(\xi<x)$, 试证:$F(x)$单调不减、左连续, 且$F(-\infty) = 0$, $F(+\infty) = 1$.
-		
+		\begin{proof}
+			若$x_1<x_2$, 则$\{ \xi<x_2 \} = \{ \xi<x_1\}  \cup\{ x_1\leqslant\xi<x_2 \}$, 
+			注意到等式右边的两个集合不交, 故
+			\begin{equation}
+			 F(x_2) = P(\xi<x_2) = P(\xi<x_1)+P( x_1\leqslant\xi<x_2) \geqslant P(\xi<x_1) = F(x_1).
+			\end{equation}
+			由于函数$F(x)$单调且有界, 所以它必存在单侧极限. 为了证明$F(x-0)=F(x)$, 必须且只需对某一列$\{x_n\}$, $x_1<x_2<\cdots,x_n\to x$, 有$\lim\limits_{n\to\infty}F(x_n) = F(x)$即可. 令
+			\begin{equation}
+				A_n = \{ x_n\leqslant \xi < x \},
+			\end{equation}
+			则$A_n\supset A_{n+1}$ 且$\bigcap\limits_{n=1}^{\infty}A_n = \varnothing$, 利用概率测度在$\varnothing$处上连续得到:
+			\begin{equation}
+				\lim_{n\to\infty}F(x_n) - F(x) = \lim_{n\to\infty}[F(x_n) - F(x)] = \lim_{n\to\infty}P(A_n) = P(\varnothing) = 0.
+			\end{equation}
+			令$B_n = \{ \xi<-n \}$, 则$B_n\downarrow \varnothing$; 类似地, 令$C_n = \{\xi<n\}$,则$C_n\uparrow\Omega$.
+			由$F$的单调性和概率测度$P$的连续性,
+			\begin{align}
+				F(+\infty) &= \lim_{n\to\infty}F(n) = \lim_{n\to\infty}P(C_n) = P(\Omega) = 1,\nonumber\\
+				F(-\infty) &= \lim_{n\to\infty}F(-n) = \lim_{n\to\infty}P(B_n) =  P(\varnothing) = 0.
+			\end{align}
+		\end{proof}
 	\end{homeworkProblem}
+	
 	
 	\begin{homeworkProblem}
 		设随机变量$\xi$取值于$(0,1)$, 若对一切$0<x\leqslant y<1$，$P(x<\xi\leqslant y)$只与长度$y-x$有关, 试证:
@@ -256,11 +278,11 @@
 	        \end{equation}
         由此, 可以第五节(一)中的方法求解本题:
 	        \begin{equation}
-	            F_U(u) = \iiint_{x+y+z\leqslant u}f(x,y,z)\mathrm{d}x\mathrm{d}y\mathrm{d}z = \int_{0}^{u}\frac{3x^2}{(1+x)^4}\mathrm{d}x,
+	            F_U(u) = \iiint_{\{x+y+z\leqslant u\}}f(x,y,z)\mathrm{d}x\mathrm{d}y\mathrm{d}z = \int_{0}^{u}\frac{3x^2}{(1+x)^4}\mathrm{d}x,
 	        \end{equation}
 	        可见, $U$的概率密度函数为\begin{equation}
 	            f_U(u) = \begin{dcases}
-	                \frac{3u^2}{(1+u)^4}, &u>0\\
+	                \frac{3u^2}{(1+u)^4}, &u>0,\\
 	                0,&u\leqslant 0.
 	            \end{dcases}
 	        \end{equation}
@@ -284,10 +306,10 @@
     \begin{homeworkProblem}
         证明: 任一广义分布函数最多有可列个不连续点.
         \begin{proof}
-            设$F$是一个广义分布函数, 即$F$是一个$\mathbb{R}$上的非降右连续的实值函数. 若$x_0$是$f(x)$的不连续点, 则有
-            \begin{equation} f(x_0-0)=\lim_{x\to x_0-0}F(x)<\lim_{x\to x_0+0}F(x)=F(x_0+0).
+            设$F$是一个广义分布函数, 即$F$是一个$\mathbb{R}$上的非降右连续的实值函数. 若$x_0$是$F(x)$的不连续点, 则有
+            \begin{equation} F(x_0-0)<F(x_0+0).
             \end{equation}
-            因此, $x_0$就对应着一个开区间$(F(x_0-0),F(x_0+0))$. 对于两个不同的不连续点$x_1$及$x_2$, 区间$(F(x_1-0),F(x_1+0))$与$(F(x_2-0),F(x_2+0))$不交. 因而, $F$的不连续点构成一个$\mathbb{R}$上的互不相交的开区间族, 所以它是至多可列集.(Remark: 设$E$是$\mathbb{R}$中互不相交的开区间族,可从每个区间取一个有理数, 而有理数是可列集, 从而$E$是至多可列集)
+            因此, $x_0$就对应着一个开区间$(F(x_0-0),F(x_0+0))$. 对于两个不同的不连续点$x_1$及$x_2$, 区间$(F(x_1-0),F(x_1+0))$与$(F(x_2-0),F(x_2+0))$不交. 因而, $F$的不连续点构成一个$\mathbb{R}$上的互不相交的开区间族, 所以它是至多可列集.(Remark: 设$\mathscr{G}$是$\mathbb{R}$中互不相交的开区间族,可从每个区间取一个有理数, 而有理数是可列集, 从而$\mathscr{G}$是至多可列集).
         \end{proof}
     \end{homeworkProblem}
     

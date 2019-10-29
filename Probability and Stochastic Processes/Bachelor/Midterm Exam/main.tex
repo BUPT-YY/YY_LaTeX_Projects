@@ -1,0 +1,142 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[english]{babel}
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsmath, amsthm,bm}
+\usepackage{mathtools}
+\input{chapters/preamble}
+\title{Solution(Midterm Exam)} %->->->->-> Check hyperref title <-<-<-<-<-
+\author[Yong YANG]{Yong YANG, 2019110294}
+\institute[BUPT]{
+	Beijing University of Posts and Telecommunications%
+} %You can change the Institution if you are from somewhere else
+\date{\today}
+%\logo{\includegraphics[width= 0.2\textwidth]{images/a-logo.png}}
+
+\begin{document}
+	
+	\frame{\titlepage}
+	
+   \section{}
+\begin{frame}{\textbf{陈述:}请举例说明什么是主观概率?什么是客观概率}
+\begin{block}{主观概率}
+	例:甲乙丙丁四人对事件$A = \{\text{今晚下午六点前不会下雨} \}$发生的可能性大小做个估计, 分别为$0$,$0.2$,$0.7$和$1$.
+	
+	主观概率可以理解为一种心态或倾向性. 究其根由, 大抵有二: 1、根据经验和知识. 例如乙可能在本地居住了30年, 又是个有气象学知识的人. 所以主观概率也可能有一定的客观背景, 终究不同于信口雌黄 2、 根据其利害关系, 也就是事件发生与否带来的风险与损失.
+	
+	在概率论中, 主观概率进一步发展为 Bayes统计学派.
+\end{block}
+\begin{block}{客观概率}
+	例:掷三枚骰子, 求点数之和为$9$的概率.
+	
+	客观概率 包含“试验与事件”的概念. 人们处在被动地位, 只是记录而并不干预这个过程, 也就是人们仅仅“观察”. 
+	
+	客观概率则对应概率的频率学派.
+\end{block}
+\end{frame}
+
+\begin{frame}{\textbf{判断题}:}
+
+\begin{itemize}
+	\item ($\times$)任意离散型随机变量都存在数学期望.\\
+	例: $X\sim \mathrm{Ge}(0.5)$, $Y = 2^X$. 则$Y$不存在数学期望.
+	\item ($\times$)两个随机变量不相关, 则这两个随机变量不可能独立.\\
+	例: $(X,Y)$服从单位圆盘上的均匀分布.
+	\item ($\times$)已知随机变量$X$的分布与随机变量$Y$的分布, 一般地, 可以求出$\abs{X^2+Y^2}$的分布函数.\\
+	Rmk: 应当知道$X$与$Y$的联合分布.
+	\item ($\times$)指数分布与泊松分布都有无记忆性.\\
+	Rmk: Poisson分布没有无记忆性
+	\item ($\times$)有三个随机变量, 它们两两独立, 则它们相互独立.\\
+	例: 从4个质地相同的球任取一个, $A = \{\text{取到1号或2号}\}$, $B = \{\text{取到1号或3号}\}$, $C = \{\text{取到1号或4号}\}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{\textbf{3计算:}}
+	有4个灯泡, 它们的寿命服从独立同分布的参数为$\lambda$的指数分布, 现将其中两个串联, 再将另外两个串联, 最后再将它们并联. 求这个电路的工作寿命的概率密度函数.
+	\begin{block}{解.}
+		设四个灯泡的寿命分别为$X_j\sim\mathcal{E}(\lambda)$($j=1,2,3,4$). 电路工作寿命为$Y = \max(\min(X_1,X_2),\min(X_3,X_4))$.
+		\begin{equation*}
+			\begin{split}
+				F_Y(y) &= P(Y\leqslant y) = P(\min(X_1,X_2)\leqslant y)P(\min(X_3,X_4)\leqslant y)\\
+				&= \left[ 1-P(X_1>y)P(X_2>y) \right]\left[ 1-P(X_3>y)P(X_4>y) \right]\\
+				&=(1-\mathrm{e}^{-2\lambda y})^2,~~(y>0).
+			\end{split}
+		\end{equation*}
+		所以\begin{equation*}
+			f_Y(y) =F_Y'(y) =  2\lambda \mathrm{e}^{-\lambda y}(1-\mathrm{e}^{-2\lambda y})\bm{1}_{(y>0)}.
+		\end{equation*}
+		其中,$\bm{1}_{(\cdot)}$表示示性函数(indicator function).
+	\end{block}
+\end{frame}
+
+\begin{frame}{\textbf{4计算}:}
+	袋中有$N$张卡片, 各记以数字$1,2,\cdots,N$. 不放回地从中抽取$n$($n\leqslant N$)张. 求其和的数学期望与方差.
+	\begin{block}{解}
+		记随机变量$X_j = \{\text{第}j\text{次取得卡片的数字}\},~~(j=1,\cdots,n)$.
+		则不难计算出:$\mathrm{E}X_j = (N+1)/2$.
+		\begin{equation*}
+			\mathrm{E}X_iX_j =\begin{dcases}
+			 \frac{1}{12} \left(3 N^2+5N+2\right),&i\neq j,\\
+			 \frac{(N+1)(2N+1)}{6}, &i=j.
+			\end{dcases}
+		\end{equation*}
+		
+		$Y = X_1+\cdots+X_n$是抽到的卡片数字之和. 它的期望和方差分别为\begin{equation*}
+			\mathrm{E}Y = \mathrm{E}X_1 + \cdots + \mathrm{E}X_n = \frac{n(N+1)}{2},
+		\end{equation*}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{接上页}
+		\begin{equation*}
+		\begin{split}
+			\mathrm{var}(Y) &= \sum_{j=1}^n\sum_{i=1}^n\left[ \mathrm{E}(X_iX_j) - \mathrm{E}X_i\mathrm{E}X_j \right]\\
+			&= n\mathrm{E}X_1^2 + n(n-1)\mathrm{E}X_1X_2 - n^2(\mathrm{E}X_1)^2 \\
+			&= \frac{n(N+1)(2N+1)}{6} + n(n-1)\frac{1}{12} \left(3 N^2+5N+2\right) \\
+			&~~- n^2\left(\frac{N+1}{2}\right)^2\\
+			&= \frac{1}{12} n (N+1) (N-n).
+		\end{split}
+		\end{equation*}
+	\end{block}
+\end{frame}
+
+\begin{frame}{\textbf{5构造}}
+	一个二维均匀分布, 使得该二维随机变量的边际分布都是一维均匀分布且该二维随机变量的两个分量是相互独立的; 再构造一个二维均匀分布, 使得该二维随机变量的两个分量不是相互独立的;再构造一个二维均匀分布, 使得该二维随机变量的两个分量是不相关的.
+	\begin{block}{解.}
+		\begin{enumerate}
+			\item $E = [-1,1]\times [-1,1]$, 随机向量$(X,Y)\sim\mathcal{U}(E)$.
+			\item $D = \{ (x,y): x^2+y^2\leqslant 1 \}$(单位圆盘), 随机向量$(X,Y)\sim\mathcal{U}(D)$.
+			\item 同上
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}{\textbf{6证明}}
+	若$(X,Y)$服从二维正态分布$\mathcal{N}(0,0,1,1,\rho)$, 求证: $X+2Y$服从一维正态分布.
+	\begin{proof}
+		随机向量$(X,Y)$有特征函数:
+		\begin{equation*}
+			\psi(t_1,t_2) = \mathrm{E}\mathrm{e}^{i(t_1X+t_2Y)} = 
+			\exp\left[ -\frac{1}{2}(t_1^2+2t_1t_2+t_2^2) \right].
+		\end{equation*}
+		随机变量$Z = X+2Y$的特征函数是\begin{equation*}
+			\psi_Z(t) = \mathrm{E}\mathrm{e}^{itZ} = \psi(t,2t) = \exp\left[ -\frac{9}{2}(t^2) \right].
+		\end{equation*}
+		这说明: $Z\sim\mathcal{N}(0,9)$.
+	\end{proof}
+\end{frame}
+
+
+\section{}
+\begin{frame}{}
+\centering
+\Huge\bfseries
+\textcolor{orange}{谢~~谢}
+\end{frame}
+\end{document}

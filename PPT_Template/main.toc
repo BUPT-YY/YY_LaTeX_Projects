@@ -1,0 +1,11 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Introduction}{4}{0}{1}
+\beamer@sectionintoc {2}{Section 1}{5}{0}{2}
+\beamer@sectionintoc {3}{Section 2}{6}{0}{3}
+\beamer@sectionintoc {4}{Section 3}{7}{0}{4}
+\beamer@sectionintoc {5}{Content}{8}{0}{5}
+\beamer@sectionintoc {6}{Figures}{10}{0}{6}
+\beamer@sectionintoc {7}{Chart}{11}{0}{7}
+\beamer@sectionintoc {8}{Some \LaTeX {} Examples}{15}{0}{8}
+\beamer@subsectionintoc {8}{1}{Tables}{15}{0}{8}
+\beamer@subsectionintoc {8}{2}{Mathematics}{16}{0}{8}

@@ -1,0 +1,174 @@
+%!TEX program = xelatex
+\documentclass[a4paper,AutoFakeBold,oneside,12pt]{article}
+
+%need xelatex
+\usepackage[fntef]{ctex} % invole CJKfntef
+\usepackage{ctex}
+
+%%%%%%%% 这两个宏包冲突, 只可保留其中一个
+%\usepackage{amsfonts}
+\usepackage{mathrsfs}
+%%%%%%%%
+
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{calligra}
+\usepackage{csquotes}
+\usepackage{tensor}
+\usepackage[thicklines]{cancel}
+\usepackage{tcolorbox}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{enumerate}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ \hmwkClassInstructor\ \hmwkClassTime \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+	\nobreak\extramarks{}{习题 \arabic{#1} 接下页\ldots}\nobreak{}
+	\nobreak\extramarks{习题 \arabic{#1} (continued)}{习题 \arabic{#1} 接下页\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+	\nobreak\extramarks{习题 \arabic{#1} (continued)}{习题 \arabic{#1} 接下页\ldots}\nobreak{}
+	\stepcounter{#1}
+	\nobreak\extramarks{习题 \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{ \today}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+	\section{习题 \arabic{homeworkProblemCounter}}
+	\setcounter{partCounter}{1}
+	\enterProblemHeader{homeworkProblemCounter}
+}{
+	\exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{~~}
+\newcommand{\hmwkDueDate}{\today}
+\newcommand{\hmwkClass}{小练习}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{}
+\newcommand{\hmwkAuthorName}{杨勇}
+
+%
+% Title Page
+%
+
+\title{
+	\vspace{2in}
+	\textmd{\textbf{\hmwkClass}}\\
+	\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+	\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large 解.}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+	
+	%\maketitle
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%\pagebreak
+	\begin{homeworkProblem}
+		袋中有$N$张卡片, 各记以数字$1,2,\cdots, N$. 不放回地从中抽取$n$张($n\leqslant N$)， 求其和的数学期望和方差.		
+	\end{homeworkProblem}
+	
+	\begin{homeworkProblem}
+		在$\mathbb{R}^3$中的单位球中随机地选取$m$个点, 问这$m$个点位于同一个半球的概率是多少?
+	\end{homeworkProblem}
+	
+	\begin{homeworkProblem}
+		若$U=aX+b$,  $V=cY+d$, 其中$a,b,c,d$为常数，$a>0$, $c>0$. 试证$U,V$的相关系数等于$X,Y$的相关系数。
+	\end{homeworkProblem}
+
+	\begin{homeworkProblem}
+		用概率方法证明如下Weierstrass定理:对区间$[0,1]$上任何连续函数$f(x)$, 必存在多项式序列$\{b_n(x)\}$, 使在区间$[0,1]$上一致地有$b_n(x)\to f(x)$.
+	\end{homeworkProblem}
+
+\end{document}

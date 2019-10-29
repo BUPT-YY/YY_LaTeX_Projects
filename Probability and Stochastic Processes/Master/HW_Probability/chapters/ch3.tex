@@ -1,0 +1,224 @@
+\chapter{随机变量的数字特征}
+
+	\begin{yyEx}
+	设$\xi,\eta$是两个相互独立的随机变量, 且$\mathrm{var}(\xi)<\infty$, $\mathrm{var}(\eta)<\infty$, 试证:	
+	\begin{equation}
+	\mathrm{var}(\xi\eta) = \mathrm{var}(\xi)\mathrm{var}(\eta)+\left[ \mathrm{E}(\xi) \right]^2\mathrm{var}(\eta)+\left[ \mathrm{E}(\eta) \right]^2\mathrm{var}(\xi).
+	\end{equation}
+\end{yyEx}
+	\begin{yyProof}
+	反复利用结论:$\mathrm{var}(X) = \mathrm{E}X^2-(\mathrm{E}X)^2$.
+	
+	则等式左边可以化为:
+	\begin{align}
+	\mathrm{var}(\xi\eta) &= \mathrm{E}\left[ (\xi\eta)^2 \right] - \left[\mathrm{E}(\xi\eta)\right]^2\nonumber\\
+	&=\mathrm{E}(\xi^2)\mathrm{E}(\eta^2) - \left[\mathrm{E}(\xi)\right]^2\left[\mathrm{E}(\eta)\right]^2.
+	\end{align}
+	而等式右边为\begin{align}
+	&\mathrm{var}(\xi)\mathrm{var}(\eta)+\left[ \mathrm{E}(\xi) \right]^2\mathrm{var}(\eta)+\left[ \mathrm{E}(\eta) \right]^2\mathrm{var}(\xi)\nonumber\\
+	&=\mathrm{E}\left(\xi^2 \right)\mathrm{var}(\eta)+\left[ \mathrm{E}(\eta) \right]^2\mathrm{var}(\xi)\nonumber\\
+	&=\mathrm{E}\left(\xi^2 \right)\left\{ \mathrm{E}\left(\eta^2 \right) - \left[\mathrm{E}(\eta)\right]^2 \right\} + \left[ \mathrm{E}(\eta) \right]^2\left\{ \mathrm{E}\left( \xi^2 \right) - \left[\mathrm{E}(\xi)\right]^2 \right\}\nonumber\\
+	&=\mathrm{E}(\xi^2)\mathrm{E}(\eta^2) - \left[\mathrm{E}(\xi)\right]^2\left[\mathrm{E}(\eta)\right]^2.
+	\end{align}
+	因而二者相等.
+\end{yyProof}
+
+
+\begin{yyEx}
+	设随机变量$\xi$的分布函数为$F(x)$, 若$\mathrm{E}(\xi)$有限, 则
+	\begin{blist}
+		\item[(1)] \begin{equation}
+		\lim_{x\to-\infty}xF(x) = 0,~~\lim_{x\to\infty}x\left[ 1-F(x) \right] = 0;
+		\end{equation}
+		\item[(2)] \begin{equation}
+		\mathrm{E}(\xi) = \int_{0}^{+\infty}\left[1-F(x)-F(-x)\right]\mathrm{d}x.
+		\end{equation}
+	\end{blist}
+\end{yyEx}
+	\begin{yyProof}
+	由于$\mathrm{E}(\xi^+) = \int_{0}^{+\infty}x\mathrm{d}F(x)<+\infty$, 则$\lim\limits_{A\to\infty}\int_{A}^{+\infty}x\mathrm{d}F(x) = 0$. 故
+	\begin{equation}
+	0\leqslant A(1-F(A))=A\int_{A}^{+\infty}\mathrm{d}F(x) \leqslant \int_{A}^{+\infty}x\mathrm{d}F(x)\to 0~~\text{as}~ A\to\infty.
+	\end{equation}	类似地，根据$\mathrm{E}(\xi^-) = \int_{-\infty}^0x\mathrm{d}F(x)<+\infty$,则$\lim\limits_{A\to-\infty}\int_{-\infty}^{A}x\mathrm{d}F(x) = 0$. 因此,
+	\begin{equation}
+	0\leqslant AF(A) = A\int_{-\infty}^{A}\mathrm{d}F(x)\leqslant \int_{-\infty}^Ax\mathrm{d}F(x)\to 0~~\text{as}~A\to-\infty.
+	\end{equation}利用分部积分公式,\begin{align}
+	\int_0^{+\infty}\left[1-F(x)-F(-x)\right]\mathrm{d}x &= \lim_{A\to+\infty}\int_0^{A}\left[1-F(x)-F(-x)\right]\mathrm{d}x \nonumber\\
+	&=\lim_{A\to+\infty}\left( x(1-F(x))\big\vert_0^A + xF(x)\big\vert_{-A}^0 +\int_{-A}^Ax\mathrm{d}F(x)\right)\nonumber\\
+	&\geqslant \liminf_{A\to+\infty}\int_{-A}^Ax\mathrm{d}F(x).
+	\end{align}
+	由此知道\begin{align}
+	&\int_0^{+\infty}\left[1-F(x)-F(-x)\right]\mathrm{d}x \\
+	&~~= \lim_{A\to+\infty}x(1-F(x))\big\vert_0^A+\lim_{A\to+\infty}xF(x)\big\vert_{-A}^0+\lim_{A\to+\infty}\int_{-A}^Ax\mathrm{d}F(x)\nonumber\\
+	&~~=\int_{-\infty}^{\infty}x\mathrm{d}F(x) = \mathrm{E}(\xi).
+	\end{align}
+\end{yyProof}
+
+
+\begin{yyEx}
+	设$\{\xi_n,n\geqslant 1\}$是均值有限的同分布的随机变量列, 证明:
+	\begin{equation}
+	\lim_{n\to\infty}\frac{1}{n}\mathrm{E}\left[ \max_{1\leqslant j\leqslant n}\abs{\xi_j} \right] = 0.
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	设$r>1$, $\xi$为非负随机变量, 证明:
+	\begin{equation}
+	\int_{0}^{+\infty}\frac{1}{u^r}\mathrm{E}(\xi \wedge u^r)\mathrm{d}u = \frac{r}{r-1}\mathrm{E}(\xi^{1/r}).
+	\end{equation}
+	其中, $\xi\wedge u^r = \min(\xi,u^r)$.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi$, $\eta$是取非负整数的独立随机变量, $\mathrm{E}(\xi)<\infty$, $\mathrm{E}(\eta)<\infty$, 试证:
+	\begin{blist}
+		\item[(1)] \begin{equation}
+		\mathrm{E}(\xi) = \sum_{m=1}^{+\infty}P(\xi\geqslant m);
+		\end{equation}
+		\item[(2)] \begin{equation}
+		\mathrm{E}(\xi) = 2\sum_{m=1}^{+\infty}mP(\xi\geqslant m)-\mathrm{E}(\xi)\left[\mathrm{E}(\xi)+1\right];
+		\end{equation}
+		\item[(3)] \begin{equation}
+		\mathrm{E}\left[ \min(\xi,\eta) \right] = \sum_{m=1}^{\infty}P(\xi\geqslant m)P(\eta\geqslant m).
+		\end{equation}
+	\end{blist}
+\end{yyEx}
+
+\begin{yyEx}
+	假设$\xi$是非负随机变量, 只取有限个值$x_1,\cdots,x_m$, 试证明:\begin{equation}
+	\lim_{n\to\infty}\frac{\mathrm{E}(\xi^{n+1})}{\mathrm{E}(\xi^n)} = \lim_{n\to\infty}\sqrt{\mathrm{E}(\xi^n)} = \max\{x_1,x_2,\cdots,x_m\}.
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi_1,\cdots,\xi_n$是任意$n$个独立同分布的正值随机变量, 试证明: 对任意
+	$1\leqslant k<n$, 有\begin{equation}
+	\mathrm{E}\left( \frac{\xi_1+\cdots+\xi_k}{\xi_1+\cdots+\xi_n} \right) = \frac{k}{n}.
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	假设随机变量$\xi_1,\cdots,\xi_n$, $\eta_1,\cdots,\eta_n$相互独立, 其中$\mathrm{E}\xi_i=\mu$, $\mathrm{var}(\xi_i)=\sigma^2$($i=1,\cdots,n$), 而$\eta_j$($j=1,2,\cdots,n$)服从参数为$p$的$0-1$分布, 令
+	\begin{equation}
+	\zeta_n = \xi_1+\cdots+\xi_n,~~\zeta_n^* = \xi_1\eta_1+\cdots+\xi_n\eta_n,
+	\end{equation}
+	求$\mathrm{E}(\zeta_n),\mathrm{var}(\zeta_n),\mathrm{E}(\zeta_n^*),\mathrm{var}(\zeta_n^*)$.
+\end{yyEx}
+
+\begin{yyEx}
+	若$\xi_1,\xi_2$相互独立均服从$\mathcal{N}(a,\sigma^2)$, 试证:
+	\begin{equation}
+	\mathrm{E}\left[ \max(\xi_1,\xi_2) \right] = a+\frac{\sigma}{\sqrt{\mathrm{\pi}}}.
+	\end{equation}
+\end{yyEx}
+	\begin{yyProof}
+	Note that:
+	\begin{equation}
+	\abs{\xi_1-\xi_2} = \max(\xi_1,\xi_2)-\min(\xi_1,\xi_2) = \max(\xi_1-a,\xi_2-a)+\max(a-\xi_1,a-\xi_2)
+	\end{equation}
+	Since the joint distribution of $(\xi_1-a,\xi_2-a)$ is symmetric about $0$, the distribution of $\max(\xi_1-a,\xi_2-a)$ and $\max(a-\xi_1,a-\xi_2)$ are the same. Hence, $\mathrm{E}\abs{\xi_1-\xi_2} = 2\mathrm{E}(\max(\xi_1-a,\xi_2-a)$. From the property of the normal distribution, $\xi_1-\xi_2$ is normally distributed with mean $0$ and variance $\mathrm{var}(\xi_1-\xi_2) = \mathrm{var}(\xi_1)+\mathrm{var}(\xi_2) = 2\sigma^2$. Then,
+	\begin{equation}
+	\mathrm{E}\left[ \max(\xi_1,\xi_2) \right] = a+\mathrm{E}\abs{\xi_1-\xi_2} = a+ 2^{-1}\sqrt{2/\mathrm{\pi}}\sqrt{2\sigma^2} = a+\frac{\sigma}{\sqrt{\mathrm{\pi}}}.
+	\end{equation}
+\end{yyProof}
+
+\begin{yyEx}
+	设$f(x)(x>0)$是一正值上升函数, $\xi$是一随机变量, 若$\mathrm{E}\left[ f(\abs{\xi}) \right] < +\infty$, 则有
+	\begin{equation}
+	P(\abs{\xi}\geqslant \varepsilon)\leqslant\frac{\mathrm{E}\left[ f(\abs{\xi}) \right]}{f(\varepsilon)}~~(\varepsilon>0).
+	\end{equation}
+\end{yyEx}
+
+\begin{yyEx}
+	试证明:如果$\mathrm{E}(\xi)$有限, 则
+	\begin{align}
+	\mathrm{E}(\xi) &= -\int_{0}^{+\infty}F_{\xi}(x)\mathrm{d}x+\int_{0}^{+\infty}\left[ 1-F_{\xi}(x) \right]\mathrm{d}x;\nonumber\\
+	\mathrm{E}(\abs{\xi}) &= \int_{0}^{+\infty}F_{\xi}(x)\mathrm{d}x+\int_{0}^{+\infty}\left[ 1-F_{\xi}(x) \right]\mathrm{d}x.
+	\end{align}	
+\end{yyEx}
+\begin{yyProof}
+	By Fubini's theorem,
+	\begin{align}
+	\int_{0}^{\infty}[1-F(x)]\mathrm{d}x&=\int_{0}^{\infty}\int_{(x,\infty)}d\mathrm{d}F(y)\mathrm{d}x\nonumber\\
+	&=\int_{0}^{\infty}\int_{(0,y)}\mathrm{d}x\mathrm{d}F(y)\nonumber\\
+	&=\int_{0}^{\infty}y\mathrm{d}y.
+	\end{align}
+	Similarly,\begin{equation}
+	\int_{-\infty}^0F(x)\mathrm{d}x=\int_{-\infty}^0\int_{(-\infty,x]}\mathrm{d}F(y)\mathrm{d}x = -\int_{-\infty}^0y\mathrm{d}F(y).
+	\end{equation}
+	If $\mathrm{E}\xi$ exists, then at least one of $\int_{0}^{\infty}y\mathrm{d}F(y)$ and $\int_{-\infty}^0y\mathrm{d}F(y)$ is finite and
+	\begin{equation}
+	\mathrm{E}\xi = \int_{-\infty}^{\infty}y\mathrm{d}F(y) =  -\int_{0}^{+\infty}F_{\xi}(x)\mathrm{d}x+\int_{0}^{+\infty}\left[ 1-F_{\xi}(x) \right]\mathrm{d}x;
+	\end{equation}
+	\begin{equation}
+	\mathrm{E}\abs{\xi} = \int_{-\infty}^\infty \abs{y}\mathrm{d}F(y) = \int_{0}^{+\infty}F_{\xi}(x)\mathrm{d}x+\int_{0}^{+\infty}\left[ 1-F_{\xi}(x) \right]\mathrm{d}x.
+	\end{equation}
+\end{yyProof}
+
+\begin{yyEx}
+	设$\xi_1,\cdots,\xi_n$是独立的随机变量, $\mathrm{var}(\xi_j) = \sigma_j^2$($j=1,\cdots,n$), 试求满足$\sum\limits_{j=1}^na_j = 1$的正数$a_1,\cdots,a_n$,使$\sum\limits_{j=1}^na_j\xi_j$的方差最小.
+\end{yyEx}
+
+\begin{yyEx}
+	设随机向量$\bm{\xi} = (\xi,\eta)$有密度
+	\begin{equation}
+	f(x,y) = \begin{dcases}
+	\frac{p(x+y)}{x+y},&x>0,y>0,\\
+	0,&\text{otherwise},
+	\end{dcases}
+	\end{equation}
+	其中$p(u),u\in(-\infty,+\infty)$是一维分布密度, $p(u) = 0$($u\in(-\infty,0)$), 求$\bm{\xi}$的协方差矩阵.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi$和$\eta_j$($j=1,\cdots,n$)不相关, 证明: 对于任意$a_j(j=1,\cdots,n)$, $\xi$与$\sum\limits_{j=1}^na_j\eta_j$不相关.
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi_1,\xi_2,\cdots,x_n$独立同标准正态分布, 证明:$\zeta_1=\sum\limits_{j=1}^n\alpha_j\xi_j$和$\zeta_2=\sum\limits_{j=1}^n\beta_j\xi_j$独立的充要条件是$\sum\limits_{j=1}^n\alpha_j\beta_j = 0$.
+\end{yyEx}
+
+\begin{yyEx}
+	设随机变量$\xi_1,\cdots,\xi_n$相互独立, 并具有相同的数学期望$\mu$和方差$\sigma^2$, 令\begin{equation}
+	\bar{\xi} = \frac{1}{n}\sum_{j=1}^n\xi_j,~~S^2 = \frac{1}{n-1}\sum_{j=1}^n(\xi_j-\bar{\xi})^2,
+	\end{equation}
+	试证:\begin{blist}
+		\item[(1)] \begin{equation}
+		\mathrm{E}(\bar{\xi}) = \mu,\mathrm{var}(\bar{\xi}) = \frac{1}{n}\sigma^2;
+		\end{equation}
+		\item[(2)] \begin{equation}
+		\mathrm{Cov}(\bar{\xi},\xi_j-\bar{\xi})=\mathrm{E}\left[ (\bar{\xi}-\mu)(\xi_j-\bar{\xi}) \right] = 0,~j=1,\cdots,n;
+		\end{equation}
+		\item[(3)] \begin{equation}
+		\mathrm{E}(S^2) = \sigma^2.
+		\end{equation}
+	\end{blist}
+\end{yyEx}
+
+\begin{yyEx}
+	求$\mathrm{E}(\xi|\eta=y),y>0$. 设$\xi$和$\eta$的联合密度为
+	\begin{blist}
+		\item[(1)] \begin{equation}
+		f(x,y) = \begin{dcases}
+		\frac{1}{y}\mathrm{e}^{-y-\frac{x}{y}}, &x>0,y>0;\\
+		0,&\text{otherwise};
+		\end{dcases}
+		\end{equation}
+		\item[(2)] \begin{equation}
+		f(x,y) = \begin{dcases}
+		\lambda^2\mathrm{e}^{-\lambda x}, &0<y<x;\\
+		0,&\text{otherwise};
+		\end{dcases}
+		\end{equation}
+	\end{blist}
+	
+\end{yyEx}
+
+\begin{yyEx}
+	设$\xi$和$\eta$独立同分布, 求$\mathrm{var}(\xi|\xi+\eta)$, 已知:
+	\begin{blist}
+		\item[(1)] $\xi$在$[0,1]$上有均匀分布;
+		\item[(2)] $\xi$服从参数为$\lambda$的指数分布.
+	\end{blist}
+\end{yyEx}
